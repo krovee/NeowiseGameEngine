@@ -1,0 +1,349 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Ship|x64">
+      <Configuration>Ship</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Public\Base\Algorithms.h" />
+    <ClInclude Include="Public\Base\Allocators.h" />
+    <ClInclude Include="Public\Base\ArrayView.h" />
+    <ClInclude Include="Public\Base\Assert.h" />
+    <ClInclude Include="Public\Base\Clock.h" />
+    <ClInclude Include="Public\Base\Common.h" />
+    <ClInclude Include="Public\Base\CRC.h" />
+    <ClInclude Include="Public\Base\Diagnostics.h" />
+    <ClInclude Include="Public\Base\Export.h" />
+    <ClInclude Include="Public\Base\Hash.h" />
+    <ClInclude Include="Public\Base\IOBase.h" />
+    <ClInclude Include="Public\Base\MacroUtils.h" />
+    <ClInclude Include="Public\Base\MD5.h" />
+    <ClInclude Include="Public\Base\MemoryUtilities.h" />
+    <ClInclude Include="Public\Base\Optional.h" />
+    <ClInclude Include="Public\Base\PolicyAllocator.h" />
+    <ClInclude Include="Public\Base\Memory\AllocatorPolicyBase.h" />
+    <ClInclude Include="Public\Base\Memory\FixedHeapAllocatorPolicy.h" />
+    <ClInclude Include="Public\Base\Memory\FixedStackAllocatorPolicy.h" />
+    <ClInclude Include="Public\Base\Mutex.h" />
+    <ClInclude Include="Public\Base\NumericTypes.h" />
+    <ClInclude Include="Public\Base\Ref.h" />
+    <ClInclude Include="Public\Base\Scope.h" />
+    <ClInclude Include="Public\Base\StaticVector.h" />
+    <ClInclude Include="Public\Base\String.h" />
+    <ClInclude Include="Public\Base\StringUtils.h" />
+    <ClInclude Include="Public\Base\StringView.h" />
+    <ClInclude Include="Public\Base\Templated.h" />
+    <ClInclude Include="Public\Base\Thread.h" />
+    <ClInclude Include="Public\Base\TimePoint.h" />
+    <ClInclude Include="Public\Base\Utilities.h" />
+    <ClInclude Include="Public\Base\UUID.h" />
+    <ClInclude Include="Public\Base\BuildVersion.h" />
+    <ClInclude Include="Public\Base\Vector.h" />
+    <ClInclude Include="Public\Engine\Application.h" />
+    <ClInclude Include="Public\Engine\BaseWindow.h" />
+    <ClInclude Include="Public\Engine\EngineBoot.h" />
+    <ClInclude Include="Public\Engine\EngineGlobals.h" />
+    <ClInclude Include="Public\Engine\EngineLoop.h" />
+    <ClInclude Include="Public\Engine\GameRuntimeApplication.h" />
+    <ClInclude Include="Public\Engine\RHI\Common.h" />
+    <ClInclude Include="Public\Engine\RHI\RHI.h" />
+    <ClInclude Include="Public\Engine\RenderThread.h" />
+    <ClInclude Include="Public\Engine\SplashScreen.h" />
+    <ClInclude Include="Public\Engine\VulkanRHI\Common.h" />
+    <ClInclude Include="Public\Input\InputDevice.h" />
+    <ClInclude Include="Public\Input\InputSystem.h" />
+    <ClInclude Include="Public\Input\Keycode.h" />
+    <ClInclude Include="Public\Launch\SecureMain.h" />
+    <ClInclude Include="Public\Math\Functions.h" />
+    <ClInclude Include="Public\Math\Half.h" />
+    <ClInclude Include="Public\Math\Math.h" />
+    <ClInclude Include="Public\Math\Matrix3.h" />
+    <ClInclude Include="Public\Math\Matrix4.h" />
+    <ClInclude Include="Public\Math\Packed.h" />
+    <ClInclude Include="Public\Math\Point.h" />
+    <ClInclude Include="Public\Math\Projection.h" />
+    <ClInclude Include="Public\Math\Quaternion.h" />
+    <ClInclude Include="Public\Math\Scalar.h" />
+    <ClInclude Include="Public\Math\Setup.h" />
+    <ClInclude Include="Public\Math\Vector2.h" />
+    <ClInclude Include="Public\Math\Vector3.h" />
+    <ClInclude Include="Public\Math\Vector4.h" />
+    <ClInclude Include="Public\Platform\Null\NullPlatformConsole.h" />
+    <ClInclude Include="Public\Platform\Null\NullPlatformKeyboard.h" />
+    <ClInclude Include="Public\Platform\Null\NullPlatformMemory.h" />
+    <ClInclude Include="Public\Platform\Null\NullPlatformSystemClock.h" />
+    <ClInclude Include="Public\Platform\Null\NullPlatformThread.h" />
+    <ClInclude Include="Public\Platform\Null\NullPlatformWindow.h" />
+    <ClInclude Include="Public\Platform\PlatformConsole.h" />
+    <ClInclude Include="Public\Platform\PlatformKeyboard.h" />
+    <ClInclude Include="Public\Platform\PlatformMemory.h" />
+    <ClInclude Include="Public\Platform\PlatformSystemClock.h" />
+    <ClInclude Include="Public\Platform\PlatformThread.h" />
+    <ClInclude Include="Public\Platform\PlatformWindow.h" />
+    <ClInclude Include="Public\Platform\Windows\WindowsBase.h" />
+    <ClInclude Include="Public\Platform\Windows\WindowsPlatformConsole.h" />
+    <ClInclude Include="Public\Platform\Windows\WindowsPlatformFilesystem.h" />
+    <ClInclude Include="Public\Platform\Windows\WindowsPlatformKeyboard.h" />
+    <ClInclude Include="Public\Platform\Windows\WindowsPlatformMemory.h" />
+    <ClInclude Include="Public\Platform\Windows\WindowsPlatformSystemClock.h" />
+    <ClInclude Include="Public\Platform\Windows\WindowsPlatformThread.h" />
+    <ClInclude Include="Public\Platform\Windows\WindowsPlatformWindow.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\Base\Allocators.cpp" />
+    <ClCompile Include="Source\Base\CRC.cpp" />
+    <ClCompile Include="Source\Base\Diagnostics.cpp" />
+    <ClCompile Include="Source\Base\Hash.cpp" />
+    <ClCompile Include="Source\Base\MD5.cpp" />
+    <ClCompile Include="Source\Base\MemoryUtilities.cpp" />
+    <ClCompile Include="Source\Base\Memory\AllocatorPolicyBase.cpp" />
+    <ClCompile Include="Source\Base\Memory\FixedHeapAllocatorPolicy.cpp" />
+    <ClCompile Include="Source\Base\String.cpp" />
+    <ClCompile Include="Source\Base\StringUtils.cpp" />
+    <ClCompile Include="Source\Base\StringView.cpp" />
+    <ClCompile Include="Source\Base\Thread.cpp" />
+    <ClCompile Include="Source\Base\TimePoint.cpp" />
+    <ClCompile Include="Source\Base\UUID.cpp" />
+    <ClCompile Include="Source\Base\BuildVersion.cpp" />
+    <ClCompile Include="Source\Engine\Application.cpp" />
+    <ClCompile Include="Source\Engine\BaseWindow.cpp" />
+    <ClCompile Include="Source\Engine\EngineBoot.cpp" />
+    <ClCompile Include="Source\Engine\EngineLoop.cpp" />
+    <ClCompile Include="Source\Engine\GameRuntimeApplication.cpp" />
+    <ClCompile Include="Source\Engine\RHI\RHI.cpp" />
+    <ClCompile Include="Source\Engine\Renderer\RenderThread.cpp" />
+    <ClCompile Include="Source\Engine\VulkanRHI\Common.cpp" />
+    <ClCompile Include="Source\Input\InputDevice.cpp" />
+    <ClCompile Include="Source\Input\InputSystem.cpp" />
+    <ClCompile Include="Source\Input\KeyboardInputDevice.cpp" />
+    <ClCompile Include="Source\Input\MouseInputDevice.cpp" />
+    <ClCompile Include="Source\Launch\SecureMain.cpp" />
+    <ClCompile Include="Source\Math\Half.cpp" />
+    <ClCompile Include="Source\Math\Matrix3.cpp" />
+    <ClCompile Include="Source\Math\Matrix4.cpp" />
+    <ClCompile Include="Source\Math\MatrixFunctions.cpp" />
+    <ClCompile Include="Source\Math\Packed.cpp" />
+    <ClCompile Include="Source\Math\Projection.cpp" />
+    <ClCompile Include="Source\Math\Quaternion.cpp" />
+    <ClCompile Include="Source\Math\Scalar.cpp" />
+    <ClCompile Include="Source\Math\Vector2.cpp" />
+    <ClCompile Include="Source\Math\Vector3.cpp" />
+    <ClCompile Include="Source\Math\Vector4.cpp" />
+    <ClCompile Include="Source\Math\VectorFunctions.cpp" />
+    <ClCompile Include="Source\Platform\Null\NullPlatformConsole.cpp" />
+    <ClCompile Include="Source\Platform\Null\NullPlatformKeyboard.cpp" />
+    <ClCompile Include="Source\Platform\Null\NullPlatformMemory.cpp" />
+    <ClCompile Include="Source\Platform\Null\NullPlatformSystemClock.cpp" />
+    <ClCompile Include="Source\Platform\Null\NullPlatformWindow.cpp" />
+    <ClCompile Include="Source\Platform\PlatformConsole.cpp" />
+    <ClCompile Include="Source\Platform\Windows\WindowsBase.cpp" />
+    <ClCompile Include="Source\Platform\Windows\WindowsPlatformAssert.cpp" />
+    <ClCompile Include="Source\Platform\Windows\WindowsPlatformConsole.cpp" />
+    <ClCompile Include="Source\Platform\Windows\WindowsPlatformFilesystem.cpp" />
+    <ClCompile Include="Source\Platform\Windows\WindowsPlatformKeyboard.cpp" />
+    <ClCompile Include="Source\Platform\Windows\WindowsPlatformMemory.cpp" />
+    <ClCompile Include="Source\Platform\Windows\WindowsPlatformMutexLock.cpp" />
+    <ClCompile Include="Source\Platform\Windows\WindowsPlatformSystemClock.cpp" />
+    <ClCompile Include="Source\Platform\Windows\WindowsPlatformThread.cpp" />
+    <ClCompile Include="Source\Platform\Windows\WindowsPlatformWindow.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Natvis Include="DataTypes.natvis" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{24017dc0-e807-42d3-9ae7-e950cc04b626}</ProjectGuid>
+    <RootNamespace>Engine</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Ship|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Ship|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>..\Binaries-$(Configuration)\</OutDir>
+    <IntDir>..\Binaries\Build-Garbage\$(ProjectName)\</IntDir>
+    <TargetName>NeowiseEngine</TargetName>
+    <CopyCppRuntimeToOutputDir>true</CopyCppRuntimeToOutputDir>
+    <UseStructuredOutput>false</UseStructuredOutput>
+    <IncludePath>$(VK_SDK_PATH)\Include;$(ProjectDir)Public;$(IncludePath)</IncludePath>
+    <LibraryPath>$(VK_SDK_PATH)\Lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>..\Binaries-$(Configuration)\</OutDir>
+    <IntDir>..\Binaries\Build-Garbage\$(ProjectName)\</IntDir>
+    <TargetName>NeowiseEngine</TargetName>
+    <CopyCppRuntimeToOutputDir>true</CopyCppRuntimeToOutputDir>
+    <UseStructuredOutput>false</UseStructuredOutput>
+    <IncludePath>$(VK_SDK_PATH)\Include;$(ProjectDir)Public;$(IncludePath)</IncludePath>
+    <LibraryPath>$(VK_SDK_PATH)\Lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Ship|x64'">
+    <OutDir>..\Binaries-$(Configuration)\</OutDir>
+    <IntDir>..\Binaries\Build-Garbage\$(ProjectName)\</IntDir>
+    <TargetName>NeowiseEngine</TargetName>
+    <CopyCppRuntimeToOutputDir>true</CopyCppRuntimeToOutputDir>
+    <UseStructuredOutput>false</UseStructuredOutput>
+    <IncludePath>$(VK_SDK_PATH)\Include;$(ProjectDir)Public;$(IncludePath)</IncludePath>
+    <LibraryPath>$(VK_SDK_PATH)\Lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>false</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;ENGINE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <ExceptionHandling>false</ExceptionHandling>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <RemoveUnreferencedCodeData>false</RemoveUnreferencedCodeData>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <CallingConvention>FastCall</CallingConvention>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <UseFullPaths>false</UseFullPaths>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+      <AdditionalDependencies>vulkan-1.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>false</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;ENGINE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <ExceptionHandling>false</ExceptionHandling>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <RemoveUnreferencedCodeData>false</RemoveUnreferencedCodeData>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <CallingConvention>FastCall</CallingConvention>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <UseFullPaths>false</UseFullPaths>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+      <AdditionalDependencies>vulkan-1.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Ship|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>false</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;NW_SHIP_BUILD;ENGINE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <ExceptionHandling>false</ExceptionHandling>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <RemoveUnreferencedCodeData>false</RemoveUnreferencedCodeData>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <CallingConvention>FastCall</CallingConvention>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <UseFullPaths>false</UseFullPaths>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <CompileAsManaged>false</CompileAsManaged>
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+      <AdditionalDependencies>vulkan-1.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,36 @@
+
+#CORE 
+ [+] Custom global heap allocator (reserved?)
+ [~] Complete linear algebra math library
+ [ ] 
+
+#ENGINE
+ [+] Application class that is base for the editor and runtime application.
+   [ ] Editor application (plugin like?)
+   [+] Runtime application. 
+
+ [ ] Data package for fast data access from disk.
+ [ ] Resource container (typed)
+
+#SCENE
+ [ ] Scenegraph view or an ECS?
+
+#RENDERER
+ [ ] Scene-Level renderer 
+   [ ] Command-like API (queue maybe?)
+   [ ] A reference to VisualScene container, which contains all "drawable" entitites.
+   [ ] SceneViewport object to control main viewport (e.g. game or editor one's)
+
+ [ ] Mid-Level (rendergraph) midware 
+   [ ] Prioritized render command queues
+   [ ] Geometry complexity analyzer and solver (trying to optimize command queue to be efficient)
+   [ ] Auto-binding (priority to bindless design)
+   [ ] 
+ 
+ [ ] Low-Level VulkanAPI abstraction (vk is overcomplicated imo, so need to reduce it's complexity to ease work with it)
+   [+] Context (instance + device)
+   [ ] Formats
+   [ ] Buffers
+   [ ] Samplers
+   [ ] Barriers (Synchronization objects)
+

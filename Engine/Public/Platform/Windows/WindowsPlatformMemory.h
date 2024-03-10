@@ -1,0 +1,20 @@
+#pragma once
+
+#include "WindowsBase.h"
+#include <Base/NumericTypes.h>
+
+namespace Neowise::Platform::Windows {
+	/** 
+	* 
+	*/
+	class NW_API CMemory {
+	public:
+		static void* allocate(uint64 size);
+		static void  free(void* p);
+		static void* copy(void* dst, void* src, uint64 size);
+		static void* fill(void* dst, int32 value, uint64 size);
+		static uint64 counts(const char* s);
+		static uint64 counts(const wchar_t* ws);
+		static bool compare(const void* p1, const void* p2, uint64 len);
+	};
+}

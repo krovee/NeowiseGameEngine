@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">
+	
+	<Type Name="Neowise::CStaticVector&lt;*,*&gt;">
+		<DisplayString>{{ size = { _size } }}</DisplayString>
+		<Expand>
+			<Item Name="[size]" ExcludeView="simple">_size</Item>
+			<Item Name="[capacity]" ExcludeView="simple">_capacity</Item>
+			<ArrayItems>
+				<Size>_size</Size>
+				<ValuePointer>_ptr</ValuePointer>
+			</ArrayItems>
+		</Expand>
+	</Type>
+
+	<Type Name="Neowise::CVector&lt;*&gt;">
+		<DisplayString>{{ size = { _size } }}</DisplayString>
+		<Expand>
+			<Item Name="[size]" ExcludeView="simple">_size</Item>
+			<Item Name="[capacity]" ExcludeView="simple">_capacity</Item>
+			<ArrayItems>
+				<Size>_size</Size>
+				<ValuePointer>_ptr</ValuePointer>
+			</ArrayItems>
+		</Expand>
+	</Type>
+
+	<Type Name="Neowise::CArrayView&lt;*&gt;">
+		<DisplayString>{{ size = { length } }}</DisplayString>
+		<Expand>
+			<Item Name="[size]" ExcludeView="simple">length</Item>
+			<ArrayItems>
+				<Size>length</Size>
+				<ValuePointer>ptr</ValuePointer>
+			</ArrayItems>
+		</Expand>
+	</Type>
+
+	<Type Name="Neowise::CAllocatorPolicyBase">
+		<DisplayString>{{ allocated={ _info.currentAllocated } total={ _info.totalAllocated } }}</DisplayString>
+	</Type>
+
+	<Type Name="Neowise::CFixedHeapAllocatorPolicy">
+		<DisplayString>{{ allocated={_info.currentAllocated} }}</DisplayString>
+		<Expand>
+			<Item Name="[allocated]" ExcludeView="simple">_info.currentAllocated</Item>
+			<Item Name="[total]" ExcludeView="simple">_info.totalAllocated</Item>
+			<Item Name="[capacity]" ExcludeView="simple">_capacity</Item>
+		</Expand>
+	</Type>
+
+	<Type Name="Neowise::CBuildVersion">
+		<DisplayString>{{ {_number} }}</DisplayString>
+	</Type>
+
+	<Type Name="Neowise::CUUID">
+		<DisplayString>{{ {_b8} }}</DisplayString>
+		<Expand>
+			<Item Name="[text]" ExcludeView="simple">&amp;_b._0</Item>
+		</Expand>
+	</Type>
+
+	<Type Name="Neowise::CTimePoint">
+		<DisplayString>{{ {_seconds}s }}</DisplayString>
+		<Expand>
+			<Item Name="[milliseconds]" ExcludeView="simple">_seconds * 1000</Item>
+			<Item Name="[seconds]" ExcludeView="simple">_seconds</Item>
+		</Expand>
+	</Type>
+
+	<Type Name="Neowise::CStringView">
+		<DisplayString>{{ {_str} }}</DisplayString>
+		<Expand>
+			<Item Name="[size]" ExcludeView="simple">_size</Item>
+		</Expand>
+	</Type>
+
+	<Type Name="Neowise::CString">
+		<DisplayString>{{ {ptr} }}</DisplayString>
+		<Expand>
+			<Item Name="[size]" ExcludeView="simple" Condition="ptr == rep.small.strbuf">rep.small.size</Item>
+			<Item Name="[size]" ExcludeView="simple" Condition="ptr != rep.small.strbuf">rep.large.size</Item>
+			<Item Name="[capacity]" ExcludeView="simple" Condition="ptr == rep.small.strbuf">sizeof(_LargeData)</Item>
+			<Item Name="[capacity]" ExcludeView="simple" Condition="ptr != rep.small.strbuf">rep.large.capacity</Item>
+			<Item Name="[hashsum]" ExcludeView="simple">crc</Item>
+		</Expand>
+	</Type>
+
+	<Type Name="Neowise::Scope&lt;*&gt;">
+		<DisplayString Condition="_ptr != nullptr">{{ {_ptr} }}</DisplayString>
+		<DisplayString Condition="_ptr == nullptr">{{ empty }}</DisplayString>
+	</Type>
+
+	<Type Name="Neowise::CMutex">
+		<DisplayString Condition="_interlock == 0">{{ unlocked }}</DisplayString>
+		<DisplayString Condition="_interlock != 0">{{ locked }}</DisplayString>
+	</Type>
+
+	<Type Name="Neowise::Point2i">
+		<DisplayString>{{ {x} {y} }}</DisplayString>
+		<Expand>
+			<Item Name="[x]" ExcludeView="simple">x</Item>
+			<Item Name="[y]" ExcludeView="simple">y</Item>
+		</Expand>
+	</Type>
+	
+	<Type Name="Neowise::Point2u">
+		<DisplayString>{{ {x} {y} }}</DisplayString>
+		<Expand>
+			<Item Name="[x]" ExcludeView="simple">x</Item>
+			<Item Name="[y]" ExcludeView="simple">y</Item>
+		</Expand>
+	</Type>
+	
+	<Type Name="Neowise::Point2r">
+		<DisplayString>{{ {x} {y} }}</DisplayString>
+		<Expand>
+			<Item Name="[x]" ExcludeView="simple">x</Item>
+			<Item Name="[y]" ExcludeView="simple">y</Item>
+		</Expand>
+	</Type>
+	
+	<Type Name="Neowise::FVector2">
+		<DisplayString>{{ {x} {y} }}</DisplayString>
+		<Expand>
+			<Item Name="[x]" ExcludeView="simple">x</Item>
+			<Item Name="[y]" ExcludeView="simple">y</Item>
+		</Expand>
+	</Type>
+	
+	<Type Name="Neowise::FVector3">
+		<DisplayString>{{ {x} {y} {z} }}</DisplayString>
+		<Expand>
+			<Item Name="[x]" ExcludeView="simple">x</Item>
+			<Item Name="[y]" ExcludeView="simple">y</Item>
+			<Item Name="[z]" ExcludeView="simple">z</Item>
+		</Expand>
+	</Type>
+	
+	<Type Name="Neowise::FVector4">
+		<DisplayString>{{ {x} {y} {z} {w} }}</DisplayString>
+		<Expand>
+			<Item Name="[x]" ExcludeView="simple">x</Item>
+			<Item Name="[y]" ExcludeView="simple">y</Item>
+			<Item Name="[z]" ExcludeView="simple">z</Item>
+			<Item Name="[w]" ExcludeView="simple">w</Item>
+		</Expand>
+	</Type>
+	
+	<Type Name="Neowise::FQuaternion">
+		<DisplayString>{{ {x} {y} {z} {w} }}</DisplayString>
+		<Expand>
+			<Item Name="[x]" ExcludeView="simple">x</Item>
+			<Item Name="[y]" ExcludeView="simple">y</Item>
+			<Item Name="[z]" ExcludeView="simple">z</Item>
+			<Item Name="[w]" ExcludeView="simple">w</Item>
+		</Expand>
+	</Type>
+
+	<Type Name="Neowise::CProjection">
+		<DisplayString Condition="_kind == EProjectionKind::perspective">{{ fov={_fovY} vp={_right - _left, _bottom - _top} aspect={(_right - _left) / (_bottom - _top)} }}</DisplayString>
+		<DisplayString Condition="_kind == EProjectionKind::orthographic">{{ vp={_left, _top, _right, _bottom} zNear={_zNear} zFar={_zFar} }}</DisplayString>
+	</Type>
+	
+</AutoVisualizer>

@@ -1,0 +1,2 @@
+#define NW_API __declspec(dllexport)
+#define NW_API __declspec(dllimport)
