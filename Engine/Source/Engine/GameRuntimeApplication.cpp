@@ -3,8 +3,6 @@
 
 #include <Engine/RenderThread.h>
 
-#include <Base/Ref.h>
-
 namespace Neowise {
 	bool CGameRuntimeApplication::initialize() {
 		NW_PROFILE_FUNCTION();
@@ -14,8 +12,6 @@ namespace Neowise {
 		_inputSystem.addDevice(_kbdDevice);
 		_inputSystem.addDevice(_msDevice);
 		_inputSystem.update(_window.get());
-
-		const auto sref = CString("Hello, world!").toRef();
 
 		return true;
 	}

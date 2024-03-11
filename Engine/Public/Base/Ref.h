@@ -52,7 +52,7 @@ namespace Neowise {
 		template<class U>
 		Ref<U> cast() {
 			auto p = release();
-			return Ref<U>()
+			return Ref<U>(CastCtor{}, move(*p));
 		}
 
 		const T* get() const {
