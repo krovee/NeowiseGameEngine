@@ -4,7 +4,7 @@
 * Defenition of every used numeric types of this codebase.
 */
 
-#include "Export.h"
+#include "MacroUtils.h"
 #include "Assert.h"
 
 namespace Neowise {
@@ -47,11 +47,11 @@ namespace Neowise {
 		constexpr auto INT8_MIN		= int8(-128);
 		constexpr auto INT16_MIN	= int16(-32768);
 		constexpr auto INT32_MIN	= int32(-2147483648);
-		constexpr auto INT64_MIN	= int64(-9223372036854775808i64);
+		constexpr auto INT64_MIN	= int64(-9223372036854775808ULL);
 		constexpr auto INT8_MAX		= int8(128 - 1);
 		constexpr auto INT16_MAX	= int16(32768 - 1);
 		constexpr auto INT32_MAX	= int32(2147483648 - 1);
-		constexpr auto INT64_MAX	= int64(9223372036854775808 - 1);
+		constexpr auto INT64_MAX	= int64(9223372036854775807LL);
 		constexpr auto UINT8_MIN	= uint8(0);
 		constexpr auto UINT16_MIN	= uint16(0);
 		constexpr auto UINT32_MIN	= uint32(0);

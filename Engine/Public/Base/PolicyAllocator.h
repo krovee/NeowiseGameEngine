@@ -41,7 +41,7 @@ namespace Neowise {
 
 			void* p2 = allocate(newSize);
 			if (!p2)
-				return;
+				return nullptr;
 
 			Memory::copy(p2, p, newSize);
 			free(p, oldSize);

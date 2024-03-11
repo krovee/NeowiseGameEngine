@@ -1,6 +1,5 @@
 #pragma once
 
-#include <Base/Export.h>
 #include <Base/MacroUtils.h>
 
 namespace Neowise {

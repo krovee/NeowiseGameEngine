@@ -140,19 +140,19 @@ namespace Neowise {
 		}
 
 		constexpr T& value() {
-			return static_cast<T&>(*reinterpret_cast<T*>(getStorage()));
+			return static_cast<T&>(*(T*)(getStorage()));
 		}
 
 		constexpr const T& value() const {
-			return static_cast<const T&>(*reinterpret_cast<const T*>(getStorage()));
+			return static_cast<const T&>(*(const T*)(getStorage()));
 		}
 
 		constexpr T&& value() {
-			return static_cast<T&&>(*reinterpret_cast<T*>(getStorage()));
+			return static_cast<T&&>(*(T*)(getStorage()));
 		}
 
 		constexpr const T&& value() const {
-			return static_cast<const T&&>(*reinterpret_cast<const T*>(getStorage()));
+			return static_cast<const T&&>(*(const T*)(getStorage()));
 		}
 
 		constexpr T* operator->() {

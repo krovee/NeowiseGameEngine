@@ -5,6 +5,10 @@
 
 #define DECLARE_HANDLE(name) struct name##__{int unused;}; typedef struct name##__ *name
 
+#ifndef __stdcall
+#	define __stdcall
+#endif
+
 namespace Neowise::Platform::Windows {
 	using HANDLE	= void*;
 	using LPVOID	= void*;

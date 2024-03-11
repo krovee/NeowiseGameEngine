@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Base/Export.h>
+#include <Base/MacroUtils.h>
 #include <Base/NumericTypes.h>
 #include <Engine/EngineGlobals.h>
 #include <Input/InputSystem.h>

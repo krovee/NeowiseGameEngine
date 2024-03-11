@@ -4,7 +4,6 @@
 * Collection of common-handy headers.
 */
 
-#include <Base/Export.h>
 #include <Base/NumericTypes.h>
 #include <Base/Assert.h>
 #include <Base/Templated.h>
