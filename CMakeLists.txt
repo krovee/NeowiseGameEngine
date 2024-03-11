@@ -1,7 +1,7 @@
 
 ## CMake 3.28 is modern enough to be main version
 ## to compile and build Neowise Engine project.
-cmake_minimum_required(VERSION 3.28)
+cmake_minimum_required(VERSION 3.27)
 
 ## Set project name as 'Neowise' and specify C++.
 project(Neowise CXX)
@@ -60,82 +60,82 @@ set(
     ENGINE_SOURCES
 
     # BASE
-    ${ENGINE_SOURCE_PREFIX}"/Base/Memory/AllocatorPolicyBase.cpp"
-    ${ENGINE_SOURCE_PREFIX}"/Base/Memory/FixedHeapAllocatorPolicy.cpp"
-    ${ENGINE_SOURCE_PREFIX}"/Base/Allocators.cpp"
-    ${ENGINE_SOURCE_PREFIX}"/Base/BuildVersion.cpp"
-    ${ENGINE_SOURCE_PREFIX}"/Base/CRC.cpp"
-    ${ENGINE_SOURCE_PREFIX}"/Base/Diagnostics.cpp"
-    ${ENGINE_SOURCE_PREFIX}"/Base/Hash.cpp"
-    ${ENGINE_SOURCE_PREFIX}"/Base/MD5.cpp"
-    ${ENGINE_SOURCE_PREFIX}"/Base/MemoryUtilities.cpp"
-    ${ENGINE_SOURCE_PREFIX}"/Base/String.cpp"
-    ${ENGINE_SOURCE_PREFIX}"/Base/StringUtils.cpp"
-    ${ENGINE_SOURCE_PREFIX}"/Base/StringView.cpp"
-    ${ENGINE_SOURCE_PREFIX}"/Base/Thread.cpp"
-    ${ENGINE_SOURCE_PREFIX}"/Base/TimePoint.cpp"
-    ${ENGINE_SOURCE_PREFIX}"/Base/UUID.cpp"
+    ${ENGINE_SOURCE_PREFIX}/Base/Memory/AllocatorPolicyBase.cpp
+    ${ENGINE_SOURCE_PREFIX}/Base/Memory/FixedHeapAllocatorPolicy.cpp
+    ${ENGINE_SOURCE_PREFIX}/Base/Allocators.cpp
+    ${ENGINE_SOURCE_PREFIX}/Base/BuildVersion.cpp
+    ${ENGINE_SOURCE_PREFIX}/Base/CRC.cpp
+    ${ENGINE_SOURCE_PREFIX}/Base/Diagnostics.cpp
+    ${ENGINE_SOURCE_PREFIX}/Base/Hash.cpp
+    ${ENGINE_SOURCE_PREFIX}/Base/MD5.cpp
+    ${ENGINE_SOURCE_PREFIX}/Base/MemoryUtilities.cpp
+    ${ENGINE_SOURCE_PREFIX}/Base/String.cpp
+    ${ENGINE_SOURCE_PREFIX}/Base/StringUtils.cpp
+    ${ENGINE_SOURCE_PREFIX}/Base/StringView.cpp
+    ${ENGINE_SOURCE_PREFIX}/Base/Thread.cpp
+    ${ENGINE_SOURCE_PREFIX}/Base/TimePoint.cpp
+    ${ENGINE_SOURCE_PREFIX}/Base/UUID.cpp
 
     # ENGINE/RENDERER
-    ${ENGINE_SOURCE_PREFIX}"/Engine/Renderer/RenderThread.cpp"
+    ${ENGINE_SOURCE_PREFIX}/Engine/Renderer/RenderThread.cpp
 
     # ENGINE/RHI
-    ${ENGINE_SOURCE_PREFIX}"/Engine/RHI/RHI.cpp"
+    ${ENGINE_SOURCE_PREFIX}/Engine/RHI/RHI.cpp
     
     # ENGINE/VULKANRHI
-    ${ENGINE_SOURCE_PREFIX}"/Engine/VulkanRHI/Common.cpp"
+    ${ENGINE_SOURCE_PREFIX}/Engine/VulkanRHI/Common.cpp
 
     # ENGINE
-    ${ENGINE_SOURCE_PREFIX}"/Engine/Application.cpp"
-    ${ENGINE_SOURCE_PREFIX}"/Engine/BaseWindow.cpp"
-    ${ENGINE_SOURCE_PREFIX}"/Engine/EngineBoot.cpp"
-    ${ENGINE_SOURCE_PREFIX}"/Engine/EngineLoop.cpp"
-    ${ENGINE_SOURCE_PREFIX}"/Engine/GameRuntimeApplication.cpp"
+    ${ENGINE_SOURCE_PREFIX}/Engine/Application.cpp
+    ${ENGINE_SOURCE_PREFIX}/Engine/BaseWindow.cpp
+    ${ENGINE_SOURCE_PREFIX}/Engine/EngineBoot.cpp
+    ${ENGINE_SOURCE_PREFIX}/Engine/EngineLoop.cpp
+    ${ENGINE_SOURCE_PREFIX}/Engine/GameRuntimeApplication.cpp
 
     # INPUT
-    ${ENGINE_SOURCE_PREFIX}"/Input/InputDevice.cpp"
-    ${ENGINE_SOURCE_PREFIX}"/Input/InputSystem.cpp"
-    ${ENGINE_SOURCE_PREFIX}"/Input/KeyboardInputDevice.cpp"
-    ${ENGINE_SOURCE_PREFIX}"/Input/MouseInputDevice.cpp"
+    ${ENGINE_SOURCE_PREFIX}/Input/InputDevice.cpp
+    ${ENGINE_SOURCE_PREFIX}/Input/InputSystem.cpp
+    ${ENGINE_SOURCE_PREFIX}/Input/KeyboardInputDevice.cpp
+    ${ENGINE_SOURCE_PREFIX}/Input/MouseInputDevice.cpp
 
     # LAUNCH
-    ${ENGINE_SOURCE_PREFIX}"/Launch/SecureMain.cpp"
+    ${ENGINE_SOURCE_PREFIX}/Launch/SecureMain.cpp
 
     # MATH
-    ${ENGINE_SOURCE_PREFIX}"/Math/Half.cpp"
-    ${ENGINE_SOURCE_PREFIX}"/Math/Matrix3.cpp"
-    ${ENGINE_SOURCE_PREFIX}"/Math/Matrix4.cpp"
-    ${ENGINE_SOURCE_PREFIX}"/Math/MatrixFunctions.cpp"
-    ${ENGINE_SOURCE_PREFIX}"/Math/Packed.cpp"
-    ${ENGINE_SOURCE_PREFIX}"/Math/Projection.cpp"
-    ${ENGINE_SOURCE_PREFIX}"/Math/Quaternion.cpp"
-    ${ENGINE_SOURCE_PREFIX}"/Math/Scalar.cpp"
-    ${ENGINE_SOURCE_PREFIX}"/Math/Vector2.cpp"
-    ${ENGINE_SOURCE_PREFIX}"/Math/Vector3.cpp"
-    ${ENGINE_SOURCE_PREFIX}"/Math/Vector4.cpp"
-    ${ENGINE_SOURCE_PREFIX}"/Math/VectorFunctions.cpp"
+    ${ENGINE_SOURCE_PREFIX}/Math/Half.cpp
+    ${ENGINE_SOURCE_PREFIX}/Math/Matrix3.cpp
+    ${ENGINE_SOURCE_PREFIX}/Math/Matrix4.cpp
+    ${ENGINE_SOURCE_PREFIX}/Math/MatrixFunctions.cpp
+    ${ENGINE_SOURCE_PREFIX}/Math/Packed.cpp
+    ${ENGINE_SOURCE_PREFIX}/Math/Projection.cpp
+    ${ENGINE_SOURCE_PREFIX}/Math/Quaternion.cpp
+    ${ENGINE_SOURCE_PREFIX}/Math/Scalar.cpp
+    ${ENGINE_SOURCE_PREFIX}/Math/Vector2.cpp
+    ${ENGINE_SOURCE_PREFIX}/Math/Vector3.cpp
+    ${ENGINE_SOURCE_PREFIX}/Math/Vector4.cpp
+    ${ENGINE_SOURCE_PREFIX}/Math/VectorFunctions.cpp
 
     # PLATFORM/NULL
-    ${ENGINE_SOURCE_PREFIX}"/Platform/Null/NullPlatformConsole.cpp"
-    ${ENGINE_SOURCE_PREFIX}"/Platform/Null/NullPlatformKeyboard.cpp"
-    ${ENGINE_SOURCE_PREFIX}"/Platform/Null/NullPlatformMemory.cpp"
-    ${ENGINE_SOURCE_PREFIX}"/Platform/Null/NullPlatformSystemClock.cpp"
-    ${ENGINE_SOURCE_PREFIX}"/Platform/Null/NullPlatformWindow.cpp"
+    ${ENGINE_SOURCE_PREFIX}/Platform/Null/NullPlatformConsole.cpp
+    ${ENGINE_SOURCE_PREFIX}/Platform/Null/NullPlatformKeyboard.cpp
+    ${ENGINE_SOURCE_PREFIX}/Platform/Null/NullPlatformMemory.cpp
+    ${ENGINE_SOURCE_PREFIX}/Platform/Null/NullPlatformSystemClock.cpp
+    ${ENGINE_SOURCE_PREFIX}/Platform/Null/NullPlatformWindow.cpp
 
     # PLATFORM/WINDOWS
-    ${ENGINE_SOURCE_PREFIX}"/Platform/Windows/WindowsBase.cpp"
-    ${ENGINE_SOURCE_PREFIX}"/Platform/Windows/WindowsPlatformAssert.cpp"
-    ${ENGINE_SOURCE_PREFIX}"/Platform/Windows/WindowsPlatformConsole.cpp"
-    ${ENGINE_SOURCE_PREFIX}"/Platform/Windows/WindowsPlatformFilesystem.cpp"
-    ${ENGINE_SOURCE_PREFIX}"/Platform/Windows/WindowsPlatformKeyboard.cpp"
-    ${ENGINE_SOURCE_PREFIX}"/Platform/Windows/WindowsPlatformMemory.cpp"
-    ${ENGINE_SOURCE_PREFIX}"/Platform/Windows/WindowsPlatformMutexLock.cpp"
-    ${ENGINE_SOURCE_PREFIX}"/Platform/Windows/WindowsPlatformSystemClock.cpp"
-    ${ENGINE_SOURCE_PREFIX}"/Platform/Windows/WindowsPlatformThread.cpp"
-    ${ENGINE_SOURCE_PREFIX}"/Platform/Windows/WindowsPlatformWindow.cpp"
+    ${ENGINE_SOURCE_PREFIX}/Platform/Windows/WindowsBase.cpp
+    ${ENGINE_SOURCE_PREFIX}/Platform/Windows/WindowsPlatformAssert.cpp
+    ${ENGINE_SOURCE_PREFIX}/Platform/Windows/WindowsPlatformConsole.cpp
+    ${ENGINE_SOURCE_PREFIX}/Platform/Windows/WindowsPlatformFilesystem.cpp
+    ${ENGINE_SOURCE_PREFIX}/Platform/Windows/WindowsPlatformKeyboard.cpp
+    ${ENGINE_SOURCE_PREFIX}/Platform/Windows/WindowsPlatformMemory.cpp
+    ${ENGINE_SOURCE_PREFIX}/Platform/Windows/WindowsPlatformMutexLock.cpp
+    ${ENGINE_SOURCE_PREFIX}/Platform/Windows/WindowsPlatformSystemClock.cpp
+    ${ENGINE_SOURCE_PREFIX}/Platform/Windows/WindowsPlatformThread.cpp
+    ${ENGINE_SOURCE_PREFIX}/Platform/Windows/WindowsPlatformWindow.cpp
 
     # PLATFORM
-    ${ENGINE_SOURCE_PREFIX}"/Platform/PlatformConsole.cpp"
+    ${ENGINE_SOURCE_PREFIX}/Platform/PlatformConsole.cpp
 )
 
 ## Create engine's dynamic library
@@ -155,8 +155,8 @@ set(APPLICATION_SOURCE_PREFIX "Application/Source")
 set(
     APPLICATION_SOURCES
 
-    ${APPLICATION_SOURCE_PREFIX}"/Launch/WinMain.cpp"
-    ${APPLICATION_SOURCE_PREFIX}"/Launch/LinuxMain.cpp"
+    ${APPLICATION_SOURCE_PREFIX}/Launch/WinMain.cpp
+    ${APPLICATION_SOURCE_PREFIX}/Launch/LinuxMain.cpp
 )
 
 ## Create application's executable

@@ -128,3 +128,23 @@
 #ifndef NW_OS_TYPE
 #	define NW_OS_TYPE (NW_OS_TYPE_WIN32 | NW_OS_TYPE_LINUX)
 #endif
+
+/* 
+* NW_API macro defined to export functions, objects from
+* engine code over to application code base and being able
+* to link against it.
+*/
+
+#if defined(_DLL)
+#   if NW_OS_TYPE == NW_OS_TYPE_WIN32
+#	    define NW_API __declspec(dllexport)
+#   elif NW_OS_TYPE == NW_OS_TYPE_LINUX
+#	    define NW_API __attribute__ ((visibility ("default")))
+#   endif
+#else
+#   if NW_OS_TYPE == NW_OS_TYPE_WIN32
+#	    define NW_API __declspec(dllexport)
+#   elif NW_OS_TYPE == NW_OS_TYPE_LINUX
+#	    define NW_API __attribute__ ((visibility ("default")))
+#   endif
+#endif
