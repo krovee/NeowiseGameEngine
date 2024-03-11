@@ -1,9 +1,10 @@
+#include <Base/MacroUtils.h>
+
+#if NW_OS_TYPE == NW_OS_TYPE_WIN32
 
 #define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
 
-#include <Base/Export.h>
-#include <Base/NumericTypes.h>
 #include <Launch/SecureMain.h>
 
 using namespace Neowise;
@@ -15,3 +16,5 @@ int32 wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, i
 
 	return secMain.executeMain();
 }
+
+#endif

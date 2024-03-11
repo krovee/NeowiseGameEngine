@@ -15,7 +15,8 @@ namespace Neowise {
 			void* pData;
 		};
 
-		void parseCmdLine(const wchar_t* lpCmdLine);
+		void parseCmdLine(const wchar_t *lpCmdLine);
+		void parseCmdLine(int32 argc, const char **argv);
 		int32 executeMain();
 
 	private:

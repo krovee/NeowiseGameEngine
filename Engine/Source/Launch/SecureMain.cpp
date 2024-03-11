@@ -17,8 +17,13 @@ namespace Neowise {
 
 	}
 
-	int32 CSecureMain::executeMain() {
-		NW_PROFILE_FUNCTION();
+    void CSecureMain::parseCmdLine(int32 argc, const char **argv)
+    {
+    }
+    
+	int32 CSecureMain::executeMain()
+    {
+        NW_PROFILE_FUNCTION();
 
 		while (GIsRestarting) {
 			GIsRestarting = false;
@@ -47,6 +52,5 @@ namespace Neowise {
 		}
 
 		return GExitRequestCode;
-	}
-
+    }
 }
