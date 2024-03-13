@@ -27,6 +27,8 @@ namespace Neowise {
 
 	using real		= single;
 
+	using vaList = void*;
+
 	STATIC_ASSERT(sizeof(int8)		== 1);
 	STATIC_ASSERT(sizeof(uint8)		== 1);
 	STATIC_ASSERT(sizeof(int16)		== 2);

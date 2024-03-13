@@ -9,7 +9,7 @@ namespace Neowise {
 	struct NW_API FQuaternion {
 		~FQuaternion() = default;
 
-		constexpr FQuaternion() = default;
+		constexpr FQuaternion() : _data() {}
 		FQuaternion(real x, real y, real z, real w);
 		FQuaternion(const FVector3& eulerAngles);
 		FQuaternion(const FVector3& normalized1, const FVector3& normalized2);

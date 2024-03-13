@@ -46,16 +46,28 @@ macro(target_populate_compile_definitions TARGET_NAME DEFS)
     endif (NOT "${DEFS_COUNT}" STREQUAL "0")
 endmacro(target_populate_compile_definitions TARGET_NAME DEFS)
 
-macro(add_native_executable APPNAME SRCS)
-    if (WIN32)
-        add_executable(${APPNAME} WIN32 ${SRCS})
-    elseif (UNIX)
-        add_executable(${APPNAME} ${SRCS})
-    endif ()
-    
-endmacro(add_native_executable APPNAME)
-
 macro(initialize_vulkan_sdk)
     find_package(Vulkan REQUIRED)
 endmacro(initialize_vulkan_sdk)
+
+macro(enable_simd)
+    if (WIN32)
+        add_compile_options(/arch:AVX)
+    elseif (UNIX)
+        add_compile_options(-mavx)
+    endif ()
+endmacro(enable_simd)
+
+macro(target_link_os_dependent_libraries TARGETNAME)
+    set(LINKLIBS Vulkan::Vulkan)
+
+    if(LINUX)
+        find_package(X11 REQUIRED)
+        list(APPEND LINKLIBS ${X11_X11_xcb_LIB} ${X11_X11_LIB})
+    endif(LINUX)
+    
+
+    target_link_libraries(${TARGETNAME} PRIVATE ${LINKLIBS})
+endmacro(target_link_os_dependent_libraries TARGETNAME)
+
 

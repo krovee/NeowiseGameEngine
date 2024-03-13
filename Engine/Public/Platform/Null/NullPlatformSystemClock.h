@@ -10,7 +10,7 @@ namespace Neowise::Platform::Null {
 	public:
 		CSystemClock();
 
-		uint64 getAbsoluteTimeMs() const;
+		real getAbsoluteTimeMs() const;
 	};
 	
 	extern CSystemClock GSystemClock;

@@ -9,8 +9,8 @@ namespace Neowise {
 	template<class T>
 	class Ref {
 	public:
-		struct InPlaceCtor {};
-		struct CastCtor {};
+		enum class EInPlaceCtorTag { val };
+		enum class ECastCtorTag { val };
 
 		constexpr Ref() = default;
 		constexpr Ref(std::nullptr_t) : ptr() {}
@@ -20,12 +20,12 @@ namespace Neowise {
 		}
 
 		template<class...Args>
-		constexpr Ref(InPlaceCtor, Args&&...args) {
+		constexpr Ref(EInPlaceCtorTag, Args&&...args) {
 			construct(forward<Args>(args)...);
 		}
 
 		template<class U>
-		constexpr Ref(CastCtor, U&& uobj) {
+		constexpr Ref(ECastCtorTag, U&& uobj) {
 			
 		}
 
@@ -52,7 +52,7 @@ namespace Neowise {
 		template<class U>
 		Ref<U> cast() {
 			auto p = release();
-			return Ref<U>(CastCtor{}, move(*p));
+			return Ref<U>(ECastCtorTag::val, move(*p));
 		}
 
 		const T* get() const {
@@ -140,6 +140,6 @@ namespace Neowise {
 
 	template<class T, class...Args>
 	constexpr Ref<T> makeRef(Args&&...args) {
-		return Ref<T>(Ref<T>::InPlaceCtor(), forward<Args>(args)...);
+		return Ref<T>(Ref<T>::EInPlaceCtorTag::val, forward<Args>(args)...);
 	}
 }

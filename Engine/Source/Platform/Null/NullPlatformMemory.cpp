@@ -13,13 +13,12 @@ namespace Neowise::Platform::Null {
 		return dst;
 	}
 	uint64 CMemory::counts(const char* s) {
-		const char* p = s;
-		while (*p++);
-		return uint64(p - s);
+		return 0;
 	}
 	uint64 CMemory::counts(const wchar_t* ws) {
-		const auto* p = ws;
-		while (*p++);
-		return uint64(p - ws);
+		return 0;
+	}
+	bool CMemory::compare(const void *p1, const void *p2, uint64 len) {
+		return false;
 	}
 }

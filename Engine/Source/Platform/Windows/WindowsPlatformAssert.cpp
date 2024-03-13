@@ -1,5 +1,7 @@
 #include <Platform/Windows/WindowsBase.h>
 
+#if NW_OS(WIN32)
+
 #include <Base/Assert.h>
 #include <Base/Diagnostics.h>
 
@@ -61,3 +63,5 @@ namespace Neowise {
 		}
 	}
 }
+
+#endif

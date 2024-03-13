@@ -14,5 +14,6 @@ namespace Neowise::Platform::Null {
 		static void* fill(void* dst, int32 value, uint64 size);
 		static uint64 counts(const char* s);
 		static uint64 counts(const wchar_t* ws);
+		static bool compare(const void* p1, const void* p2, uint64 len);
 	};
 }

@@ -39,5 +39,6 @@ namespace Neowise {
 		uint32 d0 = 0x10325476, D = 0;
 
 		// 1: Processing the bytestring
+		// TODO(krovee): Make a md5 function.
 	}
 }

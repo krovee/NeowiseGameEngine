@@ -10,7 +10,7 @@ namespace Neowise {
 
 		~FVector2() = default;
 
-		constexpr FVector2() = default;
+		constexpr FVector2() : _data() {}
 		explicit FVector2(real v);
 		FVector2(real x, real y);
 

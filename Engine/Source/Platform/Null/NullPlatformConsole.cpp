@@ -2,7 +2,9 @@
 
 namespace Neowise::Platform::Null {
 	const CUUID CConsole::ioClass = "NullConsole";
-
+	CConsole GConsole;
+    
+    
 	CConsole::CConsole() : CIOBase(ioClass)
 	{
 	}

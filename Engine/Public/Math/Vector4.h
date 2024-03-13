@@ -10,7 +10,7 @@ namespace Neowise {
 
 		~FVector4() = default;
 
-		FVector4();
+		FVector4() : _data() {}
 		explicit FVector4(real v);
 		FVector4(real x, real y, real z, real w);
 		FVector4(const FVector3& xyz, real w);
@@ -88,15 +88,9 @@ namespace Neowise {
 			struct {
 				real x;
 				union {
-					FVector2 yz;
-					FVector2 gb;
-					FVector3 yzw;
-					FVector3 gba;
 					struct {
 						real y;
 						union {
-							FVector2 ba;
-							FVector2 zw;
 							struct {
 								real z;
 								real w;

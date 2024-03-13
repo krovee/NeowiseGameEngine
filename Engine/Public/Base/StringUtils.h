@@ -19,6 +19,10 @@ namespace Neowise {
 		static char* findFirst(const char* cstr, uint64 csize, const char* set);
 		static char* findLast(const char* cstr, uint64 csize, const char* set, uint64 setlen);
 		static char* findLast(const char* cstr, uint64 csize, const char* set);
+		static uint  format(char *s, const char *fmt, ...);
+		static uint  format(char *s, uint len, const char *fmt, ...);
+		static uint  format(char *s, const char *fmt, vaList ap);
+		static uint  format(char *s, uint len, const char *fmt, vaList ap);
 
 		static inline bool endsWith(const char* s1, uint64 len1, const char* s2, uint64 len2) {
 			if (len1 < len2) return false;

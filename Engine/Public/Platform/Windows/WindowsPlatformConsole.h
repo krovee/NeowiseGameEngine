@@ -29,4 +29,6 @@ namespace Neowise::Platform::Windows {
 		HANDLE _hConsoleOutput = nullptr;
 		HWND   _hConsoleWindow = nullptr;
 	};
+
+	extern CConsole GConsole;
 }

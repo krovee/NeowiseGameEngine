@@ -2,6 +2,7 @@
 
 #include <Math/Setup.h>
 #include <Math/Scalar.h>
+#include <Math/Point.h>
 
 #include <Math/Vector2.h>
 #include <Math/Vector3.h>

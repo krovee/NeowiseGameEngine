@@ -18,4 +18,6 @@ namespace Neowise::Platform::Null {
 		void writeFmt(const char* fmt, ...) override;
 		void write(const char* text) override;
 	};
+
+	extern CConsole GConsole;
 }

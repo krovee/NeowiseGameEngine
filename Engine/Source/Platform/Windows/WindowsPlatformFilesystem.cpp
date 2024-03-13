@@ -1,5 +1,7 @@
 #include <Platform/Windows/WindowsPlatformFilesystem.h>
 
+#if NW_OS(WIN32)
+
 namespace Neowise::Platform::Windows {
 	CFileDescriptor::~CFileDescriptor() {
 		--_refCount;
@@ -23,3 +25,5 @@ namespace Neowise::Platform::Windows {
 	}
 
 }
+
+#endif

@@ -1,5 +1,7 @@
 #include <Platform/Windows/WindowsPlatformMemory.h>
 
+#if NW_OS(WIN32)
+
 namespace Neowise::Platform::Windows {
 	
 	void* CMemory::allocate(uint64 size) {
@@ -31,3 +33,5 @@ namespace Neowise::Platform::Windows {
 	}
 	
 }
+
+#endif

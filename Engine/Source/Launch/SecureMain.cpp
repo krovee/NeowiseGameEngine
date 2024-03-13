@@ -17,9 +17,11 @@ namespace Neowise {
 
 	}
 
-    void CSecureMain::parseCmdLine(int32 argc, const char **argv)
-    {
-    }
+    void CSecureMain::parseCmdLine(int32 argc, char **argv) {
+		NW_PROFILE_FUNCTION();
+    
+		// TODO(krovee): Add a parser to manage command line arguments.
+	}
     
 	int32 CSecureMain::executeMain()
     {
@@ -29,7 +31,7 @@ namespace Neowise {
 			GIsRestarting = false;
 
 			DEngineBootInfo eBootInfo = {};
-			eBootInfo.baseScenePath = 0;
+			eBootInfo.baseScenePath = "";
 
 			struct ExitGuard {
 				~ExitGuard() {

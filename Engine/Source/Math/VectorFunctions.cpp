@@ -45,7 +45,7 @@ namespace Neowise {
 		};
 	}
 
-	FVector2 Neowise::sin(const FVector2& v) {
+	FVector2 sin(const FVector2& v) {
 		return recallfn(v, sin);
 	}
 
@@ -179,7 +179,7 @@ namespace Neowise {
 	}
 
 	
-	FVector3 Neowise::sin(const FVector3& v) {
+	FVector3 sin(const FVector3& v) {
 		return recallfn(v, sin);
 	}
 
@@ -324,7 +324,7 @@ namespace Neowise {
 	}
 
 	
-	FVector4 Neowise::sin(const FVector4& v) {
+	FVector4 sin(const FVector4& v) {
 		return recallfn(v, sin);
 	}
 

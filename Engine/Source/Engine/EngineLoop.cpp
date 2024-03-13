@@ -68,7 +68,7 @@ namespace Neowise {
 			currentTime = newTime;
 
 			if (GTime.updateCount == 0) {
-
+				
 			}
 
 			const real frameBeginTime = CClock::now().getMilliseconds();

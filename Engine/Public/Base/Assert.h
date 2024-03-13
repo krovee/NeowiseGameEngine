@@ -21,7 +21,7 @@ namespace Neowise {
 	};
 
 #define STATIC_ASSERT(cond) \
-	constexpr static inline typename Neowise::SCompileTimeAssert<!!(cond)>::Ph NW_CONCAT(compileTimeAssertAtLine, __LINE__){}
+	constexpr static inline const typename Neowise::SCompileTimeAssert<!!(cond)>::Ph NW_CONCAT(__hiddenComptimeCheck, __LINE__){}
 #endif
 
 #ifdef  NW_SHIP_BUILD

@@ -1,6 +1,6 @@
 #include <Math/Math.h>
 
-#include  <intrin.h>
+#include  <immintrin.h>
 
 namespace Neowise {
 

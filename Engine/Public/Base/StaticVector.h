@@ -159,7 +159,7 @@ namespace Neowise {
 			destroy_range(_ptr, _size);
 			_size = 0;
 			
-			if constexpr (set0) {
+			if (set0) {
 				Memory::clear(_ptr, sizeof(T) * _capacity);
 			}
 		}

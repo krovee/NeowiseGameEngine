@@ -29,6 +29,9 @@ initialize_vulkan_sdk()
 ## required macro definitions for compilation.
 set(PREPROCESSOR_DEFINITIONS)
 
+## Enable AVX instructions on compiler-dependent level.
+enable_simd()
+
 ## Setup for Debug compilation...
 if("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
     log("Configuring Debug...")
@@ -115,6 +118,17 @@ set(
     ${ENGINE_SOURCE_PREFIX}/Math/Vector4.cpp
     ${ENGINE_SOURCE_PREFIX}/Math/VectorFunctions.cpp
 
+    # PLATFORM/LINUX
+    ${ENGINE_SOURCE_PREFIX}/Platform/Linux/LinuxBase.cpp
+    ${ENGINE_SOURCE_PREFIX}/Platform/Linux/LinuxPlatformAssert.cpp
+    ${ENGINE_SOURCE_PREFIX}/Platform/Linux/LinuxPlatformConsole.cpp
+    ${ENGINE_SOURCE_PREFIX}/Platform/Linux/LinuxPlatformKeyboard.cpp
+    ${ENGINE_SOURCE_PREFIX}/Platform/Linux/LinuxPlatformMemory.cpp
+    ${ENGINE_SOURCE_PREFIX}/Platform/Linux/LinuxPlatformMutexLock.cpp
+    ${ENGINE_SOURCE_PREFIX}/Platform/Linux/LinuxPlatformSystemClock.cpp
+    ${ENGINE_SOURCE_PREFIX}/Platform/Linux/LinuxPlatformThread.cpp
+    ${ENGINE_SOURCE_PREFIX}/Platform/Linux/LinuxPlatformWindow.cpp
+
     # PLATFORM/NULL
     ${ENGINE_SOURCE_PREFIX}/Platform/Null/NullPlatformConsole.cpp
     ${ENGINE_SOURCE_PREFIX}/Platform/Null/NullPlatformKeyboard.cpp
@@ -133,15 +147,12 @@ set(
     ${ENGINE_SOURCE_PREFIX}/Platform/Windows/WindowsPlatformSystemClock.cpp
     ${ENGINE_SOURCE_PREFIX}/Platform/Windows/WindowsPlatformThread.cpp
     ${ENGINE_SOURCE_PREFIX}/Platform/Windows/WindowsPlatformWindow.cpp
-
-    # PLATFORM
-    ${ENGINE_SOURCE_PREFIX}/Platform/PlatformConsole.cpp
-)
+    )
 
 ## Create engine's dynamic library
 add_library(NeowiseEngine SHARED ${ENGINE_SOURCES})
 target_populate_compile_definitions(NeowiseEngine ENGINE_DEFINITIONS)
-target_link_libraries(NeowiseEngine Vulkan::Vulkan)
+target_link_os_dependent_libraries(NeowiseEngine)
 
 ## APPLICATION CONFIGURATION:
 list(APPEND APPLICATION_DEFINITIONS ${PREPROCESSOR_DEFINITIONS})
@@ -160,6 +171,6 @@ set(
 )
 
 ## Create application's executable
-add_native_executable(Application ${APPLICATION_SOURCES})
+add_executable(Application WIN32 ${APPLICATION_SOURCES})
 target_populate_compile_definitions(Application APPLICATION_DEFINITIONS)
 target_link_libraries(Application PRIVATE NeowiseEngine)

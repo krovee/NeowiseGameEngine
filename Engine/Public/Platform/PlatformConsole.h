@@ -1,22 +1,26 @@
 #pragma once
 
-#if NW_OS_TYPE == NW_OS_TYPE_WIN32 
+#include <Base/MacroUtils.h>
 
+#if NW_OS(WIN32) 
 #include "Windows/WindowsPlatformConsole.h"
 
 namespace Neowise::Platform {
-	using Windows::CConsole;
+	using Windows::GConsole;
+}
+
+#elif NW_OS(LINUX)
+#include "Linux/LinuxPlatformConsole.h"
+
+namespace Neowise::Platform {
+	using Linux::GConsole;
 }
 
 #else
 #include "Null/NullPlatformConsole.h"
 
 namespace Neowise::Platform {
-	using Null::CConsole;
+	using Null::GConsole;
 }
 
 #endif
-
-namespace Neowise::Platform {
-	extern CConsole GConsole;
-}

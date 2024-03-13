@@ -70,10 +70,17 @@ namespace Neowise {
 
 #ifndef NW_SHIP_BUILD
 
+#   if NW_OS(WIN32)
     CCodeProfiler::CCodeProfiler(const char* name) 
         : _name(name, 9, CStringUtils::length(name)), _begin(CClock::now())
     {
     }
+#   else
+    CCodeProfiler::CCodeProfiler(const char* name) 
+        : _name(name, CStringUtils::length(name)), _begin(CClock::now())
+    {
+    }
+#   endif
 
     CCodeProfiler::CCodeProfiler(TagScopeProfiler, const char* name)
         : _name(name), _begin(CClock::now())
@@ -84,8 +91,11 @@ namespace Neowise {
         const auto end = CClock::now();
         
         const auto elapsed = CTimePoint::normalize(end - _begin);
+        const auto ms = elapsed.getMilliseconds();
+        const char* meas = ms > 1500 ? "s" : "ms";
+        const auto timev = ms > 1500 ? elapsed.getSeconds() : ms;
 
-        GDiag << "[PROFILER]: " << elapsed.getMilliseconds() << "ms\t" << _name << "()\n";
+        GDiag << "[PROFILER]: " << timev << meas << "\t" << _name << "()\n";
     }
 
 #else 

@@ -4,8 +4,7 @@
 #include <Platform/PlatformMemory.h>
 
 // TODO(krovee): Remove stdlib.h dependency
-#define _CRT_SECURE_NO_WARNINGS 1
-#include <stdlib.h>
+#include <stdarg.h>
 #include <stdio.h>
 
 namespace Neowise {
@@ -19,15 +18,15 @@ namespace Neowise {
 	}
 
 	uint CStringUtils::signedToString(char* s, int64 i) {
-		return (uint)_snprintf_s(s, 24, 24, "%lli", i) + 1;
+		return format(s, 24, "%lli", i) + 1;
 	}
 
 	uint CStringUtils::unsignedToString(char* s, uint64 i) {
-		return (uint)_snprintf_s(s, 24, 24, "%llu", i) + 1;
+		return format(s, 24, "%llu", i) + 1;
 	}
 
 	uint CStringUtils::realToString(char* s, real f) {
-		return (uint) _snprintf_s(s, 16, 16, "%.4f", f);
+		return format(s, 16, "%.4f", f);
 	}
 
 	char* CStringUtils::find(const char* cstr, uint64 csize, const char* substr, uint64 subsize) {
@@ -83,4 +82,43 @@ namespace Neowise {
 		return findLast(cstr, csize, set, length(set));
 	}
 
+    uint CStringUtils::format(char *s, const char *fmt, ...) {
+        va_list ap = {};
+		va_start(ap, fmt);
+#if NW_OS(WIN32)
+		const uint len = vsnprintf_s(s, length(s), fmt, ap);
+#else
+		const uint len = vsnprintf(s, length(s), fmt, ap);
+#endif
+		va_end(ap);
+		return len;
+    }
+
+	uint CStringUtils::format(char *s, uint len, const char *fmt, ...) {
+		va_list ap = {};
+		va_start(ap, fmt);
+#if NW_OS(WIN32)
+		const uint reallen = vsnprintf_s(s, len, fmt, ap);
+#else
+		const uint reallen = vsnprintf(s, len, fmt, ap);
+#endif
+		va_end(ap);
+		return reallen;
+	}
+
+    uint CStringUtils::format(char *s, const char *fmt, vaList ap) {
+#if NW_OS(WIN32)
+		return vsnprintf_s(s, length(s), fmt, ap);
+#else
+		return vsnprintf(s, length(s), fmt, *(va_list*)ap);
+#endif
+    }
+
+    uint CStringUtils::format(char *s, uint len, const char *fmt, vaList ap) {
+#if NW_OS(WIN32)
+		return vsnprintf_s(s, len, fmt, ap);
+#else
+		return vsnprintf(s, len, fmt, *(va_list*)ap);
+#endif
+    }
 }

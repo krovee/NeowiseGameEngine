@@ -1,6 +1,14 @@
 #include <Math/Math.h>
 
-#include <intrin.h>
+#include <immintrin.h>
+
+#ifndef _mm_cvtss_i32_safe
+#	if NW_OS(LINUX)
+#		define _mm_cvtss_i32_safe __builtin_ia32_cvtss2si
+#	else
+#		define _mm_cvtss_i32_safe _mm_cvtss_i32
+#	endif
+#endif
 
 namespace Neowise {
 
@@ -112,27 +120,27 @@ namespace Neowise {
 	}
 
 	bool FVector3::operator==(const FVector3& r) const {
-		return _mm_cvtss_i32(_mm_cmpeq_ps(_mm_load_ps(_data), _mm_load_ps(r._data)));
+		return _mm_cvtss_i32_safe(_mm_cmpeq_ps(_mm_load_ps(_data), _mm_load_ps(r._data)));
 	}
 
 	bool FVector3::operator!=(const FVector3& r) const {
-		return _mm_cvtss_i32(_mm_cmpneq_ps(_mm_load_ps(_data), _mm_load_ps(r._data)));
+		return _mm_cvtss_i32_safe(_mm_cmpneq_ps(_mm_load_ps(_data), _mm_load_ps(r._data)));
 	}
 
 	bool FVector3::operator<(const FVector3& r) const {
-		return _mm_cvtss_i32(_mm_cmplt_ps(_mm_load_ps(_data), _mm_load_ps(r._data)));
+		return _mm_cvtss_i32_safe(_mm_cmplt_ps(_mm_load_ps(_data), _mm_load_ps(r._data)));
 	}
 
 	bool FVector3::operator<=(const FVector3& r) const {
-		return _mm_cvtss_i32(_mm_cmple_ps(_mm_load_ps(_data), _mm_load_ps(r._data)));
+		return _mm_cvtss_i32_safe(_mm_cmple_ps(_mm_load_ps(_data), _mm_load_ps(r._data)));
 	}
 
 	bool FVector3::operator>(const FVector3& r) const {
-		return _mm_cvtss_i32(_mm_cmpgt_ps(_mm_load_ps(_data), _mm_load_ps(r._data)));
+		return _mm_cvtss_i32_safe(_mm_cmpgt_ps(_mm_load_ps(_data), _mm_load_ps(r._data)));
 	}
 
 	bool FVector3::operator>=(const FVector3& r) const {
-		return _mm_cvtss_i32(_mm_cmpge_ps(_mm_load_ps(_data), _mm_load_ps(r._data)));
+		return _mm_cvtss_i32_safe(_mm_cmpge_ps(_mm_load_ps(_data), _mm_load_ps(r._data)));
 	}
 
 	FVector3& FVector3::operator+=(const FVector3& r) {

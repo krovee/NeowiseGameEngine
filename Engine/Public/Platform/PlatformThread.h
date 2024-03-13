@@ -1,10 +1,19 @@
 #pragma once
 
-#if NW_OS_TYPE == NW_OS_TYPE_WIN32 
+#include <Base/MacroUtils.h>
+
+#if NW_OS(WIN32) 
 #include "Windows/WindowsPlatformThread.h"
 
 namespace Neowise::Platform {
 	using Windows::CThread;
+}
+
+#elif NW_OS(LINUX) 
+#include "Linux/LinuxPlatformThread.h"
+
+namespace Neowise::Platform {
+	using Linux::CThread;
 }
 
 #else

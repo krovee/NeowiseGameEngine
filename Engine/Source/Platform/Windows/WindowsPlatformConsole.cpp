@@ -1,10 +1,21 @@
 #include <Platform/Windows/WindowsPlatformConsole.h>
 
+#if NW_OS(WIN32)
+
 #include <stdarg.h>
 #include <stdio.h>
 
 namespace Neowise::Platform::Windows {
 	const CUUID CConsole::ioClass = "WindowsConsole";
+	CConsole GConsole;
+    
+#if NW_OS(WIN32)
+#	define _vsprintf vsprintf_s
+#	define _vswprintf vswprintf_s
+#else 
+#	define _vsprintf vsprintf
+#	define _vswprintf 
+#endif
 
 	CConsole::CConsole() : CIOBase(ioClass) {
 		NW_NONSHIP_CODE(
@@ -31,7 +42,7 @@ namespace Neowise::Platform::Windows {
 		va_list ap;
 		va_start(ap, fmt);
 		char buf[256]{};
-		vsprintf_s(buf, fmt, ap);
+		_vsprintf(buf, fmt, ap);
 		setWindowTextA(_hConsoleWindow, buf);
 		va_end(ap);
 		)
@@ -42,7 +53,7 @@ namespace Neowise::Platform::Windows {
 		va_list ap;
 		va_start(ap, fmt);
 		wchar_t buf[256]{};
-		vswprintf_s(buf, fmt, ap);
+		_vswprintf(buf, fmt, ap);
 		writeConsoleW(_hConsoleOutput, buf);
 		va_end(ap);
 		)
@@ -69,7 +80,7 @@ namespace Neowise::Platform::Windows {
 		va_list ap;
 		va_start(ap, fmt);
 		char buf[256]{};
-		vsprintf_s(buf, fmt, ap);
+		_vsprintf(buf, fmt, ap);
 		writeConsoleA(_hConsoleOutput, buf);
 		va_end(ap);
 		)
@@ -87,3 +98,5 @@ namespace Neowise::Platform::Windows {
 		)
 	}
 }
+
+#endif

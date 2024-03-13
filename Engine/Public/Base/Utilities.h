@@ -5,6 +5,18 @@
 
 namespace Neowise {
 
+	inline constexpr uint operator""_kb(long double kilobytes) {
+		return uint(kilobytes * 1024.0);
+	}
+
+	inline constexpr uint operator""_mb(long double megabytes) {
+		return uint(megabytes * 1024.0 * 1024.0);
+	}
+
+	inline constexpr long double operator""_gb(long double gigabytes) {
+		return 1024.0 * 1024.0 * 1024.0 * gigabytes;
+	}
+
 	/**
 	* Enumeration to determine build type in compile time, 
 	* in a 'more c++ way'.
@@ -46,19 +58,8 @@ namespace Neowise {
 	constexpr bool isReleaseBuild	= E_BUILD_TYPE == E_BUILD_TYPE_RELEASE;
 	constexpr bool isShipBuild		= E_BUILD_TYPE == E_BUILD_TYPE_SHIP;
 
+	// [LINUX]: required line offset
 	STATIC_ASSERT(isDebugBuild != isReleaseBuild != isShipBuild);
-
-	inline constexpr uint operator""_kb(long double kilobytes) {
-		return uint(kilobytes * 1024.0);
-	}
-
-	inline constexpr uint operator""_mb(long double megabytes) {
-		return uint(megabytes * 1024.0 * 1024.0);
-	}
-
-	inline constexpr long double operator""_gb(long double gigabytes) {
-		return 1024.0 * 1024.0 * 1024.0 * gigabytes;
-	}
 
 	constexpr uint32 lrotate32bits(uint32 n, uint rot) {
 		return (n << rot) | (n >> (32 - rot));

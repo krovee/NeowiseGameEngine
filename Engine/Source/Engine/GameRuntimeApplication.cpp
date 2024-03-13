@@ -36,10 +36,10 @@ namespace Neowise {
 	void CGameRuntimeApplication::onUpdate() {
 
 		if (keyboard().isKeyPressed(E_KEY_ESCAPE)) {
-			GEngineLoop->requestExit(1);
+			GEngineLoop->requestExit();
 		}
 		
-		if (GTime.updateCount % 500 == 0) {
+		if (GTime.updateCount % 1000 == 0) {
 			static CString title = {};
 			CStringBuilder sb(title);
 

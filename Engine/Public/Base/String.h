@@ -68,6 +68,7 @@ namespace Neowise {
 
 	private:
 		struct NW_API _LargeData {
+			constexpr _LargeData() = default;
 
 			char*	strptr = nullptr;
 			uint	size = 0;
@@ -75,6 +76,7 @@ namespace Neowise {
 		};
 
 		struct NW_API _SmallData {
+			constexpr _SmallData() = default;
 			
 			char	strbuf[sizeof(_LargeData) - sizeof(uint8)] = {};
 			uint8	size = 0;
@@ -82,7 +84,10 @@ namespace Neowise {
 
 		char*	ptr = nullptr;
 		uint	crc = {};
-		union {
+		union _StringRep {
+			constexpr _StringRep() : large() 
+			{}
+
 			_LargeData large = {};
 			_SmallData small;
 		}

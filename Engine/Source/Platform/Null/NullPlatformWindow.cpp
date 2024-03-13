@@ -1,32 +1,32 @@
-#include <Platform\Null\NullPlatformWindow.h>
+#include <Platform/Null/NullPlatformWindow.h>
 
-namespace Neowise::Platform {
+namespace Neowise::Platform::Null {
 
-	Null::CBaseWindow::CBaseWindow(defaultCreateTag)
+	CBaseWindow::CBaseWindow(defaultCreateTag)
 	{
 	}
 
-	void Null::CBaseWindow::update() {
+	void CBaseWindow::update() {
 
 	}
 
-	bool Null::CBaseWindow::isOpen() const {
+	bool CBaseWindow::isOpen() const {
 		return false;
 	}
 
-	void Null::CBaseWindow::setFullscreen(bool) {
+	void CBaseWindow::setFullscreen(bool) {
 
 	}
 
-	void Null::CBaseWindow::setMaximized(bool) {
+	void CBaseWindow::setMaximized(bool) {
 
 	}
 
-	void Null::CBaseWindow::suspend(bool) {
+	void CBaseWindow::suspend(bool) {
 
 	}
 
-	void* Null::CBaseWindow::getNativeHandle() const {
+	void* CBaseWindow::getNativeHandle() const {
 		return nullptr;
 	}
 

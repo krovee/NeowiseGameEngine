@@ -12,7 +12,7 @@ namespace Neowise {
 	enum EToggleState : uint8 {
 		E_TOGGLE_STATE_IDLE		= 0x0000,
 		E_TOGGLE_STATE_RELEASED	= 0x0001,
-		E_TOGGLE_STATE_PRESSED		= 0x0002,
+		E_TOGGLE_STATE_PRESSED	= 0x0002,
 	};
 
 	/** 

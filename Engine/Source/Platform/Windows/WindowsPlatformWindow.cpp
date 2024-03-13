@@ -1,4 +1,7 @@
 #include <Platform/Windows/WindowsPlatformWindow.h>
+
+#if NW_OS(WIN32)
+
 #include <Engine/EngineGlobals.h>
 #include <Base/BuildVersion.h>
 
@@ -177,6 +180,6 @@ namespace Neowise::Platform {
         _size = s;
     }
 
-
-
 }
+
+#endif

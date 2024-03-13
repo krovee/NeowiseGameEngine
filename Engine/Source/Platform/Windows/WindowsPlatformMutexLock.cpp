@@ -1,4 +1,7 @@
 #include <Platform/Windows/WindowsBase.h>
+
+#if NW_OS(WIN32)
+
 #include <Base/Mutex.h>
 
 namespace Neowise {
@@ -11,3 +14,5 @@ namespace Neowise {
 	}
 
 }
+
+#endif

@@ -1,6 +1,16 @@
 #include <Math/Math.h>
 
-#include <intrin.h>
+//#include <intrin.h>
+
+#include <immintrin.h>
+
+#ifndef _mm_cvtss_i32_safe
+#	if NW_OS(LINUX)
+#		define _mm_cvtss_i32_safe __builtin_ia32_cvtss2si
+#	else
+#		define _mm_cvtss_i32_safe _mm_cvtss_i32
+#	endif
+#endif
 
 namespace Neowise {
 
@@ -42,7 +52,7 @@ namespace Neowise {
 		const auto m = (const real* const)(&const_cast<FMatrix4&>(*this)[0][0]);
 		const auto m2= (const real* const)(&const_cast<FMatrix4&>(r)[0][0]);
 		
-		return _mm_cvtss_i32(_mm256_castps256_ps128(
+		return _mm_cvtss_i32_safe(_mm256_castps256_ps128(
 			_mm256_and_ps(
 				_mm256_cmp_ps(
 					_mm256_set_ps(
