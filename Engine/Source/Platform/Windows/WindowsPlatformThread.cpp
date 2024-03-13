@@ -1,7 +1,5 @@
 #include <Platform/Windows/WindowsPlatformThread.h>
 
-#if NW_OS(WIN32)
-
 namespace Neowise::Platform::Windows {
 	CThread::CThread(PFN_StartFunc func, void* params, bool immediateStart, bool immediateDetach) {
 		_hHandle = createThread(func, params, &_id);
@@ -64,5 +62,3 @@ namespace Neowise::Platform::Windows {
 	}
 
 }
-
-#endif

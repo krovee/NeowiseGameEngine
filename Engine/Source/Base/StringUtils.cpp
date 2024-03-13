@@ -85,8 +85,9 @@ namespace Neowise {
     uint CStringUtils::format(char *s, const char *fmt, ...) {
         va_list ap = {};
 		va_start(ap, fmt);
-#if NW_OS(WIN32)
-		const uint len = vsnprintf_s(s, length(s), fmt, ap);
+#if NW_OS_TYPE_WIN32
+		const auto maxlen = length(s);
+		const uint len = vsnprintf_s(s, maxlen, maxlen, fmt, ap);
 #else
 		const uint len = vsnprintf(s, length(s), fmt, ap);
 #endif
@@ -97,8 +98,8 @@ namespace Neowise {
 	uint CStringUtils::format(char *s, uint len, const char *fmt, ...) {
 		va_list ap = {};
 		va_start(ap, fmt);
-#if NW_OS(WIN32)
-		const uint reallen = vsnprintf_s(s, len, fmt, ap);
+#if NW_OS_TYPE_WIN32
+		const uint reallen = vsnprintf_s(s, len, len, fmt, ap);
 #else
 		const uint reallen = vsnprintf(s, len, fmt, ap);
 #endif
@@ -107,16 +108,17 @@ namespace Neowise {
 	}
 
     uint CStringUtils::format(char *s, const char *fmt, vaList ap) {
-#if NW_OS(WIN32)
-		return vsnprintf_s(s, length(s), fmt, ap);
+#if NW_OS_TYPE_WIN32
+		const auto maxlen = length(s);
+		return vsnprintf_s(s, maxlen, maxlen, fmt, *(va_list*)ap);
 #else
 		return vsnprintf(s, length(s), fmt, *(va_list*)ap);
 #endif
     }
 
     uint CStringUtils::format(char *s, uint len, const char *fmt, vaList ap) {
-#if NW_OS(WIN32)
-		return vsnprintf_s(s, len, fmt, ap);
+#if NW_OS_TYPE_WIN32
+		return vsnprintf_s(s, len, len, fmt, *(va_list*)ap);
 #else
 		return vsnprintf(s, len, fmt, *(va_list*)ap);
 #endif

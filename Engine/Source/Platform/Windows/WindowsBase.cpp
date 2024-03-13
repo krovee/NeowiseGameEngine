@@ -1,7 +1,5 @@
 #include <Platform/Windows/WindowsBase.h>
 
-#if NW_OS(WIN32)
-
 #define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
 #include <Base/Diagnostics.h>
@@ -412,5 +410,3 @@ namespace Neowise::Platform::Windows {
 	}
 
 }
-
-#endif

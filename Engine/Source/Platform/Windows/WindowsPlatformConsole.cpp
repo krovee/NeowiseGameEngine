@@ -1,7 +1,5 @@
 #include <Platform/Windows/WindowsPlatformConsole.h>
 
-#if NW_OS(WIN32)
-
 #include <stdarg.h>
 #include <stdio.h>
 
@@ -9,7 +7,7 @@ namespace Neowise::Platform::Windows {
 	const CUUID CConsole::ioClass = "WindowsConsole";
 	CConsole GConsole;
     
-#if NW_OS(WIN32)
+#if NW_OS_TYPE_WIN32
 #	define _vsprintf vsprintf_s
 #	define _vswprintf vswprintf_s
 #else 
@@ -98,5 +96,3 @@ namespace Neowise::Platform::Windows {
 		)
 	}
 }
-
-#endif

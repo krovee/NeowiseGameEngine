@@ -1,6 +1,6 @@
 #include <Base/MacroUtils.h>
 
-#if NW_OS(LINUX)
+#if NW_OS_TYPE_LINUX
 
 #include <Launch/SecureMain.h>
 

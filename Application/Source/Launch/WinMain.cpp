@@ -1,6 +1,6 @@
 #include <Base/MacroUtils.h>
 
-#if NW_OS(WIN32)
+#if NW_OS_TYPE_WIN32
 
 #define WIN32_LEAN_AND_MEAN
 #include <Windows.h>

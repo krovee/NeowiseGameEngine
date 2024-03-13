@@ -118,40 +118,55 @@ set(
     ${ENGINE_SOURCE_PREFIX}/Math/Vector4.cpp
     ${ENGINE_SOURCE_PREFIX}/Math/VectorFunctions.cpp
 
-    # PLATFORM/LINUX
-    ${ENGINE_SOURCE_PREFIX}/Platform/Linux/LinuxBase.cpp
-    ${ENGINE_SOURCE_PREFIX}/Platform/Linux/LinuxPlatformAssert.cpp
-    ${ENGINE_SOURCE_PREFIX}/Platform/Linux/LinuxPlatformConsole.cpp
-    ${ENGINE_SOURCE_PREFIX}/Platform/Linux/LinuxPlatformKeyboard.cpp
-    ${ENGINE_SOURCE_PREFIX}/Platform/Linux/LinuxPlatformMemory.cpp
-    ${ENGINE_SOURCE_PREFIX}/Platform/Linux/LinuxPlatformMutexLock.cpp
-    ${ENGINE_SOURCE_PREFIX}/Platform/Linux/LinuxPlatformSystemClock.cpp
-    ${ENGINE_SOURCE_PREFIX}/Platform/Linux/LinuxPlatformThread.cpp
-    ${ENGINE_SOURCE_PREFIX}/Platform/Linux/LinuxPlatformWindow.cpp
-
     # PLATFORM/NULL
     ${ENGINE_SOURCE_PREFIX}/Platform/Null/NullPlatformConsole.cpp
     ${ENGINE_SOURCE_PREFIX}/Platform/Null/NullPlatformKeyboard.cpp
     ${ENGINE_SOURCE_PREFIX}/Platform/Null/NullPlatformMemory.cpp
     ${ENGINE_SOURCE_PREFIX}/Platform/Null/NullPlatformSystemClock.cpp
     ${ENGINE_SOURCE_PREFIX}/Platform/Null/NullPlatformWindow.cpp
+)
 
-    # PLATFORM/WINDOWS
-    ${ENGINE_SOURCE_PREFIX}/Platform/Windows/WindowsBase.cpp
-    ${ENGINE_SOURCE_PREFIX}/Platform/Windows/WindowsPlatformAssert.cpp
-    ${ENGINE_SOURCE_PREFIX}/Platform/Windows/WindowsPlatformConsole.cpp
-    ${ENGINE_SOURCE_PREFIX}/Platform/Windows/WindowsPlatformFilesystem.cpp
-    ${ENGINE_SOURCE_PREFIX}/Platform/Windows/WindowsPlatformKeyboard.cpp
-    ${ENGINE_SOURCE_PREFIX}/Platform/Windows/WindowsPlatformMemory.cpp
-    ${ENGINE_SOURCE_PREFIX}/Platform/Windows/WindowsPlatformMutexLock.cpp
-    ${ENGINE_SOURCE_PREFIX}/Platform/Windows/WindowsPlatformSystemClock.cpp
-    ${ENGINE_SOURCE_PREFIX}/Platform/Windows/WindowsPlatformThread.cpp
-    ${ENGINE_SOURCE_PREFIX}/Platform/Windows/WindowsPlatformWindow.cpp
+if (WIN32)
+    list(
+        APPEND 
+        ENGINE_SOURCES
+
+        # PLATFORM/WINDOWS
+        ${ENGINE_SOURCE_PREFIX}/Platform/Windows/WindowsBase.cpp
+        ${ENGINE_SOURCE_PREFIX}/Platform/Windows/WindowsPlatformAssert.cpp
+        ${ENGINE_SOURCE_PREFIX}/Platform/Windows/WindowsPlatformConsole.cpp
+        ${ENGINE_SOURCE_PREFIX}/Platform/Windows/WindowsPlatformFilesystem.cpp
+        ${ENGINE_SOURCE_PREFIX}/Platform/Windows/WindowsPlatformKeyboard.cpp
+        ${ENGINE_SOURCE_PREFIX}/Platform/Windows/WindowsPlatformMemory.cpp
+        ${ENGINE_SOURCE_PREFIX}/Platform/Windows/WindowsPlatformMutexLock.cpp
+        ${ENGINE_SOURCE_PREFIX}/Platform/Windows/WindowsPlatformSystemClock.cpp
+        ${ENGINE_SOURCE_PREFIX}/Platform/Windows/WindowsPlatformThread.cpp
+        ${ENGINE_SOURCE_PREFIX}/Platform/Windows/WindowsPlatformWindow.cpp
     )
+endif ()
+
+if (LINUX)
+    list(
+        APPEND
+        ENGINE_SOURCES 
+
+        # PLATFORM/LINUX
+        ${ENGINE_SOURCE_PREFIX}/Platform/Linux/LinuxBase.cpp
+        ${ENGINE_SOURCE_PREFIX}/Platform/Linux/LinuxPlatformAssert.cpp
+        ${ENGINE_SOURCE_PREFIX}/Platform/Linux/LinuxPlatformConsole.cpp
+        ${ENGINE_SOURCE_PREFIX}/Platform/Linux/LinuxPlatformKeyboard.cpp
+        ${ENGINE_SOURCE_PREFIX}/Platform/Linux/LinuxPlatformMemory.cpp
+        ${ENGINE_SOURCE_PREFIX}/Platform/Linux/LinuxPlatformMutexLock.cpp
+        ${ENGINE_SOURCE_PREFIX}/Platform/Linux/LinuxPlatformSystemClock.cpp
+        ${ENGINE_SOURCE_PREFIX}/Platform/Linux/LinuxPlatformThread.cpp
+        ${ENGINE_SOURCE_PREFIX}/Platform/Linux/LinuxPlatformWindow.cpp
+    )
+endif ()
 
 ## Create engine's dynamic library
 add_library(NeowiseEngine SHARED ${ENGINE_SOURCES})
 target_populate_compile_definitions(NeowiseEngine ENGINE_DEFINITIONS)
+target_compile_definitions(NeowiseEngine PRIVATE ENGINE_EXPORTS)
 target_link_os_dependent_libraries(NeowiseEngine)
 
 ## APPLICATION CONFIGURATION:

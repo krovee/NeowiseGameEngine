@@ -1,7 +1,5 @@
 #include <Platform/Windows/WindowsPlatformSystemClock.h>
 
-#if NW_OS(WIN32)
-
 #include <Platform/Windows/WindowsBase.h>
 
 namespace Neowise::Platform::Windows {
@@ -21,5 +19,3 @@ namespace Neowise::Platform::Windows {
 	}
 
 }
-
-#endif

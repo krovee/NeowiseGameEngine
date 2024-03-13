@@ -70,7 +70,7 @@ namespace Neowise {
 
 #ifndef NW_SHIP_BUILD
 
-#   if NW_OS(WIN32)
+#   if NW_OS_TYPE_WIN32
     CCodeProfiler::CCodeProfiler(const char* name) 
         : _name(name, 9, CStringUtils::length(name)), _begin(CClock::now())
     {

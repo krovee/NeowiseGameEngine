@@ -1,7 +1,5 @@
 #include <Base/Mutex.h>
 
-#if NW_OS(LINUX)
-
 #include <Platform/Linux/LinuxBase.h>
 
 namespace Neowise {
@@ -14,5 +12,3 @@ namespace Neowise {
 	}
 
 }
-
-#endif

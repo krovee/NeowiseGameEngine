@@ -1,7 +1,5 @@
 #include <Platform/Linux/LinuxBase.h>
 
-#if NW_OS(LINUX)
-
 #include <Engine/EngineLoop.h>
 
 #include <stdlib.h>
@@ -450,5 +448,3 @@ namespace Neowise::Platform::Linux {
     }
 
 }
-
-#endif

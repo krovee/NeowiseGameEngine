@@ -1,7 +1,5 @@
 #include <Platform/Linux/LinuxBase.h>
 
-#if NW_OS(LINUX)
-
 #include <Base/Assert.h>
 #include <Base/Diagnostics.h>
 
@@ -52,5 +50,3 @@ namespace Neowise {
 		}
 	}
 }
-
-#endif

@@ -110,8 +110,8 @@
 */
 
 #ifndef NW_OS_TYPE_WIN32
-#	ifdef _WIN64
-#		define NW_OS_TYPE_WIN32 0x314
+#	ifdef _WIN32
+#		define NW_OS_TYPE_WIN32 1
 #	else
 #		define NW_OS_TYPE_WIN32 0
 #	endif
@@ -119,18 +119,10 @@
 
 #ifndef NW_OS_TYPE_LINUX
 #	ifdef __linux__
-#		define NW_OS_TYPE_LINUX 0x114
+#		define NW_OS_TYPE_LINUX 1
 #	else
 #		define NW_OS_TYPE_LINUX 0
 #	endif
-#endif
-
-#ifndef NW_OS_TYPE
-#	define NW_OS_TYPE (NW_OS_TYPE_WIN32 | NW_OS_TYPE_LINUX)
-#endif
-
-#ifndef NW_OS
-#   define NW_OS(type) (NW_OS_TYPE == NW_CONCAT(NW_OS_TYPE_, type))
 #endif
 
 /* 
@@ -140,15 +132,15 @@
 */
 
 #ifdef ENGINE_EXPORTS
-#   if NW_OS(WIN32)
+#   if NW_OS_TYPE_WIN32
 #	    define NW_API __declspec(dllexport)
-#   elif NW_OS(LINUX)
+#   elif NW_OS_TYPE_LINUX
 #	    define NW_API __attribute__ ((visibility ("default")))
 #   endif
 #else
-#   if NW_OS(WIN32)
+#   if NW_OS_TYPE_WIN32
 #	    define NW_API __declspec(dllimport)
-#   elif NW_OS(LINUX)
+#   elif NW_OS_TYPE_LINUX
 #	    define NW_API __attribute__ ((visibility ("default")))
 #   endif
 #endif
