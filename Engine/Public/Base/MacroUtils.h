@@ -83,7 +83,7 @@
 
 #ifndef NW_LITTLE_ENDIAN
 #	if (0x00000000ffffffff >> 31) == 1
-#		define NW_LITTLE_ENDIAN 2
+#		define NW_LITTLE_ENDIAN 1
 #	else
 #		define NW_LITTLE_ENDIAN 0
 #	endif
@@ -91,17 +91,13 @@
 
 #ifndef NW_BIG_ENDIAN
 #	if (0xffffffff0000000 >> 31) == 1
-#		define NW_BIG_ENDIAN 4
+#		define NW_BIG_ENDIAN 1
 #	else
 #		define NW_BIG_ENDIAN 0
 #	endif
 #endif
 
-#ifndef NW_ENDIANNESS
-#	define NW_ENDIANNESS (NW_BIG_ENDIAN | NW_LITTLE_ENDIAN)
-#endif
-
-#if NW_ENDIANNESS == NW_BIG_ENDIAN
+#if NW_BIG_ENDIAN
 #	error "This code is expected to be compiled on a little endian machine only!"
 #endif
 

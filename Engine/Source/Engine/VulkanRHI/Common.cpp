@@ -78,9 +78,11 @@ namespace Neowise {
 			case vk::Result::eIncomplete:
 			case vk::Result::ePipelineCompileRequired:
 				return true;
+
+			default: 
+				return false;
 		}
 		
-		return false;
 	}
 
 	void RHIVKUtil::errorLog(const CString msg, const uint line, const CStringView file, const CStringView fn) {

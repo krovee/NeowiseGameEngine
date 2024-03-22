@@ -30,7 +30,7 @@ initialize_vulkan_sdk()
 set(PREPROCESSOR_DEFINITIONS)
 
 ## Enable AVX instructions on compiler-dependent level.
-enable_simd()
+enable_compiler_features()
 
 ## Setup for Debug compilation...
 if("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")

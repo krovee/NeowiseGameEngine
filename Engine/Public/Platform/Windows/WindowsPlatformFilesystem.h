@@ -28,10 +28,10 @@ namespace Neowise::Platform::Windows {
 		uint getData() const;
 
 	private:
-		CFS&	_fs;
+		CFS*	_fs;
 		CUUID	_uuid = {};
 		uint	_size = {};
-		int64&	_refCount;
+		int64*	_refCount;
 		bool	_autoRelease = true;
 	};
 

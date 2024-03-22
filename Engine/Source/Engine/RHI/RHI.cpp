@@ -31,6 +31,7 @@ namespace Neowise {
 			case E_RHI_CLASS_OPENGL: {
 				//destroy_at<COpenGL_RHIInterface>(GRHI);
 			} break;
+			default: break;
 		}
 	}
 

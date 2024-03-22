@@ -36,7 +36,7 @@ namespace Neowise {
 	const auto NW_CONCAT(result_on_line_, line) = fn; if (!RHIVKUtil::isSuccess(NW_CONCAT(result_on_line_, line))) {				\
 		CString msgbuf;																												\
 		CStringBuilder ms(msgbuf);																									\
-		ms << RHIVKUtil::toString(NW_CONCAT(result_on_line_, line)) << msg << "" __VA_ARGS__ ;										\															\
+		ms << RHIVKUtil::toString(NW_CONCAT(result_on_line_, line)) << msg << "" __VA_ARGS__ ;										\
 		RHIVKUtil::errorLog(msgbuf, line, __FILE__, __FUNCTION__);																	\
 	}																																\
 }

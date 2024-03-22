@@ -9,7 +9,7 @@ namespace Neowise {
 	}
 
 	CString::~CString() {
-		if (this && !isSmall() && ptr) {
+		if (!isSmall() && ptr) {
 			GAlloc->free(ptr, size());
 		}
 	}

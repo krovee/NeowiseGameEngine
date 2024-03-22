@@ -2,6 +2,7 @@
 #include <Engine/EngineLoop.h>
 
 #include <Engine/RenderThread.h>
+#include <Engine/VulkanRHI/Common.h>
 
 namespace Neowise {
 	bool CGameRuntimeApplication::initialize() {

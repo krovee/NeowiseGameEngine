@@ -30,11 +30,15 @@ macro(guard_build_type DEFAULT_BUILD_TYPE)
 endmacro(guard_build_type)
 
 macro(initialize_compilers)
+
     if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+        set(CMAKE_CXX_DEFINITION_PREFIX "-D")
+    elseif (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
         set(CMAKE_CXX_DEFINITION_PREFIX "-D")
     elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
         set(CMAKE_CXX_DEFINITION_PREFIX "/D")
     endif()
+
 endmacro(initialize_compilers)
 
 macro(target_populate_compile_definitions TARGET_NAME DEFS)
@@ -50,21 +54,21 @@ macro(initialize_vulkan_sdk)
     find_package(Vulkan REQUIRED)
 endmacro(initialize_vulkan_sdk)
 
-macro(enable_simd)
+macro(enable_compiler_features)
     if (WIN32)
-        add_compile_options(/arch:AVX)
-    elseif (UNIX)
+        add_compile_options(/arch:AVX /Ot /GS- /sdl- /fp:fast /GR- /permissive- /Gr)
+    else ()
         add_compile_options(-mavx)
     endif ()
-endmacro(enable_simd)
+endmacro(enable_compiler_features)
 
 macro(target_link_os_dependent_libraries TARGETNAME)
     set(LINKLIBS Vulkan::Vulkan)
 
-    if(LINUX)
+    if (LINUX)
         find_package(X11 REQUIRED)
         list(APPEND LINKLIBS ${X11_X11_xcb_LIB} ${X11_X11_LIB})
-    endif(LINUX)
+    endif (LINUX)
     
 
     target_link_libraries(${TARGETNAME} PRIVATE ${LINKLIBS})
