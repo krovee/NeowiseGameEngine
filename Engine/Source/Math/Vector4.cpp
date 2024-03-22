@@ -27,7 +27,7 @@ namespace Neowise {
 	const FVector4 FVector4::back	= FVector4(0, 0, -1, 0);
 
 	FVector4::FVector4(real v) {
-		_mm = _mm_set_ps1(v);
+		_mm = _mm_set_ps(v, v, v, v);
 	}
 
 	FVector4::FVector4(real x, real y, real z, real w) {

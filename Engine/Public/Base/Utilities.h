@@ -59,7 +59,7 @@ namespace Neowise {
 	constexpr bool isShipBuild		= E_BUILD_TYPE == E_BUILD_TYPE_SHIP;
 
 	// [LINUX]: required line offset
-	STATIC_ASSERT(isDebugBuild != isReleaseBuild != isShipBuild);
+	STATIC_ASSERT((isDebugBuild != isReleaseBuild) || (isReleaseBuild != isShipBuild));
 
 	constexpr uint32 lrotate32bits(uint32 n, uint rot) {
 		return (n << rot) | (n >> (32 - rot));

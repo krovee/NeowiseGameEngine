@@ -7,76 +7,76 @@ namespace Neowise {
 #endif
 
 	static CStringView sResultStringArray[] = {
-		RESULT_TO_STR(eSuccess)
-		RESULT_TO_STR(eNotReady)
-		RESULT_TO_STR(eTimeout)
-		RESULT_TO_STR(eEventSet)
-		RESULT_TO_STR(eEventReset)
-		RESULT_TO_STR(eIncomplete)
-		RESULT_TO_STR(eErrorOutOfHostMemory)
-		RESULT_TO_STR(eErrorOutOfDeviceMemory)
-		RESULT_TO_STR(eErrorInitializationFailed)
-		RESULT_TO_STR(eErrorDeviceLost)
-		RESULT_TO_STR(eErrorMemoryMapFailed)
-		RESULT_TO_STR(eErrorLayerNotPresent)
-		RESULT_TO_STR(eErrorExtensionNotPresent)
-		RESULT_TO_STR(eErrorFeatureNotPresent)
-		RESULT_TO_STR(eErrorIncompatibleDriver)
-		RESULT_TO_STR(eErrorTooManyObjects)
-		RESULT_TO_STR(eErrorFormatNotSupported)
-		RESULT_TO_STR(eErrorFragmentedPool)
-		RESULT_TO_STR(eErrorUnknown)
-		RESULT_TO_STR(eErrorOutOfPoolMemory)
-		RESULT_TO_STR(eErrorInvalidExternalHandle)
-		RESULT_TO_STR(eErrorFragmentation)
-		RESULT_TO_STR(eErrorInvalidOpaqueCaptureAddress)
-		RESULT_TO_STR(ePipelineCompileRequired)
-		RESULT_TO_STR(eErrorSurfaceLostKHR)
-		RESULT_TO_STR(eErrorNativeWindowInUseKHR)
-		RESULT_TO_STR(eSuboptimalKHR)
-		RESULT_TO_STR(eErrorOutOfDateKHR)
-		RESULT_TO_STR(eErrorIncompatibleDisplayKHR)
-		RESULT_TO_STR(eErrorValidationFailedEXT)
-		RESULT_TO_STR(eErrorInvalidShaderNV)
-		RESULT_TO_STR(eErrorImageUsageNotSupportedKHR)
-		RESULT_TO_STR(eErrorVideoPictureLayoutNotSupportedKHR)
-		RESULT_TO_STR(eErrorVideoProfileOperationNotSupportedKHR)
-		RESULT_TO_STR(eErrorVideoProfileFormatNotSupportedKHR)
-		RESULT_TO_STR(eErrorVideoProfileCodecNotSupportedKHR)
-		RESULT_TO_STR(eErrorVideoStdVersionNotSupportedKHR)
-		RESULT_TO_STR(eErrorOutOfPoolMemoryKHR)
-		RESULT_TO_STR(eErrorInvalidExternalHandleKHR)
-		RESULT_TO_STR(eErrorInvalidDrmFormatModifierPlaneLayoutEXT)
-		RESULT_TO_STR(eErrorFragmentationEXT)
-		RESULT_TO_STR(eErrorNotPermittedEXT)
-		RESULT_TO_STR(eErrorNotPermittedKHR)
-		RESULT_TO_STR(eErrorInvalidDeviceAddressEXT)
-		RESULT_TO_STR(eErrorFullScreenExclusiveModeLostEXT)
-		RESULT_TO_STR(eErrorInvalidOpaqueCaptureAddressKHR)
-		RESULT_TO_STR(eThreadIdleKHR)
-		RESULT_TO_STR(eThreadDoneKHR)
-		RESULT_TO_STR(eOperationDeferredKHR)
-		RESULT_TO_STR(eOperationNotDeferredKHR)
-		RESULT_TO_STR(ePipelineCompileRequiredEXT)
-		RESULT_TO_STR(eErrorPipelineCompileRequiredEXT)
-		RESULT_TO_STR(eErrorInvalidVideoStdParametersKHR)
-		RESULT_TO_STR(eErrorCompressionExhaustedEXT)
-		RESULT_TO_STR(eErrorIncompatibleShaderBinaryEXT)
+		RESULT_TO_STR(Success)
+		RESULT_TO_STR(NotReady)
+		RESULT_TO_STR(Timeout)
+		RESULT_TO_STR(EventSet)
+		RESULT_TO_STR(EventReset)
+		RESULT_TO_STR(Incomplete)
+		RESULT_TO_STR(ErrorOutOfHostMemory)
+		RESULT_TO_STR(ErrorOutOfDeviceMemory)
+		RESULT_TO_STR(ErrorInitializationFailed)
+		RESULT_TO_STR(ErrorDeviceLost)
+		RESULT_TO_STR(ErrorMemoryMapFailed)
+		RESULT_TO_STR(ErrorLayerNotPresent)
+		RESULT_TO_STR(ErrorExtensionNotPresent)
+		RESULT_TO_STR(ErrorFeatureNotPresent)
+		RESULT_TO_STR(ErrorIncompatibleDriver)
+		RESULT_TO_STR(ErrorTooManyObjects)
+		RESULT_TO_STR(ErrorFormatNotSupported)
+		RESULT_TO_STR(ErrorFragmentedPool)
+		RESULT_TO_STR(ErrorUnknown)
+		RESULT_TO_STR(ErrorOutOfPoolMemory)
+		RESULT_TO_STR(ErrorInvalidExternalHandle)
+		RESULT_TO_STR(ErrorFragmentation)
+		RESULT_TO_STR(ErrorInvalidOpaqueCaptureAddress)
+		RESULT_TO_STR(PipelineCompileRequired)
+		RESULT_TO_STR(ErrorSurfaceLostKHR)
+		RESULT_TO_STR(ErrorNativeWindowInUseKHR)
+		RESULT_TO_STR(SuboptimalKHR)
+		RESULT_TO_STR(ErrorOutOfDateKHR)
+		RESULT_TO_STR(ErrorIncompatibleDisplayKHR)
+		RESULT_TO_STR(ErrorValidationFailedEXT)
+		RESULT_TO_STR(ErrorInvalidShaderNV)
+		RESULT_TO_STR(ErrorImageUsageNotSupportedKHR)
+		RESULT_TO_STR(ErrorVideoPictureLayoutNotSupportedKHR)
+		RESULT_TO_STR(ErrorVideoProfileOperationNotSupportedKHR)
+		RESULT_TO_STR(ErrorVideoProfileFormatNotSupportedKHR)
+		RESULT_TO_STR(ErrorVideoProfileCodecNotSupportedKHR)
+		RESULT_TO_STR(ErrorVideoStdVersionNotSupportedKHR)
+		RESULT_TO_STR(ErrorOutOfPoolMemoryKHR)
+		RESULT_TO_STR(ErrorInvalidExternalHandleKHR)
+		RESULT_TO_STR(ErrorInvalidDrmFormatModifierPlaneLayoutEXT)
+		RESULT_TO_STR(ErrorFragmentationEXT)
+		RESULT_TO_STR(ErrorNotPermittedEXT)
+		RESULT_TO_STR(ErrorNotPermittedKHR)
+		RESULT_TO_STR(ErrorInvalidDeviceAddressEXT)
+		RESULT_TO_STR(ErrorFullScreenExclusiveModeLostEXT)
+		RESULT_TO_STR(ErrorInvalidOpaqueCaptureAddressKHR)
+		RESULT_TO_STR(ThreadIdleKHR)
+		RESULT_TO_STR(ThreadDoneKHR)
+		RESULT_TO_STR(OperationDeferredKHR)
+		RESULT_TO_STR(OperationNotDeferredKHR)
+		RESULT_TO_STR(PipelineCompileRequiredEXT)
+		RESULT_TO_STR(ErrorPipelineCompileRequiredEXT)
+		RESULT_TO_STR(ErrorInvalidVideoStdParametersKHR)
+		RESULT_TO_STR(ErrorCompressionExhaustedEXT)
+		RESULT_TO_STR(ErrorIncompatibleShaderBinaryEXT)
 	};
 
-	bool Neowise::RHIVKUtil::isSuccess(const vk::Result result) {
-		return result == vk::Result::eSuccess;
+	bool Neowise::RHIVKUtil::isSuccess(const VkResult result) {
+		return result == VK_SUCCESS;
 	}
 
-	bool RHIVKUtil::isValid(const vk::Result result) {
+	bool RHIVKUtil::isValid(const VkResult result) {
 		switch (result) {
-			case vk::Result::eSuccess:
-			case vk::Result::eNotReady:
-			case vk::Result::eTimeout:
-			case vk::Result::eEventSet:
-			case vk::Result::eEventReset:
-			case vk::Result::eIncomplete:
-			case vk::Result::ePipelineCompileRequired:
+			case VK_SUCCESS:
+			case VK_NOT_READY:
+			case VK_TIMEOUT:
+			case VK_EVENT_SET:
+			case VK_EVENT_RESET:
+			case VK_INCOMPLETE:
+			case VK_PIPELINE_COMPILE_REQUIRED:
 				return true;
 
 			default: 
@@ -89,7 +89,7 @@ namespace Neowise {
 		GDiag << "[RHI::VK][ERROR](" << file << ":" << line << ") in function " << fn << " an error: " << msg << "\n";
 	}
 
-	CStringView RHIVKUtil::toString(const vk::Result result) {
+	CStringView RHIVKUtil::toString(const VkResult result) {
 		return (uint)result <= arrayn(sResultStringArray) ? sResultStringArray[(uint)result] : "eUnknownResult";
 	}
 

@@ -36,6 +36,6 @@ namespace Neowise::Platform::Linux {
 		int32			_releasedKeys[8] = {};
 		int32			_releasedKeysCount = {};
 		bool			_dirty = false;
-		_WindowID		_id = -1;
+		_WindowID		_id = _WindowID(-1);
 	};
 }

@@ -2,7 +2,7 @@
 
 #include <Engine/RHI/RHI.h>
 
-#include <vulkan/vulkan.hpp>
+#include <vulkan/vulkan.h>
 
 namespace Neowise {
 	/** 
@@ -12,12 +12,12 @@ namespace Neowise {
 		/** 
 		* Returns true ONLY when result is equals vk::Result::eSuccess.
 		*/
-		static bool isSuccess(const vk::Result result);
+		static bool isSuccess(const VkResult result);
 
 		/** 
 		* Returns true if result is semi-successful (e.g. VK_SUBOPTIMAL).
 		*/
-		static bool isValid(const vk::Result result);
+		static bool isValid(const VkResult result);
 
 		/** 
 		* 
@@ -27,7 +27,7 @@ namespace Neowise {
 		/** 
 		* Returns reflected string of a reslult.
 		*/
-		static CStringView toString(const vk::Result result);
+		static CStringView toString(const VkResult result);
 	};
 
 #ifndef RHIVKFN

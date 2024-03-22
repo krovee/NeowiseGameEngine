@@ -4,7 +4,7 @@
 #include <Base/CRC.h>
 
 namespace Neowise {
-	CString::CString() : rep(), crc() {
+	CString::CString() {
 		ptr = rep.small.strbuf;
 	}
 
@@ -14,15 +14,15 @@ namespace Neowise {
 		}
 	}
 
-	CString::CString(const char* str, uint size) : rep() {
+	CString::CString(const char* str, uint size) {
 		ptr = construct(str, size);
 	}
 
-	CString::CString(const CStringView& sv) : rep() {
+	CString::CString(const CStringView& sv) {
 		ptr = construct(sv.cstr(), sv.size());
 	}
 
-	CString::CString(const char* str) : rep() {
+	CString::CString(const char* str) {
 		ptr = construct(str, CStringUtils::length(str));
 		crc = CRC64(data(), size());
 	}
@@ -32,11 +32,11 @@ namespace Neowise {
 		crc = CRC64(&c, 1);
 	}
 
-	CString::CString(const CString& o) : rep(), crc(o.crc) {
+	CString::CString(const CString& o) : crc(o.crc) {
 		ptr = construct(o.ptr, o.size());
 	}
 
-	CString::CString(CString&& o) : rep(), crc(o.crc) {
+	CString::CString(CString&& o) : crc(o.crc) {
 		ptr = construct(o.ptr, o.size());
 		if (!o.isSmall()) {
 			o.ptr = nullptr;

@@ -45,7 +45,7 @@ namespace Neowise {
 
 		if (e <= 0)
 		{
-			if (e < -10)
+			if (e < TFloatAsIntRep(-10))
 			{
 				//
 				// E is less than -10.  The absolute value of f is
@@ -87,7 +87,7 @@ namespace Neowise {
 			_rep = (s | (m >> 13));
 			return;
 		}
-		else if (e == 0xff - (127 - 15))
+		else if (e == TFloatAsIntRep(0xff - (127 - 15)))
 		{
 			if (m == 0)
 			{

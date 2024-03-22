@@ -64,12 +64,12 @@ namespace Neowise {
 			uint8 in[4] = {};
 			uint32 out;
 		} 
-		u = {
+		u = {{
 			(uint8)(round)(NW_CLAMP(p[0], 0.f, 1.f) * 255.f),
 			(uint8)(round)(NW_CLAMP(p[1], 0.f, 1.f) * 255.f),
 			(uint8)(round)(NW_CLAMP(p[2], 0.f, 1.f) * 255.f),
 			(uint8)(round)(NW_CLAMP(p[3], 0.f, 1.f) * 255.f)
-		};
+		}};
 		return u.out;
 	}
 
@@ -94,12 +94,12 @@ namespace Neowise {
 			int8 in[4] = {};
 			uint32 out;
 		}
-		u = {
+		u = {{
 			(int8)(round)(NW_CLAMP(p[0], -1.f, 1.f) * 127.f),
 			(int8)(round)(NW_CLAMP(p[1], -1.f, 1.f) * 127.f),
 			(int8)(round)(NW_CLAMP(p[2], -1.f, 1.f) * 127.f),
 			(int8)(round)(NW_CLAMP(p[3], -1.f, 1.f) * 127.f)
-		};
+		}};
 		return u.out;
 	}
 

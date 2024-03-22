@@ -32,6 +32,9 @@ set(PREPROCESSOR_DEFINITIONS)
 ## Enable AVX instructions on compiler-dependent level.
 enable_compiler_features()
 
+## Enable warnings check.
+enable_warnings()
+
 ## Setup for Debug compilation...
 if("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
     log("Configuring Debug...")

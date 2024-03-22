@@ -22,6 +22,13 @@
 #endif
 
 /**
+ * 
+*/
+#ifndef NW_UNUSED
+#   define NW_UNUSED(x) (void)x
+#endif 
+
+/**
 * Everything in x will be placed during all build 
 * types except for shipped code. 
 */

@@ -33,10 +33,13 @@ namespace Neowise {
 	};
 
 	void MD5(const void* data, const uint size, const uint8 out[16]) {
-		uint32 a0 = 0x67452301, A = 0;
-		uint32 b0 = 0xefcdab89, B = 0;
-		uint32 c0 = 0x98badcfe, C = 0;
-		uint32 d0 = 0x10325476, D = 0;
+		NW_UNUSED(sInitialData);
+		NW_UNUSED(sPRNround);
+
+		// uint32 a0 = 0x67452301, A = 0;
+		// uint32 b0 = 0xefcdab89, B = 0;
+		// uint32 c0 = 0x98badcfe, C = 0;
+		// uint32 d0 = 0x10325476, D = 0;
 
 		// 1: Processing the bytestring
 		// TODO(krovee): Make a md5 function.

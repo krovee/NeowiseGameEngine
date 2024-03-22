@@ -20,7 +20,7 @@ namespace Neowise {
 
 	public:
 		constexpr CStaticVector() 
-			: _zbuffer(), _ptr((T*)(uint8*)_zbuffer), _size()
+			: _ptr((T*)(uint8*)_zbuffer)
 		{}
 		
 		constexpr CStaticVector(const CStaticVector& o) 

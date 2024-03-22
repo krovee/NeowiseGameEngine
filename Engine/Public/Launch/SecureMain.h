@@ -11,9 +11,6 @@ namespace Neowise {
 		constexpr CSecureMain() = default;
 
 		enum { kMaxCmdLineArgs = 16 };
-		struct ExtraData {
-			void* pData;
-		};
 
 		void parseCmdLine(const wchar_t *lpCmdLine);
 		void parseCmdLine(int32 argc, char **argv);
@@ -21,6 +18,5 @@ namespace Neowise {
 
 	private:
 		CStaticVector<CStringView, kMaxCmdLineArgs> _args;
-		ExtraData									_extraData = {};
 	};
 }

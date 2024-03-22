@@ -241,7 +241,7 @@ namespace Neowise::Platform::Linux {
     }
 
     uint _WindowDestroy(_WindowID &id) {
-        if (id != -1) {
+        if (id != _WindowID(-1)) {
             _WindowData& win = getWindowData(id);
             XAutoRepeatOn(win.pDisplay);
             xcb_destroy_window(win.pHandleConnection, win.handle);
@@ -252,7 +252,7 @@ namespace Neowise::Platform::Linux {
     }
 
     bool _WindowPumpMessages(const _WindowID &id, void *params) {
-        if (id == -1) return false;
+        if (id == _WindowID(-1)) return false;
 
         _WindowData& win = getWindowData(id);
         _WindowInputInfo* input = (_WindowInputInfo *)params;

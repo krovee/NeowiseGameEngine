@@ -6,10 +6,6 @@
 
 namespace Neowise::Platform::Linux {
 
-    static FVec2 sGetScreenSize() {
-        return {};
-    }
-
     CBaseWindow::CBaseWindow(defaultCreateTag) 
 	: Neowise::CBaseWindow({0, 0}, {1280, 720}, false, true, false, true)
     {
@@ -53,7 +49,7 @@ namespace Neowise::Platform::Linux {
     }
 
     bool CBaseWindow::isOpen() const {
-        return _id != -1;
+        return _id != _WindowID(-1);
     }
 
     void CBaseWindow::setFullscreen(bool value) {
