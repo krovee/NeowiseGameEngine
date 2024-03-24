@@ -1,21 +1,6 @@
 #include <Math/Math.h>
 
-#include <immintrin.h>
-
-#ifndef _mm_cvtss_i32_safe
-#	if NW_OS_TYPE_LINUX
-#		define _mm_cvtss_i32_safe __builtin_ia32_cvtss2si
-#	else
-#		define _mm_cvtss_i32_safe _mm_cvtss_i32
-#	endif
-#endif
-
 namespace Neowise {
-
-	static __m128& _mm(FVector4& v) {
-		return *(__m128*)(&v._data);
-	}
-#define _mm _mm(*this)
 
 	const FVector4 FVector4::zero	= FVector4();
 	const FVector4 FVector4::one	= FVector4(1);
@@ -26,8 +11,8 @@ namespace Neowise {
 	const FVector4 FVector4::forward= FVector4(0, 0, 1, 0);
 	const FVector4 FVector4::back	= FVector4(0, 0, -1, 0);
 
-	FVector4::FVector4(real v) {
-		_mm = _mm_set_ps(v, v, v, v);
+	FVector4::FVector4(real o) {
+		_mm = _mm_set1_ps(o);
 	}
 
 	FVector4::FVector4(real x, real y, real z, real w) {

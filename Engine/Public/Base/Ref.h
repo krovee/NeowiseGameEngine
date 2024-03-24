@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Base/MacroUtils.h"
 #include <Base/Assert.h>
 #include <Base/Allocators.h>
 
@@ -26,7 +27,7 @@ namespace Neowise {
 
 		template<class U>
 		constexpr Ref(ECastCtorTag, U&& uobj) {
-			
+			NW_UNUSED(uobj);
 		}
 
 		constexpr Ref(const Ref& o) : ptr(o.ptr) {

@@ -63,7 +63,7 @@ namespace Neowise {
 		return ptr;
 	}
 
-	const uint CString::getCRC() const {
+	uint CString::getCRC() const {
 		return crc;
 	}
 
@@ -79,19 +79,19 @@ namespace Neowise {
 		}
 	}
 
-	const char* const CString::begin() const {
+	const char* CString::begin() const {
 		return ptr;
 	}
 
-	const char* const CString::end() const {
+	const char* CString::end() const {
 		return ptr + size();
 	}
 
-	char* const CString::begin() {
+	char* CString::begin() {
 		return ptr;
 	}
 
-	char* const CString::end() {
+	char* CString::end() {
 		return ptr + size();
 	}
 

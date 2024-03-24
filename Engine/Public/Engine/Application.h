@@ -32,7 +32,7 @@ namespace Neowise {
 		virtual void onRenderFrame() {}
 		virtual void preShutdown() {}
 
-		const EApplicationType getType() const {
+		EApplicationType getType() const {
 			return type;
 		}
 	protected:

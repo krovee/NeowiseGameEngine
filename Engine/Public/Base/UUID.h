@@ -19,8 +19,8 @@ namespace Neowise {
 
 		static const CUUID INVALID;
 
-		const uint64 get64() const;
-		const uint8  get8(uint64 i) const;
+		uint64 get64() const;
+		uint8  get8(uint64 i) const;
 
 		operator uint64() const;
 

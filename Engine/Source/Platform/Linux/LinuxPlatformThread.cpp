@@ -5,7 +5,7 @@
 #include <Engine/EngineLoop.h>
 
 namespace Neowise::Platform::Linux {
-    CThread::CThread(PFN_StartFunc func, void* params, bool immediateStart, bool immediateDetach) {
+    CThread::CThread(PFN_StartFunc func, void* params, bool, bool immediateDetach) {
         NW_ASSERT(func, "Failed to create a thread without work!");
 
         {

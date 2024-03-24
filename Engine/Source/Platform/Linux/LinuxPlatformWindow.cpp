@@ -1,3 +1,4 @@
+#include "Base/MacroUtils.h"
 #include <Platform/Linux/LinuxPlatformWindow.h>
 
 #include <Platform/Linux/LinuxBase.h>
@@ -53,7 +54,7 @@ namespace Neowise::Platform::Linux {
     }
 
     void CBaseWindow::setFullscreen(bool value) {
-        
+        NW_UNUSED(value);
     }
 
     void CBaseWindow::setTitle(const CString& title) {
@@ -61,11 +62,11 @@ namespace Neowise::Platform::Linux {
     }
 
     void CBaseWindow::setMaximized(bool value) {
-
+        NW_UNUSED(value);
     }
 
     void CBaseWindow::suspend(bool value) {
-
+        NW_UNUSED(value);
     }
 
     void* CBaseWindow::getNativeHandle() const {
