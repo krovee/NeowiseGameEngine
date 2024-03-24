@@ -21,10 +21,10 @@ namespace Neowise {
 
 		virtual void update() {}
 		virtual bool isOpen() const { return false; }
-		virtual void setFullscreen(bool enable = true) {}
-		virtual void setMaximized(bool enable = true) {}
-		virtual void setTitle(const CString& title) {}
-		virtual void suspend(bool enable = true) {}
+		virtual void setFullscreen(bool enable = true) { NW_UNUSED(enable); }
+		virtual void setMaximized(bool enable = true) { NW_UNUSED(enable); }
+		virtual void setTitle(const CString& title) { NW_UNUSED(title); }
+		virtual void suspend(bool enable = true) { NW_UNUSED(enable); }
 		virtual void* getNativeHandle() const { return nullptr; }
 
 		Point2i getPosition() const;

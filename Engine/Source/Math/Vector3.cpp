@@ -1,15 +1,5 @@
 #include <Math/Math.h>
 
-#include <immintrin.h>
-
-#ifndef _mm_cvtss_i32_safe
-#	if NW_OS_TYPE_LINUX
-#		define _mm_cvtss_i32_safe __builtin_ia32_cvtss2si
-#	else
-#		define _mm_cvtss_i32_safe _mm_cvtss_i32
-#	endif
-#endif
-
 namespace Neowise {
 
 	FVector3::operator FVector2() const {

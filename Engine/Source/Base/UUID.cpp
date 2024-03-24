@@ -65,11 +65,11 @@ namespace Neowise {
 		return *this;
 	}
 
-	const uint64 CUUID::get64() const {
+	uint64 CUUID::get64() const {
 		return _b8;
 	}
 
-	const uint8 CUUID::get8(uint64 i) const {
+	uint8 CUUID::get8(uint64 i) const {
 		return (&_b._0)[i];
 	}
 

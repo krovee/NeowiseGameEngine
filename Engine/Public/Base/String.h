@@ -34,13 +34,13 @@ namespace Neowise {
 		bool empty() const;
 		char* data() const;
 		const char* cstr() const;
-		const uint getCRC() const;
+		uint getCRC() const;
 		void clear();
 
-		const char* const begin() const;
-		const char* const end() const;
-		char* const begin();
-		char* const end();
+		const char* begin() const;
+		const char* end() const;
+		char* begin();
+		char* end();
 
 		bool operator==(const CString& r) const;
 		bool operator!=(const CString& r) const;

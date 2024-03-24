@@ -9,7 +9,7 @@ namespace Neowise {
 	*/
 	class NW_API CPackUnorm2x16 {
 	public:
-		const uint32 operator()(const FVector2& v) const;
+		uint32 operator()(const FVector2& v) const;
 		const FVector2 operator()(uint32 p) const;
 	};
 
@@ -19,7 +19,7 @@ namespace Neowise {
 	*/
 	class NW_API CPackSnorm2x16 {
 	public:
-		const uint32 operator()(const FVector2& v) const;
+		uint32 operator()(const FVector2& v) const;
 		const FVector2 operator()(uint32 p) const;
 	};
 
@@ -29,7 +29,7 @@ namespace Neowise {
 	*/
 	class NW_API CPackUnorm4x8 {
 	public:
-		const uint32 operator()(const FVector4& v) const;
+		uint32 operator()(const FVector4& v) const;
 		const FVector4 operator()(uint32 p) const;
 	};
 
@@ -39,7 +39,7 @@ namespace Neowise {
 	*/
 	class NW_API CPackSnorm4x8 {
 	public:
-		const uint32 operator()(const FVector4& v) const;
+		uint32 operator()(const FVector4& v) const;
 		const FVector4 operator()(uint32 p) const;
 	};
 
@@ -48,7 +48,7 @@ namespace Neowise {
 	*/
 	class NW_API CPackHalf2x16 {
 	public:
-		const uint32 operator()(const FVector2& v) const; 
+		uint32 operator()(const FVector2& v) const; 
 		const FVector2 operator()(uint32 p) const; 
 	};
 }

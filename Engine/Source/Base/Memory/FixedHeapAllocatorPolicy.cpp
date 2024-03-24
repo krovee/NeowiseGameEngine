@@ -40,13 +40,12 @@ namespace Neowise {
 		return nullptr;
 	}
 
-	void CFixedHeapAllocatorPolicy::free(void* p, uint64 size) {
+	void CFixedHeapAllocatorPolicy::free(void*, uint64 size) {
 		if (size <= _capacity) {
 			onFree(size);
 			if (int64(_info.currentAllocated) < 0) {
 				_info.currentAllocated = 0;
 			}
-			//Memory::clear(p, size);
 		}
 	}
 }

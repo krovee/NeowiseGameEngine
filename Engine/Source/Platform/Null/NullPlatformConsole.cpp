@@ -8,16 +8,16 @@ namespace Neowise::Platform::Null {
 	CConsole::CConsole() : CIOBase(ioClass)
 	{
 	}
-	void CConsole::setTitleFmt(const char* fmt, ...)
+	void CConsole::setTitleFmt(const char*, ...)
 	{
 	}
-	void CConsole::setTitle(const char* text)
+	void CConsole::setTitle(const char*)
 	{
 	}
-	void CConsole::writeFmt(const char* fmt, ...)
+	void CConsole::writeFmt(const char*, ...)
 	{
 	}
-	void CConsole::write(const char* text)
+	void CConsole::write(const char*)
 	{
 	}
 }

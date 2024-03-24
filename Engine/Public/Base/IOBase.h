@@ -11,12 +11,12 @@ namespace Neowise {
 	public:
 		virtual void* getHandle() const { return nullptr; }
 
-		virtual void write(const char* data) {}
-		virtual void write(const char* data, uint64 len) {}
-		virtual void writeFmt(const char* fmt, ...) {}
-		virtual void write(const wchar_t* data) {}
-		virtual void write(const wchar_t* data, uint64 len) {}
-		virtual void writeFmt(const wchar_t* fmt, ...) {}
+		virtual void write(const char*) {}
+		virtual void write(const char*, uint64) {}
+		virtual void writeFmt(const char*, ...) {}
+		virtual void write(const wchar_t*) {}
+		virtual void write(const wchar_t*, uint64) {}
+		virtual void writeFmt(const wchar_t*, ...) {}
 
 	protected:
 		inline CIOBase(CUUID ioid) : _ioid(ioid) {}

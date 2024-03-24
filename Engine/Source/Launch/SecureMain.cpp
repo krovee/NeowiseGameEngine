@@ -14,13 +14,15 @@ namespace Neowise {
 		NW_PROFILE_FUNCTION();
 
 		// TODO(krovee): Add a parser to manage command line arguments.
-
+		NW_UNUSED(lpCmdLine);
 	}
 
     void CSecureMain::parseCmdLine(int32 argc, char **argv) {
 		NW_PROFILE_FUNCTION();
     
 		// TODO(krovee): Add a parser to manage command line arguments.
+		NW_UNUSED(argc);
+		NW_UNUSED(argv);
 	}
     
 	int32 CSecureMain::executeMain()

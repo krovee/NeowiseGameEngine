@@ -180,7 +180,7 @@ namespace Neowise {
 	}
 
 	template<class T, uint N>
-	constexpr uint arrayn(T(&_)[N]) {
+	constexpr uint arrayn(T(&)[N]) {
 		return N;
 	}
 

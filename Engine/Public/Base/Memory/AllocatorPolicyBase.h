@@ -25,8 +25,8 @@ namespace Neowise {
 		CAllocatorPolicyBase(const DAllocationInfo& info);
 
 		virtual void  destroy() {}
-		virtual void* allocate(uint64 size) { return nullptr; }
-		virtual void  free(void* p, uint64 size) {}
+		virtual void* allocate(uint64) { return nullptr; }
+		virtual void  free(void*, uint64) {}
 
 		DAllocationInfo const& getInfo() const;
 		uint64 getTotalAllocated() const;

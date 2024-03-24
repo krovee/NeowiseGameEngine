@@ -21,11 +21,11 @@ namespace Neowise::Platform::Linux {
         NW_OPT_ASSERT(false, "[LINUXNOTIMPLEMENTED]: Failed to set title on linux terminal!");
     }
 
-    void CConsole::writeFmt(const wchar_t *fmt, ...) {
+    void CConsole::writeFmt(const wchar_t *, ...) {
         NW_OPT_ASSERT(false, "[LINUXNOTIMPLEMENTED]: Failed to write wide-character text on linux terminal!");
     }
 
-    void CConsole::write(const wchar_t *text) {
+    void CConsole::write(const wchar_t *) {
         NW_OPT_ASSERT(false, "[LINUXNOTIMPLEMENTED]: Failed to write wide-character text on linux terminal!");
     }
 
@@ -46,13 +46,13 @@ namespace Neowise::Platform::Linux {
         )
     }
 
-    void CConsole::write(const char *text, uint len) {
+    void CConsole::write(const char *text, uint) {
         NW_NONSHIP_CODE(
         _ConsoleWrite(text);
         )
     }
 
-    void CConsole::write(const wchar_t *text, uint len) {
+    void CConsole::write(const wchar_t *, uint) {
         NW_OPT_ASSERT(false, "[LINUXNOTIMPLEMENTED]: Failed to write wide-character text on linux terminal!");
     }
 

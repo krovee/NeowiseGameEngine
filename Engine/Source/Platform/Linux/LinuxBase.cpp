@@ -47,7 +47,7 @@ namespace Neowise::Platform::Linux {
         return GWindows.data[id];
     }
 
-    void *_AlignedAlloc(uint size, uint alignment) {
+    void *_AlignedAlloc(uint size, uint) {
         return malloc(size);
     }
 

@@ -3,7 +3,7 @@
 
 namespace Neowise {
 
-	const uint32 CPackUnorm2x16::operator()(const FVector2& v) const {
+	uint32 CPackUnorm2x16::operator()(const FVector2& v) const {
 		union {
 			uint16 in[2] = {};
 			uint32 out;
@@ -27,7 +27,7 @@ namespace Neowise {
 		};
 	}
 
-	const uint32 CPackSnorm2x16::operator()(const FVector2& v) const {
+	uint32 CPackSnorm2x16::operator()(const FVector2& v) const {
 		union {
 			int16 in[2] = {};
 			uint32 out;
@@ -57,7 +57,7 @@ namespace Neowise {
 
 	}
 
-	const uint32 CPackUnorm4x8::operator()(const FVector4& v) const {
+	uint32 CPackUnorm4x8::operator()(const FVector4& v) const {
 		const real* p = &const_cast<FVector4&>(v)[0];
 
 		union {
@@ -87,7 +87,7 @@ namespace Neowise {
 		};
 	}
 
-	const uint32 CPackSnorm4x8::operator()(const FVector4& v) const {
+	uint32 CPackSnorm4x8::operator()(const FVector4& v) const {
 		const real* p = &const_cast<FVector4&>(v)[0];
 
 		union {
@@ -117,7 +117,7 @@ namespace Neowise {
 		};
 	}
 
-	const uint32 CPackHalf2x16::operator()(const FVector2& v) const {
+	uint32 CPackHalf2x16::operator()(const FVector2& v) const {
 		union {
 			half in[2] = {};
 			uint32 out;
