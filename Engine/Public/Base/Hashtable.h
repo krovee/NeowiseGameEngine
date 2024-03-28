@@ -89,7 +89,18 @@ namespace Neowise {
         using ConstIterator = HTIterator<const K, const V>;
 
         virtual ~HT() {
-            
+            if (!_buckets) return;
+
+            for (uint i = 0; i < _capacity; ++i) {
+                if (_buckets[i]) {
+                    auto& kv = _buckets[i].unwrap();
+                    destroy_at(kv.key);
+                    destroy_at(kv.value);
+                }
+            }
+
+            GAlloc->free(_buckets, sizeof *_buckets * _capacity);
+            Memory::clear(this, sizeof *this);
         }
 
         uint capacity() const {
@@ -121,12 +132,33 @@ namespace Neowise {
             return _buckets[hv];
         }
 
+        CWrap<V> get(const K& key) const {
+            return lookup(key);
+        }
+
         void insert(const K& key, const V& value) {
             insertKV(key, value);
         }
 
-        CWrap<V> get(const K& key) const {
-            return lookup(key);
+        template<class...Args>
+        void emplace(const K& key, Args&&...args) {
+            insertKArgs(key, forward<Args>(args)...);
+        }
+
+        void foreach(void(*fn)(HTBucket<K, V>& kv)) {
+            for (uint i = 0; i < _capacity; ++i) {
+                if (_buckets[i]) {
+                    fn(_buckets[i].unwrap());
+                }
+            }
+        }
+
+        void foreach(void(*fn)(const HTBucket<K, V>& kv)) const {
+            for (uint i = 0; i < _capacity; ++i) {
+                if (_buckets[i]) {
+                    fn(_buckets[i].unwrap());
+                }
+            }
         }
 
     private:
@@ -148,6 +180,17 @@ namespace Neowise {
             ++_size;
         }
 
+        template<class...Args>
+        void insertKArgs(const K& key, Args&&...args) {
+            if (_size >= _capacity) {
+                extendBucketsStorage();
+            }
+
+            const auto hv = getBucketId(key);
+            loadBucketArgs(key, hv, forward<Args>(args)...);
+            ++_size;
+        }
+
         CWrap<V> lookup(const K& key) const {
             if (_capacity == 0) return nullptr;
 
@@ -164,6 +207,12 @@ namespace Neowise {
 
         void loadBucket(const K& key, const V& value, uint idx) {
             construct_at(_buckets[idx], key, value);
+        }
+
+        template<class...Args>
+        void loadBucketArgs(const K& key, uint idx, Args&&...args) {
+            construct_at(_buckets[idx], key);
+            construct_at(_buckets[idx].unwrap().value, forward<Args>(args)...);
         }
 
         void extendBucketsStorage(const uint initialCapacity = kDefInitialCapacity) {

@@ -16,6 +16,7 @@
 #include <Base/ArrayView.h>
 #include <Base/Vector.h>
 #include <Base/StaticVector.h>
+#include <Base/Hashtable.h>
 #include <Base/Scope.h>
 #include <Base/Ref.h>
 #include <Base/String.h>
