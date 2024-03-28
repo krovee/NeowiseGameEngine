@@ -147,6 +147,14 @@ namespace Neowise {
 			return static_cast<const T&>(*(const T*)(getStorage()));
 		}
 
+		constexpr T* ptr() {
+			return static_cast<T*>(getStorage());
+		}
+
+		constexpr const T* ptr() const {
+			return static_cast<const T*>(getStorage());
+		}
+
 		constexpr T* operator->() {
 			return &value();
 		}
@@ -210,7 +218,7 @@ namespace Neowise {
 		}
 
 		constexpr const void* getStorage() const {
-			return reinterpret_cast<void*>(storage);
+			return reinterpret_cast<const void*>(storage);
 		}
 
 		template<class...Args>

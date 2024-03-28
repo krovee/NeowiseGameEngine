@@ -1,16 +1,13 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Debug-Linux",
             "type": "lldb",
             "request": "launch",
-            "name": "Debug-Linux",
             "program": "${workspaceFolder}/build/Application",
-            "args": [],
-            "cwd": "${workspaceFolder}/build"
+            "cwd": "${workspaceFolder}/build",
+            "args": []
         }
     ]
 }

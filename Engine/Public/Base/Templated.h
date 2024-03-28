@@ -2,8 +2,8 @@
 
 #include <Base/MacroUtils.h>
 #include <Base/NumericTypes.h>
+
 #include <initializer_list>
-#include <new>
 
 namespace Neowise {
 	template<class T>
@@ -97,6 +97,135 @@ namespace Neowise {
 
 	using TFloatAsIntRep = typename FloatAsIntRep<isTypeOf<real, single>>::Type;
 
+	template<class>
+	static constexpr auto isIntegral = false;
+
+	template<>
+	static constexpr auto isIntegral<bool> = true;
+
+	template<>
+	static constexpr auto isIntegral<const bool> = true;
+
+	template<>
+	static constexpr auto isIntegral<bool&> = true;
+
+	template<>
+	static constexpr auto isIntegral<const bool&> = true;
+
+	template<>
+	static constexpr auto isIntegral<int8> = true;
+
+	template<>
+	static constexpr auto isIntegral<const int8> = true;
+
+	template<>
+	static constexpr auto isIntegral<int8&> = true;
+
+	template<>
+	static constexpr auto isIntegral<const int8&> = true;
+
+	template<>
+	static constexpr auto isIntegral<int16> = true;
+
+	template<>
+	static constexpr auto isIntegral<const int16> = true;
+
+	template<>
+	static constexpr auto isIntegral<int16&> = true;
+
+	template<>
+	static constexpr auto isIntegral<const int16&> = true;
+
+	template<>
+	static constexpr auto isIntegral<int32> = true;
+
+	template<>
+	static constexpr auto isIntegral<const int32> = true;
+
+	template<>
+	static constexpr auto isIntegral<int32&> = true;
+
+	template<>
+	static constexpr auto isIntegral<const int32&> = true;
+
+	template<>
+	static constexpr auto isIntegral<int64> = true;
+
+	template<>
+	static constexpr auto isIntegral<const int64> = true;
+
+	template<>
+	static constexpr auto isIntegral<int64&> = true;
+
+	template<>
+	static constexpr auto isIntegral<const int64&> = true;
+
+	template<>
+	static constexpr auto isIntegral<uint8> = true;
+
+	template<>
+	static constexpr auto isIntegral<const uint8> = true;
+
+	template<>
+	static constexpr auto isIntegral<uint8&> = true;
+
+	template<>
+	static constexpr auto isIntegral<const uint8&> = true;
+
+	template<>
+	static constexpr auto isIntegral<uint16> = true;
+
+	template<>
+	static constexpr auto isIntegral<const uint16> = true;
+
+	template<>
+	static constexpr auto isIntegral<uint16&> = true;
+
+	template<>
+	static constexpr auto isIntegral<const uint16&> = true;
+
+	template<>
+	static constexpr auto isIntegral<uint32> = true;
+
+	template<>
+	static constexpr auto isIntegral<const uint32> = true;
+
+	template<>
+	static constexpr auto isIntegral<uint32&> = true;
+
+	template<>
+	static constexpr auto isIntegral<const uint32&> = true;
+
+	template<>
+	static constexpr auto isIntegral<uint64> = true;
+
+	template<>
+	static constexpr auto isIntegral<const uint64> = true;
+
+	template<>
+	static constexpr auto isIntegral<uint64&> = true;
+
+	template<>
+	static constexpr auto isIntegral<const uint64&> = true;
+
+	template<class>
+	static constexpr auto isFloatingPoint = false;
+
+	template<>
+	static constexpr auto isFloatingPoint<float> = true;
+
+	template<>
+	static constexpr auto isFloatingPoint<const float> = true;
+
+	template<>
+	static constexpr auto isFloatingPoint<float&> = true;
+
+	template<>
+	static constexpr auto isFloatingPoint<const float&> = true;
+
+	template<class T>
+	static constexpr auto isNumeric = isIntegral<T> || isFloatingPoint<T>;
+
 	template<bool>
 	struct FloatPointEvilHack {
 		static const auto value = TFloatAsIntRep();
@@ -149,5 +278,47 @@ namespace Neowise {
 	};
 	
 	struct NW_API NonCopyableNonMovable : NonCopyable, NonMovable {};
+
+	template<class T>
+	class NW_API CObjectHash {
+	public:
+		static constexpr uint get(const T& x) {
+			return ((x << 5) + (x << 8));
+		}
+	};
+
+	constexpr auto v = CObjectHash<uint>::get(251);
+
+	template<>
+	class NW_API CObjectHash<real> {
+	public: 
+		static constexpr uint get(const real& x) {
+			return ((uint(x) << 5) + uint(x)) + 1ull;
+		}
+	};
+
+	template<>
+	class NW_API CObjectHash<const real> {
+	public: 
+		static constexpr uint get(const real& x) {
+			return ((uint(x) << 5) + uint(x)) + 1ull;
+		}
+	};
+
+	template<>
+	class NW_API CObjectHash<real&> {
+	public: 
+		static constexpr uint get(const real& x) {
+			return ((uint(x) << 5) + uint(x)) + 1ull;
+		}
+	};
+
+	template<>
+	class NW_API CObjectHash<const real&> {
+	public: 
+		static constexpr uint get(const real& x) {
+			return ((uint(x) << 5) + uint(x)) + 1ull;
+		}
+	};
 
 }

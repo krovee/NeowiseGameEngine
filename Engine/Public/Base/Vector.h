@@ -189,4 +189,16 @@ namespace Neowise {
 		uint	_capacity = kInitialCap;
 		uint	_size = 0;
 	};
+
+	template<class T>
+	class NW_API CObjectHash<CVector<T>> {
+	public:
+		static uint get(const CVector<T>& vec) {
+			auto hs = vec.size() * 0xab0ba + 1;
+			for (const auto& v : vec) {
+				hs *= hs + CObjectHash<T>::get(v);
+			}
+			return hs;
+		}
+	};
 }

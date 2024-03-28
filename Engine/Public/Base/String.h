@@ -94,6 +94,14 @@ namespace Neowise {
 		rep = {};
 	};
 
+	template<>
+	class NW_API CObjectHash<CString> {
+	public:
+		static uint get(const CString& str) {
+			return str.getCRC();
+		}
+	};
+
 	class NW_API CStringBuilder : public NonCopyable, public NonMovable {
 	public:
 		CStringBuilder(CString& ref);

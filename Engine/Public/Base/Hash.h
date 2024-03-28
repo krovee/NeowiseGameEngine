@@ -2,6 +2,7 @@
 
 #include <Base/NumericTypes.h>
 #include <Base/StringView.h>
+#include <Base/Templated.h>
 
 namespace Neowise {
 	enum : uint64 {
@@ -24,4 +25,13 @@ namespace Neowise {
 	private:
 		uint64 _offset = {};
 	};
+
+	template<>
+	class NW_API CObjectHash<CStringView> {
+	public:
+		static uint get(const CStringView& sv) {
+			return CHash()(sv);
+		}
+	};
+
 }

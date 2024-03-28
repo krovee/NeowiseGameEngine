@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Base/NumericTypes.h>
+#include <Base/Templated.h>
 #include <Base/UUID.h>
 
 namespace Neowise {
@@ -46,4 +47,5 @@ namespace Neowise {
 		uint64		_size = 0;
 		// CUUID		_uuid = {};
 	};
+
 }

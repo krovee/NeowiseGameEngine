@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Base/NumericTypes.h>
+#include <Base/Templated.h>
 
 namespace Neowise {
 	/** 
@@ -44,5 +45,13 @@ namespace Neowise {
 				char	_7;
 			}			_b;
 		};
+	};
+
+	template<>
+	class NW_API CObjectHash<CUUID> {
+	public:
+		static uint get(const CUUID& uuid) {
+			return uint(uuid);
+		}
 	};
 }

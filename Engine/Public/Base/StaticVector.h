@@ -181,4 +181,16 @@ namespace Neowise {
 		swap(l._size, r._size);
 	}
 
+	template<class T, uint N>
+	class NW_API CObjectHash<CStaticVector<T, N>> {
+	public:
+		static uint get(const CStaticVector<T, N>& vec) {
+			uint hs = vec.size() * 0xab0ba + 1;
+			for (const auto& v : vec) {
+				hs *= hs + CObjectHash<T>::get(v);
+			}
+			return hs;
+		}
+	};
+
 }

@@ -2,6 +2,7 @@
 
 #include <Base/NumericTypes.h>
 #include <Base/Templated.h>
+#include <new>
 
 namespace Neowise {
 
