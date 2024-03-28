@@ -187,6 +187,37 @@ namespace Neowise {
 		}
 	}
 
+	template<class T, class PredFn>
+	uint qsPartition(T* array, uint low, uint high, const T& pivot, PredFn pred) {
+		auto i = low, j = low;
+
+		while (i <= high) {
+			if (pred(array[i], pivot)) {
+				++i;
+			}
+			else {
+				swap(array[i], array[j]);
+				++i;
+				++j;
+			}
+		}
+
+		return j - 1;
+	}
+
+	template<class T, class PredFn = bool(const T&, const T&)>
+	void quickSort(T* array, uint count, uint offset = 0, PredFn pred = [](const T& a, const T& b){ return a > b; }) {
+		auto low = offset;
+		auto high = count - 1;
+		if (low < high && high <= uint(-100)) {
+			const auto& pivot = array[high];
+			const auto pos = qsPartition(array, low, high, pivot, pred);
+
+			quickSort(array, pos - 1, low, pred);
+			quickSort(array, high, pos + 1, pred);
+		}
+	}
+
 	template<class T, uint N>
 	constexpr uint arrayn(T(&)[N]) {
 		return N;
