@@ -24,27 +24,27 @@ namespace Neowise {
 		
 		constexpr COptional(const COptional& o) {
 			if (o.hasValue()) {
-				construct(o.value());
+				construct(o.unwrap());
 			}
 		}
 		
 		constexpr COptional(COptional&& o) {
 			if (o.hasValue()) {
-				construct(move(o.value()));
+				construct(move(o.unwrap()));
 			}
 		}
 		
 		template<class U>
 		constexpr COptional(const COptional<U>& o) {
 			if (o.hasValue()) {
-				construct(o.value());
+				construct(o.unwrap());
 			}
 		}
 		
 		template<class U>
 		constexpr COptional(COptional<U>&& o) {
 			if (o.hasValue()) {
-				construct(move(o.value()));
+				construct(move(o.unwrap()));
 			}
 		}
 
@@ -61,10 +61,10 @@ namespace Neowise {
 		constexpr COptional& operator=(const COptional& r) {
 			if (r.hasValue()) {
 				if (hasValue()) {
-					value() = r.value();
+					unwrap() = r.unwrap();
 				}
 				else {
-					construct(r.value());
+					construct(r.unwrap());
 				}
 			}
 			else {
@@ -78,10 +78,10 @@ namespace Neowise {
 		constexpr COptional& operator=(const COptional<U>& r) {
 			if (r.hasValue()) {
 				if (hasValue()) {
-					value() = r.value();
+					unwrap() = r.unwrap();
 				}
 				else {
-					construct(r.value());
+					construct(r.unwrap());
 				}
 			}
 			else {
@@ -94,10 +94,10 @@ namespace Neowise {
 		constexpr COptional& operator=(COptional&& r) {
 			if (r.hasValue()) {
 				if (hasValue()) {
-					value() = move(r.value());
+					unwrap() = move(r.unwrap());
 				}
 				else {
-					construct(move(r.value()));
+					construct(move(r.unwrap()));
 				}
 			}
 			else {
@@ -111,10 +111,10 @@ namespace Neowise {
 		constexpr COptional& operator=(COptional<U>&& r) {
 			if (r.hasValue()) {
 				if (hasValue()) {
-					value() = move(r.value());
+					unwrap() = move(r.unwrap());
 				}
 				else {
-					construct(move(r.value()));
+					construct(move(r.unwrap()));
 				}
 			}
 			else {
@@ -128,7 +128,7 @@ namespace Neowise {
 		constexpr T& emplace(Args&&...args) {
 			reset();
 			construct(forward<Args>(args)...);
-			return value();
+			return unwrap();
 		}
 
 		constexpr bool hasValue() const {
@@ -139,11 +139,11 @@ namespace Neowise {
 			return check;
 		}
 
-		constexpr T& value() {
+		constexpr T& unwrap() {
 			return static_cast<T&>(*(T*)(getStorage()));
 		}
 
-		constexpr const T& value() const {
+		constexpr const T& unwrap() const {
 			return static_cast<const T&>(*(const T*)(getStorage()));
 		}
 
@@ -156,19 +156,19 @@ namespace Neowise {
 		}
 
 		constexpr T* operator->() {
-			return &value();
+			return &unwrap();
 		}
 		
 		constexpr const T* operator->() const {
-			return &value();
+			return &unwrap();
 		}
 		
 		constexpr T& operator*() {
-			return value();
+			return unwrap();
 		}
 		
 		constexpr const T& operator*() const {
-			return value();
+			return unwrap();
 		}
 
 		constexpr void reset() {
@@ -181,16 +181,16 @@ namespace Neowise {
 		constexpr void swap(COptional& r) {
 			if (r.hasValue()) {
 				if (hasValue()) {
-					Neowise::swap(value(), r.value());
+					Neowise::swap(unwrap(), r.unwrap());
 				}
 				else {
-					construct(move(r.value()));
+					construct(move(r.unwrap()));
 					r.reset();
 				}
 			}
 			else {
 				if (hasValue()) {
-					r.construct(move(value()));
+					r.construct(move(unwrap()));
 					reset();
 				}
 			}
@@ -200,7 +200,7 @@ namespace Neowise {
 		constexpr bool operator==(const COptional<U>& r) const {
 			if (hasValue() != hasValue()) return false;
 			if (!hasValue()) return true;
-			return value() == r.value();
+			return unwrap() == r.unwrap();
 		}
 
 		template<class U>
@@ -230,7 +230,7 @@ namespace Neowise {
 
 		constexpr void destruct() {
 			if (hasValue()) {
-				destroy_at(value());
+				destroy_at(unwrap());
 			}
 		}
 

@@ -2,7 +2,14 @@
 
 #include <Base/NumericTypes.h>
 #include <Base/Templated.h>
+
+#if NW_OS_LINUX
+inline void* operator new(unsigned long, void* address) {
+	return address;
+}
+#else
 #include <new>
+#endif
 
 namespace Neowise {
 
