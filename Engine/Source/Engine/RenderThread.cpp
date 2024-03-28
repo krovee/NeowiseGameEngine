@@ -10,9 +10,9 @@ namespace Neowise {
 		NW_PROFILE_FUNCTION();
 		NW_OPT_ASSERT(!GRenderThread, "Failed to initialize already created GRenderThread object!");
 
-		auto grtp = GAlloc->allocate(sizeof(CRenderThread));
-		GRenderThread = reinterpret_cast<CRenderThread*>(grtp);
-
+		auto rtp = GAlloc->allocate(sizeof(CRenderThread));
+		GRenderThread = reinterpret_cast<CRenderThread*>(rtp);
+		
 		construct_at<CRenderThread>(GRenderThread);
 
 		return true;

@@ -83,20 +83,20 @@ set(
     ${ENGINE_SOURCE_PREFIX}/Base/UUID.cpp
 
     # ENGINE/RENDERER
-    ${ENGINE_SOURCE_PREFIX}/Engine/Renderer/RenderThread.cpp
-
+    
     # ENGINE/RHI
     ${ENGINE_SOURCE_PREFIX}/Engine/RHI/RHI.cpp
     
     # ENGINE/VULKANRHI
     ${ENGINE_SOURCE_PREFIX}/Engine/VulkanRHI/Common.cpp
-
+    
     # ENGINE
     ${ENGINE_SOURCE_PREFIX}/Engine/Application.cpp
     ${ENGINE_SOURCE_PREFIX}/Engine/BaseWindow.cpp
     ${ENGINE_SOURCE_PREFIX}/Engine/EngineBoot.cpp
     ${ENGINE_SOURCE_PREFIX}/Engine/EngineLoop.cpp
     ${ENGINE_SOURCE_PREFIX}/Engine/GameRuntimeApplication.cpp
+    ${ENGINE_SOURCE_PREFIX}/Engine/RenderThread.cpp
 
     # INPUT
     ${ENGINE_SOURCE_PREFIX}/Input/InputDevice.cpp
