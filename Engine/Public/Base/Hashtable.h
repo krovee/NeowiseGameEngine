@@ -247,13 +247,4 @@ namespace Neowise {
         uint    _size = 0;
     };
 
-    template<class K>
-    class NW_API HS {
-    public:
-        using Bucket = HTBucket<K, void>;
-
-    private:
-
-    };
-
 }
