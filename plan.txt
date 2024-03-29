@@ -1,7 +1,8 @@
 
 #CORE 
- [+] Custom global heap allocator (reserved?)
+ [+] Custom global heap allocator (reserved)
  [~] Complete linear algebra math library
+ [~] Hash table data structure
  [ ] 
 
 #ENGINE
