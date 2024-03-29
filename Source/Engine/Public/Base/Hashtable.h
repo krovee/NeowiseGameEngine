@@ -128,11 +128,15 @@ namespace Neowise {
         }
 
         bool contains(const K& key) const {
+            if (!_buckets) return false;
+
             const auto hv = getBucketId(key);
             return _buckets[hv];
         }
 
         CWrap<V> get(const K& key) const {
+            if (!_buckets) return nullptr;
+            
             return lookup(key);
         }
 
@@ -146,6 +150,8 @@ namespace Neowise {
         }
 
         void foreach(void(*fn)(HTBucket<K, V>& kv)) {
+            if (!_buckets) return;
+            
             for (uint i = 0; i < _capacity; ++i) {
                 if (_buckets[i]) {
                     fn(_buckets[i].unwrap());
@@ -154,6 +160,8 @@ namespace Neowise {
         }
 
         void foreach(void(*fn)(const HTBucket<K, V>& kv)) const {
+            if (!_buckets) return;
+            
             for (uint i = 0; i < _capacity; ++i) {
                 if (_buckets[i]) {
                     fn(_buckets[i].unwrap());
