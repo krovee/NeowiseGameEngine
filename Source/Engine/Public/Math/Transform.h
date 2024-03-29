@@ -19,20 +19,17 @@ namespace Neowise {
             return _parent;
         }
 
-        const FMatrix4& getMatrix() const;
+        void resetParent(CWrap<const CTransform> parent = nullptr);
+
+        FMatrix4 getMatrix() const;
         const FVector3& getLocalPosition() const;
-        const FVector3& getLocalRotation() const;
-        const FQuaternion& getLocalRotationQuat() const;
+        FVector3 getLocalRotationEuler() const;
+        const FQuaternion& getLocalRotation() const;
         const FVector3& getLocalScale() const;
 
         FVector3& localPosition();
-        FVector3& localRotation();
-        FQuaternion& localRotationQuat();
+        FQuaternion& localRotation();
         FVector3& localScale();
-
-        FVector3 getPosition() const;
-        FVector3 getRotation() const;
-        FQuaternion getRotationQuat() const;
 
         void recalculate();
     private:
@@ -40,10 +37,9 @@ namespace Neowise {
         void setDirty(const uint8 flag);
 
     private:
-        FMatrix4                _modelMatrix = FMatrix4(1);
+        FMatrix4                _localMatrix = FMatrix4(1);
 
         FVector3                _localPosition = {};
-        FVector3                _localRotationEuler = {};
         FQuaternion             _localRotation = {};
         FVector3                _localScale = FVector3::one;
     

@@ -15,21 +15,24 @@ namespace Neowise {
     void CTransform::setDirty(const uint8 flag) {
         _dirtyFlags |= flag;
     }
-    
 
-    const FMatrix4& CTransform::getMatrix() const {
-        return _modelMatrix;
+    void CTransform::resetParent(CWrap<const CTransform> parent) {
+        _parent = parent;
+    }
+
+    FMatrix4 CTransform::getMatrix() const {
+        return _localMatrix;
     }
 
     const FVector3& CTransform::getLocalPosition() const {
         return _localPosition;
     }
 
-    const FVector3& CTransform::getLocalRotation() const {
-        return _localRotationEuler;
+    FVector3 CTransform::getLocalRotationEuler() const {
+        return _localRotation.euler();
     }
 
-    const FQuaternion& CTransform::getLocalRotationQuat() const {
+    const FQuaternion& CTransform::getLocalRotation() const {
         return _localRotation;
     }
 
@@ -42,12 +45,7 @@ namespace Neowise {
         return _localPosition;
     }
 
-    FVector3& CTransform::localRotation() {
-        setDirty(E_TRANSFORM_LOCAL_ROTATION_DIRTY);
-        return _localRotationEuler;
-    }
-
-    FQuaternion& CTransform::localRotationQuat() {
+    FQuaternion& CTransform::localRotation() {
         setDirty(E_TRANSFORM_LOCAL_ROTATION_DIRTY);
         return _localRotation;
     }
@@ -57,41 +55,43 @@ namespace Neowise {
         return _localScale;
     }
 
-    FVector3 CTransform::getPosition() const {
-        if (_parent) {
-            return _parent.unwrap().getPosition() * _localPosition;
-        }
-        
-        return _localPosition;
-    }
-
-    FVector3 CTransform::getRotation() const {
-        if (_parent) {
-            return _parent.unwrap().getRotation() * _localPosition;
-        }
-        
-        return _localPosition;
-    }
-
-    FQuaternion CTransform::getRotationQuat() const {
-        return FQuaternion(getRotation());
-    }
-
     void CTransform::recalculate() {
         if (isDirty(E_TRANSFORM_LOCAL_SCALE_DIRTY)) {
-            _modelMatrix = scale(_modelMatrix, getRotation());
+            _localMatrix = scale(_localMatrix, _localScale);
         }
 
         if (isDirty(E_TRANSFORM_LOCAL_ROTATION_DIRTY)) {
-            _modelMatrix = rotateAxis(_modelMatrix, FVec3::right, _localRotationEuler.x);
-            _modelMatrix = rotateAxis(_modelMatrix, FVec3::forward, _localRotationEuler.y);
-            _modelMatrix = rotateAxis(_modelMatrix, FVec3::up, _localRotationEuler.z);
+            _localRotation.apply(_localMatrix);
         }
 
         if (isDirty(E_TRANSFORM_LOCAL_POSITION_DIRTY)) {
-            _modelMatrix = translate(_modelMatrix, getPosition());
+            _localMatrix = translate(_localMatrix, _localPosition);
+        }
+
+        if (_parent) {
+            _localMatrix = _parent.unwrap().getMatrix() * _localMatrix;
         }
 
         _dirtyFlags = 0;
+    }
+
+    CTransform::CTransform(const FVector3& translation, const FVector3& rotation, const FVector3& scale) : _localPosition(translation), _localRotation(rotation), _localScale(scale) {
+        _dirtyFlags = E_TRANSFORM_LOCAL_POSITION_DIRTY | E_TRANSFORM_LOCAL_ROTATION_DIRTY | E_TRANSFORM_LOCAL_SCALE_DIRTY;
+    }
+
+    CTransform::CTransform(const FVector3& translation, const FQuaternion& rotation, const FVector3& scale) : _localPosition(translation), _localRotation(rotation), _localScale(scale) {
+        _dirtyFlags = E_TRANSFORM_LOCAL_POSITION_DIRTY | E_TRANSFORM_LOCAL_ROTATION_DIRTY | E_TRANSFORM_LOCAL_SCALE_DIRTY;
+    }
+
+    CTransform CTransform::createChild(const FVector3& translation, const FVector3& rotation, const FVector3& scale) {
+        CTransform t(translation, rotation, scale);
+        t._parent = CWrap<const CTransform>(this);
+        return t;
+    }
+
+    CTransform CTransform::createChild(const FVector3& translation, const FQuaternion& rotation, const FVector3& scale) {
+        CTransform t(translation, rotation, scale);
+        t._parent = CWrap<const CTransform>(this);
+        return t;
     }
 }
