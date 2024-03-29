@@ -3,6 +3,8 @@
 #include <Math/Vector4.h>
 
 namespace Neowise {
+	struct FMatrix4;
+
 	/** 
 	* 
 	*/
@@ -12,6 +14,7 @@ namespace Neowise {
 		constexpr FQuaternion() : _data() {}
 		FQuaternion(real x, real y, real z, real w);
 		explicit FQuaternion(const FVector3& eulerAngles);
+		explicit FQuaternion(const FVector3& axis, const real angle);
 		FQuaternion(const FVector3& normalized1, const FVector3& normalized2);
 
 		FQuaternion(const FQuaternion&) = default;
@@ -41,6 +44,15 @@ namespace Neowise {
 		FQuaternion operator*(real) const;
 		FQuaternion operator/(real) const;
 
+		real angle() const;
+		real roll() const;
+		real pitch() const;
+		real yaw() const;
+
+		FVector3 axis() const;
+		FVector3 euler() const;
+
+		void apply(FMatrix4& m);
 
 		union {
 			real _data[4] = {};

@@ -120,4 +120,9 @@ namespace Neowise {
 	NW_API FMatrix4 scale(const FMatrix4& m, const FVector3& s);
 	NW_API FMatrix4 lookat(const FVector3& eye, const FVector3& center, const FVector3& up = FVector3::up);
 
+	template<class T>
+	constexpr real* valueptr(const T& o) {
+		return *reinterpret_cast<real**>((T*)&o);
+	}
+
 }

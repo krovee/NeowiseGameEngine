@@ -1,3 +1,5 @@
+#include "Math/Quaternion.h"
+#include "Math/Vector2.h"
 #include <Math/Math.h>
 
 #include  <immintrin.h>
@@ -17,6 +19,14 @@ namespace Neowise {
 		y = cv.x * sv.y * cv.z + sv.x * cv.y * sv.z;
 		z = cv.x * cv.y * sv.z - sv.x * sv.y * cv.z;
 		w = cv.x * cv.y * cv.z + sv.x * sv.y * sv.z;
+	}
+
+	FQuaternion::FQuaternion(const FVector3& axis, const real angle) {
+		const auto xyz = axis * sin(angle * real(.5));
+		w = cos(angle * real(.5));
+		x = xyz.x;
+		y = xyz.y;
+		z = xyz.z;
 	}
 
 	//FQuaternion::FQuaternion(const FQuaternion& o)
@@ -121,6 +131,63 @@ namespace Neowise {
 
 	FQuaternion FQuaternion::operator/(real r) const {
 		return FQuaternion(*this) /= r;
+	}
+
+	real FQuaternion::angle() const {
+		if (abs(w) > real(0.877582561890372716130286068203503191)) {
+			const auto a = asin(sqrt(x * x + y * y + z * z)) * real(2.);
+			if (w < 0) {
+				return Const::REAL_PI * real(2) - a;
+			}
+
+			return a;
+		}
+
+		return acos(w) * real(2);
+	}
+
+	real FQuaternion::roll() const {
+		const auto y2 = real(2) * (x * y * w * z);
+		const auto x2 = w * w + x * x - y * y - z * z;
+
+		if (FVector2(x2, y2) == FVector2::zero) {
+			return 0;
+		}
+
+		return atan2(y2, x2);
+	}
+
+	real FQuaternion::pitch() const {
+		const auto y2 = real(2) * (y * z + w * x);
+		const auto x2 = w * w - x * x - y * y + z * z;
+
+		if (FVector2(x2, y2) == FVector2::zero) {
+			return real(2) * atan2(x, w);
+		}
+
+		return atan2(y2, x2);
+	}
+
+	real FQuaternion::yaw() const {
+		return asin(NW_CLAMP(real(-2) * (x * z - w * y), real(-1), real(1)));
+	}
+
+	FVector3 FQuaternion::axis() const {
+		const auto t = real(1) - w * w;
+		if (t <= 0) {
+			return { 0, 0, 1 };
+		}
+
+		const auto t2 = real(1) / sqrt(t);
+		return { x * t2, y * t2, z * t2 };
+	}
+
+	FVector3 FQuaternion::euler() const {
+		return { pitch(), yaw(), roll() };
+	}
+
+	void FQuaternion::apply(FMatrix4& m) {
+		m = rotateAxis(m, axis(), angle());
 	}
 
 }
