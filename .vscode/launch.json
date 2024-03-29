@@ -5,8 +5,8 @@
             "name": "Debug-Linux",
             "type": "lldb",
             "request": "launch",
-            "program": "${workspaceFolder}/build/Application",
-            "cwd": "${workspaceFolder}/build",
+            "program": "${workspaceFolder}/Binaries-x64/Application",
+            "cwd": "${workspaceFolder}/Binaries-x64",
             "args": []
         }
     ]
