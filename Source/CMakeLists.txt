@@ -94,6 +94,7 @@ set(
     ${ENGINE_SOURCE_PREFIX}/Engine/Application.cpp
     ${ENGINE_SOURCE_PREFIX}/Engine/BaseWindow.cpp
     ${ENGINE_SOURCE_PREFIX}/Engine/EngineBoot.cpp
+    ${ENGINE_SOURCE_PREFIX}/Engine/EngineGlobals.cpp
     ${ENGINE_SOURCE_PREFIX}/Engine/EngineLoop.cpp
     ${ENGINE_SOURCE_PREFIX}/Engine/GameRuntimeApplication.cpp
     ${ENGINE_SOURCE_PREFIX}/Engine/RenderThread.cpp
