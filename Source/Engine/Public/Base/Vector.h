@@ -127,7 +127,7 @@ namespace Neowise {
 		constexpr void shrinkToFit() {
 			T* p = reinterpret_cast<T*>(GAlloc->allocate(sizeof(T) * _size));
 			NW_ASSERT(p, "");
-			copy_range(p, _ptr, _size);
+			move_range(p, _ptr, _size);
 			GAlloc->free(_ptr, _size);
 			_capacity = _size;
 			_ptr = p;
@@ -154,7 +154,7 @@ namespace Neowise {
 			growStorage();
 			T* p = reinterpret_cast<T*>(GAlloc->allocate(sizeof(T) * _capacity));
 			NW_ASSERT(p, "");
-			copy_range(p, data, _size);
+			move_range(p, data, _size);
 			_ptr = p;
 		}
 
@@ -175,7 +175,7 @@ namespace Neowise {
 			T* p = reinterpret_cast<T*>(GAlloc->allocate(sizeof(T) * _capacity));
 			NW_ASSERT(p, "");
 			if (_ptr) {
-				copy_range(p, _ptr, _size);
+				move_range(p, _ptr, _size);
 				GAlloc->free(_ptr, _size);
 			}
 			_ptr = p;
