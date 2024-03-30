@@ -1,23 +1,61 @@
+#include "Input/Keycode.h"
 #include <Engine/EngineBoot.h>
 #include <Engine/EngineLoop.h>
+#include <Engine/Events/Bus.h>
+#include <Engine/EngineEvents.h>
 
 #include <Engine/RenderThread.h>
 
 namespace Neowise {
-	CStringView		GBaseScenePath = "Unknown";
+	CStringView		GBaseScenePath = "";
 	CEngineLoop*	GEngineLoop = nullptr;
 
 	EEngineBoot CEngineBoot::earlyInit(DEngineBootInfo const& info) {
 		NW_PROFILE_FUNCTION();
 		
-		GBaseScenePath = info.baseScenePath;
-		NW_OPT_ASSERT(!GBaseScenePath.empty(), "No base scene path was provided!");
+		GEventBus = reinterpret_cast<CEventBus*>(GAlloc->allocate(sizeof(CEventBus)));
+		construct_at(*GEventBus);
 
 		GEngineLoop = CEngineLoop::instantiate();
 		if (!GEngineLoop || isExitRequested()) {
 			return E_ENGINE_BOOT_ERROR_CANT_INSTANTIATE_LOOP;
 		}
 
+		GEventBus->subscribe<CEventWindowClose>([](const CEventWindowClose&){
+			GEngineLoop->requestExit(0);
+		});
+
+		GEventBus->subscribe<CEventWindowGotFocus>([](const CEventWindowGotFocus&){
+			GDiag << "Window got focused!\n";
+		});
+
+		GEventBus->subscribe<CEventWindowLostFocus>([](const CEventWindowLostFocus&){
+			GDiag << "Window lost focus..\n";
+		});
+
+		GEventBus->subscribe<CEventWindowSuspended>([](const CEventWindowSuspended&){
+			GDiag << "Window suspended..ZzZzZzzz\n";
+		});
+
+		GEventBus->subscribe<CEventWindowMoved>([](const CEventWindowMoved& e){
+			GDiag << "Window pos(" << e.getX() << ", " << e.getY() << ")\n";
+		});
+
+		GEventBus->subscribe<CEventWindowResized>([](const CEventWindowResized& e){
+			GDiag << "Window(" << e.getWidth() << ", " << e.getHeight() << ")\n";
+		});
+
+		GEventBus->subscribe<CEventWindowInputKeyboard>([](const CEventWindowInputKeyboard& e){
+			GDiag << "Key: " << EKey(e.getKey()) << "(" << e.isPressed() << ")\n";
+		});
+
+		GEventBus->subscribe<CEventWindowInputMouseButton>([](const CEventWindowInputMouseButton& e){
+			GDiag << "Mouse: " << EMouseButton(e.getButton()) << "(" << e.isPressed() << ")\n";
+		});
+
+
+		GBaseScenePath = info.baseScenePath;
+		NW_OPT_ASSERT(!GBaseScenePath.empty(), "No base scene path was provided!");
 
 		return E_ENGINE_BOOT_SUCCESS;
 	}

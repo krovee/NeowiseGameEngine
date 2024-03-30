@@ -1,7 +1,9 @@
-#include "Base/MacroUtils.h"
+#include "Engine/EngineEvents.h"
+#include "Input/InputDevice.h"
 #include <Platform/Linux/LinuxPlatformWindow.h>
 
 #include <Platform/Linux/LinuxBase.h>
+#include <Engine/Events/Bus.h>
 #include <Engine/EngineLoop.h>
 #include <Base/BuildVersion.h>
 
@@ -31,6 +33,10 @@ namespace Neowise::Platform::Linux {
                 default: break;
             }
         }
+
+        GEventBus->subscribe<CEventWindowInputKeyboard>(&CBaseWindow::updateKeysState);
+        GEventBus->subscribe<CEventWindowInputMouseButton>(&CBaseWindow::updateKeysState);
+
     }
 
     CBaseWindow::~CBaseWindow() {
@@ -95,6 +101,13 @@ namespace Neowise::Platform::Linux {
         _size = s;
     }
 
+    void CBaseWindow::updateKeysState(const CEventWindowInputKeyboard& e) {
+        _keysStates[int32(e.getKey())] = e.isPressed() ? E_TOGGLE_STATE_PRESSED : E_TOGGLE_STATE_RELEASED;
+        _keysModes[int32(e.getKey())] = EKeyMod(e.getKeyMod());
+    }
 
+    void CBaseWindow::updateKeysState(const CEventWindowInputMouseButton& e) {
+        _keysStates[int32(e.getButton())] = e.isPressed() ? E_TOGGLE_STATE_PRESSED : E_TOGGLE_STATE_RELEASED;
+    }
 
 }
