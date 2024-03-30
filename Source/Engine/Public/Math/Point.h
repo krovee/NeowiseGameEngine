@@ -18,4 +18,54 @@ namespace Neowise {
 		real x;
 		real y;
 	};
+
+	constexpr Point2i operator+(const Point2i& a, const Point2i& b) {
+		return { a.x + b.x, a.y + b.y };
+	}
+	
+	constexpr Point2i operator-(const Point2i& a, const Point2i& b) {
+		return { a.x - b.x, a.y - b.y };
+	}
+	
+	constexpr Point2i operator*(const Point2i& a, const Point2i& b) {
+		return { a.x * b.x, a.y + b.y };
+	}
+	
+	constexpr Point2i operator/(const Point2i& a, const Point2i& b) {
+		return { a.x / b.x, a.y + b.y };
+	}
+	
+
+	constexpr Point2u operator+(const Point2u& a, const Point2u& b) {
+		return { a.x + b.x, a.y + b.y };
+	}
+	
+	constexpr Point2u operator-(const Point2u& a, const Point2u& b) {
+		return { a.x - b.x, a.y - b.y };
+	}
+	
+	constexpr Point2u operator*(const Point2u& a, const Point2u& b) {
+		return { a.x * b.x, a.y + b.y };
+	}
+	
+	constexpr Point2u operator/(const Point2u& a, const Point2u& b) {
+		return { a.x / b.x, a.y + b.y };
+	}
+	
+	constexpr Point2r operator+(const Point2r& a, const Point2r& b) {
+		return { a.x + b.x, a.y + b.y };
+	}
+	
+	constexpr Point2r operator-(const Point2r& a, const Point2r& b) {
+		return { a.x - b.x, a.y - b.y };
+	}
+	
+	constexpr Point2r operator*(const Point2r& a, const Point2r& b) {
+		return { a.x * b.x, a.y + b.y };
+	}
+	
+	constexpr Point2r operator/(const Point2r& a, const Point2r& b) {
+		return { a.x / b.x, a.y + b.y };
+	}
+	
 }
