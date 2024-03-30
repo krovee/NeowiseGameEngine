@@ -3,21 +3,23 @@
 #include <Base/Common.h>
 
 #ifndef NW_EVENT_DECLARATION
-#   define NW_EVENT_DECLARATION(_typename_)                             \
-    public:                                                             \
-        static uint getStaticEventID() { return sEventName.getCRC(); }  \
-        uint getEventID() const override { return getStaticEventID(); } \
-    private:                                                            \
-        static inline CString sEventName = #_typename_;
+#   define NW_EVENT_DECLARATION(_typename_)                                         \
+    public:                                                                         \
+        static EventID  getStaticEventID() { return sEventName.getCRC(); }          \
+        EventID         getEventID() const override { return getStaticEventID(); }  \
+    private:                                                                        \
+        static inline const CString sEventName = #_typename_;
 #endif
 
 namespace Neowise {
+
+    using EventID = uint;
 
     class NW_API CEvent {
     public:
         virtual ~CEvent() = default;
 
-        virtual uint getEventID() const = 0;
+        virtual EventID getEventID() const = 0;
         
         bool isHandled() const;
         void markHandled();
@@ -36,11 +38,13 @@ namespace Neowise {
             docall(e);
         }
 
-        virtual uint getID() const { return -1; }
+        virtual EventID getID() const { return -1; }
 
     private:
         virtual void docall(const CEvent& e) = 0;
     };
+
+    using IEventHandlerWrapper = CEventHandlerWrapperInterface*;
 
     template<class T>
     struct EventHandlerSlot {
@@ -48,7 +52,7 @@ namespace Neowise {
 
         const Handler&  handler;
         
-        uint getID() const {
+        EventID getID() const {
             return T::getStaticEventID();
         }
 
@@ -70,7 +74,7 @@ namespace Neowise {
         {}
         virtual ~CEventHandlerWrapper() = default;
 
-        uint getID() const override { 
+        EventID getID() const override { 
             return _handlerID;
         }
     private:
@@ -81,8 +85,18 @@ namespace Neowise {
         }
 
     private:
-        Handler     _handler;
-        const uint  _handlerID;
+        Handler         _handler;
+        const EventID   _handlerID;
     };
+
+    template<class T>
+    using TEventHandlerWrapper = CEventHandlerWrapper<T>*;
+
+    template<class T>
+    constexpr IEventHandlerWrapper makeEventHandler(const typename CEventHandlerWrapper<T>::Handler& evFunc) {
+        auto p = reinterpret_cast<TEventHandlerWrapper<T>>(GAlloc->allocate(sizeof(CEventHandlerWrapper<T>)));
+        construct_at(*p, evFunc);
+        return reinterpret_cast<IEventHandlerWrapper>(p);
+    }
 
 }

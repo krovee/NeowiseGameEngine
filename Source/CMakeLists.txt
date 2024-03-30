@@ -89,6 +89,9 @@ set(
     
     # ENGINE/VULKANRHI
     ${ENGINE_SOURCE_PREFIX}/Engine/VulkanRHI/Common.cpp
+
+    # ENGINE/EVENTS
+    ${ENGINE_SOURCE_PREFIX}/Engine/Events/Bus.cpp
     
     # ENGINE
     ${ENGINE_SOURCE_PREFIX}/Engine/Application.cpp
