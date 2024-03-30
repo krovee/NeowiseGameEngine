@@ -1,6 +1,10 @@
+#include "Input/Keycode.h"
+#include "Math/Point.h"
 #include <Platform/Linux/LinuxBase.h>
 
 #include <Engine/EngineLoop.h>
+#include <Engine/EngineEvents.h>
+#include <Engine/Events/Bus.h>
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -155,10 +159,14 @@ namespace Neowise::Platform::Linux {
         uint32 event_mask =   XCB_CW_BACK_PIXEL | XCB_CW_EVENT_MASK;
 
         // Listen for keyboard and mouse buttons
-        uint32 event_values = XCB_EVENT_MASK_BUTTON_PRESS | XCB_EVENT_MASK_BUTTON_RELEASE |
+        uint32 event_values = XCB_EVENT_MASK_BUTTON_PRESS | XCB_EVENT_MASK_BUTTON_RELEASE | 
+                              XCB_EVENT_MASK_POINTER_MOTION | XCB_EVENT_MASK_BUTTON_MOTION |
                               XCB_EVENT_MASK_KEY_PRESS | XCB_EVENT_MASK_KEY_RELEASE |
                               XCB_EVENT_MASK_EXPOSURE | XCB_EVENT_MASK_POINTER_MOTION |
-                              XCB_EVENT_MASK_STRUCTURE_NOTIFY;
+                              XCB_EVENT_MASK_FOCUS_CHANGE | XCB_EVENT_MASK_STRUCTURE_NOTIFY |
+                              XCB_EVENT_MASK_EXPOSURE | XCB_EVENT_MASK_RESIZE_REDIRECT  |
+                              XCB_EVENT_MASK_VISIBILITY_CHANGE
+                              ;
 
         // Values to be sent over XCB (bg colour, events)
         uint32 value_list[2] = { win.pScreen->black_pixel, event_values };
@@ -251,14 +259,15 @@ namespace Neowise::Platform::Linux {
         return 0;
     }
 
-    bool _WindowPumpMessages(const _WindowID &id, void *params) {
+    bool _WindowPumpMessages(const _WindowID &id, void *) {
         if (id == _WindowID(-1)) return false;
 
         _WindowData& win = getWindowData(id);
-        _WindowInputInfo* input = (_WindowInputInfo *)params;
+        //_WindowInputInfo* input = (_WindowInputInfo *)params;
 
         xcb_generic_event_t *event = nullptr;
         xcb_client_message_event_t *cm = nullptr;
+        static Point2i lastMousePos = {};
 
         while ((event = xcb_poll_for_event(win.pHandleConnection))) {
             switch (event->response_type & ~0x80) {
@@ -269,8 +278,51 @@ namespace Neowise::Platform::Linux {
 
                     // Window close
                     if (cm->data.data32[0] == win.wmDeleteWin) {
-                        GEngineLoop->requestExit(0);
+                        GEventBus->fire(CEventWindowClose{});
+                        //GEngineLoop->requestExit(0);
                     }
+                } break;
+
+                case XCB_FOCUS_IN: {
+                    GEventBus->fire(CEventWindowGotFocus());
+                } break;
+
+                case XCB_FOCUS_OUT: {
+                    GEventBus->fire(CEventWindowLostFocus());
+                } break;
+
+                case XCB_EXPOSE: {
+                    xcb_expose_event_t* e = (xcb_expose_event_t*)event;
+                    xcb_resize_request_event_t resize_event = {
+                        XCB_RESIZE_REQUEST,
+                        0,
+                        0,
+                        win.handle,
+                        e->width,
+                        e->height
+                    };
+                    xcb_send_event(win.pHandleConnection, true, win.handle, XCB_EVENT_MASK_RESIZE_REDIRECT, (const char*)&resize_event);
+                } break;
+
+                case XCB_VISIBILITY_NOTIFY: {
+                    xcb_visibility_notify_event_t* e = (xcb_visibility_notify_event_t*)event;
+                    if (e->state == XCB_VISIBILITY_FULLY_OBSCURED) {
+                        GEventBus->fire(CEventWindowSuspended());
+                    }
+                } break;
+
+                case XCB_RESIZE_REQUEST: {
+                    xcb_resize_request_event_t* resize_event = (xcb_resize_request_event_t*)event;
+
+                    GEventBus->fire(CEventWindowResized(FVector2(real(resize_event->width), real(resize_event->height))));
+                } break;
+
+                case XCB_MOTION_NOTIFY: {
+                    xcb_motion_notify_event_t* e = (xcb_motion_notify_event_t*)event;
+
+                    Point2i pos = { e->event_x, e->event_y };
+                    GEventBus->fire(CEventWindowInputMouseMoved(pos, lastMousePos));
+                    lastMousePos = pos;
                 } break;
 
                 case XCB_KEY_PRESS:
@@ -288,8 +340,23 @@ namespace Neowise::Platform::Linux {
                     EKey key;
                     EKeyMod mod;
                     _TranslateKey(key_sym, key, mod);
-                    input->pKeysState[int32(key)] = pressed ? E_TOGGLE_STATE_PRESSED : E_TOGGLE_STATE_RELEASED;
-                    input->pKeyMods[int32(key)] = mod;
+
+                    GEventBus->fire(CEventWindowInputKeyboard(key, mod, pressed));
+                    //input->pKeysState[int32(key)] = pressed ? E_TOGGLE_STATE_PRESSED : E_TOGGLE_STATE_RELEASED;
+                    //input->pKeyMods[int32(key)] = mod;
+                } break;
+
+                case XCB_BUTTON_PRESS:
+                case XCB_BUTTON_RELEASE: {
+                    xcb_button_press_event_t* e = (xcb_button_press_event_t*)event;
+                    bool pressed = e->response_type == XCB_BUTTON_PRESS;
+                    xcb_button_t btn = e->detail;
+
+                    EKey key;
+                    EMouseButton mbtn;
+                    _TranslateKey(btn, key, mbtn);
+
+                    GEventBus->fire(CEventWindowInputMouseButton(lastMousePos, mbtn, pressed));
                 } break;
             }
 
@@ -443,6 +510,10 @@ namespace Neowise::Platform::Linux {
             _check_key(XK_Alt_R,        E_KEY_ALT,          E_KEY_MOD_RIGHT);
             _check_key(XK_semicolon,    E_KEY_SEMICOLON,    E_KEY_MOD_ANY);
             _check_key(XK_comma,        E_KEY_COMMA,        E_KEY_MOD_ANY);
+
+            _check_key(XCB_BUTTON_INDEX_1, E_KEY_MOUSE_BUTTON, E_KEY_MOD_LEFT);
+            _check_key(XCB_BUTTON_INDEX_2, E_KEY_MOUSE_BUTTON, E_KEY_MOD_MIDDLE);
+            _check_key(XCB_BUTTON_INDEX_3, E_KEY_MOUSE_BUTTON, E_KEY_MOD_RIGHT);
             default: break;
         }
     }

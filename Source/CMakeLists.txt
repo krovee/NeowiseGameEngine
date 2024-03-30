@@ -92,6 +92,7 @@ set(
 
     # ENGINE/EVENTS
     ${ENGINE_SOURCE_PREFIX}/Engine/Events/Bus.cpp
+    ${ENGINE_SOURCE_PREFIX}/Engine/Events/EngineEvents.cpp
     
     # ENGINE
     ${ENGINE_SOURCE_PREFIX}/Engine/Application.cpp
@@ -105,6 +106,7 @@ set(
     ${ENGINE_SOURCE_PREFIX}/Input/InputDevice.cpp
     ${ENGINE_SOURCE_PREFIX}/Input/InputSystem.cpp
     ${ENGINE_SOURCE_PREFIX}/Input/KeyboardInputDevice.cpp
+    ${ENGINE_SOURCE_PREFIX}/Input/Keycode.cpp
     ${ENGINE_SOURCE_PREFIX}/Input/MouseInputDevice.cpp
 
     # LAUNCH

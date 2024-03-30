@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Base/NumericTypes.h>
+#include <Base/Diagnostics.h>
 
 namespace Neowise {
 	/** 
@@ -90,6 +90,14 @@ namespace Neowise {
 		E_KEY_MOUSE_BUTTON,
 	};
 
+	NW_API CStringView getEKeyStr(const EKey key);
+
+	inline CDiagnostics& operator<<(CDiagnostics& d, EKey k) {
+		const auto sv = getEKeyStr(k);
+		d.writeString(sv.cstr(), sv.size());
+		return d;
+	}
+
 	/** 
 	* Modification keys for some primary ones.
 	*/
@@ -101,4 +109,14 @@ namespace Neowise {
 		E_KEY_MOD_EXTRA1,
 		E_KEY_MOD_EXTRA2,
 	};
+
+	using EMouseButton = EKeyMod;
+
+	NW_API CStringView getEKeyModStr(const EKeyMod mod);
+
+	inline CDiagnostics& operator<<(CDiagnostics& d, EKeyMod k) {
+		const auto sv = getEKeyModStr(k);
+		d.writeString(sv.cstr(), sv.size());
+		return d;
+	}
 }

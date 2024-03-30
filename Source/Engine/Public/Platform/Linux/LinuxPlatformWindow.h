@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Engine/EngineEvents.h"
 #include <Engine/BaseWindow.h>
 #include <Input/InputDevice.h>
 #include <Platform/Linux/LinuxBase.h>
@@ -29,13 +30,15 @@ namespace Neowise::Platform::Linux {
 		void			setPos(const Point2i& p);
 		void			setSize(const FVec2& s);
 
+		static 			void updateKeysState(const CEventWindowInputKeyboard& e);
+		static 			void updateKeysState(const CEventWindowInputMouseButton& e);
 	private:
-		CString			_title = {};
-		EToggleState	_keysStates[CInputDevice::kMaxToggleStates] = {};
-		EKeyMod			_keysModes[CInputDevice::kMaxToggleStates] = {};
-		int32			_releasedKeys[8] = {};
-		int32			_releasedKeysCount = {};
-		bool			_dirty = false;
-		_WindowID		_id = _WindowID(-1);
+		CString						_title = {};
+		static inline EToggleState	_keysStates[CInputDevice::kMaxToggleStates] = {};
+		static inline EKeyMod		_keysModes[CInputDevice::kMaxToggleStates] = {};
+		int32						_releasedKeys[8] = {};
+		int32						_releasedKeysCount = {};
+		bool						_dirty = false;
+		_WindowID					_id 	= _WindowID(-1);
 	};
 }
