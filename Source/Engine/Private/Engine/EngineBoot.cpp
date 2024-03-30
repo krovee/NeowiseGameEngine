@@ -1,10 +1,11 @@
 #include <Engine/EngineBoot.h>
 #include <Engine/EngineLoop.h>
+#include <Engine/Events/Bus.h>
 
 #include <Engine/RenderThread.h>
 
 namespace Neowise {
-	CStringView		GBaseScenePath = "Unknown";
+	CStringView		GBaseScenePath = "";
 	CEngineLoop*	GEngineLoop = nullptr;
 
 	EEngineBoot CEngineBoot::earlyInit(DEngineBootInfo const& info) {
@@ -12,6 +13,9 @@ namespace Neowise {
 		
 		GBaseScenePath = info.baseScenePath;
 		NW_OPT_ASSERT(!GBaseScenePath.empty(), "No base scene path was provided!");
+
+		GEventBus = reinterpret_cast<CEventBus*>(GAlloc->allocate(sizeof(CEventBus)));
+		construct_at(*GEventBus);
 
 		GEngineLoop = CEngineLoop::instantiate();
 		if (!GEngineLoop || isExitRequested()) {

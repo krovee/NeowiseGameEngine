@@ -3,6 +3,7 @@
 #include <Base/Common.h>
 
 namespace Neowise {
+	class CEventBus;
 	class CEngineLoop;
 	class CApplication;
 	class CRenderThread;
@@ -98,6 +99,7 @@ namespace Neowise {
 
 	extern STimeData					GTime;
 	extern CFixedHeapAllocatorPolicy*	GAlloc;
+	extern CEventBus*					GEventBus;
 	extern CEngineLoop*					GEngineLoop;
 	extern CRenderThread*				GRenderThread;
 	extern CApplication*				GApp;
