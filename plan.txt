@@ -6,6 +6,7 @@
  [ ] 
 
 #ENGINE
+ [+] Engine-side event system.
  [+] Application class that is base for the editor and runtime application.
    [ ] Editor application (plugin like?)
    [+] Runtime application. 
