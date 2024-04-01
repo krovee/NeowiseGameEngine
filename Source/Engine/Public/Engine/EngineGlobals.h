@@ -106,6 +106,3 @@ namespace Neowise {
 	extern RHIInterface*				GRHI;
 	
 }
-
-void* operator new(size_t);
-void  operator delete(void*, size_t);
