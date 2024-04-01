@@ -72,6 +72,7 @@ set(
     ${ENGINE_SOURCE_PREFIX}/Base/BuildVersion.cpp
     ${ENGINE_SOURCE_PREFIX}/Base/CRC.cpp
     ${ENGINE_SOURCE_PREFIX}/Base/Diagnostics.cpp
+    ${ENGINE_SOURCE_PREFIX}/Base/DynamicLibrary.cpp
     ${ENGINE_SOURCE_PREFIX}/Base/Hash.cpp
     ${ENGINE_SOURCE_PREFIX}/Base/MD5.cpp
     ${ENGINE_SOURCE_PREFIX}/Base/MemoryUtilities.cpp
@@ -89,6 +90,7 @@ set(
     
     # ENGINE/VULKANRHI
     ${ENGINE_SOURCE_PREFIX}/Engine/VulkanRHI/Common.cpp
+    ${ENGINE_SOURCE_PREFIX}/Engine/VulkanRHI/DynamicProvider.cpp
 
     # ENGINE/EVENTS
     ${ENGINE_SOURCE_PREFIX}/Engine/Events/Bus.cpp
@@ -164,6 +166,7 @@ if (LINUX)
         ${ENGINE_SOURCE_PREFIX}/Platform/Linux/LinuxBase.cpp
         ${ENGINE_SOURCE_PREFIX}/Platform/Linux/LinuxPlatformAssert.cpp
         ${ENGINE_SOURCE_PREFIX}/Platform/Linux/LinuxPlatformConsole.cpp
+        ${ENGINE_SOURCE_PREFIX}/Platform/Linux/LinuxPlatformDynamicLibrary.cpp
         ${ENGINE_SOURCE_PREFIX}/Platform/Linux/LinuxPlatformKeyboard.cpp
         ${ENGINE_SOURCE_PREFIX}/Platform/Linux/LinuxPlatformMemory.cpp
         ${ENGINE_SOURCE_PREFIX}/Platform/Linux/LinuxPlatformMutexLock.cpp

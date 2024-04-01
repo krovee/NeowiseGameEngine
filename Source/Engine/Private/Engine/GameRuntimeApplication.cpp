@@ -2,11 +2,13 @@
 #include <Engine/EngineLoop.h>
 
 #include <Engine/RenderThread.h>
-#include <Engine/VulkanRHI/Common.h>
+#include <Engine/RHI/RHI.h>
 
 namespace Neowise {
 	bool CGameRuntimeApplication::initialize() {
 		NW_PROFILE_FUNCTION();
+
+		auto vkProvider = RHIMakeVulkanProvider();
 
 		_window = move(CBaseWindow::createDefault());
 		NW_ASSERT(_window.get(), "Cannot create CBaseWindow object!");

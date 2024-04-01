@@ -71,7 +71,7 @@ macro(enable_warnings)
 endmacro(enable_warnings)
 
 macro(target_link_os_dependent_libraries TARGETNAME)
-    set(LINKLIBS Vulkan::Vulkan)
+    set(LINKLIBS)
 
     if (LINUX)
         find_package(X11 REQUIRED)

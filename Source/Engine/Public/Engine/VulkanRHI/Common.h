@@ -2,6 +2,7 @@
 
 #include <Engine/RHI/RHI.h>
 
+#define VK_NO_PROTOTYPES
 #include <vulkan/vulkan.h>
 
 namespace Neowise {
@@ -28,6 +29,11 @@ namespace Neowise {
 		* Returns reflected string of a reslult.
 		*/
 		static CStringView toString(const VkResult result);
+
+		/**
+		 * Gets an access to list of required instance extensions.
+		 */
+		static CVector<const char*> getRequiredInstanceExtensions();
 	};
 
 #ifndef RHIVKFN
@@ -47,6 +53,14 @@ namespace Neowise {
 #if NW_BUILD_TYPE == NW_BUILD_TYPE_SHIP
 #	undef  RHIVKFN
 #	define RHIVKFN(fn, msg, ...) { (void)fn; }
+#endif
+
+#ifndef NW_VK_LIBRARY_NAME
+#	if NW_OS_TYPE_WIN32
+#		define NW_VK_LIBRARY_NAME "vulkan-1.dll"
+#	elif NW_OS_TYPE_LINUX
+#		define NW_VK_LIBRARY_NAME "libvulkan.so.1"
+#	endif
 #endif
 
 }

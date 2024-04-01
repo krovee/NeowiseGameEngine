@@ -3,52 +3,27 @@
 #include <Engine/RHI/Common.h>
 
 namespace Neowise {
-	/** 
-	* 
-	*/
-	enum ERHIClass : uint {
-		E_RHI_CLASS_UNSPECIFIED,
-		E_RHI_CLASS_OPENGL,
-		E_RHI_CLASS_VULKAN,
-		E_RHI_CLASS_DIRECTX,
-	};
+	
+    class NW_API CRHIDynamicProviderInterface {
+    public:
+        virtual  ~CRHIDynamicProviderInterface() = default;
+        constexpr CRHIDynamicProviderInterface() = default;
 
-	CDiagnostics& operator<<(CDiagnostics& diag, ERHIClass rhi);
+        constexpr CRHIDynamicProviderInterface(const ERHIProviderClass _class) : _providerClass(_class)
+        {}
 
-	template<class>
-	struct RHIInterfaceTraits {
-		static constexpr uint RHI_RAW_SIZE = 0;
-	};
+        ERHIProviderClass getClass() const;
+    private:
+        const ERHIProviderClass _providerClass = E_RHI_PROVIDER_CLASS_UNDEFINED;
+    };
 
-	/** 
-	* 
-	*/
-	class NW_API RHIInterface {
-	public:
-		constexpr RHIInterface(ERHIClass eRHI) : rhiClass(eRHI)
-		{}
+    using IRHIDynamicProvider = Scope<CRHIDynamicProviderInterface>;
 
-		virtual ~RHIInterface() = default;
+    template<class T, class...Args>
+    inline auto RHIMakeProvider(Args&&...args) {
+        return makeScope<T>(forward<Args>(args)...).template cast<CRHIDynamicProviderInterface>();
+    }
 
-		constexpr ERHIClass getClass() const {
-			return rhiClass;
-		}
+    NW_API IRHIDynamicProvider RHIMakeVulkanProvider();
 
-		constexpr bool isOpenGLClass() const {
-			return rhiClass == E_RHI_CLASS_OPENGL;
-		}
-
-		constexpr bool isVulkanClass() const {
-			return rhiClass == E_RHI_CLASS_VULKAN;
-		}
-
-		constexpr bool isDirectXClass() const {
-			return rhiClass == E_RHI_CLASS_DIRECTX;
-		}
-	private:
-		const ERHIClass	rhiClass = E_RHI_CLASS_UNSPECIFIED;
-	};
-
-	NW_API void RHI_CreateInterface(ERHIClass eRHI);
-	NW_API void RHI_DestroyInterface();
 }
