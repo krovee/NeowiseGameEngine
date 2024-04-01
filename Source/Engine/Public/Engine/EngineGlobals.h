@@ -104,6 +104,3 @@ namespace Neowise {
 	extern CApplication*				GApp;
 	
 }
-
-void* operator new(size_t);
-void  operator delete(void*, size_t);
