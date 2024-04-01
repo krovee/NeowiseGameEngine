@@ -38,7 +38,7 @@ namespace Neowise {
 	protected:
 		inline CApplication(EApplicationType appType, const CStringView& name) : type(appType)
 		{
-			*const_cast<CString*>(&GApplicationName) = name;
+			construct_at(GApplicationName, name);
 		}
 
 	private:

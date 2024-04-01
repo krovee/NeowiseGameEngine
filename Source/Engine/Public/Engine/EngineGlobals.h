@@ -7,7 +7,6 @@ namespace Neowise {
 	class CEngineLoop;
 	class CApplication;
 	class CRenderThread;
-	class RHIInterface;
 
 	// Value for a check for engine to request an exit.
 	extern bool GIsExitRequested;
@@ -68,7 +67,7 @@ namespace Neowise {
 		return GIgnoreAssertation;
 	}
 
-	extern const CString GApplicationName;
+	extern CStringView GApplicationName;
 
 	inline auto getApplicationName() {
 		return GApplicationName;
@@ -103,7 +102,6 @@ namespace Neowise {
 	extern CEngineLoop*					GEngineLoop;
 	extern CRenderThread*				GRenderThread;
 	extern CApplication*				GApp;
-	extern RHIInterface*				GRHI;
 	
 }
 
