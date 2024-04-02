@@ -1,16 +1,72 @@
-#include <Engine/EngineGlobals.h>
 #include <Engine/VulkanRHI/DynamicProvider.h>
+#include <Engine/EngineGlobals.h>
 #include <Base/DynamicLibrary.h>
+#include <Base/BuildVersion.h>
 
 namespace Neowise {
+
+    template<class PFN>
+    static void loadInstanceFunc(CRHIVulkanDynamicProvider* p, PFN& pfn, VkInstance instance, const char* name) {
+        pfn = (PFN)p->getInstanceProcAddr(instance, name);
+    }
+
+    static VkBool32 sDebugMessageCallback(
+        VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity,
+        VkDebugUtilsMessageTypeFlagsEXT messageType,
+        const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData,
+        void*) 
+    {
+        CString message;
+        CStringBuilder ss(message);
+
+        switch (messageType) {
+            case VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT: {
+                ss << "[VKGNRL]";
+            } break;
+            case VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT: {
+                ss << "[VKPERF]";
+            } break;
+            default: {
+                ss << "[VKUNKW]";
+            } break;
+        }
+
+        switch (messageSeverity) {
+            case VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT: {
+                ss << "[ERRR]";
+            } break;
+            case VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT: {
+                ss << "[WARN]";
+            } break;
+            default: {
+                ss << "[UNKW]";
+            } break;
+        }
+
+        ss << ": " << pCallbackData->pMessage << "\n";
+        GDiag << message;
+
+        return VK_FALSE; // Applications must return false here
+    }
 
 	IRHIDynamicProvider RHIMakeVulkanProvider() {
         return RHIMakeProvider<CRHIVulkanDynamicProvider>();
     }
 
+    VkInstance CRHIVulkanDynamicProvider::getInstance() const {
+        return _instance;
+    }
 
     CRHIVulkanDynamicProvider::~CRHIVulkanDynamicProvider() {
-        
+        if (_debugMessenger && _instance) {
+            destroyDebugUtilsMessengerEXT(_instance, _debugMessenger, nullptr);
+            _debugMessenger = nullptr;
+        }
+
+        if (_instance) {
+            destroyInstance(_instance, nullptr);
+            _instance = nullptr;
+        }
     }
 
     CRHIVulkanDynamicProvider::CRHIVulkanDynamicProvider() 
@@ -22,30 +78,99 @@ namespace Neowise {
         auto vkLib = CDynamicLibrary::load(NW_VK_LIBRARY_NAME);
         NW_ASSERT(vkLib, "Failed to load Vulkan dynamic provider (missing " NW_VK_LIBRARY_NAME ")");
 
+        // acquire global level function
         getInstanceProcAddr = vkLib->getProcAddress<PFN_vkGetInstanceProcAddr>("vkGetInstanceProcAddr");
-        createInstance = (PFN_vkCreateInstance)getInstanceProcAddr(nullptr, "vkCreateInstance");
-        enumerateInstanceExtensionProperties = 
-            vkLib->getProcAddress<PFN_vkEnumerateInstanceExtensionProperties>("vkEnumerateInstanceExtensionProperties");
+        
+        // acquire instace level functions
+        loadInstanceFunc(this, enumerateInstanceExtensionProperties, nullptr, "vkEnumerateInstanceExtensionProperties");
+        loadInstanceFunc(this, enumerateInstanceLayerProperties, nullptr, "vkEnumerateInstanceLayerProperties");
+        loadInstanceFunc(this, enumerateInstanceVersion, nullptr, "vkEnumerateInstanceVersion");
+
+        // get system present instance extensions
+        uint32 extensionsCount = 0;
+        enumerateInstanceExtensionProperties(nullptr, &extensionsCount, nullptr);
+
+        CVector<VkExtensionProperties> extensions(extensionsCount);
+        enumerateInstanceExtensionProperties(nullptr, &extensionsCount, extensions.data());
+
+        const auto& requiredExtensions = RHIVKUtil::getRequiredInstanceExtensions();
+        CVector<const char*> presentInstanceExtensions = {};
+
+        for (auto& ext : extensions) {
+            const auto name = CStringView(ext.extensionName);
+            for (auto& rext : requiredExtensions) {
+                if (name == rext) {
+                    presentInstanceExtensions.emplace(name.cstr());
+                }
+            }
+        }
+
+        GDiag << "Found instance extensions(" << presentInstanceExtensions.size() << "): ";
+        for (auto& ext : presentInstanceExtensions) {
+            GDiag << ext << " ";
+        }
+        GDiag << "\n";
+
+        // acquire instance level functions
+        loadInstanceFunc(this, createInstance, nullptr, "vkCreateInstance");
+
+        const auto& requiredInstanceLayers = RHIVKUtil::getRequiredInstanceLayers();
+
+        uint32 layersCount = {};
+        enumerateInstanceLayerProperties(&layersCount, nullptr);
+
+        CVector<VkLayerProperties> availableLayers(layersCount);
+        enumerateInstanceLayerProperties(&layersCount, availableLayers.data());
+
+        for (auto& layer : availableLayers) {
+            GDiag << "\n(" << layer.layerName << ") " << layer.description;
+        }
+
+        CVector<const char*> presentInstanceLayers = {};
+
+        for (auto& layer : availableLayers) {
+            const auto name = CStringView(layer.layerName);
+            for (auto& rlayer : requiredInstanceLayers) {
+                if (name == rlayer) {
+                    presentInstanceLayers.emplace(name.cstr());
+                }
+            }
+        }
 
         VkApplicationInfo applicationInfo = {};
         applicationInfo.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
-        applicationInfo.apiVersion = VK_MAKE_VERSION(1, 0, 0);
+        applicationInfo.apiVersion = VK_MAKE_VERSION(1, 3, 0);
         applicationInfo.pEngineName = "NeowiseEngine";
-        // applicationInfo.engineVersion = uint32(buildVersion);
-        applicationInfo.engineVersion = VK_MAKE_VERSION(1, 0, 0);
+        applicationInfo.engineVersion = uint32(buildVersion);
         applicationInfo.pApplicationName = GApplicationName.cstr();
         applicationInfo.applicationVersion = VK_MAKE_VERSION(1, 0, 0);
 
         VkInstanceCreateInfo instanceCI = {};
         instanceCI.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
         instanceCI.pApplicationInfo = &applicationInfo;
-        instanceCI.enabledExtensionCount = 0;
-        instanceCI.enabledLayerCount = 0;
-
-        uint32 count = 0;
-        enumerateInstanceExtensionProperties(nullptr, &count, nullptr);
+        instanceCI.enabledExtensionCount = (uint32) presentInstanceExtensions.size();
+        instanceCI.ppEnabledExtensionNames = presentInstanceExtensions.data();
+        instanceCI.ppEnabledLayerNames = presentInstanceLayers.data();
+        instanceCI.enabledLayerCount = (uint32) presentInstanceLayers.size();
         
         createInstance(&instanceCI, nullptr, &_instance);
+
+        loadInstanceFunc(this, destroyInstance, getInstance(), "vkDestroyInstance");
+        loadInstanceFunc(this, createDebugUtilsMessengerEXT, getInstance(), "vkCreateDebugUtilsMessengerEXT");
+        loadInstanceFunc(this, destroyDebugUtilsMessengerEXT, getInstance(), "vkDestroyDebugUtilsMessengerEXT");
+        
+#if NW_BUILD_TYPE_DEBUG
+        VkDebugUtilsMessengerCreateInfoEXT dumCI = {};
+        dumCI.sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT;
+        dumCI.pfnUserCallback = sDebugMessageCallback;
+        dumCI.messageSeverity = 
+            VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT |
+            VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT;
+        dumCI.messageType = 
+            VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT |
+            VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT;
+        createDebugUtilsMessengerEXT(_instance, &dumCI, nullptr, &_debugMessenger);
+#endif
 
     }
  

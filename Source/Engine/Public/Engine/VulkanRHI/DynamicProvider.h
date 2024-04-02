@@ -1,4 +1,5 @@
 #include <Engine/VulkanRHI/Common.h>
+#include <vulkan/vulkan_core.h>
 
 namespace Neowise {
     
@@ -240,6 +241,8 @@ namespace Neowise {
         PFN_vkGetSwapchainImagesKHR                             getSwapchainImagesKHR;
         PFN_vkQueuePresentKHR                                   queuePresentKHR;
         PFN_vkGetSwapchainStatusKHR                             getSwapchainStatusKHR;
+        PFN_vkCreateDebugUtilsMessengerEXT                      createDebugUtilsMessengerEXT;
+        PFN_vkDestroyDebugUtilsMessengerEXT                     destroyDebugUtilsMessengerEXT;
 
     private:
         VkInstance                  _instance = VK_NULL_HANDLE;
