@@ -50,10 +50,6 @@ macro(target_populate_compile_definitions TARGET_NAME DEFS)
     endif (NOT "${DEFS_COUNT}" STREQUAL "0")
 endmacro(target_populate_compile_definitions TARGET_NAME DEFS)
 
-macro(initialize_vulkan_sdk)
-    find_package(Vulkan REQUIRED)
-endmacro(initialize_vulkan_sdk)
-
 macro(enable_compiler_features)
     if (WIN32)
         add_compile_options(/arch:AVX /Ot /GS- /sdl- /fp:fast /GR- /permissive- /Gr)

@@ -3,7 +3,8 @@
 #include <Engine/RHI/RHI.h>
 
 #define VK_NO_PROTOTYPES
-#include <vulkan/vulkan.h>
+#include <Engine/VulkanRHI/API/vk_platform.h>
+#include <Engine/VulkanRHI/API/vulkan_core.h>
 
 namespace Neowise {
 	/** 
@@ -33,7 +34,12 @@ namespace Neowise {
 		/**
 		 * Gets an access to list of required instance extensions.
 		 */
-		static CVector<const char*> getRequiredInstanceExtensions();
+		static const CVector<const char*>& getRequiredInstanceExtensions();
+		
+		/**
+		 * 
+		 */
+		static const CVector<const char*>& getRequiredInstanceLayers();
 	};
 
 #ifndef RHIVKFN

@@ -42,19 +42,19 @@
 */
 
 #ifdef  _DEBUG
-#	define NW_BUILD_TYPE_DEBUG 0xdeb
+#	define NW_BUILD_TYPE_DEBUG 1
 #else
 #	define NW_BUILD_TYPE_DEBUG 0
 #endif
 
 #if defined NDEBUG && !defined(NW_SHIP_BUILD)
-#	define NW_BUILD_TYPE_RELEASE 0x7e1
+#	define NW_BUILD_TYPE_RELEASE 1
 #else
 #	define NW_BUILD_TYPE_RELEASE 0
 #endif
 
 #ifdef NW_SHIP_BUILD
-#	define NW_BUILD_TYPE_SHIP 0x517
+#	define NW_BUILD_TYPE_SHIP 1
 #else
 #	define NW_BUILD_TYPE_SHIP 0
 #endif

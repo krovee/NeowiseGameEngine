@@ -22,9 +22,6 @@ guard_build_type("Debug")
 ## Initialize compiler-dependent variables.
 initialize_compilers()
 
-## Find and initialize VulkanSDK
-initialize_vulkan_sdk()
-
 ## Setup PREPROCESSOR_DEFINITIONS variable to create
 ## required macro definitions for compilation.
 set(PREPROCESSOR_DEFINITIONS)
@@ -57,7 +54,7 @@ endif("${CMAKE_BUILD_TYPE}" STREQUAL "Ship")
 list(APPEND ENGINE_DEFINITIONS ${PREPROCESSOR_DEFINITIONS} ENGINE_EXPORTS)
 
 ## Inlcude path.
-include_directories("Engine/Public" ${Vulkan_INCLUDE_DIRS})
+include_directories("Engine/Public")
 ## Sources path.
 set(ENGINE_SOURCE_PREFIX "Engine/Private")
 
@@ -173,6 +170,7 @@ if (LINUX)
         ${ENGINE_SOURCE_PREFIX}/Platform/Linux/LinuxPlatformSystemClock.cpp
         ${ENGINE_SOURCE_PREFIX}/Platform/Linux/LinuxPlatformThread.cpp
         ${ENGINE_SOURCE_PREFIX}/Platform/Linux/LinuxPlatformWindow.cpp
+        ${ENGINE_SOURCE_PREFIX}/Platform/Linux/LinuxVulkanExtensions.cpp
     )
 endif ()
 
@@ -186,7 +184,7 @@ target_link_os_dependent_libraries(NeowiseEngine)
 list(APPEND APPLICATION_DEFINITIONS ${PREPROCESSOR_DEFINITIONS})
 
 ## Inlcude path.
-include_directories("Engine/Public" ${Vulkan_INCLUDE_DIRS})
+include_directories("Engine/Public")
 ## Sources path.
 set(APPLICATION_SOURCE_PREFIX "Application/Private")
 
