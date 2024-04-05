@@ -83,11 +83,11 @@ set(
     # ENGINE/RENDERER
     
     # ENGINE/RHI
-    ${ENGINE_SOURCE_PREFIX}/Engine/RHI/RHI.cpp
     
     # ENGINE/VULKANRHI
     ${ENGINE_SOURCE_PREFIX}/Engine/VulkanRHI/Common.cpp
     ${ENGINE_SOURCE_PREFIX}/Engine/VulkanRHI/DynamicProvider.cpp
+    ${ENGINE_SOURCE_PREFIX}/Engine/VulkanRHI/VulkanAdapter.cpp
 
     # ENGINE/EVENTS
     ${ENGINE_SOURCE_PREFIX}/Engine/Events/Bus.cpp

@@ -3,18 +3,18 @@
 #include <Engine/RHI/Common.h>
 
 namespace Neowise {
-	
+    
+    class CRHIAdapterInterface;
+    using IRHIAdapter = Scope<CRHIAdapterInterface>;
+
     class NW_API CRHIDynamicProviderInterface {
     public:
         virtual  ~CRHIDynamicProviderInterface() = default;
         constexpr CRHIDynamicProviderInterface() = default;
 
-        constexpr CRHIDynamicProviderInterface(const ERHIProviderClass _class) : _providerClass(_class)
-        {}
+        virtual IRHIAdapter createAdapter() = 0;
 
-        ERHIProviderClass getClass() const;
-    private:
-        const ERHIProviderClass _providerClass = E_RHI_PROVIDER_CLASS_UNDEFINED;
+        NW_RHI_CLASS_DECLARATION(CRHIDynamicProviderInterface)
     };
 
     using IRHIDynamicProvider = Scope<CRHIDynamicProviderInterface>;

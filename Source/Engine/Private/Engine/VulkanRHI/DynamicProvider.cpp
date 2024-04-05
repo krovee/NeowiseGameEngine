@@ -1,14 +1,12 @@
+#include "Engine/RHI/RHIAdapter.h"
 #include <Engine/VulkanRHI/DynamicProvider.h>
+#include <Engine/VulkanRHI/VulkanAdapter.h>
+
 #include <Engine/EngineGlobals.h>
 #include <Base/DynamicLibrary.h>
 #include <Base/BuildVersion.h>
 
 namespace Neowise {
-
-    template<class PFN>
-    static void loadInstanceFunc(CRHIVulkanDynamicProvider* p, PFN& pfn, VkInstance instance, const char* name) {
-        pfn = (PFN)p->getInstanceProcAddr(instance, name);
-    }
 
     static VkBool32 sDebugMessageCallback(
         VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity,
@@ -54,23 +52,26 @@ namespace Neowise {
     }
 
     VkInstance CRHIVulkanDynamicProvider::getInstance() const {
-        return _instance;
+        return instance;
+    }
+
+    IRHIAdapter CRHIVulkanDynamicProvider::createAdapter() {
+        return makeScope<CRHIVulkanAdapter>(instance).cast<CRHIAdapterInterface>();
     }
 
     CRHIVulkanDynamicProvider::~CRHIVulkanDynamicProvider() {
-        if (_debugMessenger && _instance) {
-            destroyDebugUtilsMessengerEXT(_instance, _debugMessenger, nullptr);
+        if (_debugMessenger && instance) {
+            destroyDebugUtilsMessengerEXT(instance, _debugMessenger, nullptr);
             _debugMessenger = nullptr;
         }
 
-        if (_instance) {
-            destroyInstance(_instance, nullptr);
-            _instance = nullptr;
+        if (instance) {
+            destroyInstance(instance, nullptr);
+            instance = nullptr;
         }
     }
 
-    CRHIVulkanDynamicProvider::CRHIVulkanDynamicProvider() 
-        : CRHIDynamicProviderInterface(E_RHI_PROVIDER_CLASS_VULKAN) 
+    CRHIVulkanDynamicProvider::CRHIVulkanDynamicProvider() : CRHIDynamicProviderInterface(E_RHI_BACKEND_VULKAN) 
     {
 
         //volkInitialize();
@@ -82,13 +83,25 @@ namespace Neowise {
         getInstanceProcAddr = vkLib->getProcAddress<PFN_vkGetInstanceProcAddr>("vkGetInstanceProcAddr");
         
         // acquire instace level functions
-        loadInstanceFunc(this, enumerateInstanceExtensionProperties, nullptr, "vkEnumerateInstanceExtensionProperties");
-        loadInstanceFunc(this, enumerateInstanceLayerProperties, nullptr, "vkEnumerateInstanceLayerProperties");
-        loadInstanceFunc(this, enumerateInstanceVersion, nullptr, "vkEnumerateInstanceVersion");
+        enumerateInstanceExtensionProperties = 
+            reinterpret_cast<PFN_vkEnumerateInstanceExtensionProperties>(
+                getInstanceProcAddr(instance, "vkEnumerateInstanceExtensionProperties")
+            );
+        enumerateInstanceLayerProperties = 
+            reinterpret_cast<PFN_vkEnumerateInstanceLayerProperties>(
+                getInstanceProcAddr(instance, "vkEnumerateInstanceLayerProperties")
+            );
+        enumerateInstanceVersion = 
+            reinterpret_cast<PFN_vkEnumerateInstanceVersion>(
+                getInstanceProcAddr(instance, "vkEnumerateInstanceVersion")
+            );
+        
 
         // get system present instance extensions
         uint32 extensionsCount = 0;
         enumerateInstanceExtensionProperties(nullptr, &extensionsCount, nullptr);
+
+        NW_ASSERT(extensionsCount, "Failed to create Vulkan RHI Provider since your PC doesn't support required set of extensions.");
 
         CVector<VkExtensionProperties> extensions(extensionsCount);
         enumerateInstanceExtensionProperties(nullptr, &extensionsCount, extensions.data());
@@ -112,7 +125,10 @@ namespace Neowise {
         GDiag << "\n";
 
         // acquire instance level functions
-        loadInstanceFunc(this, createInstance, nullptr, "vkCreateInstance");
+        createInstance = 
+            reinterpret_cast<PFN_vkCreateInstance>(
+                getInstanceProcAddr(nullptr, "vkCreateInstance")
+            );
 
         const auto& requiredInstanceLayers = RHIVKUtil::getRequiredInstanceLayers();
 
@@ -153,11 +169,21 @@ namespace Neowise {
         instanceCI.ppEnabledLayerNames = presentInstanceLayers.data();
         instanceCI.enabledLayerCount = (uint32) presentInstanceLayers.size();
         
-        createInstance(&instanceCI, nullptr, &_instance);
+        createInstance(&instanceCI, nullptr, &instance);
 
-        loadInstanceFunc(this, destroyInstance, getInstance(), "vkDestroyInstance");
-        loadInstanceFunc(this, createDebugUtilsMessengerEXT, getInstance(), "vkCreateDebugUtilsMessengerEXT");
-        loadInstanceFunc(this, destroyDebugUtilsMessengerEXT, getInstance(), "vkDestroyDebugUtilsMessengerEXT");
+        destroyInstance = 
+            reinterpret_cast<PFN_vkDestroyInstance>(
+                getInstanceProcAddr(instance, "vkDestroyInstance")
+            );
+        createDebugUtilsMessengerEXT = 
+            reinterpret_cast<PFN_vkCreateDebugUtilsMessengerEXT>(
+                getInstanceProcAddr(instance, "vkCreateDebugUtilsMessengerEXT")
+            );
+        destroyDebugUtilsMessengerEXT = 
+            reinterpret_cast<PFN_vkDestroyDebugUtilsMessengerEXT>(
+                getInstanceProcAddr(instance, "vkDestroyDebugUtilsMessengerEXT")
+            );
+        
         
 #if NW_BUILD_TYPE_DEBUG
         VkDebugUtilsMessengerCreateInfoEXT dumCI = {};
@@ -169,9 +195,8 @@ namespace Neowise {
         dumCI.messageType = 
             VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT |
             VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT;
-        createDebugUtilsMessengerEXT(_instance, &dumCI, nullptr, &_debugMessenger);
+        createDebugUtilsMessengerEXT(instance, &dumCI, nullptr, &_debugMessenger);
 #endif
-
     }
  
 }

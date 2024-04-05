@@ -52,9 +52,18 @@ namespace Neowise {
 		E_PIXEL_FORMAT_N_COUNT
 	};
 
-	enum ERHIProviderClass {
-		E_RHI_PROVIDER_CLASS_UNDEFINED,
-		E_RHI_PROVIDER_CLASS_VULKAN
+	enum ERHIBackend {
+		E_RHI_BACKEND_UNDEFINED,
+		E_RHI_BACKEND_VULKAN
 	};
 
 }
+
+#ifndef NW_RHI_CLASS_DECLARATION
+#   define NW_RHI_CLASS_DECLARATION(classname)                                      	\
+    public:                                                                         	\
+        constexpr classname(const ERHIBackend _backend) : backend(_backend) {}       	\
+        constexpr ERHIBackend getBackend() const { return backend; }               		\
+    private:                                                                      		\
+        const ERHIBackend backend = E_RHI_BACKEND_UNDEFINED;
+#endif
