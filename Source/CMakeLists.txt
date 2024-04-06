@@ -145,12 +145,14 @@ if (WIN32)
         ${ENGINE_SOURCE_PREFIX}/Platform/Windows/WindowsPlatformAssert.cpp
         ${ENGINE_SOURCE_PREFIX}/Platform/Windows/WindowsPlatformConsole.cpp
         ${ENGINE_SOURCE_PREFIX}/Platform/Windows/WindowsPlatformFilesystem.cpp
+        ${ENGINE_SOURCE_PREFIX}/Platform/Windows/WindowsPlatformDynamicLibrary.cpp
         ${ENGINE_SOURCE_PREFIX}/Platform/Windows/WindowsPlatformKeyboard.cpp
         ${ENGINE_SOURCE_PREFIX}/Platform/Windows/WindowsPlatformMemory.cpp
         ${ENGINE_SOURCE_PREFIX}/Platform/Windows/WindowsPlatformMutexLock.cpp
         ${ENGINE_SOURCE_PREFIX}/Platform/Windows/WindowsPlatformSystemClock.cpp
         ${ENGINE_SOURCE_PREFIX}/Platform/Windows/WindowsPlatformThread.cpp
         ${ENGINE_SOURCE_PREFIX}/Platform/Windows/WindowsPlatformWindow.cpp
+        ${ENGINE_SOURCE_PREFIX}/Platform/Windows/WindowsVulkanExtensions.cpp
     )
 endif ()
 

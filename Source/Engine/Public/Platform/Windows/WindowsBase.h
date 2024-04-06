@@ -811,7 +811,7 @@ namespace Neowise::Platform::Windows {
 		E_KEY_UNDEFINED, // clear
 		E_KEY_ENTER,
 		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
+		E_KEY_MOUSE_BUTTON, // reserved
 		E_KEY_SHIFT,
 		E_KEY_CONTROL,
 		E_KEY_ALT,
@@ -986,7 +986,7 @@ namespace Neowise::Platform::Windows {
 		E_KEY_MOD_ANY,
 		E_KEY_MOD_ANY, // reserved
 		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY,
+		E_KEY_MOD_MIDDLE,	// NOTE: for mouse handling this set to MIDDLE
 		E_KEY_MOD_ANY,
 		E_KEY_MOD_ANY,
 		E_KEY_MOD_ANY, // pause
@@ -1139,7 +1139,7 @@ namespace Neowise::Platform::Windows {
 		E_KEY_MOD_ANY,
 		E_KEY_MOD_ANY,
 		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY
+		E_KEY_MOD_ANY,
 	};
 
 	enum EWindowEvent {
@@ -1260,6 +1260,10 @@ namespace Neowise::Platform::Windows {
 	NW_API bool			beginCreateOpenGLContext(void);
 	NW_API void*		endCreateOpenGLContext(HWND);
 	NW_API void			swapBuffers(HWND);
+
+	NW_API void*		loadLibrary(const CHAR* pname);
+	NW_API void			closeLibrary(void* phandle);
+	NW_API void*		loadProcAddress(void* phandle, const CHAR* psym);
 
 //
 //	typedef int (__stdcall* PFNCHOOSEPIXELFORMATPROC)(HDC hDc, const PIXELFORMATDESCRIPTOR* pPfd);
