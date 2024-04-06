@@ -133,6 +133,10 @@ namespace Neowise {
 		return FQuaternion(*this) /= r;
 	}
 
+#ifndef abs
+#	define abs(x) ((x) < 0 ? -(x) : (x))
+#endif
+
 	real FQuaternion::angle() const {
 		if (abs(w) > real(0.877582561890372716130286068203503191)) {
 			const auto a = asin(sqrt(x * x + y * y + z * z)) * real(2.);

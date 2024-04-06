@@ -45,6 +45,9 @@ namespace Neowise::Platform::Linux {
     bool  _WindowPumpMessages(const _WindowID& id, void* params);
     void  _WindowSetTitle(const _WindowID& id, const CStringView& name);
     void  _WindowSetPlacement(const _WindowID& id, const Point2i& pos, const FVec2& size);
-    void  _TranslateKey(const uint in, EKey& key, EKeyMod& mod);    
+    void  _TranslateKey(const uint in, EKey& key, EKeyMod& mod);   
+    void* _LoadLibrary(const char* name);
+    void  _FreeLibrary(void* handle);
+    void* _GetProcAddress(void* handle, const char* sig); 
 
 }

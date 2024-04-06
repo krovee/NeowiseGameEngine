@@ -1,6 +1,10 @@
 #include <Platform/Windows/WindowsPlatformWindow.h>
 
-#include <Engine/EngineGlobals.h>
+
+#include <Engine/EngineLoop.h>
+#include <Engine/EngineEvents.h>
+#include <Engine/Events/Bus.h>
+
 #include <Base/BuildVersion.h>
 
 namespace Neowise::Platform {
@@ -45,6 +49,8 @@ namespace Neowise::Platform {
         CStringBuilder s(_title);
         s << "Neowise Engine (build." << uint(buildVersion) << ")";
         _hWnd = createWin32Window();
+        GEventBus->subscribe<CEventWindowInputKeyboard>(&CBaseWindow::updateKeysState);
+        GEventBus->subscribe<CEventWindowInputMouseButton>(&CBaseWindow::updateKeysState);
 	}
 
 	Windows::CBaseWindow::~CBaseWindow() {
@@ -60,58 +66,68 @@ namespace Neowise::Platform {
     }
 
     void Windows::CBaseWindow::EventProcedure(HWND hWnd, const SWindowEventData& e) {
-        Windows::CBaseWindow* bw = (Windows::CBaseWindow*)getWindowLongPtrA(hWnd, E_WINDOW_LONG_PTR_NAME_USERDATA);
-        if (!bw) return;
 
+        static Point2i lastMousePos = {};
+        
         switch (e.type) {
             case E_WINDOW_EVENT_CLOSE: {
-                GIsExitRequested = true;
-                GExitRequestCode = 1;
+                GEventBus->fire(CEventWindowClose{});
             } break;
             case E_WINDOW_EVENT_ENTER_FOCUS: {
-                
+                GEventBus->fire(CEventWindowGotFocus());
             } break;
             case E_WINDOW_EVENT_EXIT_FOCUS: {
-
+                GEventBus->fire(CEventWindowLostFocus());
             } break;
             case E_WINDOW_EVENT_MOVE: {
-                const auto& pos = e.onMove;
-                bw->setPos({ pos.x, pos.y });
+
             } break;
             case E_WINDOW_EVENT_RESIZE: {
                 const auto& size = e.onResize;
-                bw->setSize({ (real)size.width, (real)size.height });
+                GEventBus->fire(CEventWindowResized({(real)size.width, (real)size.height}));
             } break;
             case E_WINDOW_EVENT_MOUSE_MOVE: {
-                const auto& mpos = e.onMouseMove;
+                const auto& mpos = Point2i{ (int32)e.onMouseMove.x, (int32)e.onMouseMove.y };
+                GEventBus->fire(CEventWindowInputMouseMoved(mpos, lastMousePos));
 
             } break;
             case E_WINDOW_EVENT_KEY_PRESSED:
             case E_WINDOW_EVENT_KEY_RELEASED: {
                 const auto& k = e.onKey;
                 EKey key = mapKeysFromEVK[k.evk];
-                auto& tglState = bw->getKeyboardKeys()[(int32)key];
-                auto& modState = bw->getKeyboardKeysMod()[(int32)key];
+                EKeyMod mod = mapModsFromEVK[k.evk];
+                // auto& tglState = bw->getKeyboardKeys()[(int32)key];
+                // auto& modState = bw->getKeyboardKeysMod()[(int32)key];
 
-                //if (tglState == EToggleState::E_TOGGLE_STATE_RELEASED) {
-                //    tglState = EToggleState::E_TOGGLE_STATE_IDLE;
-                //}
-                tglState = k.isPressed ? E_TOGGLE_STATE_PRESSED : E_TOGGLE_STATE_RELEASED;
-                modState = mapModsFromEVK[k.evk];
+                GEventBus->fire(CEventWindowInputKeyboard(key, mod, k.isPressed));
 
-                if (!k.isPressed) {
-                    bw->addReleasedKey(key);
-                }
+                // //if (tglState == EToggleState::E_TOGGLE_STATE_RELEASED) {
+                // //    tglState = EToggleState::E_TOGGLE_STATE_IDLE;
+                // //}
+                // tglState = k.isPressed ? E_TOGGLE_STATE_PRESSED : E_TOGGLE_STATE_RELEASED;
+                // modState = mapModsFromEVK[k.evk];
 
             } break;
             case E_WINDOW_EVENT_MOUSE_PRESSED:
             case E_WINDOW_EVENT_MOUSE_RELEASED: {
                 const auto& ms = e.onMouse;
-
+                EKey key = mapKeysFromEVK[ms.evk == 16 ? ms.evk - 1 : ms.evk];
+                EMouseButton btn = mapModsFromEVK[ms.evk];
+                GEventBus->fire(CEventWindowInputMouseButton(lastMousePos, btn, ms.isPressed));
             } break;
+
 
             default: break;
         }
+    }
+
+    void Windows::CBaseWindow::updateKeysState(const CEventWindowInputKeyboard& e) {
+        _keysStates[int32(e.getKey())] = e.isPressed() ? E_TOGGLE_STATE_PRESSED : E_TOGGLE_STATE_RELEASED;
+        _keysModes[int32(e.getKey())] = EKeyMod(e.getKeyMod());
+    }
+
+    void Windows::CBaseWindow::updateKeysState(const CEventWindowInputMouseButton& e) {
+        _keysStates[int32(e.getButton())] = e.isPressed() ? E_TOGGLE_STATE_PRESSED : E_TOGGLE_STATE_RELEASED;
     }
 
     void Windows::CBaseWindow::update() {

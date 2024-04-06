@@ -50,10 +50,6 @@ macro(target_populate_compile_definitions TARGET_NAME DEFS)
     endif (NOT "${DEFS_COUNT}" STREQUAL "0")
 endmacro(target_populate_compile_definitions TARGET_NAME DEFS)
 
-macro(initialize_vulkan_sdk)
-    find_package(Vulkan REQUIRED)
-endmacro(initialize_vulkan_sdk)
-
 macro(enable_compiler_features)
     if (WIN32)
         add_compile_options(/arch:AVX /Ot /GS- /sdl- /fp:fast /GR- /permissive- /Gr)
@@ -71,7 +67,7 @@ macro(enable_warnings)
 endmacro(enable_warnings)
 
 macro(target_link_os_dependent_libraries TARGETNAME)
-    set(LINKLIBS Vulkan::Vulkan)
+    set(LINKLIBS)
 
     if (LINUX)
         find_package(X11 REQUIRED)

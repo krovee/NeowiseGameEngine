@@ -1,5 +1,3 @@
-#include "Input/Keycode.h"
-#include "Math/Point.h"
 #include <Platform/Linux/LinuxBase.h>
 
 #include <Engine/EngineLoop.h>
@@ -13,6 +11,7 @@
 #include <time.h>
 #include <pthread.h>
 #include <errno.h>
+#include <dlfcn.h>
 
 // X11 headers
 #include <X11/extensions/Xrender.h> 
@@ -516,6 +515,18 @@ namespace Neowise::Platform::Linux {
             _check_key(XCB_BUTTON_INDEX_3, E_KEY_MOUSE_BUTTON, E_KEY_MOD_RIGHT);
             default: break;
         }
+    }
+
+    void* _LoadLibrary(const char* name) {
+        return dlopen(name, RTLD_NOW | RTLD_LOCAL);
+    }
+
+    void  _FreeLibrary(void* handle) {
+        dlclose(handle);
+    }
+
+    void* _GetProcAddress(void* handle, const char* sig) {
+        return dlsym(handle, sig);
     }
 
 }

@@ -108,12 +108,12 @@ namespace Neowise {
 
 	template<class T, class...Args>
 	constexpr void construct_at(T& obj, Args&&...args) {
-		new (addressof(obj)) T(forward<Args&&>(args)...); // new (addressof(obj)) T(forward<Args>(args)...);
+		new (addressof(obj)) T(forward<Args>(args)...); // new (addressof(obj)) T(forward<Args>(args)...);
 	}
 
 	template<class T, class U, class...Args>
 	constexpr void construct_at(U* p, Args&&...args) {
-		new (p) T(forward<Args&&>(args)...); // new (p) T(forward<Args>(args)...);
+		new (p) T(forward<Args>(args)...); // new (p) T(forward<Args>(args)...);
 	}
 
 	template<class T>

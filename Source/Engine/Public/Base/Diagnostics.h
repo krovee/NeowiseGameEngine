@@ -47,6 +47,11 @@ namespace Neowise {
 		return d;
 	}
 
+	inline CDiagnostics& operator<<(CDiagnostics& d, bool b) {
+		d.writeSigned(b);
+		return d;
+	}
+
 	inline CDiagnostics& operator<<(CDiagnostics& d, uint64 ui) {
 		d.writeUnsigned(ui);
 		return d;

@@ -2,6 +2,7 @@
 
 #include <Engine/BaseWindow.h>
 #include <Input/InputDevice.h>
+#include <Engine/EngineEvents.h>
 
 #include "WindowsBase.h"
 
@@ -33,12 +34,14 @@ namespace Neowise::Platform::Windows {
 		HWND			createWin32Window();
 		static void		EventProcedure(HWND hWnd, const SWindowEventData& e);
 
+		static void 	updateKeysState(const CEventWindowInputKeyboard& e);
+		static void 	updateKeysState(const CEventWindowInputMouseButton& e);
 	private:
 		CString			_title = {};
-		EToggleState	_keysStates[CInputDevice::kMaxToggleStates] = {};
-		int32			_releasedKeys[8] = {};
-		int32			_releasedKeysCount = {};
-		EKeyMod			_keysModes[CInputDevice::kMaxToggleStates] = {};
+		static inline EToggleState		_keysStates[CInputDevice::kMaxToggleStates] = {};
+		static inline int32				_releasedKeys[8] = {};
+		static inline int32				_releasedKeysCount = {};
+		static inline EKeyMod			_keysModes[CInputDevice::kMaxToggleStates] = {};
 		HWND			_hWnd = nullptr;
 		void*			_opengl = nullptr;
 	};

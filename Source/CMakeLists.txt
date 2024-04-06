@@ -22,9 +22,6 @@ guard_build_type("Debug")
 ## Initialize compiler-dependent variables.
 initialize_compilers()
 
-## Find and initialize VulkanSDK
-initialize_vulkan_sdk()
-
 ## Setup PREPROCESSOR_DEFINITIONS variable to create
 ## required macro definitions for compilation.
 set(PREPROCESSOR_DEFINITIONS)
@@ -57,7 +54,7 @@ endif("${CMAKE_BUILD_TYPE}" STREQUAL "Ship")
 list(APPEND ENGINE_DEFINITIONS ${PREPROCESSOR_DEFINITIONS} ENGINE_EXPORTS)
 
 ## Inlcude path.
-include_directories("Engine/Public" ${Vulkan_INCLUDE_DIRS})
+include_directories("Engine/Public")
 ## Sources path.
 set(ENGINE_SOURCE_PREFIX "Engine/Private")
 
@@ -72,6 +69,7 @@ set(
     ${ENGINE_SOURCE_PREFIX}/Base/BuildVersion.cpp
     ${ENGINE_SOURCE_PREFIX}/Base/CRC.cpp
     ${ENGINE_SOURCE_PREFIX}/Base/Diagnostics.cpp
+    ${ENGINE_SOURCE_PREFIX}/Base/DynamicLibrary.cpp
     ${ENGINE_SOURCE_PREFIX}/Base/Hash.cpp
     ${ENGINE_SOURCE_PREFIX}/Base/MD5.cpp
     ${ENGINE_SOURCE_PREFIX}/Base/MemoryUtilities.cpp
@@ -85,10 +83,11 @@ set(
     # ENGINE/RENDERER
     
     # ENGINE/RHI
-    ${ENGINE_SOURCE_PREFIX}/Engine/RHI/RHI.cpp
     
     # ENGINE/VULKANRHI
     ${ENGINE_SOURCE_PREFIX}/Engine/VulkanRHI/Common.cpp
+    ${ENGINE_SOURCE_PREFIX}/Engine/VulkanRHI/DynamicProvider.cpp
+    ${ENGINE_SOURCE_PREFIX}/Engine/VulkanRHI/VulkanAdapter.cpp
 
     # ENGINE/EVENTS
     ${ENGINE_SOURCE_PREFIX}/Engine/Events/Bus.cpp
@@ -146,12 +145,14 @@ if (WIN32)
         ${ENGINE_SOURCE_PREFIX}/Platform/Windows/WindowsPlatformAssert.cpp
         ${ENGINE_SOURCE_PREFIX}/Platform/Windows/WindowsPlatformConsole.cpp
         ${ENGINE_SOURCE_PREFIX}/Platform/Windows/WindowsPlatformFilesystem.cpp
+        ${ENGINE_SOURCE_PREFIX}/Platform/Windows/WindowsPlatformDynamicLibrary.cpp
         ${ENGINE_SOURCE_PREFIX}/Platform/Windows/WindowsPlatformKeyboard.cpp
         ${ENGINE_SOURCE_PREFIX}/Platform/Windows/WindowsPlatformMemory.cpp
         ${ENGINE_SOURCE_PREFIX}/Platform/Windows/WindowsPlatformMutexLock.cpp
         ${ENGINE_SOURCE_PREFIX}/Platform/Windows/WindowsPlatformSystemClock.cpp
         ${ENGINE_SOURCE_PREFIX}/Platform/Windows/WindowsPlatformThread.cpp
         ${ENGINE_SOURCE_PREFIX}/Platform/Windows/WindowsPlatformWindow.cpp
+        ${ENGINE_SOURCE_PREFIX}/Platform/Windows/WindowsVulkanExtensions.cpp
     )
 endif ()
 
@@ -164,12 +165,14 @@ if (LINUX)
         ${ENGINE_SOURCE_PREFIX}/Platform/Linux/LinuxBase.cpp
         ${ENGINE_SOURCE_PREFIX}/Platform/Linux/LinuxPlatformAssert.cpp
         ${ENGINE_SOURCE_PREFIX}/Platform/Linux/LinuxPlatformConsole.cpp
+        ${ENGINE_SOURCE_PREFIX}/Platform/Linux/LinuxPlatformDynamicLibrary.cpp
         ${ENGINE_SOURCE_PREFIX}/Platform/Linux/LinuxPlatformKeyboard.cpp
         ${ENGINE_SOURCE_PREFIX}/Platform/Linux/LinuxPlatformMemory.cpp
         ${ENGINE_SOURCE_PREFIX}/Platform/Linux/LinuxPlatformMutexLock.cpp
         ${ENGINE_SOURCE_PREFIX}/Platform/Linux/LinuxPlatformSystemClock.cpp
         ${ENGINE_SOURCE_PREFIX}/Platform/Linux/LinuxPlatformThread.cpp
         ${ENGINE_SOURCE_PREFIX}/Platform/Linux/LinuxPlatformWindow.cpp
+        ${ENGINE_SOURCE_PREFIX}/Platform/Linux/LinuxVulkanExtensions.cpp
     )
 endif ()
 
@@ -183,7 +186,7 @@ target_link_os_dependent_libraries(NeowiseEngine)
 list(APPEND APPLICATION_DEFINITIONS ${PREPROCESSOR_DEFINITIONS})
 
 ## Inlcude path.
-include_directories("Engine/Public" ${Vulkan_INCLUDE_DIRS})
+include_directories("Engine/Public")
 ## Sources path.
 set(APPLICATION_SOURCE_PREFIX "Application/Private")
 

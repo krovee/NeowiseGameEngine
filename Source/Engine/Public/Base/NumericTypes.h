@@ -44,6 +44,71 @@ namespace Neowise {
 	constexpr auto __nullptraddr = ptraddr(-1);
 	#define nullptraddr __nullptraddr
 
+#ifdef INT8_MIN
+#	undef INT8_MIN
+#endif 
+
+#ifdef INT16_MIN
+#	undef INT16_MIN
+#endif 
+
+#ifdef INT32_MIN
+#	undef INT32_MIN
+#endif 
+
+#ifdef INT64_MIN
+#	undef INT64_MIN
+#endif 
+
+#ifdef UINT8_MIN
+#	undef UINT8_MIN
+#endif 
+
+#ifdef UINT16_MIN
+#	undef UINT16_MIN
+#endif 
+
+#ifdef UINT32_MIN
+#	undef UINT32_MIN
+#endif 
+
+#ifdef UINT64_MIN
+#	undef UINT64_MIN
+#endif 
+
+
+#ifdef INT8_MAX
+#	undef INT8_MAX
+#endif 
+
+#ifdef INT16_MAX
+#	undef INT16_MAX
+#endif 
+
+#ifdef INT32_MAX
+#	undef INT32_MAX
+#endif 
+
+#ifdef INT64_MAX
+#	undef INT64_MAX
+#endif 
+
+#ifdef UINT8_MAX
+#	undef UINT8_MAX
+#endif 
+
+#ifdef UINT16_MAX
+#	undef UINT16_MAX
+#endif 
+
+#ifdef UINT32_MAX
+#	undef UINT32_MAX
+#endif 
+
+#ifdef UINT64_MAX
+#	undef UINT64_MAX
+#endif 
+
 	namespace Const {
 		constexpr auto INT8_MIN		= int8(-128);
 		constexpr auto INT16_MIN	= int16(-32768);

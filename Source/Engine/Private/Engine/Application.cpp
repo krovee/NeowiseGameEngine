@@ -2,6 +2,6 @@
 
 namespace Neowise {
 
-	const CString GApplicationName = "Test";
+	CStringView GApplicationName = "Test";
 
 }

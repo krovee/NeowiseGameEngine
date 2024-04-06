@@ -54,6 +54,8 @@ namespace Neowise::Platform::Windows {
 					case WM_MBUTTONDOWN:
 					case WM_XBUTTONDOWN: {
 						ev.type = E_WINDOW_EVENT_MOUSE_PRESSED;
+						ev.onMouse.evk = (EVirtualKey)wParam;
+						ev.onMouse.isPressed = true;
 						jump = true;
 					} break;
 					case WM_LBUTTONUP:
@@ -61,6 +63,16 @@ namespace Neowise::Platform::Windows {
 					case WM_MBUTTONUP:
 					case WM_XBUTTONUP: {
 						ev.type = E_WINDOW_EVENT_MOUSE_RELEASED;
+						if (Msg == WM_LBUTTONUP) {
+							ev.onMouse.evk = (EVirtualKey)MK_LBUTTON;
+						}
+						else if (Msg == WM_RBUTTONUP) {
+							ev.onMouse.evk = (EVirtualKey)MK_RBUTTON;
+						}
+						else if (Msg == WM_MBUTTONUP) {
+							ev.onMouse.evk = (EVirtualKey)MK_MBUTTON;
+						}
+						ev.onMouse.isPressed = false;
 						jump = true;
 					} break;
 					case WM_MOUSEMOVE: {
@@ -409,4 +421,15 @@ namespace Neowise::Platform::Windows {
 		return InterlockedCompareExchange(pValue, 1, 0);
 	}
 
+    void *loadLibrary(const CHAR *pname) {
+        return LoadLibraryA(pname);
+    }
+
+    void closeLibrary(void *phandle) {
+        FreeLibrary((::HMODULE) phandle);
+    }
+
+    void *loadProcAddress(void *phandle, const CHAR *psym) {
+        return (void*) GetProcAddress((::HMODULE) phandle, psym);
+    }
 }

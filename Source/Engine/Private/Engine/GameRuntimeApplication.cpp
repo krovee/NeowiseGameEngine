@@ -2,11 +2,13 @@
 #include <Engine/EngineLoop.h>
 
 #include <Engine/RenderThread.h>
-#include <Engine/VulkanRHI/Common.h>
+#include <Engine/RHI/RHI.h>
 
 namespace Neowise {
 	bool CGameRuntimeApplication::initialize() {
 		NW_PROFILE_FUNCTION();
+
+		auto vkProvider = RHIMakeVulkanProvider().release();
 
 		_window = move(CBaseWindow::createDefault());
 		NW_ASSERT(_window.get(), "Cannot create CBaseWindow object!");
@@ -36,7 +38,7 @@ namespace Neowise {
 
 	void CGameRuntimeApplication::onUpdate() {
 
-		if (keyboard().isKeyPressed(E_KEY_ESCAPE)) {
+		if (keyboard().isKeysPressed({E_KEY_Q, E_KEY_CONTROL})) {
 			GEngineLoop->requestExit();
 		}
 		
