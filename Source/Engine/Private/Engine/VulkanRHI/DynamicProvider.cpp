@@ -62,12 +62,10 @@ namespace Neowise {
     CRHIVulkanDynamicProvider::~CRHIVulkanDynamicProvider() {
         if (_debugMessenger && instance) {
             destroyDebugUtilsMessengerEXT(instance, _debugMessenger, nullptr);
-            _debugMessenger = nullptr;
         }
 
         if (instance) {
             destroyInstance(instance, nullptr);
-            instance = nullptr;
         }
     }
 
@@ -179,24 +177,29 @@ namespace Neowise {
             reinterpret_cast<PFN_vkCreateDebugUtilsMessengerEXT>(
                 getInstanceProcAddr(instance, "vkCreateDebugUtilsMessengerEXT")
             );
-        destroyDebugUtilsMessengerEXT = 
-            reinterpret_cast<PFN_vkDestroyDebugUtilsMessengerEXT>(
-                getInstanceProcAddr(instance, "vkDestroyDebugUtilsMessengerEXT")
-            );
-        
-        
-#if NW_BUILD_TYPE_DEBUG
-        VkDebugUtilsMessengerCreateInfoEXT dumCI = {};
-        dumCI.sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT;
-        dumCI.pfnUserCallback = sDebugMessageCallback;
-        dumCI.messageSeverity = 
-            VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT |
-            VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT;
-        dumCI.messageType = 
-            VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT |
-            VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT;
-        createDebugUtilsMessengerEXT(instance, &dumCI, nullptr, &_debugMessenger);
-#endif
+
+        if (createDebugUtilsMessengerEXT) {
+
+            destroyDebugUtilsMessengerEXT = 
+                reinterpret_cast<PFN_vkDestroyDebugUtilsMessengerEXT>(
+                    getInstanceProcAddr(instance, "vkDestroyDebugUtilsMessengerEXT")
+                );
+            
+            
+    #if NW_BUILD_TYPE_DEBUG
+            VkDebugUtilsMessengerCreateInfoEXT dumCI = {};
+            dumCI.sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT;
+            dumCI.pfnUserCallback = sDebugMessageCallback;
+            dumCI.messageSeverity = 
+                VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT |
+                VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT;
+            dumCI.messageType = 
+                VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT |
+                VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT;
+            createDebugUtilsMessengerEXT(instance, &dumCI, nullptr, &_debugMessenger);
+    #endif
+
+        }
     }
  
 }
