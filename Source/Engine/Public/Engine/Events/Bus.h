@@ -24,7 +24,7 @@ namespace Neowise {
         }
 
         template<class T>
-        void subscribe(const CEventHandlerWrapper<T>::Handler& handler) {
+        void subscribe(const typename CEventHandlerWrapper<T>::Handler& handler) {
             subscribe(makeEventHandler<T>(handler));
         }
     private:
