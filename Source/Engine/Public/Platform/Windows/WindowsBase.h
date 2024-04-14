@@ -10,240 +10,240 @@
 #endif
 
 namespace Neowise::Platform::Windows {
-	using HANDLE	= void*;
-	using LPVOID	= void*;
-	using CLPVOID	= const void*;
-	using BOOL		= int32;
-	struct HWND__ { int unused; };
-	struct HINSTANCE__ { int unused; };
-	using HWND		= HWND__*;
-	using HINSTANCE	= HINSTANCE__*;
-	using UINT		= uint64;
-	using WPARAM	= uint64;
-	using LPARAM	= uint64;
-	using DWORD		= unsigned long;
-	using CHAR		= char;
-	using BYTE		= char;
-	using LONG		= long;
-	using WORD		= uint16;
-	using COLORREF	= DWORD;
-	using INT_PTR	= long long;
-	struct RECT {
-		LONG    left;
-		LONG    top;
-		LONG    right;
-		LONG    bottom;
-	};
+    using HANDLE	= void*;
+    using LPVOID	= void*;
+    using CLPVOID	= const void*;
+    using BOOL		= TInt32;
+    struct HWND__ { int unused; };
+    struct HINSTANCE__ { int unused; };
+    using HWND		= HWND__*;
+    using HINSTANCE	= HINSTANCE__*;
+    using UINT		= TUint64;
+    using WPARAM	= TUint64;
+    using LPARAM	= TUint64;
+    using DWORD		= unsigned long;
+    using CHAR		= char;
+    using BYTE		= char;
+    using LONG		= long;
+    using WORD		= TUint16;
+    using COLORREF	= DWORD;
+    using INT_PTR	= long long;
+    struct RECT {
+        LONG    left;
+        LONG    top;
+        LONG    right;
+        LONG    bottom;
+    };
 
-	struct PIXELFORMATDESCRIPTOR {
-		WORD  nSize;
-		WORD  nVersion;
-		DWORD dwFlags;
-		BYTE  iPixelType;
-		BYTE  cColorBits;
-		BYTE  cRedBits;
-		BYTE  cRedShift;
-		BYTE  cGreenBits;
-		BYTE  cGreenShift;
-		BYTE  cBlueBits;
-		BYTE  cBlueShift;
-		BYTE  cAlphaBits;
-		BYTE  cAlphaShift;
-		BYTE  cAccumBits;
-		BYTE  cAccumRedBits;
-		BYTE  cAccumGreenBits;
-		BYTE  cAccumBlueBits;
-		BYTE  cAccumAlphaBits;
-		BYTE  cDepthBits;
-		BYTE  cStencilBits;
-		BYTE  cAuxBuffers;
-		BYTE  iLayerType;
-		BYTE  bReserved;
-		DWORD dwLayerMask;
-		DWORD dwVisibleMask;
-		DWORD dwDamageMask;
-	};
+    struct PIXELFORMATDESCRIPTOR {
+        WORD  nSize;
+        WORD  nVersion;
+        DWORD dwFlags;
+        BYTE  iPixelType;
+        BYTE  cColorBits;
+        BYTE  cRedBits;
+        BYTE  cRedShift;
+        BYTE  cGreenBits;
+        BYTE  cGreenShift;
+        BYTE  cBlueBits;
+        BYTE  cBlueShift;
+        BYTE  cAlphaBits;
+        BYTE  cAlphaShift;
+        BYTE  cAccumBits;
+        BYTE  cAccumRedBits;
+        BYTE  cAccumGreenBits;
+        BYTE  cAccumBlueBits;
+        BYTE  cAccumAlphaBits;
+        BYTE  cDepthBits;
+        BYTE  cStencilBits;
+        BYTE  cAuxBuffers;
+        BYTE  iLayerType;
+        BYTE  bReserved;
+        DWORD dwLayerMask;
+        DWORD dwVisibleMask;
+        DWORD dwDamageMask;
+    };
 
-	struct LAYERPLANEDESCRIPTOR {
-		WORD  nSize;
-		WORD  nVersion;
-		DWORD dwFlags;
-		BYTE  iPixelType;
-		BYTE  cColorBits;
-		BYTE  cRedBits;
-		BYTE  cRedShift;
-		BYTE  cGreenBits;
-		BYTE  cGreenShift;
-		BYTE  cBlueBits;
-		BYTE  cBlueShift;
-		BYTE  cAlphaBits;
-		BYTE  cAlphaShift;
-		BYTE  cAccumBits;
-		BYTE  cAccumRedBits;
-		BYTE  cAccumGreenBits;
-		BYTE  cAccumBlueBits;
-		BYTE  cAccumAlphaBits;
-		BYTE  cDepthBits;
-		BYTE  cStencilBits;
-		BYTE  cAuxBuffers;
-		BYTE  iLayerPlane;
-		BYTE  bReserved;
-		COLORREF crTransparent;
-	};
+    struct LAYERPLANEDESCRIPTOR {
+        WORD  nSize;
+        WORD  nVersion;
+        DWORD dwFlags;
+        BYTE  iPixelType;
+        BYTE  cColorBits;
+        BYTE  cRedBits;
+        BYTE  cRedShift;
+        BYTE  cGreenBits;
+        BYTE  cGreenShift;
+        BYTE  cBlueBits;
+        BYTE  cBlueShift;
+        BYTE  cAlphaBits;
+        BYTE  cAlphaShift;
+        BYTE  cAccumBits;
+        BYTE  cAccumRedBits;
+        BYTE  cAccumGreenBits;
+        BYTE  cAccumBlueBits;
+        BYTE  cAccumAlphaBits;
+        BYTE  cDepthBits;
+        BYTE  cStencilBits;
+        BYTE  cAuxBuffers;
+        BYTE  iLayerPlane;
+        BYTE  bReserved;
+        COLORREF crTransparent;
+    };
 
-	struct POINTFLOAT  {
-		float   x;
-		float   y;
-	};
+    struct POINTFLOAT  {
+        float   x;
+        float   y;
+    };
 
-	struct GLYPHMETRICSFLOAT {
-		float		gmfBlackBoxX;
-		float		gmfBlackBoxY;
-		POINTFLOAT  gmfptGlyphOrigin;
-		float       gmfCellIncX;
-		float       gmfCellIncY;
-	};
+    struct GLYPHMETRICSFLOAT {
+        float		gmfBlackBoxX;
+        float		gmfBlackBoxY;
+        POINTFLOAT  gmfptGlyphOrigin;
+        float       gmfCellIncX;
+        float       gmfCellIncY;
+    };
 
-	struct _GPU_DEVICE {
-		DWORD  cb;
-		CHAR   DeviceName[32];
-		CHAR   DeviceString[128];
-		DWORD  Flags;
-		RECT   rcVirtualScreen;
-	};
+    struct _GPU_DEVICE {
+        DWORD  cb;
+        CHAR   DeviceName[32];
+        CHAR   DeviceString[128];
+        DWORD  Flags;
+        RECT   rcVirtualScreen;
+    };
 
-	DECLARE_HANDLE(HPBUFFERARB);
-	DECLARE_HANDLE(HPBUFFEREXT);
-	DECLARE_HANDLE(HVIDEOOUTPUTDEVICENV);
-	DECLARE_HANDLE(HPVIDEODEV);
-	DECLARE_HANDLE(HPGPUNV);
-	DECLARE_HANDLE(HGPUNV);
-	DECLARE_HANDLE(HVIDEOINPUTDEVICENV);
-	DECLARE_HANDLE(HGLRC);
-	DECLARE_HANDLE(HDESK);
-	DECLARE_HANDLE(HDC);
-	DECLARE_HANDLE(HENHMETAFILE);
-	typedef struct _GPU_DEVICE GPU_DEVICE;
-	typedef struct _GPU_DEVICE* PGPU_DEVICE;
-	typedef INT_PTR(__stdcall* PROC)();
+    DECLARE_HANDLE(HPBUFFERARB);
+    DECLARE_HANDLE(HPBUFFEREXT);
+    DECLARE_HANDLE(HVIDEOOUTPUTDEVICENV);
+    DECLARE_HANDLE(HPVIDEODEV);
+    DECLARE_HANDLE(HPGPUNV);
+    DECLARE_HANDLE(HGPUNV);
+    DECLARE_HANDLE(HVIDEOINPUTDEVICENV);
+    DECLARE_HANDLE(HGLRC);
+    DECLARE_HANDLE(HDESK);
+    DECLARE_HANDLE(HDC);
+    DECLARE_HANDLE(HENHMETAFILE);
+    typedef struct _GPU_DEVICE GPU_DEVICE;
+    typedef struct _GPU_DEVICE* PGPU_DEVICE;
+    typedef INT_PTR(__stdcall* PROC)();
 
 
 #define WGL_VERSION_1_0 1
-	extern int GLAD_WGL_VERSION_1_0;
+    extern int GLAD_WGL_VERSION_1_0;
 #define WGL_3DFX_multisample 1
-	extern int GLAD_WGL_3DFX_multisample;
+    extern int GLAD_WGL_3DFX_multisample;
 #define WGL_3DL_stereo_control 1
-	extern int GLAD_WGL_3DL_stereo_control;
+    extern int GLAD_WGL_3DL_stereo_control;
 #define WGL_AMD_gpu_association 1
-	extern int GLAD_WGL_AMD_gpu_association;
+    extern int GLAD_WGL_AMD_gpu_association;
 #define WGL_ARB_buffer_region 1
-	extern int GLAD_WGL_ARB_buffer_region;
+    extern int GLAD_WGL_ARB_buffer_region;
 #define WGL_ARB_context_flush_control 1
-	extern int GLAD_WGL_ARB_context_flush_control;
+    extern int GLAD_WGL_ARB_context_flush_control;
 #define WGL_ARB_create_context 1
-	extern int GLAD_WGL_ARB_create_context;
+    extern int GLAD_WGL_ARB_create_context;
 #define WGL_ARB_create_context_no_error 1
-	extern int GLAD_WGL_ARB_create_context_no_error;
+    extern int GLAD_WGL_ARB_create_context_no_error;
 #define WGL_ARB_create_context_profile 1
-	extern int GLAD_WGL_ARB_create_context_profile;
+    extern int GLAD_WGL_ARB_create_context_profile;
 #define WGL_ARB_create_context_robustness 1
-	extern int GLAD_WGL_ARB_create_context_robustness;
+    extern int GLAD_WGL_ARB_create_context_robustness;
 #define WGL_ARB_extensions_string 1
-	extern int GLAD_WGL_ARB_extensions_string;
+    extern int GLAD_WGL_ARB_extensions_string;
 #define WGL_ARB_framebuffer_sRGB 1
-	extern int GLAD_WGL_ARB_framebuffer_sRGB;
+    extern int GLAD_WGL_ARB_framebuffer_sRGB;
 #define WGL_ARB_make_current_read 1
-	extern int GLAD_WGL_ARB_make_current_read;
+    extern int GLAD_WGL_ARB_make_current_read;
 #define WGL_ARB_multisample 1
-	extern int GLAD_WGL_ARB_multisample;
+    extern int GLAD_WGL_ARB_multisample;
 #define WGL_ARB_pbuffer 1
-	extern int GLAD_WGL_ARB_pbuffer;
+    extern int GLAD_WGL_ARB_pbuffer;
 #define WGL_ARB_pixel_format 1
-	extern int GLAD_WGL_ARB_pixel_format;
+    extern int GLAD_WGL_ARB_pixel_format;
 #define WGL_ARB_pixel_format_float 1
-	extern int GLAD_WGL_ARB_pixel_format_float;
+    extern int GLAD_WGL_ARB_pixel_format_float;
 #define WGL_ARB_render_texture 1
-	extern int GLAD_WGL_ARB_render_texture;
+    extern int GLAD_WGL_ARB_render_texture;
 #define WGL_ARB_robustness_application_isolation 1
-	extern int GLAD_WGL_ARB_robustness_application_isolation;
+    extern int GLAD_WGL_ARB_robustness_application_isolation;
 #define WGL_ARB_robustness_share_group_isolation 1
-	extern int GLAD_WGL_ARB_robustness_share_group_isolation;
+    extern int GLAD_WGL_ARB_robustness_share_group_isolation;
 #define WGL_ATI_pixel_format_float 1
-	extern int GLAD_WGL_ATI_pixel_format_float;
+    extern int GLAD_WGL_ATI_pixel_format_float;
 #define WGL_ATI_render_texture_rectangle 1
-	extern int GLAD_WGL_ATI_render_texture_rectangle;
+    extern int GLAD_WGL_ATI_render_texture_rectangle;
 #define WGL_EXT_colorspace 1
-	extern int GLAD_WGL_EXT_colorspace;
+    extern int GLAD_WGL_EXT_colorspace;
 #define WGL_EXT_create_context_es2_profile 1
-	extern int GLAD_WGL_EXT_create_context_es2_profile;
+    extern int GLAD_WGL_EXT_create_context_es2_profile;
 #define WGL_EXT_create_context_es_profile 1
-	extern int GLAD_WGL_EXT_create_context_es_profile;
+    extern int GLAD_WGL_EXT_create_context_es_profile;
 #define WGL_EXT_depth_float 1
-	extern int GLAD_WGL_EXT_depth_float;
+    extern int GLAD_WGL_EXT_depth_float;
 #define WGL_EXT_display_color_table 1
-	extern int GLAD_WGL_EXT_display_color_table;
+    extern int GLAD_WGL_EXT_display_color_table;
 #define WGL_EXT_extensions_string 1
-	extern int GLAD_WGL_EXT_extensions_string;
+    extern int GLAD_WGL_EXT_extensions_string;
 #define WGL_EXT_framebuffer_sRGB 1
-	extern int GLAD_WGL_EXT_framebuffer_sRGB;
+    extern int GLAD_WGL_EXT_framebuffer_sRGB;
 #define WGL_EXT_make_current_read 1
-	extern int GLAD_WGL_EXT_make_current_read;
+    extern int GLAD_WGL_EXT_make_current_read;
 #define WGL_EXT_multisample 1
-	extern int GLAD_WGL_EXT_multisample;
+    extern int GLAD_WGL_EXT_multisample;
 #define WGL_EXT_pbuffer 1
-	extern int GLAD_WGL_EXT_pbuffer;
+    extern int GLAD_WGL_EXT_pbuffer;
 #define WGL_EXT_pixel_format 1
-	extern int GLAD_WGL_EXT_pixel_format;
+    extern int GLAD_WGL_EXT_pixel_format;
 #define WGL_EXT_pixel_format_packed_float 1
-	extern int GLAD_WGL_EXT_pixel_format_packed_float;
+    extern int GLAD_WGL_EXT_pixel_format_packed_float;
 #define WGL_EXT_swap_control 1
-	extern int GLAD_WGL_EXT_swap_control;
+    extern int GLAD_WGL_EXT_swap_control;
 #define WGL_EXT_swap_control_tear 1
-	extern int GLAD_WGL_EXT_swap_control_tear;
+    extern int GLAD_WGL_EXT_swap_control_tear;
 #define WGL_I3D_digital_video_control 1
-	extern int GLAD_WGL_I3D_digital_video_control;
+    extern int GLAD_WGL_I3D_digital_video_control;
 #define WGL_I3D_gamma 1
-	extern int GLAD_WGL_I3D_gamma;
+    extern int GLAD_WGL_I3D_gamma;
 #define WGL_I3D_genlock 1
-	extern int GLAD_WGL_I3D_genlock;
+    extern int GLAD_WGL_I3D_genlock;
 #define WGL_I3D_image_buffer 1
-	extern int GLAD_WGL_I3D_image_buffer;
+    extern int GLAD_WGL_I3D_image_buffer;
 #define WGL_I3D_swap_frame_lock 1
-	extern int GLAD_WGL_I3D_swap_frame_lock;
+    extern int GLAD_WGL_I3D_swap_frame_lock;
 #define WGL_I3D_swap_frame_usage 1
-	extern int GLAD_WGL_I3D_swap_frame_usage;
+    extern int GLAD_WGL_I3D_swap_frame_usage;
 #define WGL_NV_DX_interop 1
-	extern int GLAD_WGL_NV_DX_interop;
+    extern int GLAD_WGL_NV_DX_interop;
 #define WGL_NV_DX_interop2 1
-	extern int GLAD_WGL_NV_DX_interop2;
+    extern int GLAD_WGL_NV_DX_interop2;
 #define WGL_NV_copy_image 1
-	extern int GLAD_WGL_NV_copy_image;
+    extern int GLAD_WGL_NV_copy_image;
 #define WGL_NV_delay_before_swap 1
-	extern int GLAD_WGL_NV_delay_before_swap;
+    extern int GLAD_WGL_NV_delay_before_swap;
 #define WGL_NV_float_buffer 1
-	extern int GLAD_WGL_NV_float_buffer;
+    extern int GLAD_WGL_NV_float_buffer;
 #define WGL_NV_gpu_affinity 1
-	extern int GLAD_WGL_NV_gpu_affinity;
+    extern int GLAD_WGL_NV_gpu_affinity;
 #define WGL_NV_multigpu_context 1
-	extern int GLAD_WGL_NV_multigpu_context;
+    extern int GLAD_WGL_NV_multigpu_context;
 #define WGL_NV_multisample_coverage 1
-	extern int GLAD_WGL_NV_multisample_coverage;
+    extern int GLAD_WGL_NV_multisample_coverage;
 #define WGL_NV_present_video 1
-	extern int GLAD_WGL_NV_present_video;
+    extern int GLAD_WGL_NV_present_video;
 #define WGL_NV_render_depth_texture 1
-	extern int GLAD_WGL_NV_render_depth_texture;
+    extern int GLAD_WGL_NV_render_depth_texture;
 #define WGL_NV_render_texture_rectangle 1
-	extern int GLAD_WGL_NV_render_texture_rectangle;
+    extern int GLAD_WGL_NV_render_texture_rectangle;
 #define WGL_NV_swap_group 1
-	extern int GLAD_WGL_NV_swap_group;
+    extern int GLAD_WGL_NV_swap_group;
 #define WGL_NV_vertex_array_range 1
-	extern int GLAD_WGL_NV_vertex_array_range;
+    extern int GLAD_WGL_NV_vertex_array_range;
 #define WGL_NV_video_capture 1
-	extern int GLAD_WGL_NV_video_capture;
+    extern int GLAD_WGL_NV_video_capture;
 #define WGL_NV_video_output 1
-	extern int GLAD_WGL_NV_video_output;
+    extern int GLAD_WGL_NV_video_output;
 #define WGL_OML_sync_control 1
-	extern int GLAD_WGL_OML_sync_control;
+    extern int GLAD_WGL_OML_sync_control;
 
 
 #ifdef WGL_FONT_LINES
@@ -379,891 +379,891 @@ namespace Neowise::Platform::Windows {
 #endif 
 
 
-	enum {
-		ERROR_INCOMPATIBLE_AFFINITY_MASKS_NV = 0x20D0,
-		ERROR_INCOMPATIBLE_DEVICE_CONTEXTS_ARB = 0x2054,
-		ERROR_INVALID_PIXEL_TYPE_ARB = 0x2043,
-		ERROR_INVALID_PIXEL_TYPE_EXT = 0x2043,
-		ERROR_INVALID_PROFILE_ARB = 0x2096,
-		ERROR_INVALID_VERSION_ARB = 0x2095,
-		ERROR_MISSING_AFFINITY_MASK_NV = 0x20D1,
-		WGL_ACCELERATION_ARB = 0x2003,
-		WGL_ACCELERATION_EXT = 0x2003,
-		WGL_ACCESS_READ_ONLY_NV = 0x00000000,
-		WGL_ACCESS_READ_WRITE_NV = 0x00000001,
-		WGL_ACCESS_WRITE_DISCARD_NV = 0x00000002,
-		WGL_ACCUM_ALPHA_BITS_ARB = 0x2021,
-		WGL_ACCUM_ALPHA_BITS_EXT = 0x2021,
-		WGL_ACCUM_BITS_ARB = 0x201D,
-		WGL_ACCUM_BITS_EXT = 0x201D,
-		WGL_ACCUM_BLUE_BITS_ARB = 0x2020,
-		WGL_ACCUM_BLUE_BITS_EXT = 0x2020,
-		WGL_ACCUM_GREEN_BITS_ARB = 0x201F,
-		WGL_ACCUM_GREEN_BITS_EXT = 0x201F,
-		WGL_ACCUM_RED_BITS_ARB = 0x201E,
-		WGL_ACCUM_RED_BITS_EXT = 0x201E,
-		WGL_ALPHA_BITS_ARB = 0x201B,
-		WGL_ALPHA_BITS_EXT = 0x201B,
-		WGL_ALPHA_SHIFT_ARB = 0x201C,
-		WGL_ALPHA_SHIFT_EXT = 0x201C,
-		WGL_AUX0_ARB = 0x2087,
-		WGL_AUX1_ARB = 0x2088,
-		WGL_AUX2_ARB = 0x2089,
-		WGL_AUX3_ARB = 0x208A,
-		WGL_AUX4_ARB = 0x208B,
-		WGL_AUX5_ARB = 0x208C,
-		WGL_AUX6_ARB = 0x208D,
-		WGL_AUX7_ARB = 0x208E,
-		WGL_AUX8_ARB = 0x208F,
-		WGL_AUX9_ARB = 0x2090,
-		WGL_AUX_BUFFERS_ARB = 0x2024,
-		WGL_AUX_BUFFERS_EXT = 0x2024,
-		WGL_BACK_COLOR_BUFFER_BIT_ARB = 0x00000002,
-		WGL_BACK_LEFT_ARB = 0x2085,
-		WGL_BACK_RIGHT_ARB = 0x2086,
-		WGL_BIND_TO_TEXTURE_DEPTH_NV = 0x20A3,
-		WGL_BIND_TO_TEXTURE_RECTANGLE_DEPTH_NV = 0x20A4,
-		WGL_BIND_TO_TEXTURE_RECTANGLE_FLOAT_RGBA_NV = 0x20B4,
-		WGL_BIND_TO_TEXTURE_RECTANGLE_FLOAT_RGB_NV = 0x20B3,
-		WGL_BIND_TO_TEXTURE_RECTANGLE_FLOAT_RG_NV = 0x20B2,
-		WGL_BIND_TO_TEXTURE_RECTANGLE_FLOAT_R_NV = 0x20B1,
-		WGL_BIND_TO_TEXTURE_RECTANGLE_RGBA_NV = 0x20A1,
-		WGL_BIND_TO_TEXTURE_RECTANGLE_RGB_NV = 0x20A0,
-		WGL_BIND_TO_TEXTURE_RGBA_ARB = 0x2071,
-		WGL_BIND_TO_TEXTURE_RGB_ARB = 0x2070,
-		WGL_BIND_TO_VIDEO_RGBA_NV = 0x20C1,
-		WGL_BIND_TO_VIDEO_RGB_AND_DEPTH_NV = 0x20C2,
-		WGL_BIND_TO_VIDEO_RGB_NV = 0x20C0,
-		WGL_BLUE_BITS_ARB = 0x2019,
-		WGL_BLUE_BITS_EXT = 0x2019,
-		WGL_BLUE_SHIFT_ARB = 0x201A,
-		WGL_BLUE_SHIFT_EXT = 0x201A,
-		WGL_COLORSPACE_EXT = 0x309D,
-		WGL_COLORSPACE_LINEAR_EXT = 0x308A,
-		WGL_COLORSPACE_SRGB_EXT = 0x3089,
-		WGL_COLOR_BITS_ARB = 0x2014,
-		WGL_COLOR_BITS_EXT = 0x2014,
-		WGL_COLOR_SAMPLES_NV = 0x20B9,
-		WGL_CONTEXT_COMPATIBILITY_PROFILE_BIT_ARB = 0x00000002,
-		WGL_CONTEXT_CORE_PROFILE_BIT_ARB = 0x00000001,
-		WGL_CONTEXT_DEBUG_BIT_ARB = 0x00000001,
-		WGL_CONTEXT_ES2_PROFILE_BIT_EXT = 0x00000004,
-		WGL_CONTEXT_ES_PROFILE_BIT_EXT = 0x00000004,
-		WGL_CONTEXT_FLAGS_ARB = 0x2094,
-		WGL_CONTEXT_FORWARD_COMPATIBLE_BIT_ARB = 0x00000002,
-		WGL_CONTEXT_LAYER_PLANE_ARB = 0x2093,
-		WGL_CONTEXT_MAJOR_VERSION_ARB = 0x2091,
-		WGL_CONTEXT_MINOR_VERSION_ARB = 0x2092,
-		WGL_CONTEXT_MULTIGPU_ATTRIB_AFR_NV = 0x20AC,
-		WGL_CONTEXT_MULTIGPU_ATTRIB_MULTICAST_NV = 0x20AD,
-		WGL_CONTEXT_MULTIGPU_ATTRIB_MULTI_DISPLAY_MULTICAST_NV = 0x20AE,
-		WGL_CONTEXT_MULTIGPU_ATTRIB_NV = 0x20AA,
-		WGL_CONTEXT_MULTIGPU_ATTRIB_SINGLE_NV = 0x20AB,
-		WGL_CONTEXT_OPENGL_NO_ERROR_ARB = 0x31B3,
-		WGL_CONTEXT_PROFILE_MASK_ARB = 0x9126,
-		WGL_CONTEXT_RELEASE_BEHAVIOR_ARB = 0x2097,
-		WGL_CONTEXT_RELEASE_BEHAVIOR_FLUSH_ARB = 0x2098,
-		WGL_CONTEXT_RELEASE_BEHAVIOR_NONE_ARB = 0,
-		WGL_CONTEXT_RESET_ISOLATION_BIT_ARB = 0x00000008,
-		WGL_CONTEXT_RESET_NOTIFICATION_STRATEGY_ARB = 0x8256,
-		WGL_CONTEXT_ROBUST_ACCESS_BIT_ARB = 0x00000004,
-		WGL_COVERAGE_SAMPLES_NV = 0x2042,
-		WGL_CUBE_MAP_FACE_ARB = 0x207C,
-		WGL_DEPTH_BITS_ARB = 0x2022,
-		WGL_DEPTH_BITS_EXT = 0x2022,
-		WGL_DEPTH_BUFFER_BIT_ARB = 0x00000004,
-		WGL_DEPTH_COMPONENT_NV = 0x20A7,
-		WGL_DEPTH_FLOAT_EXT = 0x2040,
-		WGL_DEPTH_TEXTURE_FORMAT_NV = 0x20A5,
-		WGL_DIGITAL_VIDEO_CURSOR_ALPHA_FRAMEBUFFER_I3D = 0x2050,
-		WGL_DIGITAL_VIDEO_CURSOR_ALPHA_VALUE_I3D = 0x2051,
-		WGL_DIGITAL_VIDEO_CURSOR_INCLUDED_I3D = 0x2052,
-		WGL_DIGITAL_VIDEO_GAMMA_CORRECTED_I3D = 0x2053,
-		WGL_DOUBLE_BUFFER_ARB = 0x2011,
-		WGL_DOUBLE_BUFFER_EXT = 0x2011,
-		WGL_DRAW_TO_BITMAP_ARB = 0x2002,
-		WGL_DRAW_TO_BITMAP_EXT = 0x2002,
-		WGL_DRAW_TO_PBUFFER_ARB = 0x202D,
-		WGL_DRAW_TO_PBUFFER_EXT = 0x202D,
-		WGL_DRAW_TO_WINDOW_ARB = 0x2001,
-		WGL_DRAW_TO_WINDOW_EXT = 0x2001,
-		WGL_FLOAT_COMPONENTS_NV = 0x20B0,
-	};
+    enum {
+        ERROR_INCOMPATIBLE_AFFINITY_MASKS_NV = 0x20D0,
+        ERROR_INCOMPATIBLE_DEVICE_CONTEXTS_ARB = 0x2054,
+        ERROR_INVALID_PIXEL_TYPE_ARB = 0x2043,
+        ERROR_INVALID_PIXEL_TYPE_EXT = 0x2043,
+        ERROR_INVALID_PROFILE_ARB = 0x2096,
+        ERROR_INVALID_VERSION_ARB = 0x2095,
+        ERROR_MISSING_AFFINITY_MASK_NV = 0x20D1,
+        WGL_ACCELERATION_ARB = 0x2003,
+        WGL_ACCELERATION_EXT = 0x2003,
+        WGL_ACCESS_READ_ONLY_NV = 0x00000000,
+        WGL_ACCESS_READ_WRITE_NV = 0x00000001,
+        WGL_ACCESS_WRITE_DISCARD_NV = 0x00000002,
+        WGL_ACCUM_ALPHA_BITS_ARB = 0x2021,
+        WGL_ACCUM_ALPHA_BITS_EXT = 0x2021,
+        WGL_ACCUM_BITS_ARB = 0x201D,
+        WGL_ACCUM_BITS_EXT = 0x201D,
+        WGL_ACCUM_BLUE_BITS_ARB = 0x2020,
+        WGL_ACCUM_BLUE_BITS_EXT = 0x2020,
+        WGL_ACCUM_GREEN_BITS_ARB = 0x201F,
+        WGL_ACCUM_GREEN_BITS_EXT = 0x201F,
+        WGL_ACCUM_RED_BITS_ARB = 0x201E,
+        WGL_ACCUM_RED_BITS_EXT = 0x201E,
+        WGL_ALPHA_BITS_ARB = 0x201B,
+        WGL_ALPHA_BITS_EXT = 0x201B,
+        WGL_ALPHA_SHIFT_ARB = 0x201C,
+        WGL_ALPHA_SHIFT_EXT = 0x201C,
+        WGL_AUX0_ARB = 0x2087,
+        WGL_AUX1_ARB = 0x2088,
+        WGL_AUX2_ARB = 0x2089,
+        WGL_AUX3_ARB = 0x208A,
+        WGL_AUX4_ARB = 0x208B,
+        WGL_AUX5_ARB = 0x208C,
+        WGL_AUX6_ARB = 0x208D,
+        WGL_AUX7_ARB = 0x208E,
+        WGL_AUX8_ARB = 0x208F,
+        WGL_AUX9_ARB = 0x2090,
+        WGL_AUX_BUFFERS_ARB = 0x2024,
+        WGL_AUX_BUFFERS_EXT = 0x2024,
+        WGL_BACK_COLOR_BUFFER_BIT_ARB = 0x00000002,
+        WGL_BACK_LEFT_ARB = 0x2085,
+        WGL_BACK_RIGHT_ARB = 0x2086,
+        WGL_BIND_TO_TEXTURE_DEPTH_NV = 0x20A3,
+        WGL_BIND_TO_TEXTURE_RECTANGLE_DEPTH_NV = 0x20A4,
+        WGL_BIND_TO_TEXTURE_RECTANGLE_FLOAT_RGBA_NV = 0x20B4,
+        WGL_BIND_TO_TEXTURE_RECTANGLE_FLOAT_RGB_NV = 0x20B3,
+        WGL_BIND_TO_TEXTURE_RECTANGLE_FLOAT_RG_NV = 0x20B2,
+        WGL_BIND_TO_TEXTURE_RECTANGLE_FLOAT_R_NV = 0x20B1,
+        WGL_BIND_TO_TEXTURE_RECTANGLE_RGBA_NV = 0x20A1,
+        WGL_BIND_TO_TEXTURE_RECTANGLE_RGB_NV = 0x20A0,
+        WGL_BIND_TO_TEXTURE_RGBA_ARB = 0x2071,
+        WGL_BIND_TO_TEXTURE_RGB_ARB = 0x2070,
+        WGL_BIND_TO_VIDEO_RGBA_NV = 0x20C1,
+        WGL_BIND_TO_VIDEO_RGB_AND_DEPTH_NV = 0x20C2,
+        WGL_BIND_TO_VIDEO_RGB_NV = 0x20C0,
+        WGL_BLUE_BITS_ARB = 0x2019,
+        WGL_BLUE_BITS_EXT = 0x2019,
+        WGL_BLUE_SHIFT_ARB = 0x201A,
+        WGL_BLUE_SHIFT_EXT = 0x201A,
+        WGL_COLORSPACE_EXT = 0x309D,
+        WGL_COLORSPACE_LINEAR_EXT = 0x308A,
+        WGL_COLORSPACE_SRGB_EXT = 0x3089,
+        WGL_COLOR_BITS_ARB = 0x2014,
+        WGL_COLOR_BITS_EXT = 0x2014,
+        WGL_COLOR_SAMPLES_NV = 0x20B9,
+        WGL_CONTEXT_COMPATIBILITY_PROFILE_BIT_ARB = 0x00000002,
+        WGL_CONTEXT_CORE_PROFILE_BIT_ARB = 0x00000001,
+        WGL_CONTEXT_DEBUG_BIT_ARB = 0x00000001,
+        WGL_CONTEXT_ES2_PROFILE_BIT_EXT = 0x00000004,
+        WGL_CONTEXT_ES_PROFILE_BIT_EXT = 0x00000004,
+        WGL_CONTEXT_FLAGS_ARB = 0x2094,
+        WGL_CONTEXT_FORWARD_COMPATIBLE_BIT_ARB = 0x00000002,
+        WGL_CONTEXT_LAYER_PLANE_ARB = 0x2093,
+        WGL_CONTEXT_MAJOR_VERSION_ARB = 0x2091,
+        WGL_CONTEXT_MINOR_VERSION_ARB = 0x2092,
+        WGL_CONTEXT_MULTIGPU_ATTRIB_AFR_NV = 0x20AC,
+        WGL_CONTEXT_MULTIGPU_ATTRIB_MULTICAST_NV = 0x20AD,
+        WGL_CONTEXT_MULTIGPU_ATTRIB_MULTI_DISPLAY_MULTICAST_NV = 0x20AE,
+        WGL_CONTEXT_MULTIGPU_ATTRIB_NV = 0x20AA,
+        WGL_CONTEXT_MULTIGPU_ATTRIB_SINGLE_NV = 0x20AB,
+        WGL_CONTEXT_OPENGL_NO_ERROR_ARB = 0x31B3,
+        WGL_CONTEXT_PROFILE_MASK_ARB = 0x9126,
+        WGL_CONTEXT_RELEASE_BEHAVIOR_ARB = 0x2097,
+        WGL_CONTEXT_RELEASE_BEHAVIOR_FLUSH_ARB = 0x2098,
+        WGL_CONTEXT_RELEASE_BEHAVIOR_NONE_ARB = 0,
+        WGL_CONTEXT_RESET_ISOLATION_BIT_ARB = 0x00000008,
+        WGL_CONTEXT_RESET_NOTIFICATION_STRATEGY_ARB = 0x8256,
+        WGL_CONTEXT_ROBUST_ACCESS_BIT_ARB = 0x00000004,
+        WGL_COVERAGE_SAMPLES_NV = 0x2042,
+        WGL_CUBE_MAP_FACE_ARB = 0x207C,
+        WGL_DEPTH_BITS_ARB = 0x2022,
+        WGL_DEPTH_BITS_EXT = 0x2022,
+        WGL_DEPTH_BUFFER_BIT_ARB = 0x00000004,
+        WGL_DEPTH_COMPONENT_NV = 0x20A7,
+        WGL_DEPTH_FLOAT_EXT = 0x2040,
+        WGL_DEPTH_TEXTURE_FORMAT_NV = 0x20A5,
+        WGL_DIGITAL_VIDEO_CURSOR_ALPHA_FRAMEBUFFER_I3D = 0x2050,
+        WGL_DIGITAL_VIDEO_CURSOR_ALPHA_VALUE_I3D = 0x2051,
+        WGL_DIGITAL_VIDEO_CURSOR_INCLUDED_I3D = 0x2052,
+        WGL_DIGITAL_VIDEO_GAMMA_CORRECTED_I3D = 0x2053,
+        WGL_DOUBLE_BUFFER_ARB = 0x2011,
+        WGL_DOUBLE_BUFFER_EXT = 0x2011,
+        WGL_DRAW_TO_BITMAP_ARB = 0x2002,
+        WGL_DRAW_TO_BITMAP_EXT = 0x2002,
+        WGL_DRAW_TO_PBUFFER_ARB = 0x202D,
+        WGL_DRAW_TO_PBUFFER_EXT = 0x202D,
+        WGL_DRAW_TO_WINDOW_ARB = 0x2001,
+        WGL_DRAW_TO_WINDOW_EXT = 0x2001,
+        WGL_FLOAT_COMPONENTS_NV = 0x20B0,
+    };
 
-	enum : uint {
-		WGL_FONT_LINES = 0,
-		WGL_FONT_POLYGONS = 1,
-		WGL_FRAMEBUFFER_SRGB_CAPABLE_ARB = 0x20A9,
-		WGL_FRAMEBUFFER_SRGB_CAPABLE_EXT = 0x20A9,
-		WGL_FRONT_COLOR_BUFFER_BIT_ARB = 0x00000001,
-		WGL_FRONT_LEFT_ARB = 0x2083,
-		WGL_FRONT_RIGHT_ARB = 0x2084,
-		WGL_FULL_ACCELERATION_ARB = 0x2027,
-		WGL_FULL_ACCELERATION_EXT = 0x2027,
-		WGL_GAMMA_EXCLUDE_DESKTOP_I3D = 0x204F,
-		WGL_GAMMA_TABLE_SIZE_I3D = 0x204E,
-		WGL_GENERIC_ACCELERATION_ARB = 0x2026,
-		WGL_GENERIC_ACCELERATION_EXT = 0x2026,
-		WGL_GENLOCK_SOURCE_DIGITAL_FIELD_I3D = 0x2049,
-		WGL_GENLOCK_SOURCE_DIGITAL_SYNC_I3D = 0x2048,
-		WGL_GENLOCK_SOURCE_EDGE_BOTH_I3D = 0x204C,
-		WGL_GENLOCK_SOURCE_EDGE_FALLING_I3D = 0x204A,
-		WGL_GENLOCK_SOURCE_EDGE_RISING_I3D = 0x204B,
-		WGL_GENLOCK_SOURCE_EXTERNAL_FIELD_I3D = 0x2046,
-		WGL_GENLOCK_SOURCE_EXTERNAL_SYNC_I3D = 0x2045,
-		WGL_GENLOCK_SOURCE_EXTERNAL_TTL_I3D = 0x2047,
-		WGL_GENLOCK_SOURCE_MULTIVIEW_I3D = 0x2044,
-		WGL_GPU_CLOCK_AMD = 0x21A4,
-		WGL_GPU_FASTEST_TARGET_GPUS_AMD = 0x21A2,
-		WGL_GPU_NUM_PIPES_AMD = 0x21A5,
-		WGL_GPU_NUM_RB_AMD = 0x21A7,
-		WGL_GPU_NUM_SIMD_AMD = 0x21A6,
-		WGL_GPU_NUM_SPI_AMD = 0x21A8,
-		WGL_GPU_OPENGL_VERSION_STRING_AMD = 0x1F02,
-		WGL_GPU_RAM_AMD = 0x21A3,
-		WGL_GPU_RENDERER_STRING_AMD = 0x1F01,
-		WGL_GPU_VENDOR_AMD = 0x1F00,
-		WGL_GREEN_BITS_ARB = 0x2017,
-		WGL_GREEN_BITS_EXT = 0x2017,
-		WGL_GREEN_SHIFT_ARB = 0x2018,
-		WGL_GREEN_SHIFT_EXT = 0x2018,
-		WGL_IMAGE_BUFFER_LOCK_I3D = 0x00000002,
-		WGL_IMAGE_BUFFER_MIN_ACCESS_I3D = 0x00000001,
-		WGL_LOSE_CONTEXT_ON_RESET_ARB = 0x8252,
-		WGL_MAX_PBUFFER_HEIGHT_ARB = 0x2030,
-		WGL_MAX_PBUFFER_HEIGHT_EXT = 0x2030,
-		WGL_MAX_PBUFFER_PIXELS_ARB = 0x202E,
-		WGL_MAX_PBUFFER_PIXELS_EXT = 0x202E,
-		WGL_MAX_PBUFFER_WIDTH_ARB = 0x202F,
-		WGL_MAX_PBUFFER_WIDTH_EXT = 0x202F,
-		WGL_MIPMAP_LEVEL_ARB = 0x207B,
-		WGL_MIPMAP_TEXTURE_ARB = 0x2074,
-		WGL_NEED_PALETTE_ARB = 0x2004,
-		WGL_NEED_PALETTE_EXT = 0x2004,
-		WGL_NEED_SYSTEM_PALETTE_ARB = 0x2005,
-		WGL_NEED_SYSTEM_PALETTE_EXT = 0x2005,
-		WGL_NO_ACCELERATION_ARB = 0x2025,
-		WGL_NO_ACCELERATION_EXT = 0x2025,
-		WGL_NO_RESET_NOTIFICATION_ARB = 0x8261,
-		WGL_NO_TEXTURE_ARB = 0x2077,
-		WGL_NUMBER_OVERLAYS_ARB = 0x2008,
-		WGL_NUMBER_OVERLAYS_EXT = 0x2008,
-		WGL_NUMBER_PIXEL_FORMATS_ARB = 0x2000,
-		WGL_NUMBER_PIXEL_FORMATS_EXT = 0x2000,
-		WGL_NUMBER_UNDERLAYS_ARB = 0x2009,
-		WGL_NUMBER_UNDERLAYS_EXT = 0x2009,
-		WGL_NUM_VIDEO_CAPTURE_SLOTS_NV = 0x20CF,
-		WGL_NUM_VIDEO_SLOTS_NV = 0x20F0,
-		WGL_OPTIMAL_PBUFFER_HEIGHT_EXT = 0x2032,
-		WGL_OPTIMAL_PBUFFER_WIDTH_EXT = 0x2031,
-		WGL_PBUFFER_HEIGHT_ARB = 0x2035,
-		WGL_PBUFFER_HEIGHT_EXT = 0x2035,
-		WGL_PBUFFER_LARGEST_ARB = 0x2033,
-		WGL_PBUFFER_LARGEST_EXT = 0x2033,
-		WGL_PBUFFER_LOST_ARB = 0x2036,
-		WGL_PBUFFER_WIDTH_ARB = 0x2034,
-		WGL_PBUFFER_WIDTH_EXT = 0x2034,
-		WGL_PIXEL_TYPE_ARB = 0x2013,
-		WGL_PIXEL_TYPE_EXT = 0x2013,
-		WGL_RED_BITS_ARB = 0x2015,
-		WGL_RED_BITS_EXT = 0x2015,
-		WGL_RED_SHIFT_ARB = 0x2016,
-		WGL_RED_SHIFT_EXT = 0x2016,
-		WGL_SAMPLES_3DFX = 0x2061,
-		WGL_SAMPLES_ARB = 0x2042,
-		WGL_SAMPLES_EXT = 0x2042,
-		WGL_SAMPLE_BUFFERS_3DFX = 0x2060,
-		WGL_SAMPLE_BUFFERS_ARB = 0x2041,
-		WGL_SAMPLE_BUFFERS_EXT = 0x2041,
-		WGL_SHARE_ACCUM_ARB = 0x200E,
-		WGL_SHARE_ACCUM_EXT = 0x200E,
-		WGL_SHARE_DEPTH_ARB = 0x200C,
-		WGL_SHARE_DEPTH_EXT = 0x200C,
-		WGL_SHARE_STENCIL_ARB = 0x200D,
-		WGL_SHARE_STENCIL_EXT = 0x200D,
-		WGL_STENCIL_BITS_ARB = 0x2023,
-		WGL_STENCIL_BITS_EXT = 0x2023,
-		WGL_STENCIL_BUFFER_BIT_ARB = 0x00000008,
-		WGL_STEREO_ARB = 0x2012,
-		WGL_STEREO_EMITTER_DISABLE_3DL = 0x2056,
-		WGL_STEREO_EMITTER_ENABLE_3DL = 0x2055,
-		WGL_STEREO_EXT = 0x2012,
-		WGL_STEREO_POLARITY_INVERT_3DL = 0x2058,
-		WGL_STEREO_POLARITY_NORMAL_3DL = 0x2057,
-		WGL_SUPPORT_GDI_ARB = 0x200F,
-		WGL_SUPPORT_GDI_EXT = 0x200F,
-		WGL_SUPPORT_OPENGL_ARB = 0x2010,
-		WGL_SUPPORT_OPENGL_EXT = 0x2010,
-		WGL_SWAP_COPY_ARB = 0x2029,
-		WGL_SWAP_COPY_EXT = 0x2029,
-		WGL_SWAP_EXCHANGE_ARB = 0x2028,
-		WGL_SWAP_EXCHANGE_EXT = 0x2028,
-		WGL_SWAP_LAYER_BUFFERS_ARB = 0x2006,
-		WGL_SWAP_LAYER_BUFFERS_EXT = 0x2006,
-		WGL_SWAP_MAIN_PLANE = 0x00000001,
-		WGL_SWAP_METHOD_ARB = 0x2007,
-		WGL_SWAP_METHOD_EXT = 0x2007,
-		WGL_SWAP_OVERLAY1 = 0x00000002,
-		WGL_SWAP_OVERLAY10 = 0x00000400,
-		WGL_SWAP_OVERLAY11 = 0x00000800,
-		WGL_SWAP_OVERLAY12 = 0x00001000,
-		WGL_SWAP_OVERLAY13 = 0x00002000,
-		WGL_SWAP_OVERLAY14 = 0x00004000,
-		WGL_SWAP_OVERLAY15 = 0x00008000,
-		WGL_SWAP_OVERLAY2 = 0x00000004,
-		WGL_SWAP_OVERLAY3 = 0x00000008,
-		WGL_SWAP_OVERLAY4 = 0x00000010,
-		WGL_SWAP_OVERLAY5 = 0x00000020,
-		WGL_SWAP_OVERLAY6 = 0x00000040,
-		WGL_SWAP_OVERLAY7 = 0x00000080,
-		WGL_SWAP_OVERLAY8 = 0x00000100,
-		WGL_SWAP_OVERLAY9 = 0x00000200,
-		WGL_SWAP_UNDEFINED_ARB = 0x202A,
-		WGL_SWAP_UNDEFINED_EXT = 0x202A,
-		WGL_SWAP_UNDERLAY1 = 0x00010000,
-		WGL_SWAP_UNDERLAY10 = 0x02000000,
-		WGL_SWAP_UNDERLAY11 = 0x04000000,
-		WGL_SWAP_UNDERLAY12 = 0x08000000,
-		WGL_SWAP_UNDERLAY13 = 0x10000000,
-		WGL_SWAP_UNDERLAY14 = 0x20000000,
-		WGL_SWAP_UNDERLAY15 = 0x40000000,
-		WGL_SWAP_UNDERLAY2 = 0x00020000,
-		WGL_SWAP_UNDERLAY3 = 0x00040000,
-		WGL_SWAP_UNDERLAY4 = 0x00080000,
-		WGL_SWAP_UNDERLAY5 = 0x00100000,
-		WGL_SWAP_UNDERLAY6 = 0x00200000,
-		WGL_SWAP_UNDERLAY7 = 0x00400000,
-		WGL_SWAP_UNDERLAY8 = 0x00800000,
-		WGL_SWAP_UNDERLAY9 = 0x01000000,
-		WGL_TEXTURE_1D_ARB = 0x2079,
-		WGL_TEXTURE_2D_ARB = 0x207A,
-		WGL_TEXTURE_CUBE_MAP_ARB = 0x2078,
-		WGL_TEXTURE_CUBE_MAP_NEGATIVE_X_ARB = 0x207E,
-		WGL_TEXTURE_CUBE_MAP_NEGATIVE_Y_ARB = 0x2080,
-		WGL_TEXTURE_CUBE_MAP_NEGATIVE_Z_ARB = 0x2082,
-		WGL_TEXTURE_CUBE_MAP_POSITIVE_X_ARB = 0x207D,
-		WGL_TEXTURE_CUBE_MAP_POSITIVE_Y_ARB = 0x207F,
-		WGL_TEXTURE_CUBE_MAP_POSITIVE_Z_ARB = 0x2081,
-		WGL_TEXTURE_DEPTH_COMPONENT_NV = 0x20A6,
-		WGL_TEXTURE_FLOAT_RGBA_NV = 0x20B8,
-		WGL_TEXTURE_FLOAT_RGB_NV = 0x20B7,
-		WGL_TEXTURE_FLOAT_RG_NV = 0x20B6,
-		WGL_TEXTURE_FLOAT_R_NV = 0x20B5,
-		WGL_TEXTURE_FORMAT_ARB = 0x2072,
-		WGL_TEXTURE_RECTANGLE_ATI = 0x21A5,
-		WGL_TEXTURE_RECTANGLE_NV = 0x20A2,
-		WGL_TEXTURE_RGBA_ARB = 0x2076,
-		WGL_TEXTURE_RGB_ARB = 0x2075,
-		WGL_TEXTURE_TARGET_ARB = 0x2073,
-		WGL_TRANSPARENT_ALPHA_VALUE_ARB = 0x203A,
-		WGL_TRANSPARENT_ARB = 0x200A,
-		WGL_TRANSPARENT_BLUE_VALUE_ARB = 0x2039,
-		WGL_TRANSPARENT_EXT = 0x200A,
-		WGL_TRANSPARENT_GREEN_VALUE_ARB = 0x2038,
-		WGL_TRANSPARENT_INDEX_VALUE_ARB = 0x203B,
-		WGL_TRANSPARENT_RED_VALUE_ARB = 0x2037,
-		WGL_TRANSPARENT_VALUE_EXT = 0x200B,
-		WGL_TYPE_COLORINDEX_ARB = 0x202C,
-		WGL_TYPE_COLORINDEX_EXT = 0x202C,
-		WGL_TYPE_RGBA_ARB = 0x202B,
-		WGL_TYPE_RGBA_EXT = 0x202B,
-		WGL_TYPE_RGBA_FLOAT_ARB = 0x21A0,
-		WGL_TYPE_RGBA_FLOAT_ATI = 0x21A0,
-		WGL_TYPE_RGBA_UNSIGNED_FLOAT_EXT = 0x20A8,
-		WGL_UNIQUE_ID_NV = 0x20CE,
-		WGL_VIDEO_OUT_ALPHA_NV = 0x20C4,
-		WGL_VIDEO_OUT_COLOR_AND_ALPHA_NV = 0x20C6,
-		WGL_VIDEO_OUT_COLOR_AND_DEPTH_NV = 0x20C7,
-		WGL_VIDEO_OUT_COLOR_NV = 0x20C3,
-		WGL_VIDEO_OUT_DEPTH_NV = 0x20C5,
-		WGL_VIDEO_OUT_FIELD_1 = 0x20C9,
-		WGL_VIDEO_OUT_FIELD_2 = 0x20CA,
-		WGL_VIDEO_OUT_FRAME = 0x20C8,
-		WGL_VIDEO_OUT_STACKED_FIELDS_1_2 = 0x20CB,
-		WGL_VIDEO_OUT_STACKED_FIELDS_2_1 = 0x20CC,
-	};
+    enum : TUint {
+        WGL_FONT_LINES = 0,
+        WGL_FONT_POLYGONS = 1,
+        WGL_FRAMEBUFFER_SRGB_CAPABLE_ARB = 0x20A9,
+        WGL_FRAMEBUFFER_SRGB_CAPABLE_EXT = 0x20A9,
+        WGL_FRONT_COLOR_BUFFER_BIT_ARB = 0x00000001,
+        WGL_FRONT_LEFT_ARB = 0x2083,
+        WGL_FRONT_RIGHT_ARB = 0x2084,
+        WGL_FULL_ACCELERATION_ARB = 0x2027,
+        WGL_FULL_ACCELERATION_EXT = 0x2027,
+        WGL_GAMMA_EXCLUDE_DESKTOP_I3D = 0x204F,
+        WGL_GAMMA_TABLE_SIZE_I3D = 0x204E,
+        WGL_GENERIC_ACCELERATION_ARB = 0x2026,
+        WGL_GENERIC_ACCELERATION_EXT = 0x2026,
+        WGL_GENLOCK_SOURCE_DIGITAL_FIELD_I3D = 0x2049,
+        WGL_GENLOCK_SOURCE_DIGITAL_SYNC_I3D = 0x2048,
+        WGL_GENLOCK_SOURCE_EDGE_BOTH_I3D = 0x204C,
+        WGL_GENLOCK_SOURCE_EDGE_FALLING_I3D = 0x204A,
+        WGL_GENLOCK_SOURCE_EDGE_RISING_I3D = 0x204B,
+        WGL_GENLOCK_SOURCE_EXTERNAL_FIELD_I3D = 0x2046,
+        WGL_GENLOCK_SOURCE_EXTERNAL_SYNC_I3D = 0x2045,
+        WGL_GENLOCK_SOURCE_EXTERNAL_TTL_I3D = 0x2047,
+        WGL_GENLOCK_SOURCE_MULTIVIEW_I3D = 0x2044,
+        WGL_GPU_CLOCK_AMD = 0x21A4,
+        WGL_GPU_FASTEST_TARGET_GPUS_AMD = 0x21A2,
+        WGL_GPU_NUM_PIPES_AMD = 0x21A5,
+        WGL_GPU_NUM_RB_AMD = 0x21A7,
+        WGL_GPU_NUM_SIMD_AMD = 0x21A6,
+        WGL_GPU_NUM_SPI_AMD = 0x21A8,
+        WGL_GPU_OPENGL_VERSION_STRING_AMD = 0x1F02,
+        WGL_GPU_RAM_AMD = 0x21A3,
+        WGL_GPU_RENDERER_STRING_AMD = 0x1F01,
+        WGL_GPU_VENDOR_AMD = 0x1F00,
+        WGL_GREEN_BITS_ARB = 0x2017,
+        WGL_GREEN_BITS_EXT = 0x2017,
+        WGL_GREEN_SHIFT_ARB = 0x2018,
+        WGL_GREEN_SHIFT_EXT = 0x2018,
+        WGL_IMAGE_BUFFER_LOCK_I3D = 0x00000002,
+        WGL_IMAGE_BUFFER_MIN_ACCESS_I3D = 0x00000001,
+        WGL_LOSE_CONTEXT_ON_RESET_ARB = 0x8252,
+        WGL_MAX_PBUFFER_HEIGHT_ARB = 0x2030,
+        WGL_MAX_PBUFFER_HEIGHT_EXT = 0x2030,
+        WGL_MAX_PBUFFER_PIXELS_ARB = 0x202E,
+        WGL_MAX_PBUFFER_PIXELS_EXT = 0x202E,
+        WGL_MAX_PBUFFER_WIDTH_ARB = 0x202F,
+        WGL_MAX_PBUFFER_WIDTH_EXT = 0x202F,
+        WGL_MIPMAP_LEVEL_ARB = 0x207B,
+        WGL_MIPMAP_TEXTURE_ARB = 0x2074,
+        WGL_NEED_PALETTE_ARB = 0x2004,
+        WGL_NEED_PALETTE_EXT = 0x2004,
+        WGL_NEED_SYSTEM_PALETTE_ARB = 0x2005,
+        WGL_NEED_SYSTEM_PALETTE_EXT = 0x2005,
+        WGL_NO_ACCELERATION_ARB = 0x2025,
+        WGL_NO_ACCELERATION_EXT = 0x2025,
+        WGL_NO_RESET_NOTIFICATION_ARB = 0x8261,
+        WGL_NO_TEXTURE_ARB = 0x2077,
+        WGL_NUMBER_OVERLAYS_ARB = 0x2008,
+        WGL_NUMBER_OVERLAYS_EXT = 0x2008,
+        WGL_NUMBER_PIXEL_FORMATS_ARB = 0x2000,
+        WGL_NUMBER_PIXEL_FORMATS_EXT = 0x2000,
+        WGL_NUMBER_UNDERLAYS_ARB = 0x2009,
+        WGL_NUMBER_UNDERLAYS_EXT = 0x2009,
+        WGL_NUM_VIDEO_CAPTURE_SLOTS_NV = 0x20CF,
+        WGL_NUM_VIDEO_SLOTS_NV = 0x20F0,
+        WGL_OPTIMAL_PBUFFER_HEIGHT_EXT = 0x2032,
+        WGL_OPTIMAL_PBUFFER_WIDTH_EXT = 0x2031,
+        WGL_PBUFFER_HEIGHT_ARB = 0x2035,
+        WGL_PBUFFER_HEIGHT_EXT = 0x2035,
+        WGL_PBUFFER_LARGEST_ARB = 0x2033,
+        WGL_PBUFFER_LARGEST_EXT = 0x2033,
+        WGL_PBUFFER_LOST_ARB = 0x2036,
+        WGL_PBUFFER_WIDTH_ARB = 0x2034,
+        WGL_PBUFFER_WIDTH_EXT = 0x2034,
+        WGL_PIXEL_TYPE_ARB = 0x2013,
+        WGL_PIXEL_TYPE_EXT = 0x2013,
+        WGL_RED_BITS_ARB = 0x2015,
+        WGL_RED_BITS_EXT = 0x2015,
+        WGL_RED_SHIFT_ARB = 0x2016,
+        WGL_RED_SHIFT_EXT = 0x2016,
+        WGL_SAMPLES_3DFX = 0x2061,
+        WGL_SAMPLES_ARB = 0x2042,
+        WGL_SAMPLES_EXT = 0x2042,
+        WGL_SAMPLE_BUFFERS_3DFX = 0x2060,
+        WGL_SAMPLE_BUFFERS_ARB = 0x2041,
+        WGL_SAMPLE_BUFFERS_EXT = 0x2041,
+        WGL_SHARE_ACCUM_ARB = 0x200E,
+        WGL_SHARE_ACCUM_EXT = 0x200E,
+        WGL_SHARE_DEPTH_ARB = 0x200C,
+        WGL_SHARE_DEPTH_EXT = 0x200C,
+        WGL_SHARE_STENCIL_ARB = 0x200D,
+        WGL_SHARE_STENCIL_EXT = 0x200D,
+        WGL_STENCIL_BITS_ARB = 0x2023,
+        WGL_STENCIL_BITS_EXT = 0x2023,
+        WGL_STENCIL_BUFFER_BIT_ARB = 0x00000008,
+        WGL_STEREO_ARB = 0x2012,
+        WGL_STEREO_EMITTER_DISABLE_3DL = 0x2056,
+        WGL_STEREO_EMITTER_ENABLE_3DL = 0x2055,
+        WGL_STEREO_EXT = 0x2012,
+        WGL_STEREO_POLARITY_INVERT_3DL = 0x2058,
+        WGL_STEREO_POLARITY_NORMAL_3DL = 0x2057,
+        WGL_SUPPORT_GDI_ARB = 0x200F,
+        WGL_SUPPORT_GDI_EXT = 0x200F,
+        WGL_SUPPORT_OPENGL_ARB = 0x2010,
+        WGL_SUPPORT_OPENGL_EXT = 0x2010,
+        WGL_SWAP_COPY_ARB = 0x2029,
+        WGL_SWAP_COPY_EXT = 0x2029,
+        WGL_SWAP_EXCHANGE_ARB = 0x2028,
+        WGL_SWAP_EXCHANGE_EXT = 0x2028,
+        WGL_SWAP_LAYER_BUFFERS_ARB = 0x2006,
+        WGL_SWAP_LAYER_BUFFERS_EXT = 0x2006,
+        WGL_SWAP_MAIN_PLANE = 0x00000001,
+        WGL_SWAP_METHOD_ARB = 0x2007,
+        WGL_SWAP_METHOD_EXT = 0x2007,
+        WGL_SWAP_OVERLAY1 = 0x00000002,
+        WGL_SWAP_OVERLAY10 = 0x00000400,
+        WGL_SWAP_OVERLAY11 = 0x00000800,
+        WGL_SWAP_OVERLAY12 = 0x00001000,
+        WGL_SWAP_OVERLAY13 = 0x00002000,
+        WGL_SWAP_OVERLAY14 = 0x00004000,
+        WGL_SWAP_OVERLAY15 = 0x00008000,
+        WGL_SWAP_OVERLAY2 = 0x00000004,
+        WGL_SWAP_OVERLAY3 = 0x00000008,
+        WGL_SWAP_OVERLAY4 = 0x00000010,
+        WGL_SWAP_OVERLAY5 = 0x00000020,
+        WGL_SWAP_OVERLAY6 = 0x00000040,
+        WGL_SWAP_OVERLAY7 = 0x00000080,
+        WGL_SWAP_OVERLAY8 = 0x00000100,
+        WGL_SWAP_OVERLAY9 = 0x00000200,
+        WGL_SWAP_UNDEFINED_ARB = 0x202A,
+        WGL_SWAP_UNDEFINED_EXT = 0x202A,
+        WGL_SWAP_UNDERLAY1 = 0x00010000,
+        WGL_SWAP_UNDERLAY10 = 0x02000000,
+        WGL_SWAP_UNDERLAY11 = 0x04000000,
+        WGL_SWAP_UNDERLAY12 = 0x08000000,
+        WGL_SWAP_UNDERLAY13 = 0x10000000,
+        WGL_SWAP_UNDERLAY14 = 0x20000000,
+        WGL_SWAP_UNDERLAY15 = 0x40000000,
+        WGL_SWAP_UNDERLAY2 = 0x00020000,
+        WGL_SWAP_UNDERLAY3 = 0x00040000,
+        WGL_SWAP_UNDERLAY4 = 0x00080000,
+        WGL_SWAP_UNDERLAY5 = 0x00100000,
+        WGL_SWAP_UNDERLAY6 = 0x00200000,
+        WGL_SWAP_UNDERLAY7 = 0x00400000,
+        WGL_SWAP_UNDERLAY8 = 0x00800000,
+        WGL_SWAP_UNDERLAY9 = 0x01000000,
+        WGL_TEXTURE_1D_ARB = 0x2079,
+        WGL_TEXTURE_2D_ARB = 0x207A,
+        WGL_TEXTURE_CUBE_MAP_ARB = 0x2078,
+        WGL_TEXTURE_CUBE_MAP_NEGATIVE_X_ARB = 0x207E,
+        WGL_TEXTURE_CUBE_MAP_NEGATIVE_Y_ARB = 0x2080,
+        WGL_TEXTURE_CUBE_MAP_NEGATIVE_Z_ARB = 0x2082,
+        WGL_TEXTURE_CUBE_MAP_POSITIVE_X_ARB = 0x207D,
+        WGL_TEXTURE_CUBE_MAP_POSITIVE_Y_ARB = 0x207F,
+        WGL_TEXTURE_CUBE_MAP_POSITIVE_Z_ARB = 0x2081,
+        WGL_TEXTURE_DEPTH_COMPONENT_NV = 0x20A6,
+        WGL_TEXTURE_FLOAT_RGBA_NV = 0x20B8,
+        WGL_TEXTURE_FLOAT_RGB_NV = 0x20B7,
+        WGL_TEXTURE_FLOAT_RG_NV = 0x20B6,
+        WGL_TEXTURE_FLOAT_R_NV = 0x20B5,
+        WGL_TEXTURE_FORMAT_ARB = 0x2072,
+        WGL_TEXTURE_RECTANGLE_ATI = 0x21A5,
+        WGL_TEXTURE_RECTANGLE_NV = 0x20A2,
+        WGL_TEXTURE_RGBA_ARB = 0x2076,
+        WGL_TEXTURE_RGB_ARB = 0x2075,
+        WGL_TEXTURE_TARGET_ARB = 0x2073,
+        WGL_TRANSPARENT_ALPHA_VALUE_ARB = 0x203A,
+        WGL_TRANSPARENT_ARB = 0x200A,
+        WGL_TRANSPARENT_BLUE_VALUE_ARB = 0x2039,
+        WGL_TRANSPARENT_EXT = 0x200A,
+        WGL_TRANSPARENT_GREEN_VALUE_ARB = 0x2038,
+        WGL_TRANSPARENT_INDEX_VALUE_ARB = 0x203B,
+        WGL_TRANSPARENT_RED_VALUE_ARB = 0x2037,
+        WGL_TRANSPARENT_VALUE_EXT = 0x200B,
+        WGL_TYPE_COLORINDEX_ARB = 0x202C,
+        WGL_TYPE_COLORINDEX_EXT = 0x202C,
+        WGL_TYPE_RGBA_ARB = 0x202B,
+        WGL_TYPE_RGBA_EXT = 0x202B,
+        WGL_TYPE_RGBA_FLOAT_ARB = 0x21A0,
+        WGL_TYPE_RGBA_FLOAT_ATI = 0x21A0,
+        WGL_TYPE_RGBA_UNSIGNED_FLOAT_EXT = 0x20A8,
+        WGL_UNIQUE_ID_NV = 0x20CE,
+        WGL_VIDEO_OUT_ALPHA_NV = 0x20C4,
+        WGL_VIDEO_OUT_COLOR_AND_ALPHA_NV = 0x20C6,
+        WGL_VIDEO_OUT_COLOR_AND_DEPTH_NV = 0x20C7,
+        WGL_VIDEO_OUT_COLOR_NV = 0x20C3,
+        WGL_VIDEO_OUT_DEPTH_NV = 0x20C5,
+        WGL_VIDEO_OUT_FIELD_1 = 0x20C9,
+        WGL_VIDEO_OUT_FIELD_2 = 0x20CA,
+        WGL_VIDEO_OUT_FRAME = 0x20C8,
+        WGL_VIDEO_OUT_STACKED_FIELDS_1_2 = 0x20CB,
+        WGL_VIDEO_OUT_STACKED_FIELDS_2_1 = 0x20CC,
+    };
 
-	enum { THREAD_HANDLE_INVALID = 0xffffffff };
+    enum { THREAD_HANDLE_INVALID = 0xffffffff };
 
-	enum HeapAllocFlags {
-		E_HEAP_ALLOC_FLAGS_UNDEFINED,
-		E_HEAP_ALLOC_FLAGS_ZERO_INITIALIZED,
-	};
+    enum HeapAllocFlags {
+        E_HEAP_ALLOC_FLAGS_UNDEFINED,
+        E_HEAP_ALLOC_FLAGS_ZERO_INITIALIZED,
+    };
 
-	enum WindowFlags : uint64 {
-		E_WINDOW_FLAGS_DEFAULT		= 13565952,
-		E_WINDOW_FLAGS_BORDERLESS	= 2148466688
-	};
+    enum WindowFlags : TUint64 {
+        E_WINDOW_FLAGS_DEFAULT		= 13565952,
+        E_WINDOW_FLAGS_BORDERLESS	= 2148466688
+    };
 
-	enum WindowShowFlags {
-		E_WINDOW_SHOW_FLAGS_NORMAL = 5,
-		E_WINDOW_SHOW_FLAGS_HIDDEN = 6,
-		E_WINDOW_SHOW_FLAGS_MAXIMIZED = 3,
-	};
+    enum WindowShowFlags {
+        E_WINDOW_SHOW_FLAGS_NORMAL = 5,
+        E_WINDOW_SHOW_FLAGS_HIDDEN = 6,
+        E_WINDOW_SHOW_FLAGS_MAXIMIZED = 3,
+    };
 
-	enum WindowLongPtrName {
-		E_WINDOW_LONG_PTR_NAME_STYLE = -16,
-		E_WINDOW_LONG_PTR_NAME_USERDATA = -21
-	};
+    enum WindowLongPtrName {
+        E_WINDOW_LONG_PTR_NAME_STYLE = -16,
+        E_WINDOW_LONG_PTR_NAME_USERDATA = -21
+    };
 
-	enum EVirtualKey : uint8 {
-		E_VK_LBUTTON = 1,
-		E_VK_RBUTTON = 2,
-		E_VK_CANCEL = 3,
-		E_VK_MBUTTON = 4,
-		E_VK_XBUTTON1 = 5,
-		E_VK_XBUTTON2 = 6,
-		/////////////////
-		E_VK_BACKSPACE = 8,
-		E_VK_TAB = 9,
-		/////////////////
-		E_VK_CLEAR = 12,
-		E_VK_ENTER = 13,
-		/////////////////
-		E_VK_SHIFT = 16,
-		E_VK_CONTROL = 17,
-		E_VK_ALT = 18,
-		E_VK_PAUSE = 19,
-		E_VK_CAPSLOCK = 20,
-		/////////////////
-		/////////////////
-		E_VK_ESCAPE = 27,
-		E_VK_SPACEBAR = 32,
-		E_VK_LEFT = 37,
-		E_VK_UP = 38,
-		E_VK_RIGHT = 39,
-		E_VK_DOWN = 40,
-		E_VK_KEY0 = 48,
-		E_VK_KEY1 = 49,
-		E_VK_KEY2 = 50,
-		E_VK_KEY3 = 51,
-		E_VK_KEY4 = 52,
-		E_VK_KEY5 = 53,
-		E_VK_KEY6 = 54,
-		E_VK_KEY7 = 55,
-		E_VK_KEY8 = 56,
-		E_VK_KEY9 = 57,
-		/////////////////
-		E_VK_A = 65,
-		E_VK_B,
-		E_VK_C,
-		E_VK_D,
-		E_VK_E,
-		E_VK_F,
-		E_VK_G,
-		E_VK_H,
-		E_VK_I,
-		E_VK_J,
-		E_VK_K,
-		E_VK_L,
-		E_VK_M,
-		E_VK_N,
-		E_VK_O,
-		E_VK_P,
-		E_VK_Q,
-		E_VK_R,
-		E_VK_S,
-		E_VK_T,
-		E_VK_U,
-		E_VK_V,
-		E_VK_W,
-		E_VK_X,
-		E_VK_Y,
-		E_VK_Z,
-		E_VK_LWIN = 91,
-		E_VK_RWIN = 92,
-		E_VK_FN1 = 112,
-		E_VK_FN2,
-		E_VK_FN3,
-		E_VK_FN4,
-		E_VK_FN5,
-		E_VK_FN6,
-		E_VK_FN7,
-		E_VK_FN8,
-		E_VK_FN9,
-		E_VK_FN10,
-		E_VK_LSHIFT = 160,
-		E_VK_RSHIFT = 161,
-		E_VK_LCONTROL = 162,
-		E_VK_RCONTROL = 163,
-		E_VK_SLASH = 191,
-		E_VK_TILDE = 192,
-		E_VK_SQBEG = 219,
-		E_VK_SQEND = 221,
-		E_VK_BKSLSH = 220,
-		E_VK_QUOT = 222,
-	};
+    enum EVirtualKey : TUint8 {
+        E_VK_LBUTTON = 1,
+        E_VK_RBUTTON = 2,
+        E_VK_CANCEL = 3,
+        E_VK_MBUTTON = 4,
+        E_VK_XBUTTON1 = 5,
+        E_VK_XBUTTON2 = 6,
+        /////////////////
+        E_VK_BACKSPACE = 8,
+        E_VK_TAB = 9,
+        /////////////////
+        E_VK_CLEAR = 12,
+        E_VK_ENTER = 13,
+        /////////////////
+        E_VK_SHIFT = 16,
+        E_VK_CONTROL = 17,
+        E_VK_ALT = 18,
+        E_VK_PAUSE = 19,
+        E_VK_CAPSLOCK = 20,
+        /////////////////
+        /////////////////
+        E_VK_ESCAPE = 27,
+        E_VK_SPACEBAR = 32,
+        E_VK_LEFT = 37,
+        E_VK_UP = 38,
+        E_VK_RIGHT = 39,
+        E_VK_DOWN = 40,
+        E_VK_KEY0 = 48,
+        E_VK_KEY1 = 49,
+        E_VK_KEY2 = 50,
+        E_VK_KEY3 = 51,
+        E_VK_KEY4 = 52,
+        E_VK_KEY5 = 53,
+        E_VK_KEY6 = 54,
+        E_VK_KEY7 = 55,
+        E_VK_KEY8 = 56,
+        E_VK_KEY9 = 57,
+        /////////////////
+        E_VK_A = 65,
+        E_VK_B,
+        E_VK_C,
+        E_VK_D,
+        E_VK_E,
+        E_VK_F,
+        E_VK_G,
+        E_VK_H,
+        E_VK_I,
+        E_VK_J,
+        E_VK_K,
+        E_VK_L,
+        E_VK_M,
+        E_VK_N,
+        E_VK_O,
+        E_VK_P,
+        E_VK_Q,
+        E_VK_R,
+        E_VK_S,
+        E_VK_T,
+        E_VK_U,
+        E_VK_V,
+        E_VK_W,
+        E_VK_X,
+        E_VK_Y,
+        E_VK_Z,
+        E_VK_LWIN = 91,
+        E_VK_RWIN = 92,
+        E_VK_FN1 = 112,
+        E_VK_FN2,
+        E_VK_FN3,
+        E_VK_FN4,
+        E_VK_FN5,
+        E_VK_FN6,
+        E_VK_FN7,
+        E_VK_FN8,
+        E_VK_FN9,
+        E_VK_FN10,
+        E_VK_LSHIFT = 160,
+        E_VK_RSHIFT = 161,
+        E_VK_LCONTROL = 162,
+        E_VK_RCONTROL = 163,
+        E_VK_SLASH = 191,
+        E_VK_TILDE = 192,
+        E_VK_SQBEG = 219,
+        E_VK_SQEND = 221,
+        E_VK_BKSLSH = 220,
+        E_VK_QUOT = 222,
+    };
 
-	constexpr EKey mapKeysFromEVK[] = {
-		E_KEY_UNDEFINED, // no  value
-		/////////////////////////////
-		E_KEY_MOUSE_BUTTON,
-		E_KEY_MOUSE_BUTTON,
-		E_KEY_UNDEFINED, // 'cancel', i dunno
-		E_KEY_MOUSE_BUTTON,
-		E_KEY_MOUSE_BUTTON,
-		E_KEY_MOUSE_BUTTON,
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_BACKSPACE,
-		E_KEY_TAB,
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // clear
-		E_KEY_ENTER,
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_MOUSE_BUTTON, // reserved
-		E_KEY_SHIFT,
-		E_KEY_CONTROL,
-		E_KEY_ALT,
-		E_KEY_UNDEFINED, // pause
-		E_KEY_CAPSLOCK,
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_ESCAPE,
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_SPACE,
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_ARROW_L,
-		E_KEY_ARROW_U,
-		E_KEY_ARROW_R,
-		E_KEY_ARROW_D,
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_0,
-		E_KEY_1,
-		E_KEY_2,
-		E_KEY_3,
-		E_KEY_4,
-		E_KEY_5,
-		E_KEY_6,
-		E_KEY_7,
-		E_KEY_8,
-		E_KEY_9,
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_A,
-		E_KEY_B,
-		E_KEY_C,
-		E_KEY_D,
-		E_KEY_E,
-		E_KEY_F,
-		E_KEY_G,
-		E_KEY_H,
-		E_KEY_I,
-		E_KEY_J,
-		E_KEY_K,
-		E_KEY_L,
-		E_KEY_M,
-		E_KEY_N,
-		E_KEY_O,
-		E_KEY_P,
-		E_KEY_Q,
-		E_KEY_R,
-		E_KEY_S,
-		E_KEY_T,
-		E_KEY_U,
-		E_KEY_V,
-		E_KEY_W,
-		E_KEY_X,
-		E_KEY_Y,
-		E_KEY_Z,
-		E_KEY_SUPER,
-		E_KEY_SUPER,
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_FUNC1,
-		E_KEY_FUNC2,
-		E_KEY_FUNC3,
-		E_KEY_FUNC4,
-		E_KEY_FUNC5,
-		E_KEY_FUNC6,
-		E_KEY_FUNC7,
-		E_KEY_FUNC8,
-		E_KEY_FUNC9,
-		E_KEY_FUNC10,
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_UNDEFINED, // reserved
-		E_KEY_SHIFT,
-		E_KEY_SHIFT,
-		E_KEY_CONTROL,
-		E_KEY_CONTROL,
-		E_KEY_SLASH,
-		E_KEY_APOSTROPHE,
-		E_KEY_SQUAREOPEN,
-		E_KEY_SQUARECLOSE,
-		E_KEY_BACKSLASH,
-		E_KEY_QUOT
-	};
+    constexpr EKey mapKeysFromEVK[] = {
+        E_KEY_UNDEFINED, // no  value
+        /////////////////////////////
+        E_KEY_MOUSE_BUTTON,
+        E_KEY_MOUSE_BUTTON,
+        E_KEY_UNDEFINED, // 'cancel', i dunno
+        E_KEY_MOUSE_BUTTON,
+        E_KEY_MOUSE_BUTTON,
+        E_KEY_MOUSE_BUTTON,
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_BACKSPACE,
+        E_KEY_TAB,
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // clear
+        E_KEY_ENTER,
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_MOUSE_BUTTON, // reserved
+        E_KEY_SHIFT,
+        E_KEY_CONTROL,
+        E_KEY_ALT,
+        E_KEY_UNDEFINED, // pause
+        E_KEY_CAPSLOCK,
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_ESCAPE,
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_SPACE,
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_ARROW_L,
+        E_KEY_ARROW_U,
+        E_KEY_ARROW_R,
+        E_KEY_ARROW_D,
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_0,
+        E_KEY_1,
+        E_KEY_2,
+        E_KEY_3,
+        E_KEY_4,
+        E_KEY_5,
+        E_KEY_6,
+        E_KEY_7,
+        E_KEY_8,
+        E_KEY_9,
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_A,
+        E_KEY_B,
+        E_KEY_C,
+        E_KEY_D,
+        E_KEY_E,
+        E_KEY_F,
+        E_KEY_G,
+        E_KEY_H,
+        E_KEY_I,
+        E_KEY_J,
+        E_KEY_K,
+        E_KEY_L,
+        E_KEY_M,
+        E_KEY_N,
+        E_KEY_O,
+        E_KEY_P,
+        E_KEY_Q,
+        E_KEY_R,
+        E_KEY_S,
+        E_KEY_T,
+        E_KEY_U,
+        E_KEY_V,
+        E_KEY_W,
+        E_KEY_X,
+        E_KEY_Y,
+        E_KEY_Z,
+        E_KEY_SUPER,
+        E_KEY_SUPER,
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_FUNC1,
+        E_KEY_FUNC2,
+        E_KEY_FUNC3,
+        E_KEY_FUNC4,
+        E_KEY_FUNC5,
+        E_KEY_FUNC6,
+        E_KEY_FUNC7,
+        E_KEY_FUNC8,
+        E_KEY_FUNC9,
+        E_KEY_FUNC10,
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_UNDEFINED, // reserved
+        E_KEY_SHIFT,
+        E_KEY_SHIFT,
+        E_KEY_CONTROL,
+        E_KEY_CONTROL,
+        E_KEY_SLASH,
+        E_KEY_APOSTROPHE,
+        E_KEY_SQUAREOPEN,
+        E_KEY_SQUARECLOSE,
+        E_KEY_BACKSLASH,
+        E_KEY_QUOT
+    };
 
-	constexpr EKeyMod mapModsFromEVK[] = {
-		E_KEY_MOD_ANY, // no  value
-		/////////////////////////////
-		E_KEY_MOD_LEFT,
-		E_KEY_MOD_RIGHT,
-		E_KEY_MOD_ANY, // 'cancel', i dunno
-		E_KEY_MOD_MIDDLE,
-		E_KEY_MOD_EXTRA1,
-		E_KEY_MOD_EXTRA2,
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // clear
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_MIDDLE,	// NOTE: for mouse handling this set to MIDDLE
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY, // pause
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_LEFT,
-		E_KEY_MOD_RIGHT,
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_ANY, // reserved
-		E_KEY_MOD_LEFT,
-		E_KEY_MOD_RIGHT,
-		E_KEY_MOD_LEFT,
-		E_KEY_MOD_RIGHT,
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY,
-		E_KEY_MOD_ANY,
-	};
+    constexpr EKeyMod mapModsFromEVK[] = {
+        E_KEY_MOD_ANY, // no  value
+        /////////////////////////////
+        E_KEY_MOD_LEFT,
+        E_KEY_MOD_RIGHT,
+        E_KEY_MOD_ANY, // 'cancel', i dunno
+        E_KEY_MOD_MIDDLE,
+        E_KEY_MOD_EXTRA1,
+        E_KEY_MOD_EXTRA2,
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // clear
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_MIDDLE,	// NOTE: for mouse handling this set to MIDDLE
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY, // pause
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_LEFT,
+        E_KEY_MOD_RIGHT,
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_ANY, // reserved
+        E_KEY_MOD_LEFT,
+        E_KEY_MOD_RIGHT,
+        E_KEY_MOD_LEFT,
+        E_KEY_MOD_RIGHT,
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY,
+        E_KEY_MOD_ANY,
+    };
 
-	enum EWindowEvent {
-		E_WINDOW_EVENT_NONE,
-		E_WINDOW_EVENT_QUIT,
-		E_WINDOW_EVENT_CLOSE,
-		E_WINDOW_EVENT_RESIZE,
-		E_WINDOW_EVENT_ENTER_FOCUS,
-		E_WINDOW_EVENT_EXIT_FOCUS,
-		E_WINDOW_EVENT_KEY_PRESSED,
-		E_WINDOW_EVENT_KEY_RELEASED,
-		E_WINDOW_EVENT_CHAR,
-		E_WINDOW_EVENT_MOUSE_PRESSED,
-		E_WINDOW_EVENT_MOUSE_RELEASED,
-		E_WINDOW_EVENT_MOUSE_MOVE,
-		E_WINDOW_EVENT_MOVE,
-	};
+    enum EWindowEvent {
+        E_WINDOW_EVENT_NONE,
+        E_WINDOW_EVENT_QUIT,
+        E_WINDOW_EVENT_CLOSE,
+        E_WINDOW_EVENT_RESIZE,
+        E_WINDOW_EVENT_ENTER_FOCUS,
+        E_WINDOW_EVENT_EXIT_FOCUS,
+        E_WINDOW_EVENT_KEY_PRESSED,
+        E_WINDOW_EVENT_KEY_RELEASED,
+        E_WINDOW_EVENT_CHAR,
+        E_WINDOW_EVENT_MOUSE_PRESSED,
+        E_WINDOW_EVENT_MOUSE_RELEASED,
+        E_WINDOW_EVENT_MOUSE_MOVE,
+        E_WINDOW_EVENT_MOVE,
+    };
 
-	enum EWaitResult {
-		E_WAIT_ABANDONED = 0x00000080L,
-		E_WAIT_OBJECT_0  = 0x00000000L,
-		E_WAIT_TIMEOUT   = 0x00000102L,
-		E_WAIT_FAILED    = 0xFFFFFFFF
-	};
+    enum EWaitResult {
+        E_WAIT_ABANDONED = 0x00000080L,
+        E_WAIT_OBJECT_0  = 0x00000000L,
+        E_WAIT_TIMEOUT   = 0x00000102L,
+        E_WAIT_FAILED    = 0xFFFFFFFF
+    };
 
-	struct SWindowEventData {
-		EWindowEvent type;
-		union {
-			struct {
-				int32 width;
-				int32 height;
-			} onResize;
-			struct {
-				EVirtualKey evk;
-				bool isPressed;
-			} onKey;
-			char* onChar;
-			struct {
-				EVirtualKey evk;
-				bool isPressed;
-			} onMouse;
-			struct {
-				real x;
-				real y;
-			} onMouseMove;
-			struct {
-				int32 x;
-				int32 y;
-			} onMove;
-		};
-	};
+    struct SWindowEventData {
+        EWindowEvent type;
+        union {
+            struct {
+                TInt32 width;
+                TInt32 height;
+            } onResize;
+            struct {
+                EVirtualKey evk;
+                bool isPressed;
+            } onKey;
+            char* onChar;
+            struct {
+                EVirtualKey evk;
+                bool isPressed;
+            } onMouse;
+            struct {
+                TReal x;
+                TReal y;
+            } onMouseMove;
+            struct {
+                TInt32 x;
+                TInt32 y;
+            } onMove;
+        };
+    };
 
-	using PFNWindowMessageProc = void(*)(HWND hWnd, const SWindowEventData& msg);
+    using PFNWindowMessageProc = void(*)(HWND hWnd, const SWindowEventData& msg);
 
-	NW_API HINSTANCE	getCurrentPlatformHandle(void);
-	NW_API HANDLE		getProcessHeap(void);
-	NW_API LPVOID		heapAlloc(HANDLE hHeap, uint64 size, HeapAllocFlags flags);
-	NW_API void			heapFree(HANDLE hHeap, void* p);
+    NW_API HINSTANCE	getCurrentPlatformHandle(void);
+    NW_API HANDLE		getProcessHeap(void);
+    NW_API LPVOID		heapAlloc(HANDLE hHeap, TUint64 size, HeapAllocFlags flags);
+    NW_API void			heapFree(HANDLE hHeap, void* p);
 
-	NW_API DWORD		getLastError(void);
-	NW_API DWORD		getLastErrorStringA(char* s);
-	NW_API DWORD		getLastErrorStringW(wchar_t* s);
+    NW_API DWORD		getLastError(void);
+    NW_API DWORD		getLastErrorStringA(char* s);
+    NW_API DWORD		getLastErrorStringW(wchar_t* s);
 
-	NW_API LPVOID		copyMemory(LPVOID dst, LPVOID src, uint64 size);
-	NW_API LPVOID		fillMemory(LPVOID dst, int32 value, uint64 size);
-	NW_API bool			compareMemory(CLPVOID p1, CLPVOID p2, uint64 size);
+    NW_API LPVOID		copyMemory(LPVOID dst, LPVOID src, TUint64 size);
+    NW_API LPVOID		fillMemory(LPVOID dst, TInt32 value, TUint64 size);
+    NW_API bool			compareMemory(CLPVOID p1, CLPVOID p2, TUint64 size);
 
-	NW_API uint64		lstrlenA(const char* s);
-	NW_API uint64		lstrlenW(const wchar_t* s);
+    NW_API TUint64		lstrlenA(const char* s);
+    NW_API TUint64		lstrlenW(const wchar_t* s);
 
-	NW_API void			getKeyboardState(uint8 state[256]);
+    NW_API void			getKeyboardState(TUint8 state[256]);
 
-	NW_API BOOL			allocConsole(void);
-	NW_API void			freeConsole(void);
-	NW_API HANDLE		getStdOutHandle(void);
-	NW_API void			writeConsoleA(HANDLE hConsole, const char* text);
-	NW_API void			writeConsoleW(HANDLE hConsole, const wchar_t* text);
-	NW_API void			writeConsoleA(HANDLE hConsole, const char* text, uint64 len);
-	NW_API void			writeConsoleW(HANDLE hConsole, const wchar_t* text, uint64 len);
-	NW_API HWND			getConsoleWindow(void);
+    NW_API BOOL			allocConsole(void);
+    NW_API void			freeConsole(void);
+    NW_API HANDLE		getStdOutHandle(void);
+    NW_API void			writeConsoleA(HANDLE hConsole, const char* text);
+    NW_API void			writeConsoleW(HANDLE hConsole, const wchar_t* text);
+    NW_API void			writeConsoleA(HANDLE hConsole, const char* text, TUint64 len);
+    NW_API void			writeConsoleW(HANDLE hConsole, const wchar_t* text, TUint64 len);
+    NW_API HWND			getConsoleWindow(void);
 
-	NW_API HWND			createWindowW(const wchar_t* title, int32 x, int32 y, int32 w, int32 h, WindowFlags flags, PFNWindowMessageProc proc);
-	NW_API HWND			createWindowA(const char* title, int32 x, int32 y, int32 w, int32 h, WindowFlags flags, PFNWindowMessageProc proc);
-	NW_API void			destroyWindow(HWND hWnd);
-	NW_API void			setWindowLongPtrW(HWND hWnd, WindowLongPtrName name, ptraddr ptraddress);
-	NW_API void			setWindowLongPtrA(HWND hWnd, WindowLongPtrName name, ptraddr ptraddress);
-	NW_API ptraddr		getWindowLongPtrW(HWND hWnd, WindowLongPtrName name);
-	NW_API ptraddr		getWindowLongPtrA(HWND hWnd, WindowLongPtrName name);
-	NW_API void			setWindowTextA(HWND hWnd, const char* text);
-	NW_API void			setWindowTextW(HWND hWnd, const wchar_t* text);
-	NW_API void			showWindow(HWND hWnd, WindowShowFlags flags);
-	NW_API BOOL			peekWindowMessagesA(HWND hWnd);
-	NW_API BOOL			peekWindowMessagesW(HWND hWnd);
+    NW_API HWND			createWindowW(const wchar_t* title, TInt32 x, TInt32 y, TInt32 w, TInt32 h, WindowFlags flags, PFNWindowMessageProc proc);
+    NW_API HWND			createWindowA(const char* title, TInt32 x, TInt32 y, TInt32 w, TInt32 h, WindowFlags flags, PFNWindowMessageProc proc);
+    NW_API void			destroyWindow(HWND hWnd);
+    NW_API void			setWindowLongPtrW(HWND hWnd, WindowLongPtrName name, TPtrAddr ptraddress);
+    NW_API void			setWindowLongPtrA(HWND hWnd, WindowLongPtrName name, TPtrAddr ptraddress);
+    NW_API TPtrAddr		getWindowLongPtrW(HWND hWnd, WindowLongPtrName name);
+    NW_API TPtrAddr		getWindowLongPtrA(HWND hWnd, WindowLongPtrName name);
+    NW_API void			setWindowTextA(HWND hWnd, const char* text);
+    NW_API void			setWindowTextW(HWND hWnd, const wchar_t* text);
+    NW_API void			showWindow(HWND hWnd, WindowShowFlags flags);
+    NW_API BOOL			peekWindowMessagesA(HWND hWnd);
+    NW_API BOOL			peekWindowMessagesW(HWND hWnd);
 
-	NW_API uint64		getPrimaryMonitorWidth(void);
-	NW_API uint64		getPrimaryMonitorHeight(void);
+    NW_API TUint64		getPrimaryMonitorWidth(void);
+    NW_API TUint64		getPrimaryMonitorHeight(void);
 
-	NW_API void			sleep(DWORD dwMilliseconds);
+    NW_API void			sleep(DWORD dwMilliseconds);
 
-	NW_API void			queryPerformanceFrequency(int64& freq);
-	NW_API void			queryPerformanceCounter(int64& cnt);
+    NW_API void			queryPerformanceFrequency(TInt64& freq);
+    NW_API void			queryPerformanceCounter(TInt64& cnt);
 
-	NW_API void			exitProcess(uint32 code);
-	NW_API void			breakProcess(void);
+    NW_API void			exitProcess(TUint32 code);
+    NW_API void			breakProcess(void);
 
-	NW_API void			outputDebugStringA(const char* str);
-	NW_API void			outputDebugStringW(const wchar_t* str);
+    NW_API void			outputDebugStringA(const char* str);
+    NW_API void			outputDebugStringW(const wchar_t* str);
 
-	NW_API HANDLE		createThread(void(*pfnStartProc)(void*), void* params, DWORD* pId);
-	NW_API DWORD		resumeThread(HANDLE hThread);
-	NW_API void			closeHandle(HANDLE handle);
-	NW_API void			getExitCodeThread(HANDLE hThread, DWORD* pExitcode);
-	NW_API void			terminateThread(HANDLE hThread, DWORD exitcode);
-	NW_API EWaitResult	waitForSingleObject(HANDLE hHandle, DWORD dwMilliseconds);
+    NW_API HANDLE		createThread(void(*pfnStartProc)(void*), void* params, DWORD* pId);
+    NW_API DWORD		resumeThread(HANDLE hThread);
+    NW_API void			closeHandle(HANDLE handle);
+    NW_API void			getExitCodeThread(HANDLE hThread, DWORD* pExitcode);
+    NW_API void			terminateThread(HANDLE hThread, DWORD exitcode);
+    NW_API EWaitResult	waitForSingleObject(HANDLE hHandle, DWORD dwMilliseconds);
 
-	NW_API uint			interlockValue(volatile uint* pValue);
+    NW_API TUint			interlockValue(volatile TUint* pValue);
 
-	NW_API bool			beginCreateOpenGLContext(void);
-	NW_API void*		endCreateOpenGLContext(HWND);
-	NW_API void			swapBuffers(HWND);
+    NW_API bool			beginCreateOpenGLContext(void);
+    NW_API void*		endCreateOpenGLContext(HWND);
+    NW_API void			swapBuffers(HWND);
 
-	NW_API void*		loadLibrary(const CHAR* pname);
-	NW_API void			closeLibrary(void* phandle);
-	NW_API void*		loadProcAddress(void* phandle, const CHAR* psym);
+    NW_API void*		loadLibrary(const CHAR* pname);
+    NW_API void			closeLibrary(void* phandle);
+    NW_API void*		loadProcAddress(void* phandle, const CHAR* psym);
 
 //
 //	typedef int (__stdcall* PFNCHOOSEPIXELFORMATPROC)(HDC hDc, const PIXELFORMATDESCRIPTOR* pPfd);

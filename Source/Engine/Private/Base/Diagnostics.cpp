@@ -5,33 +5,33 @@
 #include <Platform/PlatformConsole.h>
 
 namespace Neowise {
-	CDiagnostics GDiag;
+    CDiagnostics GDiag;
 
-	void CDiagnostics::writeString(const char* str) {
-		Platform::GConsole.write(str);
-	}
-	
-	void CDiagnostics::writeString(const wchar_t* wstr) {
-		Platform::GConsole.write(wstr);
-	}
+    void CDiagnostics::writeString(const char* str) {
+        Platform::GConsole.write(str);
+    }
+    
+    void CDiagnostics::writeString(const wchar_t* wstr) {
+        Platform::GConsole.write(wstr);
+    }
 
-    void CDiagnostics::writeString(const char* str, uint64 len) {
+    void CDiagnostics::writeString(const char* str, TUint64 len) {
         Platform::GConsole.write(str, len);
     }
 
-    void CDiagnostics::writeString(const wchar_t* wstr, uint64 len) {
+    void CDiagnostics::writeString(const wchar_t* wstr, TUint64 len) {
         Platform::GConsole.write(wstr, len);
     }
 
-	void CDiagnostics::writeSigned(const int64 v) {
+    void CDiagnostics::writeSigned(const TInt64 v) {
         Platform::GConsole.writeFmt("%lld", v);
-	}
+    }
 
-	void CDiagnostics::writeUnsigned(const uint64 v) {
+    void CDiagnostics::writeUnsigned(const TUint64 v) {
         Platform::GConsole.writeFmt("%llu", v);
-	}
+    }
 
-    void CDiagnostics::writeFloat(const real v) {
+    void CDiagnostics::writeFloat(const TReal v) {
         Platform::GConsole.writeFmt("%.4f", v);
     }
 

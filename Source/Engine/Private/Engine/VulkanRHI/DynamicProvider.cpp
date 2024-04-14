@@ -47,7 +47,7 @@ namespace Neowise {
         return VK_FALSE; // Applications must return false here
     }
 
-	IRHIDynamicProvider RHIMakeVulkanProvider() {
+    IRHIDynamicProvider RHIMakeVulkanProvider() {
         return RHIMakeProvider<CRHIVulkanDynamicProvider>();
     }
 
@@ -96,7 +96,7 @@ namespace Neowise {
         
 
         // get system present instance extensions
-        uint32 extensionsCount = 0;
+        TUint32 extensionsCount = 0;
         enumerateInstanceExtensionProperties(nullptr, &extensionsCount, nullptr);
 
         NW_ASSERT(extensionsCount, "Failed to create Vulkan RHI Provider since your PC doesn't support required set of extensions.");
@@ -130,7 +130,7 @@ namespace Neowise {
 
         const auto& requiredInstanceLayers = RHIVKUtil::getRequiredInstanceLayers();
 
-        uint32 layersCount = {};
+        TUint32 layersCount = {};
         enumerateInstanceLayerProperties(&layersCount, nullptr);
 
         CVector<VkLayerProperties> availableLayers(layersCount);
@@ -155,17 +155,17 @@ namespace Neowise {
         applicationInfo.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
         applicationInfo.apiVersion = VK_MAKE_VERSION(1, 3, 0);
         applicationInfo.pEngineName = "NeowiseEngine";
-        applicationInfo.engineVersion = uint32(buildVersion);
+        applicationInfo.engineVersion = TUint32(buildVersion);
         applicationInfo.pApplicationName = GApplicationName.cstr();
         applicationInfo.applicationVersion = VK_MAKE_VERSION(1, 0, 0);
 
         VkInstanceCreateInfo instanceCI = {};
         instanceCI.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
         instanceCI.pApplicationInfo = &applicationInfo;
-        instanceCI.enabledExtensionCount = (uint32) presentInstanceExtensions.size();
+        instanceCI.enabledExtensionCount = (TUint32) presentInstanceExtensions.size();
         instanceCI.ppEnabledExtensionNames = presentInstanceExtensions.data();
         instanceCI.ppEnabledLayerNames = presentInstanceLayers.data();
-        instanceCI.enabledLayerCount = (uint32) presentInstanceLayers.size();
+        instanceCI.enabledLayerCount = (TUint32) presentInstanceLayers.size();
         
         createInstance(&instanceCI, nullptr, &instance);
 

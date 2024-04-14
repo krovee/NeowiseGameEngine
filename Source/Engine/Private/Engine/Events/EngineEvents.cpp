@@ -6,11 +6,11 @@ namespace Neowise {
         return _pos;
     }
 
-    int32 CEventWindowMoved::getX() const {
+    TInt32 CEventWindowMoved::getX() const {
         return _pos.x;
     }
 
-    int32 CEventWindowMoved::getY() const {
+    TInt32 CEventWindowMoved::getY() const {
         return _pos.y;
     }
 
@@ -19,20 +19,20 @@ namespace Neowise {
         return _size;
     }
 
-    real CEventWindowResized::getWidth() const {
+    TReal CEventWindowResized::getWidth() const {
         return _size.x;
     }
 
-    real CEventWindowResized::getHeight() const {
+    TReal CEventWindowResized::getHeight() const {
         return _size.y;
     }
 
 
-    uint8 CEventWindowInputKeyboard::getKey() const {
+    TUint8 CEventWindowInputKeyboard::getKey() const {
         return key;
     }
 
-    uint8 CEventWindowInputKeyboard::getKeyMod() const {
+    TUint8 CEventWindowInputKeyboard::getKeyMod() const {
         return keyMod;
     }
 
@@ -41,7 +41,7 @@ namespace Neowise {
     }
 
 
-    uint8 CEventWindowInputMouseMoved::getMouseId() const {
+    TUint8 CEventWindowInputMouseMoved::getMouseId() const {
         return _mid;
     }
 
@@ -49,11 +49,11 @@ namespace Neowise {
         return _pos;
     }
 
-    int32 CEventWindowInputMouseMoved::getX() const {
+    TInt32 CEventWindowInputMouseMoved::getX() const {
         return _pos.x;
     }
 
-    int32 CEventWindowInputMouseMoved::getY() const {
+    TInt32 CEventWindowInputMouseMoved::getY() const {
         return _pos.y;
     }
 
@@ -61,16 +61,16 @@ namespace Neowise {
         return _deltaPos;
     }
 
-    int32 CEventWindowInputMouseMoved::getDeltaX() const {
+    TInt32 CEventWindowInputMouseMoved::getDeltaX() const {
         return _deltaPos.x;
     }
 
-    int32 CEventWindowInputMouseMoved::getDeltaY() const {
+    TInt32 CEventWindowInputMouseMoved::getDeltaY() const {
         return _deltaPos.y;
     }
 
 
-    uint8 CEventWindowInputMouseButton::getMouseId() const {
+    TUint8 CEventWindowInputMouseButton::getMouseId() const {
         return _mid;
     }
 
@@ -78,15 +78,15 @@ namespace Neowise {
         return _pos;
     }
 
-    int32 CEventWindowInputMouseButton::getX() const {
+    TInt32 CEventWindowInputMouseButton::getX() const {
         return _pos.x;
     }
 
-    int32 CEventWindowInputMouseButton::getY() const {
+    TInt32 CEventWindowInputMouseButton::getY() const {
         return _pos.y;
     }
 
-    uint8 CEventWindowInputMouseButton::getButton() const {
+    TUint8 CEventWindowInputMouseButton::getButton() const {
         return _buttonKey;
     }
 

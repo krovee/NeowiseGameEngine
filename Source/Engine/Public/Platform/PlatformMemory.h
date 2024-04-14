@@ -6,21 +6,21 @@
 #include "Windows/WindowsPlatformMemory.h"
 
 namespace Neowise::Platform {
-	using Windows::CMemory;
+    using Windows::CMemory;
 }
 
 #elif NW_OS_TYPE_LINUX
 #include "Linux/LinuxPlatformMemory.h"
 
 namespace Neowise::Platform {
-	using Linux::CMemory;
+    using Linux::CMemory;
 }
 
 #else
 #include "Null/NullPlatformMemory.h"
 
 namespace Neowise::Platform {
-	using Null::CMemory;
+    using Null::CMemory;
 }
 
 #endif

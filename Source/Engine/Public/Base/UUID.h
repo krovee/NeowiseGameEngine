@@ -4,54 +4,56 @@
 #include <Base/Templated.h>
 
 namespace Neowise {
-	/** 
-	* Universal-Unique-ID. Everyone should know it.
-	*/
-	class NW_API CUUID {
-	public:
-		CUUID();
-		CUUID(uint64 initial);
-		CUUID(const char* str);
-		CUUID(const char* str, uint size);
-		CUUID(const CUUID&);
-		CUUID(CUUID&&);
-		CUUID& operator=(const CUUID&);
-		CUUID& operator=(CUUID&&);
+    /** 
+    * Universal-Unique-ID. Everyone should know it.
+    */
+    class NW_API CUUID {
+    public:
+        CUUID();
+        CUUID(TUint64 initial);
+        CUUID(const char* str);
+        CUUID(const char* str, TUint size);
+        CUUID(const CUUID&);
+        CUUID(CUUID&&);
+        CUUID& operator=(const CUUID&);
+        CUUID& operator=(CUUID&&);
 
-		static const CUUID INVALID;
+        static const CUUID INVALID;
 
-		uint64 get64() const;
-		uint8  get8(uint64 i) const;
+        TUint64 get64() const;
+        TUint8  get8(TUint64 i) const;
 
-		operator uint64() const;
+        TUint8 operator[](TUint i) const;
 
-		bool operator==(const CUUID& r) const;
-		bool operator!=(const CUUID& r) const;
-		bool operator<(const CUUID& r) const;
-		bool operator<=(const CUUID& r) const;
-		bool operator>(const CUUID& r) const;
-		bool operator>=(const CUUID& r) const;
-	private:
-		union {
-			uint64		_b8 = {};
-			struct {
-				char	_0;
-				char	_1;
-				char	_2;
-				char	_3;
-				char	_4;
-				char	_5;
-				char	_6;
-				char	_7;
-			}			_b;
-		};
-	};
+        operator TUint() const;
 
-	template<>
-	class NW_API CObjectHash<CUUID> {
-	public:
-		static uint get(const CUUID& uuid) {
-			return uint(uuid);
-		}
-	};
+        bool operator==(const CUUID& r) const;
+        bool operator!=(const CUUID& r) const;
+        bool operator<(const CUUID& r) const;
+        bool operator<=(const CUUID& r) const;
+        bool operator>(const CUUID& r) const;
+        bool operator>=(const CUUID& r) const;
+    private:
+        union {
+            TUint		_b8 = {};
+            struct {
+                char	_0;
+                char	_1;
+                char	_2;
+                char	_3;
+                char	_4;
+                char	_5;
+                char	_6;
+                char	_7;
+            }			_b;
+        };
+    };
+
+    template<>
+    class NW_API CObjectHash<CUUID> {
+    public:
+        static TUint get(const CUUID& uuid) {
+            return TUint(uuid);
+        }
+    };
 }

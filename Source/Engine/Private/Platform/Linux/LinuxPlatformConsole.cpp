@@ -7,7 +7,7 @@
 #include <Platform/Linux/LinuxBase.h>
 
 namespace Neowise::Platform::Linux {
-	const CUUID CConsole::ioClass = "LinuxConsole";
+    const CUUID CConsole::ioClass = "LinuxConsole";
     CConsole GConsole;
 
     CConsole::CConsole() : CIOBase(ioClass) 
@@ -32,11 +32,11 @@ namespace Neowise::Platform::Linux {
     void CConsole::writeFmt(const char *fmt, ...) {
         NW_NONSHIP_CODE(
         va_list ap;
-		va_start(ap, fmt);
-		char buf[256]{};
+        va_start(ap, fmt);
+        char buf[256]{};
         CStringUtils::format(buf, 256, fmt, ap);
         _ConsoleWrite(buf);
-		va_end(ap);
+        va_end(ap);
         )
     }
 

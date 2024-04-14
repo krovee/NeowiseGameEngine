@@ -2,6 +2,6 @@
 
 namespace Neowise {
 
-	CStringView GApplicationName = "Test";
+    CStringView GApplicationName = "Test";
 
 }

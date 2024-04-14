@@ -2,32 +2,32 @@
 
 namespace Neowise::Platform::Null {
 
-	CBaseWindow::CBaseWindow(defaultCreateTag)
-	{
-	}
+    CBaseWindow::CBaseWindow(defaultCreateTag)
+    {
+    }
 
-	void CBaseWindow::update() {
+    void CBaseWindow::update() {
 
-	}
+    }
 
-	bool CBaseWindow::isOpen() const {
-		return false;
-	}
+    bool CBaseWindow::isOpen() const {
+        return false;
+    }
 
-	void CBaseWindow::setFullscreen(bool) {
+    void CBaseWindow::setFullscreen(bool) {
 
-	}
+    }
 
-	void CBaseWindow::setMaximized(bool) {
+    void CBaseWindow::setMaximized(bool) {
 
-	}
+    }
 
-	void CBaseWindow::suspend(bool) {
+    void CBaseWindow::suspend(bool) {
 
-	}
+    }
 
-	void* CBaseWindow::getNativeHandle() const {
-		return nullptr;
-	}
+    void* CBaseWindow::getNativeHandle() const {
+        return nullptr;
+    }
 
 }

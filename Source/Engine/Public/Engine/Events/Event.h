@@ -13,7 +13,7 @@
 
 namespace Neowise {
 
-    using EventID = uint;
+    using EventID = TUint;
 
     class NW_API CEvent {
     public:

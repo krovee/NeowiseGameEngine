@@ -33,8 +33,8 @@ namespace Neowise {
 
         void recalculate();
     private:
-        bool isDirty(const uint8 flag) const;
-        void setDirty(const uint8 flag);
+        bool isDirty(const TUint8 flag) const;
+        void setDirty(const TUint8 flag);
 
     private:
         FMatrix4                _localMatrix = FMatrix4(1);
@@ -45,7 +45,7 @@ namespace Neowise {
     
         CWrap<const CTransform> _parent = nullptr;
 
-        uint8                   _dirtyFlags = 14;
+        TUint8                   _dirtyFlags = 14;
     };
 
 }

@@ -32,32 +32,32 @@ namespace Neowise {
         }
     }
 
-	bool GIgnoreAssertation = false;
+    bool GIgnoreAssertation = false;
 
-	void Assert(const char* msg, const char* fnname, const char* file, const int line) {
+    void Assert(const char* msg, const char* fnname, const char* file, const int line) {
         char buffer[8]{};
         itoa(line, buffer, 10);
 
         const char* const fnName = fnname + 9;
 
-		Platform::Windows::outputDebugStringA(file);
-		Platform::Windows::outputDebugStringA(":");
-		Platform::Windows::outputDebugStringA(buffer);
-		Platform::Windows::outputDebugStringA(":");
-		Platform::Windows::outputDebugStringA(fnName);
-		Platform::Windows::outputDebugStringA("(): '");
-		Platform::Windows::outputDebugStringA(msg);
-		Platform::Windows::outputDebugStringA("' \n");
+        Platform::Windows::outputDebugStringA(file);
+        Platform::Windows::outputDebugStringA(":");
+        Platform::Windows::outputDebugStringA(buffer);
+        Platform::Windows::outputDebugStringA(":");
+        Platform::Windows::outputDebugStringA(fnName);
+        Platform::Windows::outputDebugStringA("(): '");
+        Platform::Windows::outputDebugStringA(msg);
+        Platform::Windows::outputDebugStringA("' \n");
 
         if (GDiag) {
             GDiag << file << ":" << buffer << ":" << fnName << "(): '" << msg << "'\n";
         }
 
-		if (!GIgnoreAssertation) {
-			Platform::Windows::breakProcess();
-		}
-		else {
-			GIgnoreAssertation = false;
-		}
-	}
+        if (!GIgnoreAssertation) {
+            Platform::Windows::breakProcess();
+        }
+        else {
+            GIgnoreAssertation = false;
+        }
+    }
 }

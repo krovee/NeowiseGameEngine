@@ -8,131 +8,73 @@
 
 namespace Neowise {
 
-	using int8		= signed char;
-	using int16		= signed short;
-	using int32		= signed int;
-	using int64		= signed long long;
-	
-	using uint8		= unsigned char;
-	using uint16	= unsigned short;
-	using uint32	= unsigned int;
-	using uint64	= unsigned long long;
+    using TInt8     = signed char;
+    using TInt16    = signed short;
+    using TInt32    = signed int;
+    using TInt64    = signed long long;
+    
+    using TUint8    = unsigned char;
+    using TUint16   = unsigned short;
+    using TUint32   = unsigned int;
+    using TUint64   = unsigned long long;
 
-	using uint		= uint64;
+    using TUint     = TUint64;
 
-	using ptraddr	= unsigned long long;
+    using TPtrAddr  = unsigned long long;
 
-	using single	= float;
+    using TSingle   = float;
+    using TDouble   = double;
 
-	using real		= single;
+    using TReal     = TSingle;
 
-	using vaList = void*;
+    using TBool     = bool;
 
-	STATIC_ASSERT(sizeof(int8)		== 1);
-	STATIC_ASSERT(sizeof(uint8)		== 1);
-	STATIC_ASSERT(sizeof(int16)		== 2);
-	STATIC_ASSERT(sizeof(uint16)	== 2);
-	STATIC_ASSERT(sizeof(int32)		== 4);
-	STATIC_ASSERT(sizeof(uint32)	== 4);
-	STATIC_ASSERT(sizeof(int64)		== 8);
-	STATIC_ASSERT(sizeof(uint)		== 8);
-	STATIC_ASSERT(sizeof(uint64)	== 8);
-	STATIC_ASSERT(sizeof(ptraddr)	== 8);
-	STATIC_ASSERT(sizeof(single)	== 4);
-	STATIC_ASSERT(sizeof(real)		== 4);
-	
-	constexpr auto __nullptraddr = ptraddr(-1);
-	#define nullptraddr __nullptraddr
+    enum EBoolean : TBool {
+        kFalse, // false
+        kTrue,  // true
+    };
 
-#ifdef INT8_MIN
-#	undef INT8_MIN
-#endif 
+    using TVaList   = void*;
 
-#ifdef INT16_MIN
-#	undef INT16_MIN
-#endif 
+    STATIC_ASSERT(sizeof(TInt8)     == 1);
+    STATIC_ASSERT(sizeof(TUint8)    == 1);
+    STATIC_ASSERT(sizeof(TInt16)    == 2);
+    STATIC_ASSERT(sizeof(TUint16)   == 2);
+    STATIC_ASSERT(sizeof(TInt32)    == 4);
+    STATIC_ASSERT(sizeof(TUint32)   == 4);
+    STATIC_ASSERT(sizeof(TInt64)    == 8);
+    STATIC_ASSERT(sizeof(TUint)	    == 8);
+    STATIC_ASSERT(sizeof(TUint64)   == 8);
+    STATIC_ASSERT(sizeof(TPtrAddr)  == 8);
+    STATIC_ASSERT(sizeof(TSingle)   == 4);
+    STATIC_ASSERT(sizeof(TReal)     == 4);
+    
+    constexpr auto      __nullptraddr = TPtrAddr(0);
+    #define nullptraddr __nullptraddr
 
-#ifdef INT32_MIN
-#	undef INT32_MIN
-#endif 
-
-#ifdef INT64_MIN
-#	undef INT64_MIN
-#endif 
-
-#ifdef UINT8_MIN
-#	undef UINT8_MIN
-#endif 
-
-#ifdef UINT16_MIN
-#	undef UINT16_MIN
-#endif 
-
-#ifdef UINT32_MIN
-#	undef UINT32_MIN
-#endif 
-
-#ifdef UINT64_MIN
-#	undef UINT64_MIN
-#endif 
-
-
-#ifdef INT8_MAX
-#	undef INT8_MAX
-#endif 
-
-#ifdef INT16_MAX
-#	undef INT16_MAX
-#endif 
-
-#ifdef INT32_MAX
-#	undef INT32_MAX
-#endif 
-
-#ifdef INT64_MAX
-#	undef INT64_MAX
-#endif 
-
-#ifdef UINT8_MAX
-#	undef UINT8_MAX
-#endif 
-
-#ifdef UINT16_MAX
-#	undef UINT16_MAX
-#endif 
-
-#ifdef UINT32_MAX
-#	undef UINT32_MAX
-#endif 
-
-#ifdef UINT64_MAX
-#	undef UINT64_MAX
-#endif 
-
-	namespace Const {
-		constexpr auto INT8_MIN		= int8(-128);
-		constexpr auto INT16_MIN	= int16(-32768);
-		constexpr auto INT32_MIN	= int32(-2147483648);
-		constexpr auto INT64_MIN	= int64(-9223372036854775808ULL);
-		constexpr auto INT8_MAX		= int8(128 - 1);
-		constexpr auto INT16_MAX	= int16(32768 - 1);
-		constexpr auto INT32_MAX	= int32(2147483648 - 1);
-		constexpr auto INT64_MAX	= int64(9223372036854775807LL);
-		constexpr auto UINT8_MIN	= uint8(0);
-		constexpr auto UINT16_MIN	= uint16(0);
-		constexpr auto UINT32_MIN	= uint32(0);
-		constexpr auto UINT64_MIN	= uint64(0);
-		constexpr auto UINT8_MAX	= uint8(0xff);
-		constexpr auto UINT16_MAX	= uint16(0xffff);
-		constexpr auto UINT32_MAX	= uint32(0xffffffff);
-		constexpr auto UINT64_MAX	= uint64(0xffffffffffffffff);
-		constexpr auto REAL_INF		= real(1e+38);
-		constexpr auto REAL_PI		= real(3.1415926535);
-		constexpr auto REAL_2_PI	= real(6.28318530718);
-		constexpr auto REAL_EPSILON = real(1.192092896e-06); 
-		constexpr auto REAL_D2R_FRAC= real(0.01745329251);
-		constexpr auto REAL_R2D_FRAC= real(57.2957795131);
-	}
-
+    namespace Const {
+        constexpr auto kMinI8       = TInt8     (-128);
+        constexpr auto kMinI16      = TInt16    (-32768);
+        constexpr auto kMinI32      = TInt32    (-2147483648);
+        constexpr auto kMinI64      = TInt64    (-9223372036854775808ULL);
+        constexpr auto kMaxI8       = TInt8     (128 - 1);
+        constexpr auto kMaxI16      = TInt16    (32768 - 1);
+        constexpr auto kMaxI32      = TInt32    (2147483648 - 1);
+        constexpr auto kMaxI64      = TInt64    (9223372036854775807LL);
+        constexpr auto kMinU8       = TUint8    (0);
+        constexpr auto kMinU16      = TUint16   (0);
+        constexpr auto kMinU32      = TUint32   (0);
+        constexpr auto kMinU64      = TUint64   (0);
+        constexpr auto kMaxU8       = TUint8    (0xff);
+        constexpr auto kMaxU16      = TUint16   (0xffff);
+        constexpr auto kMaxU32      = TUint32   (0xffffffff);
+        constexpr auto kMaxU64      = TUint64   (0xffffffffffffffff);
+        constexpr auto kRealInf     = TReal     (1e+38);
+        constexpr auto kRealPi      = TReal     (3.1415926535);
+        constexpr auto kReal2Pi     = TReal     (6.28318530718);
+        constexpr auto kRealEps     = TReal     (1.192092896e-06); 
+        constexpr auto kRealDeg2Rad = TReal     (0.01745329251);
+        constexpr auto kRealRad2Deg = TReal     (57.2957795131);
+    }
 
 }

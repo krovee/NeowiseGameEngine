@@ -9,118 +9,118 @@
 
 namespace Neowise {
 
-	bool CStringUtils::compare(const char* s1, const char* s2, uint64 len) {
-		return Platform::CMemory::compare(s1, s2, len);
-	}
+    bool CStringUtils::compare(const char* s1, const char* s2, TUint64 len) {
+        return Platform::CMemory::compare(s1, s2, len);
+    }
 
-	uint CStringUtils::length(const char* s) {
-		return Platform::CMemory::counts(s);
-	}
+    TUint CStringUtils::length(const char* s) {
+        return Platform::CMemory::counts(s);
+    }
 
-	uint CStringUtils::signedToString(char* s, int64 i) {
-		return format(s, 24, "%lli", i) + 1;
-	}
+    TUint CStringUtils::signedToString(char* s, TInt64 i) {
+        return format(s, 24, "%lli", i) + 1;
+    }
 
-	uint CStringUtils::unsignedToString(char* s, uint64 i) {
-		return format(s, 24, "%llu", i) + 1;
-	}
+    TUint CStringUtils::unsignedToString(char* s, TUint64 i) {
+        return format(s, 24, "%llu", i) + 1;
+    }
 
-	uint CStringUtils::realToString(char* s, real f) {
-		return format(s, 16, "%.4f", f);
-	}
+    TUint CStringUtils::realToString(char* s, TReal f) {
+        return format(s, 16, "%.4f", f);
+    }
 
-	char* CStringUtils::find(const char* cstr, uint64 csize, const char* substr, uint64 subsize) {
-		for (uint64 i = 0; i < csize; ++i) {
-			char* p = (char*)(cstr + i);
-			if (compare(p, substr, subsize)) {
-				return p;
-			}
-		}
-		return nullptr;
-	}
+    char* CStringUtils::find(const char* cstr, TUint64 csize, const char* substr, TUint64 subsize) {
+        for (TUint64 i = 0; i < csize; ++i) {
+            char* p = (char*)(cstr + i);
+            if (compare(p, substr, subsize)) {
+                return p;
+            }
+        }
+        return nullptr;
+    }
 
-	char* CStringUtils::reverseFind(const char* cstr, uint64 csize, const char* substr, uint64 subsize) {
-		for (int64 i = csize - subsize - 1; i >= 0; --i) {
-			char* p = (char*)(cstr + i);
-			if (compare(p, substr, subsize)) {
-				return p;
-			}
-		}
-		return nullptr;
-	}
+    char* CStringUtils::reverseFind(const char* cstr, TUint64 csize, const char* substr, TUint64 subsize) {
+        for (TInt64 i = csize - subsize - 1; i >= 0; --i) {
+            char* p = (char*)(cstr + i);
+            if (compare(p, substr, subsize)) {
+                return p;
+            }
+        }
+        return nullptr;
+    }
 
-	char* CStringUtils::findFirst(const char* cstr, uint64 csize, const char* set, uint64 setlen) {
-		for (uint64 i = 0; i < csize; ++i) {
-			char* p = (char*)(cstr + i);
-			for (uint64 k = 0; k < setlen; ++k) {
-				if (*p == set[k]) {
-					return p;
-				}
-			}
-		}
-		return nullptr;
-	}
+    char* CStringUtils::findFirst(const char* cstr, TUint64 csize, const char* set, TUint64 setlen) {
+        for (TUint64 i = 0; i < csize; ++i) {
+            char* p = (char*)(cstr + i);
+            for (TUint64 k = 0; k < setlen; ++k) {
+                if (*p == set[k]) {
+                    return p;
+                }
+            }
+        }
+        return nullptr;
+    }
 
-	char* CStringUtils::findFirst(const char* cstr, uint64 csize, const char* set) {
-		return findFirst(cstr, csize, set, length(set));
-	}
+    char* CStringUtils::findFirst(const char* cstr, TUint64 csize, const char* set) {
+        return findFirst(cstr, csize, set, length(set));
+    }
 
-	char* CStringUtils::findLast(const char* cstr, uint64 csize, const char* set, uint64 setlen) {
-		char* result = (char*)cstr;
-		for (uint64 i = 0; i < csize; ++i) {
-			char* p = (char*)(cstr + i);
-			for (uint64 k = 0; k < setlen; ++k) {
-				if (*p == set[k]) {
-					result = p;
-				}
-			}
-		}
-		return result;
-	}
+    char* CStringUtils::findLast(const char* cstr, TUint64 csize, const char* set, TUint64 setlen) {
+        char* result = (char*)cstr;
+        for (TUint64 i = 0; i < csize; ++i) {
+            char* p = (char*)(cstr + i);
+            for (TUint64 k = 0; k < setlen; ++k) {
+                if (*p == set[k]) {
+                    result = p;
+                }
+            }
+        }
+        return result;
+    }
 
-	char* CStringUtils::findLast(const char* cstr, uint64 csize, const char* set) {
-		return findLast(cstr, csize, set, length(set));
-	}
+    char* CStringUtils::findLast(const char* cstr, TUint64 csize, const char* set) {
+        return findLast(cstr, csize, set, length(set));
+    }
 
-    uint CStringUtils::format(char *s, const char *fmt, ...) {
+    TUint CStringUtils::format(char *s, const char *fmt, ...) {
         va_list ap = {};
-		va_start(ap, fmt);
+        va_start(ap, fmt);
 #if NW_OS_TYPE_WIN32
-		const auto maxlen = length(s);
-		const uint len = vsnprintf_s(s, maxlen, maxlen, fmt, ap);
+        const auto maxlen = length(s);
+        const TUint len = vsnprintf_s(s, maxlen, maxlen, fmt, ap);
 #else
-		const uint len = vsnprintf(s, length(s), fmt, ap);
+        const uint len = vsnprintf(s, length(s), fmt, ap);
 #endif
-		va_end(ap);
-		return len;
+        va_end(ap);
+        return len;
     }
 
-	uint CStringUtils::format(char *s, uint len, const char *fmt, ...) {
-		va_list ap = {};
-		va_start(ap, fmt);
+    TUint CStringUtils::format(char *s, TUint len, const char *fmt, ...) {
+        va_list ap = {};
+        va_start(ap, fmt);
 #if NW_OS_TYPE_WIN32
-		const uint reallen = vsnprintf_s(s, len, len, fmt, ap);
+        const TUint reallen = vsnprintf_s(s, len, len, fmt, ap);
 #else
-		const uint reallen = vsnprintf(s, len, fmt, ap);
+        const uint reallen = vsnprintf(s, len, fmt, ap);
 #endif
-		va_end(ap);
-		return reallen;
-	}
+        va_end(ap);
+        return reallen;
+    }
 
-    uint CStringUtils::format(char *s, const char *fmt, vaList ap) {
+    TUint CStringUtils::format(char *s, const char *fmt, TVaList ap) {
 #if NW_OS_TYPE_WIN32
-		const auto maxlen = length(s);
-		return vsnprintf_s(s, maxlen, maxlen, fmt, *(va_list*)ap);
+        const auto maxlen = length(s);
+        return vsnprintf_s(s, maxlen, maxlen, fmt, *(va_list*)ap);
 #else
-		return vsnprintf(s, length(s), fmt, *(va_list*)ap);
+        return vsnprintf(s, length(s), fmt, *(va_list*)ap);
 #endif
     }
 
-    uint CStringUtils::format(char *s, uint len, const char *fmt, vaList ap) {
+    TUint CStringUtils::format(char *s, TUint len, const char *fmt, TVaList ap) {
 #if NW_OS_TYPE_WIN32
-		return vsnprintf_s(s, len, len, fmt, *(va_list*)ap);
+        return vsnprintf_s(s, len, len, fmt, *(va_list*)ap);
 #else
-		return vsnprintf(s, len, fmt, *(va_list*)ap);
+        return vsnprintf(s, len, fmt, *(va_list*)ap);
 #endif
     }
 }
