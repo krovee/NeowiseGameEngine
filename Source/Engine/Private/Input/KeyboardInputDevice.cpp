@@ -4,10 +4,10 @@
 #include <Platform/PlatformWindow.h>
 
 namespace Neowise {
-	void CKeyboardInputDevice::updateState(CBaseWindow* pwnd) {
-		Platform::CBaseWindow* plat = (Platform::CBaseWindow*)pwnd;
-		_keysStates = plat->getKeyboardKeys();
-		_keysModes = plat->getKeyboardKeysMod();
-	}
+    void CKeyboardInputDevice::updateState(CBaseWindow* pwnd) {
+        Platform::CBaseWindow* plat = (Platform::CBaseWindow*)pwnd;
+        _keysStates = plat->getKeyboardKeys();
+        _keysModes = plat->getKeyboardKeysMod();
+    }
 
 }

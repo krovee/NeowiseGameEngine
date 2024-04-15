@@ -6,21 +6,21 @@
 #include "Windows/WindowsPlatformKeyboard.h"
 
 namespace Neowise::Platform {
-	using Windows::CKeyboard;
+    using Windows::CKeyboard;
 }
 
 #elif NW_OS_TYPE_LINUX
 #include "Linux/LinuxPlatformKeyboard.h"
 
 namespace Neowise::Platform {
-	using Linux::CKeyboard;
+    using Linux::CKeyboard;
 }
 
 #else
 #include "Null/NullPlatformKeyboard.h"
 
 namespace Neowise::Platform {
-	using Null::CKeyboard;
+    using Null::CKeyboard;
 }
 
 #endif

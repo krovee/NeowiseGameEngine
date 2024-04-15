@@ -28,8 +28,8 @@ namespace Neowise {
 
         const Point2i& getPos() const;
 
-        int32 getX() const;
-        int32 getY() const;
+        TInt32 getX() const;
+        TInt32 getY() const;
     private:
         const Point2i& _pos;
     };
@@ -42,8 +42,8 @@ namespace Neowise {
 
         const FVec2& getSize() const;
 
-        real getWidth() const;
-        real getHeight() const;
+        TReal getWidth() const;
+        TReal getHeight() const;
     private:
         const FVec2& _size;
     };
@@ -51,15 +51,15 @@ namespace Neowise {
     class CEventWindowInputKeyboard : public CEvent {
         NW_EVENT_DECLARATION(CEventWindowInputKeyboard)
     public:
-        constexpr CEventWindowInputKeyboard(const uint8 _key, const uint8 _mod, const bool _pressed) : key(_key), keyMod(_mod), pressed(_pressed)
+        constexpr CEventWindowInputKeyboard(const TUint8 _key, const TUint8 _mod, const bool _pressed) : key(_key), keyMod(_mod), pressed(_pressed)
         {}
 
-        uint8 getKey() const;
-        uint8 getKeyMod() const;
+        TUint8 getKey() const;
+        TUint8 getKeyMod() const;
         bool isPressed() const; 
     private:
-        const uint8 key = 0; 
-        const uint8 keyMod = 0; 
+        const TUint8 key = 0; 
+        const TUint8 keyMod = 0; 
         const bool pressed = false; 
     };
 
@@ -69,49 +69,49 @@ namespace Neowise {
         constexpr CEventWindowInputMouseMoved(const Point2i& to, const Point2i& from) : _deltaPos(to - from), _pos(to)
         {}
 
-        constexpr CEventWindowInputMouseMoved(const Point2i& to, const Point2i& from, const uint8 mouseId) : _deltaPos(to - from), _pos(to), _mid(mouseId)
+        constexpr CEventWindowInputMouseMoved(const Point2i& to, const Point2i& from, const TUint8 mouseId) : _deltaPos(to - from), _pos(to), _mid(mouseId)
         {}
 
-        uint8 getMouseId() const;
+        TUint8 getMouseId() const;
 
         const Point2i& getPos() const;
 
-        int32 getX() const;
-        int32 getY() const;
+        TInt32 getX() const;
+        TInt32 getY() const;
 
         const Point2i& getDelta() const;
 
-        int32 getDeltaX() const;
-        int32 getDeltaY() const;
+        TInt32 getDeltaX() const;
+        TInt32 getDeltaY() const;
     private:
         const Point2i   _deltaPos;
         const Point2i&  _pos;
-        const uint8     _mid = 0;
+        const TUint8     _mid = 0;
     };
 
     class CEventWindowInputMouseButton : public CEvent {
         NW_EVENT_DECLARATION(CEventWindowInputMouseButton)
     public:
-        constexpr CEventWindowInputMouseButton(const Point2i& pos, const uint8 mod, const bool pressed) : _pos(pos), _buttonKey(mod), _pressed(pressed)
+        constexpr CEventWindowInputMouseButton(const Point2i& pos, const TUint8 mod, const bool pressed) : _pos(pos), _buttonKey(mod), _pressed(pressed)
         {}
 
-        constexpr CEventWindowInputMouseButton(const Point2i& pos, const uint8 mod, const bool pressed, const uint8 mouseId)
+        constexpr CEventWindowInputMouseButton(const Point2i& pos, const TUint8 mod, const bool pressed, const TUint8 mouseId)
             : _pos(pos), _buttonKey(mod), _pressed(pressed), _mid(mouseId)
         {}
 
-        uint8 getMouseId() const;
+        TUint8 getMouseId() const;
 
         const Point2i& getPos() const;
 
-        int32 getX() const;
-        int32 getY() const;
+        TInt32 getX() const;
+        TInt32 getY() const;
 
-        uint8 getButton() const;
+        TUint8 getButton() const;
         bool isPressed() const; 
     private:
         const Point2i&  _pos;
-        const uint8     _buttonKey = 0;
+        const TUint8     _buttonKey = 0;
         const bool      _pressed = false;
-        const uint8     _mid = 0;
+        const TUint8     _mid = 0;
     };
 }

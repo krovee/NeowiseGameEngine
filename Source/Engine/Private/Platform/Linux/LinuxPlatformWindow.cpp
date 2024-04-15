@@ -10,7 +10,7 @@
 namespace Neowise::Platform::Linux {
 
     CBaseWindow::CBaseWindow(defaultCreateTag) 
-	: Neowise::CBaseWindow({0, 0}, {1280, 720}, false, true, false, true)
+    : Neowise::CBaseWindow({0, 0}, {1280, 720}, false, true, false, true)
     {
         CStringBuilder s(_title);
         s << "Neowise Engine (build." << uint(buildVersion) << ")";

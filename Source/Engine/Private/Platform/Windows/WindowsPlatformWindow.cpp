@@ -8,12 +8,12 @@
 #include <Base/BuildVersion.h>
 
 namespace Neowise::Platform {
-	namespace {
-        wchar_t* itoa(uint64 value, wchar_t* result, int base) {
+    namespace {
+        wchar_t* itoa(TUint64 value, wchar_t* result, int base) {
             if (base < 2 || base > 36) { *result = '\0'; return result; }
 
             wchar_t* ptr = result, * ptr1 = result, tmp_char;
-            uint64 tmp_value;
+            TUint64 tmp_value;
 
             do {
                 tmp_value = value;
@@ -34,34 +34,34 @@ namespace Neowise::Platform {
             return result;
         }
 
-		static FVec2 sGetScreenSize() {
-			static FVec2 screenSize{
-				real(Windows::getPrimaryMonitorWidth()),
-				real(Windows::getPrimaryMonitorHeight())
-			};
-			return screenSize;
-		}
-	} // 8
+        static FVec2 sGetScreenSize() {
+            static FVec2 screenSize{
+                TReal(Windows::getPrimaryMonitorWidth()),
+                TReal(Windows::getPrimaryMonitorHeight())
+            };
+            return screenSize;
+        }
+    } // 8
 
-	Windows::CBaseWindow::CBaseWindow(defaultCreateTag) 
-	: Neowise::CBaseWindow({0, 0}, sGetScreenSize() / 2, false, true, false, true)
-	{
+    Windows::CBaseWindow::CBaseWindow(defaultCreateTag) 
+    : Neowise::CBaseWindow({0, 0}, sGetScreenSize() / 2, false, true, false, true)
+    {
         CStringBuilder s(_title);
-        s << "Neowise Engine (build." << uint(buildVersion) << ")";
+        s << "Neowise Engine (build." << TUint(buildVersion) << ")";
         _hWnd = createWin32Window();
         GEventBus->subscribe<CEventWindowInputKeyboard>(&CBaseWindow::updateKeysState);
         GEventBus->subscribe<CEventWindowInputMouseButton>(&CBaseWindow::updateKeysState);
-	}
+    }
 
-	Windows::CBaseWindow::~CBaseWindow() {
+    Windows::CBaseWindow::~CBaseWindow() {
         if (_hWnd) {
             destroyWindow(_hWnd);
         }
-	}
+    }
 
     Windows::HWND Windows::CBaseWindow::createWin32Window() {
-        auto wnd = createWindowA(_title.cstr(), _pos.x, _pos.y, (int32)_size.x, (int32)_size.y, E_WINDOW_FLAGS_DEFAULT, CBaseWindow::EventProcedure);
-        setWindowLongPtrA(wnd, E_WINDOW_LONG_PTR_NAME_USERDATA, (ptraddr)this);
+        auto wnd = createWindowA(_title.cstr(), _pos.x, _pos.y, (TInt32)_size.x, (TInt32)_size.y, E_WINDOW_FLAGS_DEFAULT, CBaseWindow::EventProcedure);
+        setWindowLongPtrA(wnd, E_WINDOW_LONG_PTR_NAME_USERDATA, (TPtrAddr)this);
         return wnd;
     }
 
@@ -84,10 +84,10 @@ namespace Neowise::Platform {
             } break;
             case E_WINDOW_EVENT_RESIZE: {
                 const auto& size = e.onResize;
-                GEventBus->fire(CEventWindowResized({(real)size.width, (real)size.height}));
+                GEventBus->fire(CEventWindowResized({(TReal)size.width, (TReal)size.height}));
             } break;
             case E_WINDOW_EVENT_MOUSE_MOVE: {
-                const auto& mpos = Point2i{ (int32)e.onMouseMove.x, (int32)e.onMouseMove.y };
+                const auto& mpos = Point2i{ (TInt32)e.onMouseMove.x, (TInt32)e.onMouseMove.y };
                 GEventBus->fire(CEventWindowInputMouseMoved(mpos, lastMousePos));
 
             } break;
@@ -122,18 +122,18 @@ namespace Neowise::Platform {
     }
 
     void Windows::CBaseWindow::updateKeysState(const CEventWindowInputKeyboard& e) {
-        _keysStates[int32(e.getKey())] = e.isPressed() ? E_TOGGLE_STATE_PRESSED : E_TOGGLE_STATE_RELEASED;
-        _keysModes[int32(e.getKey())] = EKeyMod(e.getKeyMod());
+        _keysStates[TInt32(e.getKey())] = e.isPressed() ? E_TOGGLE_STATE_PRESSED : E_TOGGLE_STATE_RELEASED;
+        _keysModes[TInt32(e.getKey())] = EKeyMod(e.getKeyMod());
     }
 
     void Windows::CBaseWindow::updateKeysState(const CEventWindowInputMouseButton& e) {
-        _keysStates[int32(e.getButton())] = e.isPressed() ? E_TOGGLE_STATE_PRESSED : E_TOGGLE_STATE_RELEASED;
+        _keysStates[TInt32(e.getButton())] = e.isPressed() ? E_TOGGLE_STATE_PRESSED : E_TOGGLE_STATE_RELEASED;
     }
 
     void Windows::CBaseWindow::update() {
-        static uint32 tickCount = 0;
+        static TUint32 tickCount = 0;
         if (tickCount > 30) {
-            for (uint8 i = 0; i < _releasedKeysCount; ++i) {
+            for (TUint8 i = 0; i < _releasedKeysCount; ++i) {
                 _keysStates[_releasedKeys[i]] = E_TOGGLE_STATE_IDLE;
             }
             _releasedKeysCount = 0;
@@ -183,7 +183,7 @@ namespace Neowise::Platform {
     }
 
     void Windows::CBaseWindow::addReleasedKey(EKey key) {
-        _releasedKeys[_releasedKeysCount++] = (int32)key;
+        _releasedKeys[_releasedKeysCount++] = (TInt32)key;
     }
 
     void Windows::CBaseWindow::setPos(const Point2i& p) {

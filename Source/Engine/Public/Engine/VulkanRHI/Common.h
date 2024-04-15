@@ -7,50 +7,50 @@
 #include <Engine/VulkanRHI/API/vulkan_core.h>
 
 namespace Neowise {
-	/** 
-	* 
-	*/
-	struct RHIVKUtil {
-		/** 
-		* Returns true ONLY when result is equals vk::Result::eSuccess.
-		*/
-		static bool isSuccess(const VkResult result);
+    /** 
+    * 
+    */
+    struct RHIVKUtil {
+        /** 
+        * Returns true ONLY when result is equals vk::Result::eSuccess.
+        */
+        static bool isSuccess(const VkResult result);
 
-		/** 
-		* Returns true if result is semi-successful (e.g. VK_SUBOPTIMAL).
-		*/
-		static bool isValid(const VkResult result);
+        /** 
+        * Returns true if result is semi-successful (e.g. VK_SUBOPTIMAL).
+        */
+        static bool isValid(const VkResult result);
 
-		/** 
-		* 
-		*/
-		static void errorLog(const CString msg, const uint line, const CStringView file, const CStringView fn);
+        /** 
+        * 
+        */
+        static void errorLog(const CString msg, const TUint line, const CStringView file, const CStringView fn);
 
-		/** 
-		* Returns reflected string of a reslult.
-		*/
-		static CStringView toString(const VkResult result);
+        /** 
+        * Returns reflected string of a reslult.
+        */
+        static CStringView toString(const VkResult result);
 
-		/**
-		 * Gets an access to list of required instance extensions.
-		 */
-		static const CVector<const char*>& getRequiredInstanceExtensions();
-		
-		/**
-		 * 
-		 */
-		static const CVector<const char*>& getRequiredInstanceLayers();
-	};
+        /**
+         * Gets an access to list of required instance extensions.
+         */
+        static const CVector<const char*>& getRequiredInstanceExtensions();
+        
+        /**
+         * 
+         */
+        static const CVector<const char*>& getRequiredInstanceLayers();
+    };
 
 #ifndef RHIVKFN
 #	define RHIVKFN2(fn, line, msg, ...)																								\
 {																																	\
-	const auto NW_CONCAT(result_on_line_, line) = fn; if (!RHIVKUtil::isSuccess(NW_CONCAT(result_on_line_, line))) {				\
-		CString msgbuf;																												\
-		CStringBuilder ms(msgbuf);																									\
-		ms << RHIVKUtil::toString(NW_CONCAT(result_on_line_, line)) << msg << "" __VA_ARGS__ ;										\
-		RHIVKUtil::errorLog(msgbuf, line, __FILE__, __FUNCTION__);																	\
-	}																																\
+    const auto NW_CONCAT(result_on_line_, line) = fn; if (!RHIVKUtil::isSuccess(NW_CONCAT(result_on_line_, line))) {				\
+        CString msgbuf;																												\
+        CStringBuilder ms(msgbuf);																									\
+        ms << RHIVKUtil::toString(NW_CONCAT(result_on_line_, line)) << msg << "" __VA_ARGS__ ;										\
+        RHIVKUtil::errorLog(msgbuf, line, __FILE__, __FUNCTION__);																	\
+    }																																\
 }
 
 #	define RHIVKFN(fn, msg, ...) RHIVKFN2(fn, __LINE__, msg, __VA_ARGS__)

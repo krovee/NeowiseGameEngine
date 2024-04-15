@@ -3,19 +3,19 @@
 #include <Base/Common.h>
 
 namespace Neowise::Platform::Windows {
-	/**
-	*
-	*/
-	class NW_API CSystemClock {
-	public:
-		CSystemClock();
+    /**
+    *
+    */
+    class NW_API CSystemClock {
+    public:
+        CSystemClock();
 
-		real getAbsoluteTimeMs() const;
+        TReal getAbsoluteTimeMs() const;
 
-	private:
-		int64 _startTime = {};
-		real  _frequency = {};
-	};
+    private:
+        TInt64 _startTime = {};
+        TReal  _frequency = {};
+    };
 
-	extern CSystemClock GSystemClock;
+    extern CSystemClock GSystemClock;
 }

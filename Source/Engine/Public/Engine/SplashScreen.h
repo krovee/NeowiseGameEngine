@@ -3,17 +3,17 @@
 #include <Base/Common.h>
 
 namespace Neowise {
-	class CBaseWindow;
-	class CPlugRenderer;
+    class CBaseWindow;
+    class CPlugRenderer;
 
-	/** 
-	* 
-	*/
-	class NW_API CSplashScreen {
-	public:
+    /** 
+    * 
+    */
+    class NW_API CSplashScreen {
+    public:
 
-	private:
-		Scope<CBaseWindow>		_window = nullptr;
-		Scope<CPlugRenderer>	_renderer = nullptr;
-	};
+    private:
+        Scope<CBaseWindow>		_window = nullptr;
+        Scope<CPlugRenderer>	_renderer = nullptr;
+    };
 }

@@ -2,17 +2,17 @@
 
 namespace Neowise {
 
-    enum ETransformFlags : uint8 {
+    enum ETransformFlags : TUint8 {
         E_TRANSFORM_LOCAL_POSITION_DIRTY    = 1 << 1, 
         E_TRANSFORM_LOCAL_ROTATION_DIRTY    = 1 << 2, 
         E_TRANSFORM_LOCAL_SCALE_DIRTY       = 1 << 3, 
     };
 
-    bool CTransform::isDirty(const uint8 flag) const {
+    bool CTransform::isDirty(const TUint8 flag) const {
         return (_dirtyFlags & flag) == flag;
     }
 
-    void CTransform::setDirty(const uint8 flag) {
+    void CTransform::setDirty(const TUint8 flag) {
         _dirtyFlags |= flag;
     }
 

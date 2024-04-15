@@ -3,14 +3,14 @@
 #include <Platform/PlatformMemory.h>
 
 namespace Neowise {
-	static CFixedHeapAllocatorPolicy* sInitializeGlobalHeapAllocator() {
+    static CFixedHeapAllocatorPolicy* sInitializeGlobalHeapAllocator() {
 
-		auto p = Platform::CMemory::allocate(sizeof(CFixedHeapAllocatorPolicy));
-		auto obj = reinterpret_cast<CFixedHeapAllocatorPolicy*>(p);
-		construct_at(*obj, kDefaultGlobalHeapSize);
+        auto p = Platform::CMemory::allocate(sizeof(CFixedHeapAllocatorPolicy));
+        auto obj = reinterpret_cast<CFixedHeapAllocatorPolicy*>(p);
+        construct_at(*obj, kDefaultGlobalHeapSize);
 
-		return obj;
-	}
+        return obj;
+    }
 
-	CFixedHeapAllocatorPolicy* GAlloc = sInitializeGlobalHeapAllocator();
+    CFixedHeapAllocatorPolicy* GAlloc = sInitializeGlobalHeapAllocator();
 }
