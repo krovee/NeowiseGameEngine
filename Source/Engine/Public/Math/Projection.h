@@ -45,7 +45,7 @@ namespace Neowise {
         ~CProjection() = default;
         constexpr CProjection() = default;
 
-        CProjection(EProjectionKind kind, const IProjectionCreateInfoBase& createInfo);
+        CProjection(EProjectionKind kind, const IProjectionCreateInfoBase* pCreateInfo);
 
         void setNearZ(TReal value);
         void setFarZ(TReal value);
@@ -57,8 +57,8 @@ namespace Neowise {
 
         void updateRequired();
     private:
-        void setupPerspective(const SProjectionPerspectiveCreateInfo& createInfo);
-        void setupOrthographic(const SProjectionOrthographicCreateInfo& createInfo);
+        void setupPerspective(const SProjectionPerspectiveCreateInfo* pCreateInfo);
+        void setupOrthographic(const SProjectionOrthographicCreateInfo* pCreateInfo);
     private:
         FMatrix4		_mat = FMatrix4(1);
         TReal			_zNear	= 0.05f;

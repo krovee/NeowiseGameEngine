@@ -1,10 +1,10 @@
 #include <Math/Projection.h>
 
 namespace Neowise {
-    CProjection::CProjection(EProjectionKind kind, const IProjectionCreateInfoBase& createInfo) : _kind(kind) {
+    CProjection::CProjection(EProjectionKind kind, const IProjectionCreateInfoBase* pCreateInfo) : _kind(kind) {
         switch (kind) {
-            case E_PROJETION_KIND_PERSPECTIVE: setupPerspective((SProjectionPerspectiveCreateInfo)createInfo); return;
-            case E_PROJECTION_KIND_ORTHOGRAPHIC: setupOrthographic((SProjectionOrthographicCreateInfo)createInfo); return;
+            case E_PROJETION_KIND_PERSPECTIVE: setupPerspective((SProjectionPerspectiveCreateInfo*)pCreateInfo); return;
+            case E_PROJECTION_KIND_ORTHOGRAPHIC: setupOrthographic((SProjectionOrthographicCreateInfo*)pCreateInfo); return;
         }
     }
 
@@ -50,7 +50,7 @@ namespace Neowise {
                 info.viewportSize = { _right - _left, _bottom - _top };
                 info.nearPlaneZ = _zNear;
                 info.fovY = _fovY;
-                setupPerspective(info);
+                setupPerspective(&info);
             } break;
             case E_PROJECTION_KIND_ORTHOGRAPHIC: {
                 SProjectionOrthographicCreateInfo info;
@@ -60,40 +60,40 @@ namespace Neowise {
                 info.bottom = _bottom;
                 info.nearPlaneZ = _zNear;
                 info.farPlaneZ = _zFar;
-                setupOrthographic(info);
+                setupOrthographic(&info);
             } break;
         }
         _dirty = false;
     }
 
-    void CProjection::setupPerspective(const SProjectionPerspectiveCreateInfo& createInfo) {
-        const auto aspect = createInfo.viewportSize[0] / createInfo.viewportSize[1];
-        const auto range = tan(createInfo.fovY / (TReal)(2)) * createInfo.nearPlaneZ;
+    void CProjection::setupPerspective(const SProjectionPerspectiveCreateInfo* pCreateInfo) {
+        const auto aspect = pCreateInfo->viewportSize[0] / pCreateInfo->viewportSize[1];
+        const auto range = tan(pCreateInfo->fovY / (TReal)(2)) * pCreateInfo->nearPlaneZ;
         const auto left = -range * aspect;
         const auto right = range * aspect;
         const auto bottom = -range;
         const auto top = range;
 
         if (right - left != 0) {
-            _mat[0][0] = (TReal(2) * createInfo.nearPlaneZ) / (right - left);
+            _mat[0][0] = (TReal(2) * pCreateInfo->nearPlaneZ) / (right - left);
         }
-        _mat[1][1] = (TReal(2) * createInfo.nearPlaneZ) / (top - bottom);
+        _mat[1][1] = (TReal(2) * pCreateInfo->nearPlaneZ) / (top - bottom);
         _mat[2][2] = TReal(-0.9999988);
         _mat[2][3] = TReal(-1);
-        _mat[3][2] = TReal(-1.9999988) * createInfo.nearPlaneZ;
+        _mat[3][2] = TReal(-1.9999988) * pCreateInfo->nearPlaneZ;
     }
 
-    void CProjection::setupOrthographic(const SProjectionOrthographicCreateInfo& createInfo) {
-        if (createInfo.right - createInfo.left != 0) {
-            _mat[0][0] = (TReal)(2) / (createInfo.right - createInfo.left);
+    void CProjection::setupOrthographic(const SProjectionOrthographicCreateInfo* pCreateInfo) {
+        if (pCreateInfo->right - pCreateInfo->left != 0) {
+            _mat[0][0] = (TReal)(2) / (pCreateInfo->right - pCreateInfo->left);
         }
-        if (createInfo.top - createInfo.bottom != 0) {
-            _mat[1][1] = (TReal)(2) / (createInfo.top - createInfo.bottom);
+        if (pCreateInfo->top - pCreateInfo->bottom != 0) {
+            _mat[1][1] = (TReal)(2) / (pCreateInfo->top - pCreateInfo->bottom);
         }
-        _mat[2][2] = -(TReal)(2) / (createInfo.farPlaneZ - createInfo.nearPlaneZ);
-        _mat[3][0] = -(createInfo.right + createInfo.left) / (createInfo.right - createInfo.left);
-        _mat[3][1] = -(createInfo.top + createInfo.bottom) / (createInfo.top - createInfo.bottom);
-        _mat[3][2] = -(createInfo.farPlaneZ + createInfo.nearPlaneZ) / (createInfo.farPlaneZ - createInfo.nearPlaneZ);
+        _mat[2][2] = -(TReal)(2) / (pCreateInfo->farPlaneZ - pCreateInfo->nearPlaneZ);
+        _mat[3][0] = -(pCreateInfo->right + pCreateInfo->left) / (pCreateInfo->right - pCreateInfo->left);
+        _mat[3][1] = -(pCreateInfo->top + pCreateInfo->bottom) / (pCreateInfo->top - pCreateInfo->bottom);
+        _mat[3][2] = -(pCreateInfo->farPlaneZ + pCreateInfo->nearPlaneZ) / (pCreateInfo->farPlaneZ - pCreateInfo->nearPlaneZ);
     }
 
 }

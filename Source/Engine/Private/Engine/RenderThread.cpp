@@ -19,6 +19,11 @@ namespace Neowise {
     }
     
     bool RT_Shutdown() {
+
+        if (GRenderThread) {
+            destroy_at(GRenderThread);
+        }
+
         return true;
     }
     
