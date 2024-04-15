@@ -6,21 +6,21 @@
 #include "Windows/WindowsPlatformThread.h"
 
 namespace Neowise::Platform {
-	using Windows::CThread;
+    using Windows::CThread;
 }
 
 #elif NW_OS_TYPE_LINUX 
 #include "Linux/LinuxPlatformThread.h"
 
 namespace Neowise::Platform {
-	using Linux::CThread;
+    using Linux::CThread;
 }
 
 #else
 #include "Null/NullPlatformSystemClock.h"
 
 namespace Neowise::Platform {
-	using Null::CThread;
+    using Null::CThread;
 }
 
 #endif

@@ -3,115 +3,115 @@
 #include <Math/Vector3.h>
 
 namespace Neowise {
-	/** 
-	* 
-	*/
-	struct NW_API FVector4 {
+    /** 
+    * 
+    */
+    struct NW_API FVector4 {
 
-		~FVector4() = default;
+        ~FVector4() = default;
 
-		FVector4() : _data() {}
-		explicit FVector4(real o);
-		FVector4(real x, real y, real z, real w);
-		FVector4(const FVector3& xyz, real w);
-		FVector4(real x, const FVector3& yzw);
-		FVector4(const FVector2& xy, const FVector2& zw);
+        FVector4() : _data() {}
+        explicit FVector4(TReal o);
+        FVector4(TReal x, TReal y, TReal z, TReal w);
+        FVector4(const FVector3& xyz, TReal w);
+        FVector4(TReal x, const FVector3& yzw);
+        FVector4(const FVector2& xy, const FVector2& zw);
 
-		FVector4(const FVector4&);
-		FVector4(FVector4&&);
-		FVector4& operator=(const FVector4&);
-		FVector4& operator=(FVector4&&);
+        FVector4(const FVector4&);
+        FVector4(FVector4&&);
+        FVector4& operator=(const FVector4&);
+        FVector4& operator=(FVector4&&);
 
-		bool operator==(const FVector4&) const;
-		bool operator!=(const FVector4&) const;
-		bool operator<(const FVector4&) const;
-		bool operator<=(const FVector4&) const;
-		bool operator>(const FVector4&) const;
-		bool operator>=(const FVector4&) const;
+        bool operator==(const FVector4&) const;
+        bool operator!=(const FVector4&) const;
+        bool operator<(const FVector4&) const;
+        bool operator<=(const FVector4&) const;
+        bool operator>(const FVector4&) const;
+        bool operator>=(const FVector4&) const;
 
-		FVector4& operator+=(const FVector4&);
-		FVector4& operator+=(const FVector3&);
-		FVector4& operator+=(const FVector2&);
-		FVector4& operator+=(real);
-		FVector4& operator-=(const FVector4&);
-		FVector4& operator-=(const FVector3&);
-		FVector4& operator-=(const FVector2&);
-		FVector4& operator-=(real);
-		FVector4& operator*=(const FVector4&);
-		FVector4& operator*=(const FVector3&);
-		FVector4& operator*=(const FVector2&);
-		FVector4& operator*=(real);
-		FVector4& operator/=(const FVector4&);
-		FVector4& operator/=(const FVector3&);
-		FVector4& operator/=(const FVector2&);
-		FVector4& operator/=(real);
+        FVector4& operator+=(const FVector4&);
+        FVector4& operator+=(const FVector3&);
+        FVector4& operator+=(const FVector2&);
+        FVector4& operator+=(TReal);
+        FVector4& operator-=(const FVector4&);
+        FVector4& operator-=(const FVector3&);
+        FVector4& operator-=(const FVector2&);
+        FVector4& operator-=(TReal);
+        FVector4& operator*=(const FVector4&);
+        FVector4& operator*=(const FVector3&);
+        FVector4& operator*=(const FVector2&);
+        FVector4& operator*=(TReal);
+        FVector4& operator/=(const FVector4&);
+        FVector4& operator/=(const FVector3&);
+        FVector4& operator/=(const FVector2&);
+        FVector4& operator/=(TReal);
 
-		FVector4 operator-() const;
+        FVector4 operator-() const;
 
-		operator FVector3() const;
-		operator FVector2() const;
+        operator FVector3() const;
+        operator FVector2() const;
 
-		FVector4 operator+(const FVector4&) const;
-		FVector4 operator+(const FVector3&) const;
-		FVector4 operator+(const FVector2&) const;
-		FVector4 operator+(real) const;
-		FVector4 operator-(const FVector4&) const;
-		FVector4 operator-(const FVector3&) const;
-		FVector4 operator-(const FVector2&) const;
-		FVector4 operator-(real) const;
-		FVector4 operator*(const FVector4&) const;
-		FVector4 operator*(const FVector3&) const;
-		FVector4 operator*(const FVector2&) const;
-		FVector4 operator*(real) const;
-		FVector4 operator/(const FVector4&) const;
-		FVector4 operator/(const FVector3&) const;
-		FVector4 operator/(const FVector2&) const;
-		FVector4 operator/(real) const;
+        FVector4 operator+(const FVector4&) const;
+        FVector4 operator+(const FVector3&) const;
+        FVector4 operator+(const FVector2&) const;
+        FVector4 operator+(TReal) const;
+        FVector4 operator-(const FVector4&) const;
+        FVector4 operator-(const FVector3&) const;
+        FVector4 operator-(const FVector2&) const;
+        FVector4 operator-(TReal) const;
+        FVector4 operator*(const FVector4&) const;
+        FVector4 operator*(const FVector3&) const;
+        FVector4 operator*(const FVector2&) const;
+        FVector4 operator*(TReal) const;
+        FVector4 operator/(const FVector4&) const;
+        FVector4 operator/(const FVector3&) const;
+        FVector4 operator/(const FVector2&) const;
+        FVector4 operator/(TReal) const;
 
-		real& operator[](int32 i);
-		real operator[](int32 i) const;
+        TReal& operator[](TInt32 i);
+        TReal operator[](TInt32 i) const;
 
-		static const FVector4 zero;
-		static const FVector4 one;
-		static const FVector4 up;
-		static const FVector4 left;
-		static const FVector4 down;
-		static const FVector4 right;
-		static const FVector4 forward;
-		static const FVector4 back;
+        static const FVector4 zero;
+        static const FVector4 one;
+        static const FVector4 up;
+        static const FVector4 left;
+        static const FVector4 down;
+        static const FVector4 right;
+        static const FVector4 forward;
+        static const FVector4 back;
 
-		union {
-			__m128 _mm = {};
-			real _data[4];
-			FVector3 rgb;
-			FVector3 xyz;
-			FVector2 xy;
-			struct {
-				real x;
-				union {
-					struct {
-						real y;
-						union {
-							struct {
-								real z;
-								real w;
-							};
-						};
-					};
-				};
-			};
-			struct {
-				real r, g, b, a;
-			};
-		};
+        union {
+            __m128 _mm = {};
+            TReal _data[4];
+            FVector3 rgb;
+            FVector3 xyz;
+            FVector2 xy;
+            struct {
+                TReal x;
+                union {
+                    struct {
+                        TReal y;
+                        union {
+                            struct {
+                                TReal z;
+                                TReal w;
+                            };
+                        };
+                    };
+                };
+            };
+            struct {
+                TReal r, g, b, a;
+            };
+        };
 
-	};
+    };
 
-	NW_API FVector4 operator+(const real a, const FVector4& b);
-	NW_API FVector4 operator-(const real a, const FVector4& b);
-	NW_API FVector4 operator*(const real a, const FVector4& b);
-	NW_API FVector4 operator/(const real a, const FVector4& b);
+    NW_API FVector4 operator+(const TReal a, const FVector4& b);
+    NW_API FVector4 operator-(const TReal a, const FVector4& b);
+    NW_API FVector4 operator*(const TReal a, const FVector4& b);
+    NW_API FVector4 operator/(const TReal a, const FVector4& b);
 
-	using FVec4 = FVector4;
+    using FVec4 = FVector4;
 
 }

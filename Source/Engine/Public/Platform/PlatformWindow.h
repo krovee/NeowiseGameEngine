@@ -6,21 +6,21 @@
 #include "Windows/WindowsPlatformWindow.h"
 
 namespace Neowise::Platform {
-	using Windows::CBaseWindow;
+    using Windows::CBaseWindow;
 }
 
 #elif NW_OS_TYPE_LINUX
 #include "Linux/LinuxPlatformWindow.h"
 
 namespace Neowise::Platform {
-	using Linux::CBaseWindow;
+    using Linux::CBaseWindow;
 }
 
 #else
 #include "Null/NullPlatformWindow.h"
 
 namespace Neowise::Platform {
-	using Null::CBaseWindow;
+    using Null::CBaseWindow;
 }
 
 #endif

@@ -1,9 +1,9 @@
 #include <Base/CRC.h>
 
 namespace Neowise {
-    constexpr uint kCRCTableSize = 256;
+    constexpr TUint kCRCTableSize = 256;
 
-	static const uint32	sCRC32Table[kCRCTableSize] = {
+    static const TUint32	sCRC32Table[kCRCTableSize] = {
         0x00000000, 0x0fbb28b0, 0x1f765160, 0x10cd79d0,
         0x3eeca2c0, 0x31578a70, 0x219af3a0, 0x2e21db10,
         0x7dd94580, 0x72626d30, 0x62af14e0, 0x6d143c50,
@@ -68,9 +68,9 @@ namespace Neowise {
         0x306fd35a, 0x3fd4fbea, 0x2f19823a, 0x20a2aa8a,
         0x735a341a, 0x7ce11caa, 0x6c2c657a, 0x63974dca,
         0x4db696da, 0x420dbe6a, 0x52c0c7ba, 0x5d7bef0a
-	};
-	
-	static const uint sCRC64Table[kCRCTableSize] = {
+    };
+    
+    static const TUint sCRC64Table[kCRCTableSize] = {
         0x0000000000000000, 0x24854997ba2f81e7, 0x490a932f745f03ce, 0x6d8fdab8ce708229,
         0x9215265ee8be079c, 0xb6906fc95291867b, 0xdb1fb5719ce10452, 0xff9afce626ce85b5,
         0x66daad56789639ab, 0x425fe4c1c2b9b84c, 0x2fd03e790cc93a65, 0x0b5577eeb6e6bb82,
@@ -135,24 +135,24 @@ namespace Neowise {
         0xd686103ab85a2951, 0xf20359ad0275a8b6, 0x9f8c8315cc052a9f, 0xbb09ca82762aab78,
         0x22499b3228721766, 0x06ccd2a5925d9681, 0x6b43081d5c2d14a8, 0x4fc6418ae602954f,
         0xb05cbd6cc0cc10fa, 0x94d9f4fb7ae3911d, 0xf9562e43b4931334, 0xddd367d40ebc92d3
-	};
+    };
 
-    uint32 CRC32(const void* data, const uint size) {
-        uint32 crc = {};
-        auto p = reinterpret_cast<const uint8*>(data);
+    TUint32 CRC32(const void* data, const TUint size) {
+        TUint32 crc = {};
+        auto p = reinterpret_cast<const TUint8*>(data);
         auto end = p + size;
         while (p != end) {
-            crc = sCRC32Table[uint8(crc) ^ (*p++)] ^ (crc >> 8);
+            crc = sCRC32Table[TUint8(crc) ^ (*p++)] ^ (crc >> 8);
         }
         return crc;
     }
 
-    uint CRC64(const void* data, const uint size) {
-        uint crc = {};
-        auto p = reinterpret_cast<const uint8*>(data);
+    TUint CRC64(const void* data, const TUint size) {
+        TUint crc = {};
+        auto p = reinterpret_cast<const TUint8*>(data);
         auto end = p + size;
         while (p != end) {
-            crc = sCRC64Table[uint8(crc) ^ (*p++)] ^ (crc >> 8);
+            crc = sCRC64Table[TUint8(crc) ^ (*p++)] ^ (crc >> 8);
         }
         return crc;
     }

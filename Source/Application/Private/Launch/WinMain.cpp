@@ -9,12 +9,12 @@
 
 using namespace Neowise;
 
-int32 wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int32 nShowCmd) {
-	CSecureMain secMain;
+TInt32 wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, TInt32 nShowCmd) {
+    CSecureMain secMain;
 
-	secMain.parseCmdLine(lpCmdLine);
+    secMain.parseCmdLine(lpCmdLine);
 
-	return secMain.executeMain();
+    return secMain.executeMain();
 }
 
 #endif

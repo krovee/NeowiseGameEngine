@@ -26,12 +26,12 @@ namespace Neowise {
 
     bool CRHIVulkanAdapter::pickPhysicalDevice(VkInstance instance) {
         
-        uint32 physicalDevicesCount = 0;
+        TUint32 physicalDevicesCount = 0;
         RHIVKFN(enumeratePhysicalDevices(instance, &physicalDevicesCount, nullptr), 
             "Failed to enumerate vulkan physical devices!");
         
         // 
-        constexpr uint kMaxPhysicalDevices = 8;
+        constexpr TUint kMaxPhysicalDevices = 8;
         CStaticVector<VkPhysicalDevice, 8> physicalDevices(physicalDevicesCount);
 
         return true;

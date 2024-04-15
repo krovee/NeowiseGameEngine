@@ -4,74 +4,79 @@
 #include <Base/Thread.h>
 
 namespace Neowise {
-	CRenderThread* GRenderThread = nullptr;
+    CRenderThread* GRenderThread = nullptr;
 
-	bool RT_Initialize() {
-		NW_PROFILE_FUNCTION();
-		NW_OPT_ASSERT(!GRenderThread, "Failed to initialize already created GRenderThread object!");
+    bool RT_Initialize() {
+        NW_PROFILE_FUNCTION();
+        NW_OPT_ASSERT(!GRenderThread, "Failed to initialize already created GRenderThread object!");
 
-		auto rtp = GAlloc->allocate(sizeof(CRenderThread));
-		GRenderThread = reinterpret_cast<CRenderThread*>(rtp);
-		
-		construct_at<CRenderThread>(GRenderThread);
+        auto rtp = GAlloc->allocate(sizeof(CRenderThread));
+        GRenderThread = reinterpret_cast<CRenderThread*>(rtp);
+        
+        construct_at<CRenderThread>(GRenderThread);
 
-		return true;
-	}
-	
-	bool RT_Shutdown() {
-		return true;
-	}
-	
-	
-	CRenderThread::CRenderThread() {
-		
-	}
+        return true;
+    }
+    
+    bool RT_Shutdown() {
 
-	void CRenderThread::spawn() {
-		(void)CThread::create(&CRenderThread::loop, GRenderThread, true, true);
-	}
+        if (GRenderThread) {
+            destroy_at(GRenderThread);
+        }
 
-	void CRenderThread::initializeBasic(const CBaseWindow& window) {
-		NW_PROFILE_FUNCTION();
+        return true;
+    }
+    
+    
+    CRenderThread::CRenderThread() {
+        
+    }
 
-		this->window = &const_cast<CBaseWindow&>(window);
+    void CRenderThread::spawn() {
+        (void)CThread::create(&CRenderThread::loop, GRenderThread, true, true);
+    }
 
-		// Call setup on every renderer module
-	}
+    void CRenderThread::initializeBasic(const CBaseWindow& window) {
+        NW_PROFILE_FUNCTION();
 
-	void CRenderThread::waitResourcesIdle() {
+        this->window = &const_cast<CBaseWindow&>(window);
 
-	}
+        // Call setup on every renderer module
+    }
 
-	bool CRenderThread::startFrameRecord() {
+    void CRenderThread::waitResourcesIdle() {
 
-		return true;
-	}
+    }
 
-	void CRenderThread::endFrameRecord() {
+    bool CRenderThread::startFrameRecord() {
 
-	}
+        return true;
+    }
 
-	bool CRenderThread::beginFrame() {
+    void CRenderThread::endFrameRecord() {
 
-		return true;
-	}
+    }
 
-	bool CRenderThread::endFrame() {
+    bool CRenderThread::beginFrame() {
 
-		return true;
-	}
+        return true;
+    }
 
-	void CRenderThread::loop(void* params) {
-		auto RT = reinterpret_cast<CRenderThread*>(params);
+    bool CRenderThread::endFrame() {
+
+        return true;
+    }
+
+    void CRenderThread::loop(void* params) {
+        auto RT = reinterpret_cast<CRenderThread*>(params);
 
 
-		while (!isExitRequested()) {
-			if (!RT->beginFrame()) continue;
+        while (!isExitRequested()) {
+            if (!RT->beginFrame()) continue;
 
-				// TODO(krovee): Execute 'commands'?
+                // TODO(krovee): Execute 'commands'?
 
-			RT->endFrame();
-		}
-	}
+            RT->endFrame();
+        }
+    }
 }

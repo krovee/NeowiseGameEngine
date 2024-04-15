@@ -91,7 +91,7 @@ namespace Neowise {
         virtual ~HT() {
             if (!_buckets) return;
 
-            for (uint i = 0; i < _capacity; ++i) {
+            for (TUint i = 0; i < _capacity; ++i) {
                 if (_buckets[i]) {
                     auto& kv = _buckets[i].unwrap();
                     destroy_at(kv.key);
@@ -103,11 +103,11 @@ namespace Neowise {
             Memory::clear(this, sizeof *this);
         }
 
-        uint capacity() const {
+        TUint capacity() const {
             return _capacity;
         }
 
-        uint size() const {
+        TUint size() const {
             return _size;
         }
         
@@ -152,7 +152,7 @@ namespace Neowise {
         void foreach(void(*fn)(HTBucket<K, V>& kv)) {
             if (!_buckets) return;
             
-            for (uint i = 0; i < _capacity; ++i) {
+            for (TUint i = 0; i < _capacity; ++i) {
                 if (_buckets[i]) {
                     fn(_buckets[i].unwrap());
                 }
@@ -162,7 +162,7 @@ namespace Neowise {
         void foreach(void(*fn)(const HTBucket<K, V>& kv)) const {
             if (!_buckets) return;
             
-            for (uint i = 0; i < _capacity; ++i) {
+            for (TUint i = 0; i < _capacity; ++i) {
                 if (_buckets[i]) {
                     fn(_buckets[i].unwrap());
                 }
@@ -170,9 +170,9 @@ namespace Neowise {
         }
 
     private:
-        uint getBucketId(const K& key) const {
+        TUint getBucketId(const K& key) const {
             auto hv = CObjectHash<K>::get(key) & (_capacity - 1);
-            for (uint i = 0; i < _capacity && _buckets[hv] && (_buckets[hv].unwrap().key != key); ++i) {
+            for (TUint i = 0; i < _capacity && _buckets[hv] && (_buckets[hv].unwrap().key != key); ++i) {
                 hv = (hv + 1) & (_capacity - 1);
             }
             return hv;
@@ -211,19 +211,19 @@ namespace Neowise {
         }
 
     private:
-        static constexpr uint kDefInitialCapacity = 8;
+        static constexpr TUint kDefInitialCapacity = 8;
 
-        void loadBucket(const K& key, const V& value, uint idx) {
+        void loadBucket(const K& key, const V& value, TUint idx) {
             construct_at(_buckets[idx], key, value);
         }
 
         template<class...Args>
-        void loadBucketArgs(const K& key, uint idx, Args&&...args) {
+        void loadBucketArgs(const K& key, TUint idx, Args&&...args) {
             construct_at(_buckets[idx], key);
             construct_at(_buckets[idx].unwrap().value, forward<Args>(args)...);
         }
 
-        void extendBucketsStorage(const uint initialCapacity = kDefInitialCapacity) {
+        void extendBucketsStorage(const TUint initialCapacity = kDefInitialCapacity) {
             if (_buckets == nullptr) {
                 NW_ASSERT(!_capacity, "Invalid HashTable, since storage is NULLPTR but CAPACITY isn't!");
 
@@ -233,10 +233,10 @@ namespace Neowise {
             }
             else {
                 // expand an existing storage, twice!
-                const uint oldCapacity = _capacity;
+                const TUint oldCapacity = _capacity;
                 _capacity <<= 1;
                 Bucket *newBuckets = reinterpret_cast<Bucket*>(GAlloc->allocate(_capacity * sizeof(Bucket)));
-                for (uint i = 0; i < oldCapacity; ++i) {
+                for (TUint i = 0; i < oldCapacity; ++i) {
                     if (_buckets[i]) {
                         construct_at(newBuckets[i], _buckets[i].unwrap());
                         //construct_at(newBuckets[i].value().key, _buckets[i].value().key);
@@ -251,8 +251,8 @@ namespace Neowise {
         }
 
         Bucket *_buckets = nullptr;
-        uint    _capacity = 0;
-        uint    _size = 0;
+        TUint    _capacity = 0;
+        TUint    _size = 0;
     };
 
 }

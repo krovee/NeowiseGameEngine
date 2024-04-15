@@ -32,9 +32,9 @@ namespace Neowise {
         }
     }
 
-	bool GIgnoreAssertation = false;
+    bool GIgnoreAssertation = false;
 
-	void Assert(const char* msg, const char* fnName, const char* file, const int line) {
+    void Assert(const char* msg, const char* fnName, const char* file, const int line) {
         char buffer[32]{};
         itoa(line, buffer, 10);
 
@@ -42,11 +42,11 @@ namespace Neowise {
             GDiag << file << ":" << buffer << ":" << fnName << "(): '" << msg << "'\n";
         }
 
-		if (!GIgnoreAssertation) {
-			Platform::Linux::_BreakProcess();
-		}
-		else {
-			GIgnoreAssertation = false;
-		}
-	}
+        if (!GIgnoreAssertation) {
+            Platform::Linux::_BreakProcess();
+        }
+        else {
+            GIgnoreAssertation = false;
+        }
+    }
 }

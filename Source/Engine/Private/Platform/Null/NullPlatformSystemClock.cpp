@@ -6,7 +6,7 @@ namespace Neowise::Platform::Null {
     CSystemClock::CSystemClock() 
     {}
 
-    real CSystemClock::getAbsoluteTimeMs() const {
+    TReal CSystemClock::getAbsoluteTimeMs() const {
         return 0;
     }
 

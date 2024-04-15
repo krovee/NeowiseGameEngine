@@ -5,33 +5,33 @@
 #include <Base/Templated.h>
 
 namespace Neowise {
-	enum : uint64 {
-		FNV64_PRIME		= 0x100000001b3ULL,
-		FNV64_INITIAL	= 0xcbf29ce484222325ULL
-	};
+    enum : TUint64 {
+        FNV64_PRIME		= 0x100000001b3ULL,
+        FNV64_INITIAL	= 0xcbf29ce484222325ULL
+    };
 
-	/** 
-	* Hashing algorithm utility class, based on FNV64-1a algorithm.
-	*/
-	class NW_API CHash {
-	public:
-		CHash(uint64 offset = FNV64_INITIAL);
+    /** 
+    * Hashing algorithm utility class, based on FNV64-1a algorithm.
+    */
+    class NW_API CHash {
+    public:
+        CHash(TUint64 offset = FNV64_INITIAL);
 
-		void offset(uint64 value);
+        void offset(TUint64 value);
 
-		uint64 operator()(const CStringView& sv);
-		uint64 operator()(const char* str, uint64 size);
-		uint64 operator()(const void* arr, uint64 elemSize, uint64 count);
-	private:
-		uint64 _offset = {};
-	};
+        TUint64 operator()(const CStringView& sv);
+        TUint64 operator()(const char* str, TUint64 size);
+        TUint64 operator()(const void* arr, TUint64 elemSize, TUint64 count);
+    private:
+        TUint64 _offset = {};
+    };
 
-	template<>
-	class NW_API CObjectHash<CStringView> {
-	public:
-		static uint get(const CStringView& sv) {
-			return CHash()(sv);
-		}
-	};
+    template<>
+    class NW_API CObjectHash<CStringView> {
+    public:
+        static TUint get(const CStringView& sv) {
+            return CHash()(sv);
+        }
+    };
 
 }

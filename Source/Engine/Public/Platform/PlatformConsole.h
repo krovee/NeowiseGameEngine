@@ -6,21 +6,21 @@
 #include "Windows/WindowsPlatformConsole.h"
 
 namespace Neowise::Platform {
-	using Windows::GConsole;
+    using Windows::GConsole;
 }
 
 #elif NW_OS_TYPE_LINUX
 #include "Linux/LinuxPlatformConsole.h"
 
 namespace Neowise::Platform {
-	using Linux::GConsole;
+    using Linux::GConsole;
 }
 
 #else
 #include "Null/NullPlatformConsole.h"
 
 namespace Neowise::Platform {
-	using Null::GConsole;
+    using Null::GConsole;
 }
 
 #endif

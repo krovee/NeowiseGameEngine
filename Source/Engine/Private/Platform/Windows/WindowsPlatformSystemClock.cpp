@@ -3,19 +3,19 @@
 #include <Platform/Windows/WindowsBase.h>
 
 namespace Neowise::Platform::Windows {
-	CSystemClock GSystemClock = {};
-	
-	CSystemClock::CSystemClock() {
-		int64 freq = {};
-		queryPerformanceFrequency(freq);
-		_frequency = 1 / real(freq);
-		queryPerformanceCounter(_startTime);
-	}
+    CSystemClock GSystemClock = {};
+    
+    CSystemClock::CSystemClock() {
+        TInt64 freq = {};
+        queryPerformanceFrequency(freq);
+        _frequency = 1 / TReal(freq);
+        queryPerformanceCounter(_startTime);
+    }
 
-	real CSystemClock::getAbsoluteTimeMs() const {
-		int64 now = {};
-		queryPerformanceCounter(now);
-		return real(now - _startTime) * _frequency;
-	}
+    TReal CSystemClock::getAbsoluteTimeMs() const {
+        TInt64 now = {};
+        queryPerformanceCounter(now);
+        return TReal(now - _startTime) * _frequency;
+    }
 
 }
