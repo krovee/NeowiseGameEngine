@@ -8,7 +8,7 @@ namespace Neowise {
     */
     class NW_API CStringUtils {
     public:
-        static bool compare(const char* s1, const char* s2, TUint64 len);
+        static TBool compare(const char* s1, const char* s2, TUint64 len);
         static TUint length(const char* s);
         static TUint signedToString(char* s, TInt64 i);
         static TUint unsignedToString(char* s, TUint64 i);
@@ -24,13 +24,13 @@ namespace Neowise {
         static TUint  format(char *s, const char *fmt, TVaList ap);
         static TUint  format(char *s, TUint len, const char *fmt, TVaList ap);
 
-        static inline bool endsWith(const char* s1, TUint64 len1, const char* s2, TUint64 len2) {
-            if (len1 < len2) return false;
+        static inline TBool endsWith(const char* s1, TUint64 len1, const char* s2, TUint64 len2) {
+            if (len1 < len2) return kFalse;
             return compare(s1 + (len1 - len2), s2, len2);
         }
         
-        static inline bool startsWith(const char* s1, TUint64 len1, const char* s2, TUint64 len2) {
-            if (len1 < len2) return false;
+        static inline TBool startsWith(const char* s1, TUint64 len1, const char* s2, TUint64 len2) {
+            if (len1 < len2) return kFalse;
             return compare(s1, s2, len2);
         }
     };

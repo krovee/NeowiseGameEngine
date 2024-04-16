@@ -35,10 +35,10 @@ namespace Neowise {
              : _kind(kind) 
          {}
 
-         bool isKeyPressed(EKey key, EKeyMod mod = E_KEY_MOD_ANY) const;
-         bool isKeyReleased(EKey key, EKeyMod mod = E_KEY_MOD_ANY) const;
-         bool isKeyClicked(EKey key, EKeyMod mod = E_KEY_MOD_ANY) const;
-         bool isKeysPressed(TInitializerList<EKey> keys, EKeyMod mod = E_KEY_MOD_ANY) const;
+         TBool isKeyPressed(EKey key, EKeyMod mod = E_KEY_MOD_ANY) const;
+         TBool isKeyReleased(EKey key, EKeyMod mod = E_KEY_MOD_ANY) const;
+         TBool isKeyClicked(EKey key, EKeyMod mod = E_KEY_MOD_ANY) const;
+         TBool isKeysPressed(TInitializerList<EKey> keys, EKeyMod mod = E_KEY_MOD_ANY) const;
          TReal getX() const;
          TReal getY() const;
          TReal getZ() const;

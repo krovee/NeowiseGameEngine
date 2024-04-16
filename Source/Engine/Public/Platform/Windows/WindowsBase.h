@@ -3,6 +3,9 @@
 #include <Base/NumericTypes.h>
 #include <Input/Keycode.h>
 
+#include <Engine/VulkanRHI/API/vk_platform.h>
+#include <Engine/VulkanRHI/API/vulkan_core.h>
+
 #define DECLARE_HANDLE(name) struct name##__{int unused;}; typedef struct name##__ *name
 
 #ifndef __stdcall
@@ -1174,12 +1177,12 @@ namespace Neowise::Platform::Windows {
             } onResize;
             struct {
                 EVirtualKey evk;
-                bool isPressed;
+                TBool isPressed;
             } onKey;
             char* onChar;
             struct {
                 EVirtualKey evk;
-                bool isPressed;
+                TBool isPressed;
             } onMouse;
             struct {
                 TReal x;
@@ -1205,7 +1208,7 @@ namespace Neowise::Platform::Windows {
 
     NW_API LPVOID		copyMemory(LPVOID dst, LPVOID src, TUint64 size);
     NW_API LPVOID		fillMemory(LPVOID dst, TInt32 value, TUint64 size);
-    NW_API bool			compareMemory(CLPVOID p1, CLPVOID p2, TUint64 size);
+    NW_API TBool			compareMemory(CLPVOID p1, CLPVOID p2, TUint64 size);
 
     NW_API TUint64		lstrlenA(const char* s);
     NW_API TUint64		lstrlenW(const wchar_t* s);
@@ -1233,6 +1236,7 @@ namespace Neowise::Platform::Windows {
     NW_API void			showWindow(HWND hWnd, WindowShowFlags flags);
     NW_API BOOL			peekWindowMessagesA(HWND hWnd);
     NW_API BOOL			peekWindowMessagesW(HWND hWnd);
+    NW_API void*        createVulkanSurface(VkInstance instance, HWND hWnd);
 
     NW_API TUint64		getPrimaryMonitorWidth(void);
     NW_API TUint64		getPrimaryMonitorHeight(void);
@@ -1257,7 +1261,7 @@ namespace Neowise::Platform::Windows {
 
     NW_API TUint			interlockValue(volatile TUint* pValue);
 
-    NW_API bool			beginCreateOpenGLContext(void);
+    NW_API TBool			beginCreateOpenGLContext(void);
     NW_API void*		endCreateOpenGLContext(HWND);
     NW_API void			swapBuffers(HWND);
 

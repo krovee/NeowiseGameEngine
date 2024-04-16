@@ -17,11 +17,11 @@ namespace Neowise::Platform::Linux {
         virtual ~CBaseWindow();
 
         void			update() override;
-        bool			isOpen() const override;
-        void			setFullscreen(bool enable = true) override;
+        TBool			isOpen() const override;
+        void			setFullscreen(TBool enable = kTrue) override;
         void			setTitle(const CString& title) override;
-        void			setMaximized(bool enable = true) override;
-        void			suspend(bool enable = true) override;
+        void			setMaximized(TBool enable = kTrue) override;
+        void			suspend(TBool enable = kTrue) override;
         void*			getNativeHandle() const override;
 
         EToggleState*	getKeyboardKeys();
@@ -38,7 +38,7 @@ namespace Neowise::Platform::Linux {
         static inline EKeyMod		_keysModes[CInputDevice::kMaxToggleStates] = {};
         TInt32						_releasedKeys[8] = {};
         TInt32						_releasedKeysCount = {};
-        bool						_dirty = false;
+        TBool						_dirty = kFalse;
         _WindowID					_id 	= _WindowID(-1);
     };
 }

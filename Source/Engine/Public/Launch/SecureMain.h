@@ -17,6 +17,6 @@ namespace Neowise {
         TInt32 executeMain();
 
     private:
-        CStaticVector<CStringView, kMaxCmdLineArgs> _args;
+        TStaticVector<CStringView, kMaxCmdLineArgs> _args;
     };
 }

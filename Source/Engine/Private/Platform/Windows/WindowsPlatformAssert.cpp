@@ -32,7 +32,7 @@ namespace Neowise {
         }
     }
 
-    bool GIgnoreAssertation = false;
+    TBool GIgnoreAssertation = kFalse;
 
     void Assert(const char* msg, const char* fnname, const char* file, const int line) {
         char buffer[8]{};
@@ -57,7 +57,7 @@ namespace Neowise {
             Platform::Windows::breakProcess();
         }
         else {
-            GIgnoreAssertation = false;
+            GIgnoreAssertation = kFalse;
         }
     }
 }

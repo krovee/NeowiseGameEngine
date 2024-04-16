@@ -14,6 +14,6 @@ namespace Neowise::Platform::Linux {
         static void* fill(void* dst, TInt32 value, TUint64 size);
         static TUint64 counts(const char* s);
         static TUint64 counts(const wchar_t* ws);
-        static bool compare(const void* p1, const void* p2, TUint64 len);
+        static TBool compare(const void* p1, const void* p2, TUint64 len);
     };
 }

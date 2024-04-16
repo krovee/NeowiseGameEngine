@@ -24,7 +24,7 @@ namespace Neowise {
         virtual ~CApplication() = default;
         constexpr CApplication() = default;
 
-        virtual bool initialize() = 0;
+        virtual TBool initialize() = 0;
         virtual void onUpdate() = 0;
         virtual void shutdown() = 0;
 

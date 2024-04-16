@@ -10,7 +10,7 @@
 namespace Neowise::Platform::Linux {
 
     CBaseWindow::CBaseWindow(defaultCreateTag) 
-    : Neowise::CBaseWindow({0, 0}, {1280, 720}, false, true, false, true)
+    : Neowise::CBaseWindow({0, 0}, {1280, 720}, kFalse, kTrue, kFalse, kTrue)
     {
         CStringBuilder s(_title);
         s << "Neowise Engine (build." << uint(buildVersion) << ")";
@@ -46,7 +46,7 @@ namespace Neowise::Platform::Linux {
     void CBaseWindow::update() {
         if (_dirty) {
             _WindowSetPlacement(_id, _pos, _size);
-            _dirty = false;
+            _dirty = kFalse;
         }
         _WindowInputInfo inputInfo = {};
         inputInfo.pKeyMods = _keysModes;
@@ -55,11 +55,11 @@ namespace Neowise::Platform::Linux {
         _WindowPumpMessages(_id, &inputInfo);
     }
 
-    bool CBaseWindow::isOpen() const {
+    TBool CBaseWindow::isOpen() const {
         return _id != _WindowID(-1);
     }
 
-    void CBaseWindow::setFullscreen(bool value) {
+    void CBaseWindow::setFullscreen(TBool value) {
         NW_UNUSED(value);
     }
 
@@ -67,11 +67,11 @@ namespace Neowise::Platform::Linux {
         _WindowSetTitle(_id, title);
     }
 
-    void CBaseWindow::setMaximized(bool value) {
+    void CBaseWindow::setMaximized(TBool value) {
         NW_UNUSED(value);
     }
 
-    void CBaseWindow::suspend(bool value) {
+    void CBaseWindow::suspend(TBool value) {
         NW_UNUSED(value);
     }
 
@@ -92,12 +92,12 @@ namespace Neowise::Platform::Linux {
     }
 
     void CBaseWindow::setPos(const Point2i& p) {
-        _dirty = true;
+        _dirty = kTrue;
         _pos = p;
     }
 
     void CBaseWindow::setSize(const FVec2& s) {
-        _dirty = true;
+        _dirty = kTrue;
         _size = s;
     }
 

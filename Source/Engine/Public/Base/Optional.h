@@ -11,54 +11,54 @@ namespace Neowise {
     * Simple container that manages optional contained value.
     */
     template<class T>
-    class NW_API COptional {
+    class NW_API TOptional {
     public:
-        constexpr COptional() = default;
+        constexpr TOptional() = default;
 
-        constexpr ~COptional() {
+        constexpr ~TOptional() {
             destruct();
-            check = false;
+            check = kFalse;
         }
 
-        constexpr COptional(TNullopt) {}
+        constexpr TOptional(TNullopt) {}
         
-        constexpr COptional(const COptional& o) {
+        constexpr TOptional(const TOptional& o) {
             if (o.hasValue()) {
                 construct(o.unwrap());
             }
         }
         
-        constexpr COptional(COptional&& o) {
+        constexpr TOptional(TOptional&& o) {
             if (o.hasValue()) {
                 construct(move(o.unwrap()));
             }
         }
         
         template<class U>
-        constexpr COptional(const COptional<U>& o) {
+        constexpr TOptional(const TOptional<U>& o) {
             if (o.hasValue()) {
                 construct(o.unwrap());
             }
         }
         
         template<class U>
-        constexpr COptional(COptional<U>&& o) {
+        constexpr TOptional(TOptional<U>&& o) {
             if (o.hasValue()) {
                 construct(move(o.unwrap()));
             }
         }
 
         template<class...Args>
-        constexpr COptional(Args&&...args) {
+        constexpr TOptional(Args&&...args) {
             construct(forward<Args>(args)...);
         }
 
-        constexpr COptional& operator=(TNullopt) {
+        constexpr TOptional& operator=(TNullopt) {
             reset();
             return *this;
         }
 
-        constexpr COptional& operator=(const COptional& r) {
+        constexpr TOptional& operator=(const TOptional& r) {
             if (r.hasValue()) {
                 if (hasValue()) {
                     unwrap() = r.unwrap();
@@ -75,7 +75,7 @@ namespace Neowise {
         }
 
         template<class U>
-        constexpr COptional& operator=(const COptional<U>& r) {
+        constexpr TOptional& operator=(const TOptional<U>& r) {
             if (r.hasValue()) {
                 if (hasValue()) {
                     unwrap() = r.unwrap();
@@ -91,7 +91,7 @@ namespace Neowise {
             return *this;
         }
 
-        constexpr COptional& operator=(COptional&& r) {
+        constexpr TOptional& operator=(TOptional&& r) {
             if (r.hasValue()) {
                 if (hasValue()) {
                     unwrap() = move(r.unwrap());
@@ -108,7 +108,7 @@ namespace Neowise {
         }
 
         template<class U>
-        constexpr COptional& operator=(COptional<U>&& r) {
+        constexpr TOptional& operator=(TOptional<U>&& r) {
             if (r.hasValue()) {
                 if (hasValue()) {
                     unwrap() = move(r.unwrap());
@@ -131,11 +131,11 @@ namespace Neowise {
             return unwrap();
         }
 
-        constexpr bool hasValue() const {
+        constexpr TBool hasValue() const {
             return check;
         }
 
-        constexpr operator bool() const {
+        constexpr operator TBool() const {
             return check;
         }
 
@@ -174,11 +174,11 @@ namespace Neowise {
         constexpr void reset() {
             if (hasValue()) {
                 destruct();
-                check = false;
+                check = kFalse;
             }
         }
 
-        constexpr void swap(COptional& r) {
+        constexpr void swap(TOptional& r) {
             if (r.hasValue()) {
                 if (hasValue()) {
                     Neowise::swap(unwrap(), r.unwrap());
@@ -197,14 +197,14 @@ namespace Neowise {
         }
 
         template<class U>
-        constexpr bool operator==(const COptional<U>& r) const {
-            if (hasValue() != hasValue()) return false;
-            if (!hasValue()) return true;
+        constexpr TBool operator==(const TOptional<U>& r) const {
+            if (hasValue() != hasValue()) return kFalse;
+            if (!hasValue()) return kTrue;
             return unwrap() == r.unwrap();
         }
 
         template<class U>
-        constexpr bool operator!=(const COptional<U>& r) const {
+        constexpr TBool operator!=(const TOptional<U>& r) const {
             return !(*this == r);
         }
     private:
@@ -225,7 +225,7 @@ namespace Neowise {
         constexpr void construct(Args&&...args) {
             NW_ASSERT(!hasValue(), "Failed to construct optional that already have a value!");
             construct_at<T>(getStorage(), forward<Args>(args)...);
-            check = true;
+            check = kTrue;
         }
 
         constexpr void destruct() {
@@ -236,6 +236,6 @@ namespace Neowise {
 
     private:
         TUint8	storage[alignedSize(sizeof(T), alignmentOf<T>)] = {};
-        bool	check = false;
+        TBool	check = kFalse;
     };
 }

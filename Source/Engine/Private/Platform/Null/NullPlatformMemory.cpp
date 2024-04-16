@@ -18,7 +18,7 @@ namespace Neowise::Platform::Null {
     TUint64 CMemory::counts(const wchar_t*) {
         return 0;
     }
-    bool CMemory::compare(const void *, const void *, TUint64) {
-        return false;
+    TBool CMemory::compare(const void *, const void *, TUint64) {
+        return kFalse;
     }
 }

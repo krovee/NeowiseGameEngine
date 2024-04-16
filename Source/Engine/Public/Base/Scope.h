@@ -55,7 +55,7 @@ namespace Neowise {
             return _ptr;
         }
 
-        operator bool() const {
+        operator TBool() const {
             return get();
         }
 

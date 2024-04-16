@@ -27,12 +27,12 @@ namespace Neowise {
 
         operator TUint() const;
 
-        bool operator==(const CUUID& r) const;
-        bool operator!=(const CUUID& r) const;
-        bool operator<(const CUUID& r) const;
-        bool operator<=(const CUUID& r) const;
-        bool operator>(const CUUID& r) const;
-        bool operator>=(const CUUID& r) const;
+        TBool operator==(const CUUID& r) const;
+        TBool operator!=(const CUUID& r) const;
+        TBool operator<(const CUUID& r) const;
+        TBool operator<=(const CUUID& r) const;
+        TBool operator>(const CUUID& r) const;
+        TBool operator>=(const CUUID& r) const;
     private:
         union {
             TUint		_b8 = {};

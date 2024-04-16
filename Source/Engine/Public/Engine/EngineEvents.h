@@ -51,16 +51,16 @@ namespace Neowise {
     class CEventWindowInputKeyboard : public CEvent {
         NW_EVENT_DECLARATION(CEventWindowInputKeyboard)
     public:
-        constexpr CEventWindowInputKeyboard(const TUint8 _key, const TUint8 _mod, const bool _pressed) : key(_key), keyMod(_mod), pressed(_pressed)
+        constexpr CEventWindowInputKeyboard(const TUint8 _key, const TUint8 _mod, const TBool _pressed) : key(_key), keyMod(_mod), pressed(_pressed)
         {}
 
         TUint8 getKey() const;
         TUint8 getKeyMod() const;
-        bool isPressed() const; 
+        TBool isPressed() const; 
     private:
         const TUint8 key = 0; 
         const TUint8 keyMod = 0; 
-        const bool pressed = false; 
+        const TBool pressed = kFalse; 
     };
 
     class CEventWindowInputMouseMoved : public CEvent {
@@ -92,10 +92,10 @@ namespace Neowise {
     class CEventWindowInputMouseButton : public CEvent {
         NW_EVENT_DECLARATION(CEventWindowInputMouseButton)
     public:
-        constexpr CEventWindowInputMouseButton(const Point2i& pos, const TUint8 mod, const bool pressed) : _pos(pos), _buttonKey(mod), _pressed(pressed)
+        constexpr CEventWindowInputMouseButton(const Point2i& pos, const TUint8 mod, const TBool pressed) : _pos(pos), _buttonKey(mod), _pressed(pressed)
         {}
 
-        constexpr CEventWindowInputMouseButton(const Point2i& pos, const TUint8 mod, const bool pressed, const TUint8 mouseId)
+        constexpr CEventWindowInputMouseButton(const Point2i& pos, const TUint8 mod, const TBool pressed, const TUint8 mouseId)
             : _pos(pos), _buttonKey(mod), _pressed(pressed), _mid(mouseId)
         {}
 
@@ -107,11 +107,11 @@ namespace Neowise {
         TInt32 getY() const;
 
         TUint8 getButton() const;
-        bool isPressed() const; 
+        TBool isPressed() const; 
     private:
         const Point2i&  _pos;
         const TUint8     _buttonKey = 0;
-        const bool      _pressed = false;
+        const TBool      _pressed = kFalse;
         const TUint8     _mid = 0;
     };
 }

@@ -1,9 +1,12 @@
 #pragma once
 
 #include <Base/Common.h>
+#include <Engine/EngineGlobals.h>
 #include <Math/Math.h>
 
 namespace Neowise {
+
+    extern CFixedHeapAllocatorPolicy* GAlloc;
 
     enum EPixelFormat {
         E_PIXEL_FORMAT_UNKNOWN,
@@ -57,12 +60,155 @@ namespace Neowise {
         E_RHI_BACKEND_VULKAN
     };
 
+    template<class Interface>
+    class NW_API RHIBase {
+    public:
+
+        void incrementRef() {
+            if (_refCount)
+                (*_refCount)++;
+        }
+
+        void decrementRef() {
+            if (_refCount) {
+                (*_refCount)--;
+
+                if ((*_refCount) <= 0) {
+                    destroy_at<Interface>(this);
+                }
+            }
+        }
+
+        RHIBase() {
+            _refCount = GAlloc->create<TInt64>();
+        }
+
+        RHIBase(const RHIBase& o) : _refCount(o._refCount) {
+            incrementRef();
+        }
+        
+        RHIBase(RHIBase&& o) noexcept : _refCount(o._refCount) {
+            incrementRef();
+        }
+        
+        RHIBase& operator=(const RHIBase& o) {
+            _refCount = o._refCount;
+            incrementRef();
+
+            return *this;
+        }
+        
+        RHIBase& operator=(RHIBase&& o) noexcept {
+            _refCount = o._refCount;
+            incrementRef();
+
+            return *this;
+        }
+        
+        virtual ~RHIBase() {
+            decrementRef();
+        }
+
+    private:
+        TInt64* _refCount = 0;
+    };
+
+    template<class Interface>
+    class NW_API RHIInterface {
+    public:
+        virtual ~RHIInterface() {
+            _iface->decrementRef();
+        }
+
+        RHIInterface(nullptr_t) : _iface(nullptr) 
+        {}
+
+        RHIInterface(Interface* iface) : _iface(iface) {
+            iface->incrementRef();
+        }
+
+        RHIInterface(const RHIInterface& o) : _iface(o._iface) {
+            _iface->incrementRef();
+        }
+        
+        RHIInterface(RHIInterface&& o) noexcept : _iface(o._iface) {
+            _iface->incrementRef();
+        }
+        
+        RHIInterface& operator=(const RHIInterface& o) {
+            _iface = o._iface;
+            _iface->incrementRef();
+
+            return *this;
+        }
+        
+        RHIInterface& operator=(RHIInterface&& o) noexcept {
+            _iface = o._iface;
+            _iface->incrementRef();
+
+            return *this;
+        }
+
+        Interface* operator->() {
+            return _iface;
+        }
+        
+        const Interface* operator->() const {
+            return _iface;
+        }
+        
+        Interface& operator*() {
+            return *_iface;
+        }
+        
+        const Interface& operator*() const {
+            return *_iface;
+        }
+
+        Interface* get() {
+            return _iface;
+        }
+        
+        const Interface* get() const {
+            return _iface;
+        }
+        
+        Interface& unwrap() {
+            return *_iface;
+        }
+        
+        const Interface& unwrap() const {
+            return *_iface;
+        }
+
+        operator TBool() const {
+            return _iface != nullptr;
+        }
+
+        template<class InterfaceImpl>
+        InterfaceImpl* getImpl() {
+            return reinterpret_cast<InterfaceImpl*>(_iface);
+        }
+        
+        template<class InterfaceImpl>
+        const InterfaceImpl* getImpl() const {
+            return reinterpret_cast<const InterfaceImpl*>(_iface);
+        }
+        
+        template<class U, class...Args>
+        static RHIInterface make(Args&&...args) {
+            return RHIInterface(reinterpret_cast<U*>(GAlloc->create<U>(forward<Args>(args)...)));
+        }
+    private:
+        Interface*  _iface = nullptr;
+    };
+
 }
 
 #ifndef NW_RHI_CLASS_DECLARATION
 #   define NW_RHI_CLASS_DECLARATION(classname)                                      	\
     public:                                                                         	\
-        constexpr classname(const ERHIBackend _backend) : backend(_backend) {}       	\
+        inline classname(const ERHIBackend _backend) : backend(_backend) {}       	\
         constexpr ERHIBackend getBackend() const { return backend; }               		\
     private:                                                                      		\
         const ERHIBackend backend = E_RHI_BACKEND_UNDEFINED;

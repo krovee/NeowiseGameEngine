@@ -1,4 +1,5 @@
 #include <Engine/VulkanRHI/Common.h>
+#include <Engine/RHI/RHISurface.h>
 
 namespace Neowise {
     
@@ -9,7 +10,9 @@ namespace Neowise {
 
         VkInstance getInstance() const;
 
-        IRHIAdapter createAdapter() override;
+        IRHISurface createSurface(const CBaseWindow* window) override;
+        IRHIAdapter createAdapter(const SRHIAdapterSpecification& specs) override;
+        IRHIAdapter createAdapter(const SRHIAdapterSpecification& specs, const IRHISurface& requiredSurface) override;
     private:
         PFN_vkGetInstanceProcAddr                               getInstanceProcAddr = nullptr;
         PFN_vkCreateInstance                                    createInstance = nullptr;
@@ -22,6 +25,8 @@ namespace Neowise {
     private:
         VkInstance                  instance = VK_NULL_HANDLE;
         VkDebugUtilsMessengerEXT    _debugMessenger = VK_NULL_HANDLE;
+
+        IRHISurface                 _cachedSurface = nullptr;
     };
 
 }

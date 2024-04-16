@@ -9,11 +9,11 @@ namespace Neowise::Platform::Windows {
     */
     class NW_API CThread : public Neowise::CThread {
     public:
-        CThread(PFN_StartFunc func, void* params, bool immediateStart, bool immediateDetach);
+        CThread(PFN_StartFunc func, void* params, TBool immediateStart, TBool immediateDetach);
         ~CThread();
 
         void start() override;
-        bool isActive() const override;
+        TBool isActive() const override;
         void detach() override;
         void terminate() override;
         void destroy() override;

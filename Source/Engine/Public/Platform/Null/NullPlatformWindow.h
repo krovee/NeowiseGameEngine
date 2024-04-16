@@ -15,10 +15,10 @@ namespace Neowise::Platform::Null {
         virtual ~CBaseWindow() = default;
 
         void update() override;
-        bool isOpen() const override;
-        void setFullscreen(bool enable = true) override;
-        void setMaximized(bool enable = true) override;
-        void suspend(bool enable = true) override;
+        TBool isOpen() const override;
+        void setFullscreen(TBool enable = kTrue) override;
+        void setMaximized(TBool enable = kTrue) override;
+        void suspend(TBool enable = kTrue) override;
         void* getNativeHandle() const override;
     };
 }

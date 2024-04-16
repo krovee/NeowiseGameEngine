@@ -73,7 +73,7 @@ namespace Neowise::Platform::Linux {
         return strlen((const char*)ws) / 2;
     }
 
-    bool _MemoryCompare(const void *p1, const void *p2, uint size) {
+    TBool _MemoryCompare(const void *p1, const void *p2, uint size) {
         return memcmp(p1, p2, size) == 0;
     }
 
@@ -258,8 +258,8 @@ namespace Neowise::Platform::Linux {
         return 0;
     }
 
-    bool _WindowPumpMessages(const _WindowID &id, void *) {
-        if (id == _WindowID(-1)) return false;
+    TBool _WindowPumpMessages(const _WindowID &id, void *) {
+        if (id == _WindowID(-1)) return kFalse;
 
         _WindowData& win = getWindowData(id);
         //_WindowInputInfo* input = (_WindowInputInfo *)params;
@@ -300,7 +300,7 @@ namespace Neowise::Platform::Linux {
                         e->width,
                         e->height
                     };
-                    xcb_send_event(win.pHandleConnection, true, win.handle, XCB_EVENT_MASK_RESIZE_REDIRECT, (const char*)&resize_event);
+                    xcb_send_event(win.pHandleConnection, kTrue, win.handle, XCB_EVENT_MASK_RESIZE_REDIRECT, (const char*)&resize_event);
                 } break;
 
                 case XCB_VISIBILITY_NOTIFY: {
@@ -328,7 +328,7 @@ namespace Neowise::Platform::Linux {
                 case XCB_KEY_RELEASE: {
                     // Key press event - xcb_key_press_event_t and xcb_key_release_event_t are the same
                     xcb_key_press_event_t* kb_event = (xcb_key_press_event_t*)event;
-                    bool pressed = event->response_type == XCB_KEY_PRESS;
+                    TBool pressed = event->response_type == XCB_KEY_PRESS;
                     xcb_keycode_t code = kb_event->detail;
                     KeySym key_sym = XkbKeycodeToKeysym(
                         win.pDisplay,
@@ -348,7 +348,7 @@ namespace Neowise::Platform::Linux {
                 case XCB_BUTTON_PRESS:
                 case XCB_BUTTON_RELEASE: {
                     xcb_button_press_event_t* e = (xcb_button_press_event_t*)event;
-                    bool pressed = e->response_type == XCB_BUTTON_PRESS;
+                    TBool pressed = e->response_type == XCB_BUTTON_PRESS;
                     xcb_button_t btn = e->detail;
 
                     EKey key;
@@ -362,7 +362,7 @@ namespace Neowise::Platform::Linux {
             free(event);
         }
 
-        return true;
+        return kTrue;
     }
 
     void _WindowSetTitle(const _WindowID &id, const CStringView &name) {

@@ -10,12 +10,12 @@ namespace Neowise {
 
     void CProjection::setNearZ(TReal value) {
         _zNear = value;
-        _dirty = true;
+        _dirty = kTrue;
     }
 
     void CProjection::setFarZ(TReal value) {
         _zFar = value;
-        _dirty = true;
+        _dirty = kTrue;
     }
 
     void CProjection::setSize(const FVec2& size) {
@@ -23,7 +23,7 @@ namespace Neowise {
         _left = _top = 0;
         _right = size[0];
         _bottom = size[1];
-        _dirty = true;
+        _dirty = kTrue;
     }
 
     void CProjection::setRectSize(TReal left, TReal right, TReal top, TReal bottom) {
@@ -31,12 +31,12 @@ namespace Neowise {
         _right = right;
         _top = top;
         _bottom = bottom;
-        _dirty = true;
+        _dirty = kTrue;
     }
 
     void CProjection::setFovY(TReal value) {
         _fovY = value;
-        _dirty = true;
+        _dirty = kTrue;
     }
 
     CProjection::operator FMatrix4() const {
@@ -63,7 +63,7 @@ namespace Neowise {
                 setupOrthographic(&info);
             } break;
         }
-        _dirty = false;
+        _dirty = kFalse;
     }
 
     void CProjection::setupPerspective(const SProjectionPerspectiveCreateInfo* pCreateInfo) {

@@ -31,7 +31,7 @@ namespace Neowise {
         return _size;
     }
 
-    bool CStringView::empty() const {
+    TBool CStringView::empty() const {
         return _size == 0;
     }
 
@@ -63,28 +63,28 @@ namespace Neowise {
         return CStringUtils::findLast(_str, _size, set._str, set._size);
     }
 
-    bool CStringView::startsWith(const CStringView& str) const {
+    TBool CStringView::startsWith(const CStringView& str) const {
         return CStringUtils::startsWith(_str, _size, str._str, str._size);
     }
 
-    bool CStringView::endsWith(const CStringView& str) const {
+    TBool CStringView::endsWith(const CStringView& str) const {
         return CStringUtils::endsWith(_str, _size, str._str, str._size);
     }
 
-    bool CStringView::operator==(const CStringView& r) const {
-        if (_size != r._size) return false;
+    TBool CStringView::operator==(const CStringView& r) const {
+        if (_size != r._size) return kFalse;
         return CStringUtils::compare(_str, r._str, _size);
     }
 
-    bool CStringView::operator!=(const CStringView& r) const{
+    TBool CStringView::operator!=(const CStringView& r) const{
         return !(*this == r);
     }
 
-    bool CStringView::compareSizesLess(const CStringView& a, const CStringView& b) {
+    TBool CStringView::compareSizesLess(const CStringView& a, const CStringView& b) {
         return a._size < b._size;
     }
 
-    bool CStringView::compareSizesGreater(const CStringView& a, const CStringView& b) {
+    TBool CStringView::compareSizesGreater(const CStringView& a, const CStringView& b) {
         return a._size > b._size;
     }
 

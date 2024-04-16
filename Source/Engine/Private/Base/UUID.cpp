@@ -81,27 +81,27 @@ namespace Neowise {
         return _b8;
     }
 
-    bool CUUID::operator==(const CUUID& r) const {
+    TBool CUUID::operator==(const CUUID& r) const {
         return _b8 == r._b8;
     }
 
-    bool CUUID::operator!=(const CUUID& r) const {
+    TBool CUUID::operator!=(const CUUID& r) const {
         return _b8 != r._b8;
     }
 
-    bool CUUID::operator<(const CUUID& r) const {
+    TBool CUUID::operator<(const CUUID& r) const {
         return _b8 < r._b8;
     }
     
-    bool CUUID::operator<=(const CUUID& r) const {
+    TBool CUUID::operator<=(const CUUID& r) const {
         return _b8 <= r._b8;
     }
     
-    bool CUUID::operator>(const CUUID& r) const {
+    TBool CUUID::operator>(const CUUID& r) const {
         return _b8 > r._b8;
     }
     
-    bool CUUID::operator>=(const CUUID& r) const {
+    TBool CUUID::operator>=(const CUUID& r) const {
         return _b8 >= r._b8;
     }
 

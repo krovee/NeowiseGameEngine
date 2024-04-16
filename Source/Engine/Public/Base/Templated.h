@@ -52,61 +52,61 @@ namespace Neowise {
      * Check if passed generic type is a pointer type.
      */
     template<class>
-    constexpr bool isPointer = false;
+    constexpr TBool isPointer = kFalse;
 
     /**
      * Check if passed generic type is a pointer type.
      */
     template<class T>
-    constexpr bool isPointer<T*> = true;
+    constexpr TBool isPointer<T*> = kTrue;
 
     /**
      * Check if passed generic type is l-value reference.
      */
     template<class>
-    constexpr bool isLValReference = false;
+    constexpr TBool isLValReference = kFalse;
 
     /**
      * Check if passed generic type is l-value reference.
      */
     template<class T>
-    constexpr bool isLValReference<T&> = true;
+    constexpr TBool isLValReference<T&> = kTrue;
 
     /**
      * Check if passed generic type is r-value reference.
      */
     template<class>
-    constexpr bool isRValReference = false;
+    constexpr TBool isRValReference = kFalse;
 
     /**
      * Check if passed generic type is r-value reference.
      */
     template<class T>
-    constexpr bool isRValReference<T&&> = true;
+    constexpr TBool isRValReference<T&&> = kTrue;
 
     /**
      * Check if passed generic type is reference type.
      */
     template<class T>
-    constexpr bool isReference = isLValReference<T> || isRValReference<T>;
+    constexpr TBool isReference = isLValReference<T> || isRValReference<T>;
 
     /**
      * Check if passed generic type comes with const-qualifier.
      */
     template<class>
-    constexpr bool isConst = false;
+    constexpr TBool isConst = kFalse;
 
     /**
      * Check if passed generic type comes with const-qualifier.
      */
     template<class T>
-    constexpr bool isConst<const T> = true;
+    constexpr TBool isConst<const T> = kTrue;
 
     /**
      * Utility structure to enable certain code constructions
      * if conditions are satisfied.
      */
-    template<bool Cond, class T = void>
+    template<TBool Cond, class T = void>
     struct EnableIf {};
 
     /**
@@ -114,7 +114,7 @@ namespace Neowise {
      * if conditions are satisfied.
      */
     template<class T>
-    struct EnableIf<true, T> {
+    struct EnableIf<kTrue, T> {
         using Type = T;
     };
 
@@ -122,44 +122,44 @@ namespace Neowise {
      * Utility structure to enable certain code constructions
      * if conditions are satisfied.
      */
-    template<bool Cond, class T>
+    template<TBool Cond, class T>
     using TEnableIf = typename EnableIf<Cond, T>::Type;
 
     /**
      * Check is two passed generic types are the same.
      */
     template<class, class>
-    constexpr bool isTypeOf = false;
+    constexpr TBool isTypeOf = kFalse;
 
     /**
      * Check is two passed generic types are the same.
      */
     template<class T>
-    constexpr bool isTypeOf<T, T> = true;
+    constexpr TBool isTypeOf<T, T> = kTrue;
 
     /**
-     * Forward declaration of COptional<T>.
+     * Forward declaration of TOptional<T>.
      */
     template<class>
-    class COptional;
+    class TOptional;
 
     /**
      * Check if passed generic type is COptonal<T> generic.
      */
     template<class>
-    constexpr bool isOptional = false;
+    constexpr TBool isOptional = kFalse;
 
     /**
      * Check if passed generic type is COptonal<T> generic.
      */
     template<class T>
-    constexpr bool isOptional<COptional<T>> = true;
+    constexpr TBool isOptional<TOptional<T>> = kTrue;
 
     /**
      * Utility to get an integral type of certain floating point
      * type in order to access it's bits.
      */
-    template<bool>
+    template<TBool>
     struct FloatAsIntRep {
         using Type = void;
     };
@@ -169,7 +169,7 @@ namespace Neowise {
      * type in order to access it's bits.
      */
     template<>
-    struct FloatAsIntRep<true> {
+    struct FloatAsIntRep<kTrue> {
         using Type = TUint32;
     };
 
@@ -178,7 +178,7 @@ namespace Neowise {
      * type in order to access it's bits.
      */
     template<>
-    struct FloatAsIntRep<false> {
+    struct FloatAsIntRep<kFalse> {
         using Type = TUint64;
     };
 
@@ -192,253 +192,253 @@ namespace Neowise {
      * Check if passed generic type is integral (boolean, integer).
      */
     template<class>
-    static constexpr auto isIntegral = false;
+    static constexpr auto isIntegral = kFalse;
 
     /**
      * Check if passed generic type is integral (boolean, integer).
      */
     template<>
-    static constexpr auto isIntegral<TBool> = true;
+    static constexpr auto isIntegral<TBool> = kTrue;
 
     /**
      * Check if passed generic type is integral (boolean, integer).
      */
     template<>
-    static constexpr auto isIntegral<const TBool> = true;
+    static constexpr auto isIntegral<const TBool> = kTrue;
 
     /**
      * Check if passed generic type is integral (boolean, integer).
      */
     template<>
-    static constexpr auto isIntegral<TBool&> = true;
+    static constexpr auto isIntegral<TBool&> = kTrue;
 
     /**
      * Check if passed generic type is integral (boolean, integer).
      */
     template<>
-    static constexpr auto isIntegral<const TBool&> = true;
+    static constexpr auto isIntegral<const TBool&> = kTrue;
 
     /**
      * Check if passed generic type is integral (boolean, integer).
      */
     template<>
-    static constexpr auto isIntegral<TInt8> = true;
+    static constexpr auto isIntegral<TInt8> = kTrue;
 
     /**
      * Check if passed generic type is integral (boolean, integer).
      */
     template<>
-    static constexpr auto isIntegral<const TInt8> = true;
+    static constexpr auto isIntegral<const TInt8> = kTrue;
 
     /**
      * Check if passed generic type is integral (boolean, integer).
      */
     template<>
-    static constexpr auto isIntegral<TInt8&> = true;
+    static constexpr auto isIntegral<TInt8&> = kTrue;
 
     /**
      * Check if passed generic type is integral (boolean, integer).
      */
     template<>
-    static constexpr auto isIntegral<const TInt8&> = true;
+    static constexpr auto isIntegral<const TInt8&> = kTrue;
 
     /**
      * Check if passed generic type is integral (boolean, integer).
      */
     template<>
-    static constexpr auto isIntegral<TInt16> = true;
+    static constexpr auto isIntegral<TInt16> = kTrue;
 
     /**
      * Check if passed generic type is integral (boolean, integer).
      */
     template<>
-    static constexpr auto isIntegral<const TInt16> = true;
+    static constexpr auto isIntegral<const TInt16> = kTrue;
 
     /**
      * Check if passed generic type is integral (boolean, integer).
      */
     template<>
-    static constexpr auto isIntegral<TInt16&> = true;
+    static constexpr auto isIntegral<TInt16&> = kTrue;
 
     /**
      * Check if passed generic type is integral (boolean, integer).
      */
     template<>
-    static constexpr auto isIntegral<const TInt16&> = true;
+    static constexpr auto isIntegral<const TInt16&> = kTrue;
 
     /**
      * Check if passed generic type is integral (boolean, integer).
      */
     template<>
-    static constexpr auto isIntegral<TInt32> = true;
+    static constexpr auto isIntegral<TInt32> = kTrue;
 
     /**
      * Check if passed generic type is integral (boolean, integer).
      */
     template<>
-    static constexpr auto isIntegral<const TInt32> = true;
+    static constexpr auto isIntegral<const TInt32> = kTrue;
 
     /**
      * Check if passed generic type is integral (boolean, integer).
      */
     template<>
-    static constexpr auto isIntegral<TInt32&> = true;
+    static constexpr auto isIntegral<TInt32&> = kTrue;
 
     /**
      * Check if passed generic type is integral (boolean, integer).
      */
     template<>
-    static constexpr auto isIntegral<const TInt32&> = true;
+    static constexpr auto isIntegral<const TInt32&> = kTrue;
 
     /**
      * Check if passed generic type is integral (boolean, integer).
      */
     template<>
-    static constexpr auto isIntegral<TInt64> = true;
+    static constexpr auto isIntegral<TInt64> = kTrue;
 
     /**
      * Check if passed generic type is integral (boolean, integer).
      */
     template<>
-    static constexpr auto isIntegral<const TInt64> = true;
+    static constexpr auto isIntegral<const TInt64> = kTrue;
 
     /**
      * Check if passed generic type is integral (boolean, integer).
      */
     template<>
-    static constexpr auto isIntegral<TInt64&> = true;
+    static constexpr auto isIntegral<TInt64&> = kTrue;
 
     /**
      * Check if passed generic type is integral (boolean, integer).
      */
     template<>
-    static constexpr auto isIntegral<const TInt64&> = true;
+    static constexpr auto isIntegral<const TInt64&> = kTrue;
 
     /**
      * Check if passed generic type is integral (boolean, integer).
      */
     template<>
-    static constexpr auto isIntegral<TUint8> = true;
+    static constexpr auto isIntegral<TUint8> = kTrue;
 
     /**
      * Check if passed generic type is integral (boolean, integer).
      */
     template<>
-    static constexpr auto isIntegral<const TUint8> = true;
+    static constexpr auto isIntegral<const TUint8> = kTrue;
 
     /**
      * Check if passed generic type is integral (boolean, integer).
      */
     template<>
-    static constexpr auto isIntegral<TUint8&> = true;
+    static constexpr auto isIntegral<TUint8&> = kTrue;
 
     /**
      * Check if passed generic type is integral (boolean, integer).
      */
     template<>
-    static constexpr auto isIntegral<const TUint8&> = true;
+    static constexpr auto isIntegral<const TUint8&> = kTrue;
 
     /**
      * Check if passed generic type is integral (boolean, integer).
      */
     template<>
-    static constexpr auto isIntegral<TUint16> = true;
+    static constexpr auto isIntegral<TUint16> = kTrue;
 
     /**
      * Check if passed generic type is integral (boolean, integer).
      */
     template<>
-    static constexpr auto isIntegral<const TUint16> = true;
+    static constexpr auto isIntegral<const TUint16> = kTrue;
 
     /**
      * Check if passed generic type is integral (boolean, integer).
      */
     template<>
-    static constexpr auto isIntegral<TUint16&> = true;
+    static constexpr auto isIntegral<TUint16&> = kTrue;
 
     /**
      * Check if passed generic type is integral (boolean, integer).
      */
     template<>
-    static constexpr auto isIntegral<const TUint16&> = true;
+    static constexpr auto isIntegral<const TUint16&> = kTrue;
 
     /**
      * Check if passed generic type is integral (boolean, integer).
      */
     template<>
-    static constexpr auto isIntegral<TUint32> = true;
+    static constexpr auto isIntegral<TUint32> = kTrue;
 
     /**
      * Check if passed generic type is integral (boolean, integer).
      */
     template<>
-    static constexpr auto isIntegral<const TUint32> = true;
+    static constexpr auto isIntegral<const TUint32> = kTrue;
 
     /**
      * Check if passed generic type is integral (boolean, integer).
      */
     template<>
-    static constexpr auto isIntegral<TUint32&> = true;
+    static constexpr auto isIntegral<TUint32&> = kTrue;
 
     /**
      * Check if passed generic type is integral (boolean, integer).
      */
     template<>
-    static constexpr auto isIntegral<const TUint32&> = true;
+    static constexpr auto isIntegral<const TUint32&> = kTrue;
 
     /**
      * Check if passed generic type is integral (boolean, integer).
      */
     template<>
-    static constexpr auto isIntegral<TUint64> = true;
+    static constexpr auto isIntegral<TUint64> = kTrue;
 
     /**
      * Check if passed generic type is integral (boolean, integer).
      */
     template<>
-    static constexpr auto isIntegral<const TUint64> = true;
+    static constexpr auto isIntegral<const TUint64> = kTrue;
 
     /**
      * Check if passed generic type is integral (boolean, integer).
      */
     template<>
-    static constexpr auto isIntegral<TUint64&> = true;
+    static constexpr auto isIntegral<TUint64&> = kTrue;
 
     /**
      * Check if passed generic type is integral (boolean, integer).
      */
     template<>
-    static constexpr auto isIntegral<const TUint64&> = true;
+    static constexpr auto isIntegral<const TUint64&> = kTrue;
 
     /**
      * Check if passed generic type is floating point.
      */
     template<class>
-    static constexpr auto isFloatingPoint = false;
+    static constexpr auto isFloatingPoint = kFalse;
 
     /**
      * Check if passed generic type is floating point.
      */
     template<>
-    static constexpr auto isFloatingPoint<TSingle> = true;
+    static constexpr auto isFloatingPoint<TSingle> = kTrue;
 
     /**
      * Check if passed generic type is floating point.
      */
     template<>
-    static constexpr auto isFloatingPoint<const TSingle> = true;
+    static constexpr auto isFloatingPoint<const TSingle> = kTrue;
 
     /**
      * Check if passed generic type is floating point.
      */
     template<>
-    static constexpr auto isFloatingPoint<TSingle&> = true;
+    static constexpr auto isFloatingPoint<TSingle&> = kTrue;
 
     /**
      * Check if passed generic type is floating point.
      */
     template<>
-    static constexpr auto isFloatingPoint<const TSingle&> = true;
+    static constexpr auto isFloatingPoint<const TSingle&> = kTrue;
 
     /**
      * Check if passed generic type is numeric type.
@@ -449,7 +449,7 @@ namespace Neowise {
     /**
      * Utility to get The Magic Value In Quake-III fast reversed square root.
      */
-    template<bool>
+    template<TBool>
     struct FloatPointEvilHack {
         static const auto value = TFloatAsIntRep();
     };
@@ -458,7 +458,7 @@ namespace Neowise {
      * Utility to get The Magic Value In Quake-III fast reversed square root.
      */
     template<>
-    struct FloatPointEvilHack<true> {
+    struct FloatPointEvilHack<kTrue> {
         static const auto value = TFloatAsIntRep(0x5f3759df);
     };
 
@@ -466,7 +466,7 @@ namespace Neowise {
      * Utility to get The Magic Value In Quake-III fast reversed square root.
      */
     template<>
-    struct FloatPointEvilHack<false> {
+    struct FloatPointEvilHack<kFalse> {
         static const auto value = TFloatAsIntRep(0x5fe6eb50c7b537a9);
     };
 
@@ -538,7 +538,7 @@ namespace Neowise {
     template<class T>
     class NW_API CObjectHash {
     public:
-        static constexpr TUint get(const T& x) {
+        static constexpr TUint get(T x) {
             return ((x << 5) + (x << 8));
         }
     };

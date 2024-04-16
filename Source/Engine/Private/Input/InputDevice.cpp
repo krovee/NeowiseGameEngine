@@ -2,21 +2,21 @@
 #include <Base/MemoryUtilities.h>
 
 namespace Neowise {
-    bool CInputDevice::isKeyPressed(EKey key, EKeyMod mod) const {
+    TBool CInputDevice::isKeyPressed(EKey key, EKeyMod mod) const {
         return 
             _keysStates[TInt32(key)] == E_TOGGLE_STATE_PRESSED && 
             _keysModes[TInt32(key)] == mod
         ;
     }
 
-    bool CInputDevice::isKeyReleased(EKey key, EKeyMod mod) const {
+    TBool CInputDevice::isKeyReleased(EKey key, EKeyMod mod) const {
         return
             _keysStates[TInt32(key)] == E_TOGGLE_STATE_RELEASED &&
             _keysModes[TInt32(key)] == mod
             ;
     }
 
-    bool CInputDevice::isKeyClicked(EKey key, EKeyMod mod) const {
+    TBool CInputDevice::isKeyClicked(EKey key, EKeyMod mod) const {
         /*
         * Clicked key is really just a E_TOGGLE_STATE_RELEASED key. Because if you'll
         * think about it, you'd find out every E_TOGGLE_STATE_RELEASED key button was
@@ -25,7 +25,7 @@ namespace Neowise {
         return isKeyReleased(key, mod);
     }
 
-    bool CInputDevice::isKeysPressed(TInitializerList<EKey> keys, EKeyMod mod) const {
+    TBool CInputDevice::isKeysPressed(TInitializerList<EKey> keys, EKeyMod mod) const {
         TUint8 count = 0;
         for (auto&& key : keys) {
             if (_keysStates[TInt32(key)] == E_TOGGLE_STATE_PRESSED && _keysModes[TInt32(key)] == mod)

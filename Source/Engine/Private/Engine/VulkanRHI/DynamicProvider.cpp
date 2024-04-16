@@ -1,6 +1,7 @@
 #include "Engine/RHI/RHIAdapter.h"
 #include <Engine/VulkanRHI/DynamicProvider.h>
 #include <Engine/VulkanRHI/VulkanAdapter.h>
+#include <Engine/VulkanRHI/VulkanSurface.h>
 
 #include <Engine/EngineGlobals.h>
 #include <Base/DynamicLibrary.h>
@@ -44,7 +45,7 @@ namespace Neowise {
         ss << ": " << pCallbackData->pMessage << "\n";
         GDiag << message;
 
-        return VK_FALSE; // Applications must return false here
+        return VK_FALSE; // Applications must return kFalse here
     }
 
     IRHIDynamicProvider RHIMakeVulkanProvider() {
@@ -55,11 +56,24 @@ namespace Neowise {
         return instance;
     }
 
-    IRHIAdapter CRHIVulkanDynamicProvider::createAdapter() {
-        return makeScope<CRHIVulkanAdapter>(instance).cast<CRHIAdapterInterface>();
+    IRHIAdapter CRHIVulkanDynamicProvider::createAdapter(const SRHIAdapterSpecification& specs) {
+        return IRHIAdapter::make<CRHIVulkanAdapter>(specs, instance);
     }
 
-    CRHIVulkanDynamicProvider::~CRHIVulkanDynamicProvider() {
+    IRHIAdapter CRHIVulkanDynamicProvider::createAdapter(const SRHIAdapterSpecification& specs, const IRHISurface& requredSurface) {
+        return IRHIAdapter::make<CRHIVulkanAdapter>(specs, instance, requredSurface.getImpl<CRHIVulkanSurface>());
+    }
+
+    IRHISurface CRHIVulkanDynamicProvider::createSurface(const CBaseWindow* window) {
+        if (!_cachedSurface) {
+            RHIVKUtil::createSurfaceFromWindow(window, this, _cachedSurface);
+        }
+
+        return _cachedSurface;
+    }
+
+    CRHIVulkanDynamicProvider::~CRHIVulkanDynamicProvider()
+    {
         if (_debugMessenger && instance) {
             destroyDebugUtilsMessengerEXT(instance, _debugMessenger, nullptr);
         }
@@ -71,9 +85,6 @@ namespace Neowise {
 
     CRHIVulkanDynamicProvider::CRHIVulkanDynamicProvider() : CRHIDynamicProviderInterface(E_RHI_BACKEND_VULKAN) 
     {
-
-        //volkInitialize();
-
         auto vkLib = CDynamicLibrary::load(NW_VK_LIBRARY_NAME);
         NW_ASSERT(vkLib, "Failed to load Vulkan dynamic provider (missing " NW_VK_LIBRARY_NAME ")");
 
@@ -101,11 +112,11 @@ namespace Neowise {
 
         NW_ASSERT(extensionsCount, "Failed to create Vulkan RHI Provider since your PC doesn't support required set of extensions.");
 
-        CVector<VkExtensionProperties> extensions(extensionsCount);
+        TVector<VkExtensionProperties> extensions(extensionsCount);
         enumerateInstanceExtensionProperties(nullptr, &extensionsCount, extensions.data());
 
         const auto& requiredExtensions = RHIVKUtil::getRequiredInstanceExtensions();
-        CVector<const char*> presentInstanceExtensions = {};
+        TVector<const char*> presentInstanceExtensions = {};
 
         for (auto& ext : extensions) {
             const auto name = CStringView(ext.extensionName);
@@ -133,14 +144,15 @@ namespace Neowise {
         TUint32 layersCount = {};
         enumerateInstanceLayerProperties(&layersCount, nullptr);
 
-        CVector<VkLayerProperties> availableLayers(layersCount);
+        TVector<VkLayerProperties> availableLayers(layersCount);
         enumerateInstanceLayerProperties(&layersCount, availableLayers.data());
 
         for (auto& layer : availableLayers) {
             GDiag << "\n(" << layer.layerName << ") " << layer.description;
         }
+        GDiag << "\n";
 
-        CVector<const char*> presentInstanceLayers = {};
+        TVector<const char*> presentInstanceLayers = {};
 
         for (auto& layer : availableLayers) {
             const auto name = CStringView(layer.layerName);
@@ -166,6 +178,17 @@ namespace Neowise {
         instanceCI.ppEnabledExtensionNames = presentInstanceExtensions.data();
         instanceCI.ppEnabledLayerNames = presentInstanceLayers.data();
         instanceCI.enabledLayerCount = (TUint32) presentInstanceLayers.size();
+
+        VkValidationFeaturesEXT validationFeatsEXT = { VK_STRUCTURE_TYPE_VALIDATION_FEATURES_EXT };
+
+        const VkValidationFeatureEnableEXT enabledValFeats[] = {
+            VK_VALIDATION_FEATURE_ENABLE_BEST_PRACTICES_EXT
+        };
+        
+        validationFeatsEXT.pEnabledValidationFeatures = enabledValFeats;
+        validationFeatsEXT.enabledValidationFeatureCount = arrayn(enabledValFeats);
+        
+        instanceCI.pNext = addressof(validationFeatsEXT);
         
         createInstance(&instanceCI, nullptr, &instance);
 

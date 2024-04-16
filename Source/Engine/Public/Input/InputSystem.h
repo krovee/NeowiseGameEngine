@@ -38,6 +38,6 @@ namespace Neowise {
         void addDevice(CInputDevice& device);
         void update(CBaseWindow* p);
     private:
-        CStaticVector<CInputDevice*, kMaxInputDevices>	_devices = {};
+        TStaticVector<CInputDevice*, kMaxInputDevices>	_devices = {};
     };
 }

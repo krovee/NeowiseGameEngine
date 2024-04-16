@@ -25,7 +25,7 @@ namespace Neowise {
 
         const char* cstr() const;
         TUint64 size() const;
-        bool empty() const;
+        TBool empty() const;
         const CUUID getUUID() const; // WARN: Generated every call
 
         const char* begin() const;
@@ -35,14 +35,14 @@ namespace Neowise {
         char* findReverse(const CStringView& sv) const;
         char* findFirst(const CStringView& set) const;
         char* findLast(const CStringView& set) const;
-        bool  startsWith(const CStringView& str) const;
-        bool  endsWith(const CStringView& str) const;
+        TBool  startsWith(const CStringView& str) const;
+        TBool  endsWith(const CStringView& str) const;
 
-        bool operator==(const CStringView& r) const;
-        bool operator!=(const CStringView& r) const;
+        TBool operator==(const CStringView& r) const;
+        TBool operator!=(const CStringView& r) const;
 
-        static bool compareSizesLess(const CStringView& a, const CStringView& b);
-        static bool compareSizesGreater(const CStringView& a, const CStringView& b);
+        static TBool compareSizesLess(const CStringView& a, const CStringView& b);
+        static TBool compareSizesGreater(const CStringView& a, const CStringView& b);
     private:
         const char*	_str = nullptr;
         TUint64		_size = 0;

@@ -39,11 +39,11 @@ namespace Neowise {
     //	auto realPart = normUV + dot(normalized1, normalized2);
     //}
 
-    bool FQuaternion::operator==(const FQuaternion& r) const {
+    TBool FQuaternion::operator==(const FQuaternion& r) const {
         return *(FVector4*)(this) == *(FVector4*)(&r);
     }
 
-    bool FQuaternion::operator!=(const FQuaternion& r) const {
+    TBool FQuaternion::operator!=(const FQuaternion& r) const {
         return *(FVector4*)(this) != *(FVector4*)(&r);
     }
 

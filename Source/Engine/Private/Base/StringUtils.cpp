@@ -9,7 +9,7 @@
 
 namespace Neowise {
 
-    bool CStringUtils::compare(const char* s1, const char* s2, TUint64 len) {
+    TBool CStringUtils::compare(const char* s1, const char* s2, TUint64 len) {
         return Platform::CMemory::compare(s1, s2, len);
     }
 

@@ -26,7 +26,7 @@ namespace Neowise {
 
         template<class U>
         constexpr Ref(ECastCtorTag, U&& uobj) {
-            NW_UNUSED(uobj);
+            construct(move(uobj));
         }
 
         constexpr Ref(const Ref& o) : ptr(o.ptr) {
@@ -63,7 +63,7 @@ namespace Neowise {
             return reinterpret_cast<T*>(addressof(ptr->obj));
         }
 
-        operator bool() const {
+        operator TBool() const {
             return ptr;
         }
 

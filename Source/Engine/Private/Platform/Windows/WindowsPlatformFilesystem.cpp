@@ -8,7 +8,7 @@ namespace Neowise::Platform::Windows {
         }
     }
 
-    CFileDescriptor::CFileDescriptor(CFS& fs, const CUUID& uuid, TInt64& refCount, TUint size, bool autoRelease)
+    CFileDescriptor::CFileDescriptor(CFS& fs, const CUUID& uuid, TInt64& refCount, TUint size, TBool autoRelease)
         : _fs(&fs), _uuid(uuid), _size(size), _autoRelease(autoRelease), _refCount(&refCount)
     {
     }

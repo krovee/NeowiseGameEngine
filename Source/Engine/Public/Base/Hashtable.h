@@ -25,7 +25,7 @@ namespace Neowise {
     template<class K, class V>
     class HTIterator {
     public:
-        using Bucket = COptional<HTBucket<K, V>>;
+        using Bucket = TOptional<HTBucket<K, V>>;
 
         explicit HTIterator(Bucket* p) : ptr(p) {}
         virtual ~HTIterator() {}
@@ -65,15 +65,15 @@ namespace Neowise {
             return *this;
         }
 
-        operator bool() const {
+        operator TBool() const {
             return ptr;
         }
 
-        bool operator==(const HTIterator& it) const {
+        TBool operator==(const HTIterator& it) const {
             return ptr == it.ptr;
         }
 
-        bool operator!=(const HTIterator& it) const {
+        TBool operator!=(const HTIterator& it) const {
             return ptr != it.ptr;
         }
 
@@ -84,7 +84,7 @@ namespace Neowise {
     template<class K, class V>
     class NW_API HT {
     public:
-        using Bucket = COptional<HTBucket<K, V>>;
+        using Bucket = TOptional<HTBucket<K, V>>;
         using Iterator = HTIterator<K, V>;
         using ConstIterator = HTIterator<const K, const V>;
 
@@ -127,8 +127,8 @@ namespace Neowise {
             return ConstIterator(_buckets + _capacity);
         }
 
-        bool contains(const K& key) const {
-            if (!_buckets) return false;
+        TBool contains(const K& key) const {
+            if (!_buckets) return kFalse;
 
             const auto hv = getBucketId(key);
             return _buckets[hv];

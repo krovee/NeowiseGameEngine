@@ -1,7 +1,7 @@
 #include <Platform/Windows/WindowsPlatformThread.h>
 
 namespace Neowise::Platform::Windows {
-    CThread::CThread(PFN_StartFunc func, void* params, bool immediateStart, bool immediateDetach) {
+    CThread::CThread(PFN_StartFunc func, void* params, TBool immediateStart, TBool immediateDetach) {
         _hHandle = createThread(func, params, &_id);
         if (immediateStart) {
             resumeThread(_hHandle);
@@ -23,14 +23,14 @@ namespace Neowise::Platform::Windows {
         }
     }
 
-    bool CThread::isActive() const {
+    TBool CThread::isActive() const {
         if (_hHandle) {
             DWORD exCode = waitForSingleObject(_hHandle, 0);
             if (exCode == E_WAIT_TIMEOUT) {
-                return true;
+                return kTrue;
             }
         }
-        return false;
+        return kFalse;
     }
 
     void CThread::detach() {

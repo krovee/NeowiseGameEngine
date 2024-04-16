@@ -5,10 +5,8 @@
 #include <Engine/RHI/RHI.h>
 
 namespace Neowise {
-    bool CGameRuntimeApplication::initialize() {
-        NW_PROFILE_FUNCTION();
-
-        auto vkProvider = RHIMakeVulkanProvider().release();
+	TBool CGameRuntimeApplication::initialize() {
+		NW_PROFILE_FUNCTION();
 
         _window = move(CBaseWindow::createDefault());
         NW_ASSERT(_window.get(), "Cannot create CBaseWindow object!");
@@ -16,7 +14,7 @@ namespace Neowise {
         _inputSystem.addDevice(_msDevice);
         _inputSystem.update(_window.get());
 
-        return true;
+        return kTrue;
     }
 
     void CGameRuntimeApplication::postInitialize() {

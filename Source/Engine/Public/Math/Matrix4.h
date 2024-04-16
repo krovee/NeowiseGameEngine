@@ -29,8 +29,8 @@ namespace Neowise {
         FMatrix4& operator=(const FMatrix4&) = default;
         FMatrix4& operator=(FMatrix4&&) = default;
 
-        bool operator==(const FMatrix4& r) const;
-        bool operator!=(const FMatrix4& r) const;
+        TBool operator==(const FMatrix4& r) const;
+        TBool operator!=(const FMatrix4& r) const;
 
         FMatrix4& operator+=(const FMatrix4& r);
         FMatrix4& operator+=(const FMatrix3& r);

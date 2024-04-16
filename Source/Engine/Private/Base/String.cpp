@@ -16,10 +16,12 @@ namespace Neowise {
 
     CString::CString(const char* str, TUint size) {
         ptr = construct(str, size);
+        crc = CRC64(str, size);
     }
 
     CString::CString(const CStringView& sv) {
         ptr = construct(sv.cstr(), sv.size());
+        crc = CRC64(data(), size());
     }
 
     CString::CString(const char* str) {
@@ -51,7 +53,7 @@ namespace Neowise {
         return isSmall() ? sizeof(_LargeData) : rep.large.capacity;
     }
 
-    bool CString::empty() const {
+    TBool CString::empty() const {
         return *ptr == 0; // TODO: is there a better way???
     }
 
@@ -95,12 +97,12 @@ namespace Neowise {
         return ptr + size();
     }
 
-    bool CString::operator==(const CString& r) const {
-        if (size() != r.size()) return false;
+    TBool CString::operator==(const CString& r) const {
+        if (size() != r.size()) return kFalse;
         return CStringUtils::compare(ptr, r.ptr, size());
     }
 
-    bool CString::operator!=(const CString& r) const {
+    TBool CString::operator!=(const CString& r) const {
         return !(*this == r);
     }
 
@@ -124,11 +126,11 @@ namespace Neowise {
         return CStringUtils::findLast(ptr, size(), set.cstr(), set.size());
     }
 
-    bool CString::startsWith(const CStringView& str) const {
+    TBool CString::startsWith(const CStringView& str) const {
         return CStringUtils::startsWith(ptr, size(), str.cstr(), str.size());
     }
 
-    bool CString::endsWith(const CStringView& str) const {
+    TBool CString::endsWith(const CStringView& str) const {
         return CStringUtils::endsWith(ptr, size(), str.cstr(), str.size());
     }
 
@@ -200,11 +202,11 @@ namespace Neowise {
         return makeRef<CString>(ptr, size());
     }
     
-    bool CString::isSmall() const {
+    TBool CString::isSmall() const {
         return ptr == rep.small.strbuf;
     }
     
-    bool CString::fitSmall(TUint size) const {
+    TBool CString::fitSmall(TUint size) const {
         return size < sizeof(_LargeData);
     }
     

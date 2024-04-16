@@ -10,21 +10,21 @@ namespace Neowise {
     class NW_API CBaseWindow {
     public:
         struct Flags {
-            bool isFullscreen = false;
-            bool isMaximized = false;
-            bool isSuspended = false;
-            bool isFocused = false;
+            TBool isFullscreen = kFalse;
+            TBool isMaximized = kFalse;
+            TBool isSuspended = kFalse;
+            TBool isFocused = kFalse;
         };
 
         CBaseWindow() = default;
         virtual ~CBaseWindow() = default;
 
         virtual void update() {}
-        virtual bool isOpen() const { return false; }
-        virtual void setFullscreen(bool enable = true) { NW_UNUSED(enable); }
-        virtual void setMaximized(bool enable = true) { NW_UNUSED(enable); }
+        virtual TBool isOpen() const { return kFalse; }
+        virtual void setFullscreen(TBool enable = kTrue) { NW_UNUSED(enable); }
+        virtual void setMaximized(TBool enable = kTrue) { NW_UNUSED(enable); }
         virtual void setTitle(const CString& title) { NW_UNUSED(title); }
-        virtual void suspend(bool enable = true) { NW_UNUSED(enable); }
+        virtual void suspend(TBool enable = kTrue) { NW_UNUSED(enable); }
         virtual void* getNativeHandle() const { return nullptr; }
 
         Point2i getPosition() const;
@@ -33,14 +33,14 @@ namespace Neowise {
         FVec2 getSize() const;
         TReal getWidth() const;
         TReal getHeight() const;
-        bool isFullscreen() const;
-        bool isMaximized() const;
-        bool isSuspended() const;
-        bool isFocused() const;
+        TBool isFullscreen() const;
+        TBool isMaximized() const;
+        TBool isSuspended() const;
+        TBool isFocused() const;
 
-        static Scope<CBaseWindow> createDefault(bool maximized = false, bool fullscreen = false);
+        static Scope<CBaseWindow> createDefault(TBool maximized = kFalse, TBool fullscreen = kFalse);
     protected:
-        CBaseWindow(const Point2i& pos, const FVec2& size, bool isfull, bool ismax, bool issusp, bool isfoc);
+        CBaseWindow(const Point2i& pos, const FVec2& size, TBool isfull, TBool ismax, TBool issusp, TBool isfoc);
 
     protected:
         Point2i	_pos = {};

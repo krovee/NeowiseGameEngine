@@ -22,12 +22,12 @@ namespace Neowise {
         FVector4& operator=(const FVector4&);
         FVector4& operator=(FVector4&&);
 
-        bool operator==(const FVector4&) const;
-        bool operator!=(const FVector4&) const;
-        bool operator<(const FVector4&) const;
-        bool operator<=(const FVector4&) const;
-        bool operator>(const FVector4&) const;
-        bool operator>=(const FVector4&) const;
+        TBool operator==(const FVector4&) const;
+        TBool operator!=(const FVector4&) const;
+        TBool operator<(const FVector4&) const;
+        TBool operator<=(const FVector4&) const;
+        TBool operator>(const FVector4&) const;
+        TBool operator>=(const FVector4&) const;
 
         FVector4& operator+=(const FVector4&);
         FVector4& operator+=(const FVector3&);
