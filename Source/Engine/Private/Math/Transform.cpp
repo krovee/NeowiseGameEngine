@@ -16,7 +16,7 @@ namespace Neowise {
         _dirtyFlags |= flag;
     }
 
-    void CTransform::resetParent(CWrap<const CTransform> parent) {
+    void CTransform::resetParent(TWrap<const CTransform> parent) {
         _parent = parent;
     }
 
@@ -85,13 +85,13 @@ namespace Neowise {
 
     CTransform CTransform::createChild(const FVector3& translation, const FVector3& rotation, const FVector3& scale) {
         CTransform t(translation, rotation, scale);
-        t._parent = CWrap<const CTransform>(this);
+        t._parent = TWrap<const CTransform>(this);
         return t;
     }
 
     CTransform CTransform::createChild(const FVector3& translation, const FQuaternion& rotation, const FVector3& scale) {
         CTransform t(translation, rotation, scale);
-        t._parent = CWrap<const CTransform>(this);
+        t._parent = TWrap<const CTransform>(this);
         return t;
     }
 }

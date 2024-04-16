@@ -17,11 +17,6 @@ namespace Neowise {
         V    value;
     };
 
-    template<class K>
-    struct HTBucket<K, void> {
-        K key;
-    };
-
     template<class K, class V>
     class HTIterator {
     public:
@@ -134,7 +129,7 @@ namespace Neowise {
             return _buckets[hv];
         }
 
-        CWrap<V> get(const K& key) const {
+        TWrap<V> get(const K& key) const {
             if (!_buckets) return nullptr;
             
             return lookup(key);
@@ -199,12 +194,12 @@ namespace Neowise {
             ++_size;
         }
 
-        CWrap<V> lookup(const K& key) const {
+        TWrap<V> lookup(const K& key) const {
             if (_capacity == 0) return nullptr;
 
             const auto hv = getBucketId(key);
             if (_buckets && _buckets[hv] && _buckets[hv].unwrap().key == key) {
-                return CWrap<V>(&_buckets[hv].unwrap().value);
+                return TWrap<V>(&_buckets[hv].unwrap().value);
             }
 
             return nullptr;
@@ -239,8 +234,6 @@ namespace Neowise {
                 for (TUint i = 0; i < oldCapacity; ++i) {
                     if (_buckets[i]) {
                         construct_at(newBuckets[i], _buckets[i].unwrap());
-                        //construct_at(newBuckets[i].value().key, _buckets[i].value().key);
-                        //construct_at(newBuckets[i].value().value, _buckets[i].value().value);
                         destroy_at(_buckets[i].unwrap().key);
                         destroy_at(_buckets[i].unwrap().value);
                     }
@@ -250,9 +243,9 @@ namespace Neowise {
             }
         }
 
-        Bucket *_buckets = nullptr;
-        TUint    _capacity = 0;
-        TUint    _size = 0;
+        Bucket*     _buckets = nullptr;
+        TUint       _capacity = 0;
+        TUint       _size = 0;
     };
 
 }
