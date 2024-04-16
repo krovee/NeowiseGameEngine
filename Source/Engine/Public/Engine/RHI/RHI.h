@@ -6,9 +6,6 @@
 
 namespace Neowise {
     
-    class CRHISurfaceInterface;
-    using IRHISurface = RHIInterface<CRHISurfaceInterface>;
-
     class NW_API CRHIDynamicProviderInterface : public RHIBase<CRHIDynamicProviderInterface> {
     public:
         virtual  ~CRHIDynamicProviderInterface() = default;
@@ -20,8 +17,6 @@ namespace Neowise {
 
         NW_RHI_CLASS_DECLARATION(CRHIDynamicProviderInterface)
     };
-
-    using IRHIDynamicProvider = RHIInterface<CRHIDynamicProviderInterface>;
 
     template<class T, class...Args>
     inline auto RHIMakeProvider(Args&&...args) {

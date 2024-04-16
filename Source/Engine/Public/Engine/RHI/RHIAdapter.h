@@ -1,12 +1,9 @@
 #pragma once
 
 #include <Engine/RHI/Common.h>
+#include <Engine/RHI/RHISwapchain.h>
 
 namespace Neowise {
-
-    class CRHIAdapterInterface;
-
-    using IRHIAdapter = RHIInterface<CRHIAdapterInterface>;
 
     struct SRHIAdapterSpecification {
         struct {
@@ -47,6 +44,7 @@ namespace Neowise {
         virtual ~CRHIAdapterInterface() = default;
 
         virtual CStringView getName() const = 0;
+        virtual IRHISwapchain createSwapchain(const SRHISwapchainSpecification& specs, const IRHISurface& surface, const IRHISwapchain& oldSwapchain = nullptr) = 0;
 
         NW_RHI_CLASS_DECLARATION(CRHIAdapterInterface)
     };

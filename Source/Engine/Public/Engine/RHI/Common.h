@@ -8,6 +8,12 @@ namespace Neowise {
 
     extern CFixedHeapAllocatorPolicy* GAlloc;
 
+    enum EVerticalSynchronization {
+        E_VERTICAL_SYNCHRONIZATION_NONE,    // update screen AFAP. (VSYNC OFF)
+        E_VERTICAL_SYNCHRONIZATION_SEMI,    // update screen when frame is complete and don't wait the actual frame to fully present. (VSYNC 'HALF')
+        E_VERTICAL_SYNCHRONIZATION_FULL,    // update screen only when display is completed with last update and render frame complete. (VSYNC ON)
+    };
+
     enum EPixelFormat {
         E_PIXEL_FORMAT_UNKNOWN,
         E_PIXEL_FORMAT_R8_UNORM,	// R8_UNORM 
@@ -69,14 +75,16 @@ namespace Neowise {
                 (*_refCount)++;
         }
 
-        void decrementRef() {
+        TBool decrementRef() {
             if (_refCount) {
                 (*_refCount)--;
 
                 if ((*_refCount) <= 0) {
-                    destroy_at<Interface>(this);
+                    return kTrue;
                 }
             }
+
+            return kFalse;
         }
 
         RHIBase() {
@@ -117,7 +125,12 @@ namespace Neowise {
     class NW_API RHIInterface {
     public:
         virtual ~RHIInterface() {
-            _iface->decrementRef();
+            if (_iface) {
+                if (_iface->decrementRef()) {
+                    destroy_at<Interface>(_iface);
+                    GAlloc->free(_iface, sizeof *_iface);
+                }
+            }
         }
 
         RHIInterface(nullptr_t) : _iface(nullptr) 
@@ -202,6 +215,21 @@ namespace Neowise {
     private:
         Interface*  _iface = nullptr;
     };
+
+    class CRHIDynamicProviderInterface;
+    using IRHIDynamicProvider = RHIInterface<CRHIDynamicProviderInterface>;
+
+    class CRHISurfaceInterface;
+    using IRHISurface = RHIInterface<CRHISurfaceInterface>;
+
+    class CRHIAdapterInterface;
+    using IRHIAdapter = RHIInterface<CRHIAdapterInterface>;
+
+    class CRHISurfaceInterface;
+    using IRHISurface = RHIInterface<CRHISurfaceInterface>;
+
+    class CRHISwapchainInterface;
+    using IRHISwapchain = RHIInterface<CRHISwapchainInterface>;
 
 }
 

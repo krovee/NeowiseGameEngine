@@ -4,6 +4,7 @@
 #include <Engine/RHI/RHI.h>
 #include <Engine/RHI/RHIAdapter.h>
 #include <Engine/RHI/RHISurface.h>
+#include <Engine/RHI/RHISwapchain.h>
 
 // Include actual renderer???
 
@@ -37,6 +38,7 @@ namespace Neowise {
         IRHIDynamicProvider     rhi = nullptr;
         IRHISurface             surface = nullptr;
         IRHIAdapter             adapter = nullptr;
+        IRHISwapchain           swapchain = nullptr;
 	};
 
     NW_API TBool RT_Initialize();

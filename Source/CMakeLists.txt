@@ -89,6 +89,7 @@ set(
     ${ENGINE_SOURCE_PREFIX}/Engine/VulkanRHI/DynamicProvider.cpp
     ${ENGINE_SOURCE_PREFIX}/Engine/VulkanRHI/VulkanAdapter.cpp
     ${ENGINE_SOURCE_PREFIX}/Engine/VulkanRHI/VulkanSurface.cpp
+    ${ENGINE_SOURCE_PREFIX}/Engine/VulkanRHI/VulkanSwapchain.cpp
 
     # ENGINE/EVENTS
     ${ENGINE_SOURCE_PREFIX}/Engine/Events/Bus.cpp

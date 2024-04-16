@@ -33,6 +33,14 @@ namespace Neowise {
         return sInstanceLayers;
     }
 
+    const TVector<const char *> &Neowise::RHIVKUtil::getRequiredDeviceExtensions() {
+        static TVector<const char*> sDeviceExtensions = {
+            VK_KHR_SWAPCHAIN_EXTENSION_NAME
+        };
+
+        return sDeviceExtensions;
+    }
+
     TBool RHIVKUtil::createSurfaceFromWindow(const CBaseWindow *window, const CRHIDynamicProviderInterface* prov, IRHISurface& surface) {
 
         auto vkprov = reinterpret_cast<const CRHIVulkanDynamicProvider*>(prov);

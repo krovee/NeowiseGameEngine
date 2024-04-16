@@ -65,11 +65,9 @@ namespace Neowise {
     }
 
     IRHISurface CRHIVulkanDynamicProvider::createSurface(const CBaseWindow* window) {
-        if (!_cachedSurface) {
-            RHIVKUtil::createSurfaceFromWindow(window, this, _cachedSurface);
-        }
-
-        return _cachedSurface;
+        IRHISurface surface = nullptr;
+        RHIVKUtil::createSurfaceFromWindow(window, this, surface);
+        return surface;
     }
 
     CRHIVulkanDynamicProvider::~CRHIVulkanDynamicProvider()

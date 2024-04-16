@@ -8,6 +8,39 @@
 #include <Engine/VulkanRHI/API/vulkan_core.h>
 
 namespace Neowise {
+
+    struct SwapchainSupportInfo {
+        VkSurfaceCapabilitiesKHR    capabilities = {};
+        TVector<VkSurfaceFormatKHR> formats = {};
+        TVector<VkPresentModeKHR>   presentModes = {};
+    };
+    
+    struct QueueFamilyInfo {
+        TOptional<TUint32> graphicsIdx = nullopt;
+        TOptional<TUint32> transferIdx = nullopt;
+        TOptional<TUint32> presentIdx = nullopt;
+        TOptional<TUint32> computeIdx = nullopt;
+
+        inline TBool complete() const {
+            return graphicsIdx && computeIdx && transferIdx && presentIdx;
+        }
+    };
+
+    struct PhysicalDeviceSet {
+        TDouble score = {};
+        VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
+        CString name = { "<unknownGPU>" };
+        QueueFamilyInfo queueFamilyInfo = {};
+        SwapchainSupportInfo swapchainSupportInfo = {};
+        VkPhysicalDeviceProperties2 properties2 = { VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2, &meshShaderProps };
+        VkPhysicalDeviceFeatures2 features2 = { VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2, &features12 };
+        VkPhysicalDeviceMeshShaderFeaturesEXT meshShaderExt = { VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_FEATURES_EXT };
+        VkPhysicalDeviceMeshShaderPropertiesEXT meshShaderProps = { VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_PROPERTIES_EXT };
+        VkPhysicalDeviceVulkan13Features features13 = { VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_3_FEATURES, &meshShaderExt };
+        VkPhysicalDeviceVulkan12Features features12 = { VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_2_FEATURES, &features13 };
+        VkPhysicalDeviceMemoryProperties memory = {};
+    };
+
     /** 
     * 
     */
@@ -41,6 +74,11 @@ namespace Neowise {
          * 
          */
         static const TVector<const char*>& getRequiredInstanceLayers();
+
+        /**
+         * 
+         */
+        static const TVector<const char*>& getRequiredDeviceExtensions();
 
         /**
          * 
