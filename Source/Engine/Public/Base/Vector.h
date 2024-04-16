@@ -91,6 +91,30 @@ namespace Neowise {
             return _ptr + _size;
         }
 
+        constexpr T& front() {
+            return _ptr[0];
+        }
+
+        constexpr const T& front() const {
+            return _ptr[0];
+        }
+
+        constexpr T& back() {
+            return _ptr[_size];
+        }
+
+        constexpr const T& back() const {
+            return _ptr[_size];
+        }
+
+        T& operator[](TUint i) {
+            return _ptr[i];
+        }
+
+        const T& operator[](TUint i) const {
+            return _ptr[i];
+        }
+
         template<class...Args>
         constexpr T* emplace(Args&&...args) {
             if (_capacity == kInitialCap && !_size) {
