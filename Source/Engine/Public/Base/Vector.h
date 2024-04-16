@@ -11,51 +11,51 @@ namespace Neowise {
     * 
     */
     template<class T>
-    class NW_API CVector {
+    class NW_API TVector {
     public:
-        constexpr CVector() = default;
+        constexpr TVector() = default;
 
-        constexpr CVector(T* first, T* last) {
+        constexpr TVector(T* first, T* last) {
             construct(first, last - first);
         }
 
-        constexpr CVector(const TInitializerList<T>& list) {
+        constexpr TVector(const TInitializerList<T>& list) {
             construct(list.begin(), list.size());
         }
 
-        constexpr CVector(T* data, TUint len) {
+        constexpr TVector(T* data, TUint len) {
             construct(data, len);
         }
 
         template<TUint N>
-        constexpr CVector(T(&arr)[N]) {
+        constexpr TVector(T(&arr)[N]) {
             construct(arr, N);
         }
 
         template<class...Args>
-        constexpr CVector(TUint sz, Args&&...args) {
+        constexpr TVector(TUint sz, Args&&...args) {
             constructArgs(sz, forward<Args>(args)...);
         }
 
-        constexpr CVector(const CVector& o) {
+        constexpr TVector(const TVector& o) {
             construct(o.data(), o.size());
         }
         
-        constexpr CVector(CVector&& o) {
+        constexpr TVector(TVector&& o) {
             construct(o.data(), o.size());
         }
         
-        constexpr CVector& operator=(const CVector& o) {
+        constexpr TVector& operator=(const TVector& o) {
             construct(o.data(), o.size());
             return *this;
         }
 
-        constexpr CVector& operator=(CVector&& o) {
+        constexpr TVector& operator=(TVector&& o) {
             construct(o.data(), o.size());
             return *this;
         }
         
-        ~CVector() {
+        ~TVector() {
             destroy_range(_ptr, _size);
         }
 
@@ -133,8 +133,8 @@ namespace Neowise {
             _ptr = p;
         }
 
-        constexpr operator CArrayView<T>() const {
-            return CArrayView<T>(_ptr, _size);
+        constexpr operator TArrayView<T>() const {
+            return TArrayView<T>(_ptr, _size);
         }
 
     private:
@@ -143,7 +143,7 @@ namespace Neowise {
 
         template<class...Args>
         constexpr void constructAt(TUint i, Args&&...args) {
-            NW_ASSERT(i <= _capacity, "Failed construction in CVector: out of bounds!");
+            NW_ASSERT(i <= _capacity, "Failed construction in TVector: out of bounds!");
 
             construct_at<T>((_ptr + i), forward<Args>(args)...);
         }
@@ -191,9 +191,9 @@ namespace Neowise {
     };
 
     template<class T>
-    class NW_API CObjectHash<CVector<T>> {
+    class NW_API CObjectHash<TVector<T>> {
     public:
-        static TUint get(const CVector<T>& vec) {
+        static TUint get(const TVector<T>& vec) {
             auto hs = vec.size() * 0xab0ba + 1;
             for (const auto& v : vec) {
                 hs *= hs + CObjectHash<T>::get(v);

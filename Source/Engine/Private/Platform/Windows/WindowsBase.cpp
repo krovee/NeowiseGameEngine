@@ -3,7 +3,21 @@
 #define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
 #include <Base/Diagnostics.h>
+#include <Base/DynamicLibrary.h>
 
+#include <Engine/VulkanRHI/Common.h>
+#include <Engine/VulkanRHI/API/vk_platform.h>
+#include <Engine/VulkanRHI/API/vulkan_core.h>
+
+using VkWin32SurfaceCreateFlagsKHR = VkFlags;
+
+typedef struct VkWin32SurfaceCreateInfoKHR {
+    VkStructureType                 sType;
+    const void*                     pNext;
+    VkWin32SurfaceCreateFlagsKHR    flags;
+    HINSTANCE                       hinstance;
+    HWND                            hwnd;
+} VkWin32SurfaceCreateInfoKHR;
 
 namespace Neowise::Platform::Windows {
 
@@ -12,42 +26,42 @@ namespace Neowise::Platform::Windows {
         LRESULT MSPROC(::HWND hWnd, ::UINT Msg, ::WPARAM wParam, ::LPARAM lParam) {
             if (_Proc) {
                 SWindowEventData ev = {};
-                bool jump = false;
+                TBool jump = kFalse;
 
                 switch (Msg) {
-                    case WM_CLOSE: ev.type = E_WINDOW_EVENT_CLOSE; jump = true; break;
-                    case WM_DESTROY: ev.type = E_WINDOW_EVENT_QUIT; jump = true; break;
+                    case WM_CLOSE: ev.type = E_WINDOW_EVENT_CLOSE; jump = kTrue; break;
+                    case WM_DESTROY: ev.type = E_WINDOW_EVENT_QUIT; jump = kTrue; break;
                     case WM_SIZE: {
                         ev.type = E_WINDOW_EVENT_RESIZE;
                         ev.onResize.width = LOWORD(lParam);
                         ev.onResize.height = HIWORD(lParam);
-                        jump = true;
+                        jump = kTrue;
                     } break;
                     case WM_SETFOCUS: {
                         ev.type = E_WINDOW_EVENT_ENTER_FOCUS;
-                        jump = true;
+                        jump = kTrue;
                     } break;
                     case WM_KILLFOCUS: {
                         ev.type = E_WINDOW_EVENT_EXIT_FOCUS;
-                        jump = true;
+                        jump = kTrue;
                     } break;
                     case WM_SYSKEYDOWN:
                     case WM_KEYDOWN: {
                         ev.type = E_WINDOW_EVENT_KEY_PRESSED;
-                        jump = true;
+                        jump = kTrue;
                         ev.onKey.evk = (EVirtualKey)wParam;
-                        ev.onKey.isPressed = true;
+                        ev.onKey.isPressed = kTrue;
                     } break;
                     case WM_SYSKEYUP:
                     case WM_KEYUP: {
                         ev.type = E_WINDOW_EVENT_KEY_RELEASED;
-                        jump = true;
+                        jump = kTrue;
                         ev.onKey.evk = (EVirtualKey)wParam;
-                        ev.onKey.isPressed = false;
+                        ev.onKey.isPressed = kFalse;
                     } break;
                     case WM_CHAR: {
                         ev.type = E_WINDOW_EVENT_CHAR;
-                        jump = true;
+                        jump = kTrue;
                     } break;
                     case WM_LBUTTONDOWN:
                     case WM_RBUTTONDOWN:
@@ -55,8 +69,8 @@ namespace Neowise::Platform::Windows {
                     case WM_XBUTTONDOWN: {
                         ev.type = E_WINDOW_EVENT_MOUSE_PRESSED;
                         ev.onMouse.evk = (EVirtualKey)wParam;
-                        ev.onMouse.isPressed = true;
-                        jump = true;
+                        ev.onMouse.isPressed = kTrue;
+                        jump = kTrue;
                     } break;
                     case WM_LBUTTONUP:
                     case WM_RBUTTONUP:
@@ -72,20 +86,20 @@ namespace Neowise::Platform::Windows {
                         else if (Msg == WM_MBUTTONUP) {
                             ev.onMouse.evk = (EVirtualKey)MK_MBUTTON;
                         }
-                        ev.onMouse.isPressed = false;
-                        jump = true;
+                        ev.onMouse.isPressed = kFalse;
+                        jump = kTrue;
                     } break;
                     case WM_MOUSEMOVE: {
                         ev.type = E_WINDOW_EVENT_MOUSE_MOVE;
                         const auto p = MAKEPOINTS(lParam);
                         ev.onMouseMove.x = p.x;
                         ev.onMouseMove.y = p.y;
-                        jump = true;
+                        jump = kTrue;
                     } break;
                     case WM_MOVE: {
                         ev.type = E_WINDOW_EVENT_MOVE;
                         ev.onMove = { LOWORD(lParam), HIWORD(lParam) };
-                        jump = true;
+                        jump = kTrue;
                     } break;
                 }
 
@@ -170,7 +184,7 @@ namespace Neowise::Platform::Windows {
         return memset(dst, value, size);
     }
 
-    bool compareMemory(CLPVOID p1, CLPVOID p2, TUint64 size) {
+    TBool compareMemory(CLPVOID p1, CLPVOID p2, TUint64 size) {
         return memcmp(p1, p2, size) == 0;
     }
 
@@ -336,7 +350,7 @@ namespace Neowise::Platform::Windows {
             TranslateMessage(&msg);
             DispatchMessageA(&msg);
         }
-        return true;
+        return kTrue;
     }
 
     BOOL peekWindowMessagesW(HWND hWnd) {
@@ -345,7 +359,32 @@ namespace Neowise::Platform::Windows {
             TranslateMessage(&msg);
             DispatchMessageW(&msg);
         }
-        return true;
+        return kTrue;
+    }
+
+    void *createVulkanSurface(VkInstance instance, HWND hWnd) {
+        VkSurfaceKHR surfaceKHR = VK_NULL_HANDLE;
+
+        using PFN_vkCreateWin32SurfaceKHR = 
+            VkResult(*)(VkInstance, const VkWin32SurfaceCreateInfoKHR*, const VkAllocationCallbacks*, VkSurfaceKHR*);
+
+        auto vkLib = ::Neowise::CDynamicLibrary::load(NW_VK_LIBRARY_NAME);
+        NW_ASSERT(vkLib, "Failed to load Vulkan dynamic provider (missing " NW_VK_LIBRARY_NAME ")");
+
+        PFN_vkGetInstanceProcAddr
+            vkGetInstanceProcAddr = vkLib->getProcAddress<PFN_vkGetInstanceProcAddr>("vkGetInstanceProcAddr");
+
+        auto vkCreateWin32SurfaceKHR = (PFN_vkCreateWin32SurfaceKHR)vkGetInstanceProcAddr(instance, "vkCreateWin32SurfaceKHR");
+        NW_ASSERT(vkCreateWin32SurfaceKHR, "Failed to load function vkCreateWin32SurfaceKHR!");
+
+        VkWin32SurfaceCreateInfoKHR surfaceCI = { (VkStructureType)VK_STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR };
+        surfaceCI.hinstance = GetModuleHandle(NULL);
+        surfaceCI.hwnd = (::HWND)hWnd;
+
+        RHIVKFN(vkCreateWin32SurfaceKHR(instance, &surfaceCI, nullptr, &surfaceKHR), 
+            "Failed to create win32 surface!");
+
+        return surfaceKHR;
     }
 
     TUint64 getPrimaryMonitorWidth(void) {

@@ -5,7 +5,7 @@
 #include <Engine/EngineLoop.h>
 
 namespace Neowise::Platform::Linux {
-    CThread::CThread(PFN_StartFunc func, void* params, bool, bool immediateDetach) {
+    CThread::CThread(PFN_StartFunc func, void* params, TBool, TBool immediateDetach) {
         NW_ASSERT(func, "Failed to create a thread without work!");
 
         {
@@ -66,10 +66,10 @@ namespace Neowise::Platform::Linux {
     }
 
     void CThread::start() {
-        NW_OPT_ASSERT(false, "[LINUXNOTIMPLEMENTED]: Failed to start() linux thread, because newly created threads start immediately!");
+        NW_OPT_ASSERT(kFalse, "[LINUXNOTIMPLEMENTED]: Failed to start() linux thread, because newly created threads start immediately!");
     }
 
-    bool CThread::isActive() const {
+    TBool CThread::isActive() const {
         return sharedID != nullptr;
     }
 

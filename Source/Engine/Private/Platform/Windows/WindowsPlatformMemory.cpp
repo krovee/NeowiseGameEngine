@@ -26,7 +26,7 @@ namespace Neowise::Platform::Windows {
         return lstrlenW(s);
     }
 
-    bool CMemory::compare(const void* p1, const void* p2, TUint64 len) {
+    TBool CMemory::compare(const void* p1, const void* p2, TUint64 len) {
         return compareMemory(p1, p2, len);
     }
     

@@ -7,7 +7,7 @@ namespace Neowise {
     class CEventBus {
     public:
         constexpr static TUint kMaxSubscribers = 16;
-        using StorageHT = HT<EventID, CStaticVector<IEventHandlerWrapper, kMaxSubscribers>>;
+        using StorageHT = HT<EventID, TStaticVector<IEventHandlerWrapper, kMaxSubscribers>>;
 
         void subscribe(IEventHandlerWrapper handler);
 

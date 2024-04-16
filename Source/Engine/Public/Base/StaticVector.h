@@ -9,7 +9,7 @@ namespace Neowise {
     * Static vector is a vector but with stack-based allocated memory.
     */
     template<class T, TUint64 N>
-    class NW_API CStaticVector {
+    class NW_API TStaticVector {
     private:
         enum {
             kCapacity = N,
@@ -19,18 +19,18 @@ namespace Neowise {
         using AllocatorType = CFixedStackAllocatorPolicy<kRawCapacity>;
 
     public:
-        constexpr CStaticVector() 
+        constexpr TStaticVector() 
             : _ptr((T*)(TUint8*)_zbuffer)
         {}
         
-        constexpr CStaticVector(const CStaticVector& o) 
+        constexpr TStaticVector(const TStaticVector& o) 
             : _ptr(o._ptr), _size(o._size)
         {
             Memory::copy(_zbuffer, o._zbuffer, _size * sizeof(T));
             _ptr = (T*)_zbuffer;
         }
         
-        constexpr CStaticVector(CStaticVector&& o)
+        constexpr TStaticVector(TStaticVector&& o)
             : _ptr(o._ptr), _size(o._size)
         {
             swap(_zbuffer, o._zbuffer);
@@ -39,36 +39,36 @@ namespace Neowise {
             o._size = 0;
         }
         
-        constexpr CStaticVector& operator=(const CStaticVector& o)	= default;
+        constexpr TStaticVector& operator=(const TStaticVector& o)	= default;
         
-        constexpr CStaticVector& operator=(CStaticVector&& o)		= default;
+        constexpr TStaticVector& operator=(TStaticVector&& o)		= default;
         
-        constexpr ~CStaticVector() {
+        constexpr ~TStaticVector() {
             destroy_range(_ptr, _size);
         }
 
-        constexpr CStaticVector(TInitializerList<T> ilist) : CStaticVector() {
-            NW_ASSERT(ilist.size() <= _capacity, "CStaticVector(initializer_list) an attempted to construct with ilist which exceeds vector's bounds!");
+        constexpr TStaticVector(TInitializerList<T> ilist) : TStaticVector() {
+            NW_ASSERT(ilist.size() <= _capacity, "TStaticVector(initializer_list) an attempted to construct with ilist which exceeds vector's bounds!");
             copy_range(_ptr, ilist.begin(), ilist.size());
             _size = ilist.size();
         }
 
         template<TEnableIf<!isLValReference<T>, int> = 0>
-        constexpr CStaticVector(const T* first, const T* last) : CStaticVector() {
+        constexpr TStaticVector(const T* first, const T* last) : TStaticVector() {
             _size = last - first;
-            NW_ASSERT(_size <= _capacity, "CStaticVector(first, last) an attempted to construct with list which exceeds vector's bounds!");
+            NW_ASSERT(_size <= _capacity, "TStaticVector(first, last) an attempted to construct with list which exceeds vector's bounds!");
             copy_range(_ptr, first, _size);
         }
 
         template<class...Args>
-        constexpr CStaticVector(TUint64 count, Args&&...args) : CStaticVector() {
-            NW_ASSERT(count <= _capacity, "CStaticVector(count, ...) an attempted to construct with list which exceeds vector's bounds!");
+        constexpr TStaticVector(TUint64 count, Args&&...args) : TStaticVector() {
+            NW_ASSERT(count <= _capacity, "TStaticVector(count, ...) an attempted to construct with list which exceeds vector's bounds!");
             construct_range(_ptr, count, forward<Args>(args)...);
             _size = count;
         }
 
-        constexpr operator CArrayView<T>() const {
-            return CArrayView<T>(_ptr, _size);
+        constexpr operator TArrayView<T>() const {
+            return TArrayView<T>(_ptr, _size);
         }
 
         constexpr auto data() {
@@ -91,7 +91,7 @@ namespace Neowise {
             return _size;
         }
 
-        constexpr bool empty() const {
+        constexpr TBool empty() const {
             return _size == 0;
         }
 
@@ -132,30 +132,30 @@ namespace Neowise {
         }
 
         constexpr void pushBack(const T& t) {
-            NW_ASSERT(_size < _capacity, "CStaticVector::pushBack() exceeds bounds!");
+            NW_ASSERT(_size < _capacity, "TStaticVector::pushBack() exceeds bounds!");
             construct_at(_ptr[_size++], t);
         }
 
         constexpr void popBack() {
-            NW_ASSERT(size() > 0, "CStaticVector::popBack() an attempted to call on an empty vector!");
+            NW_ASSERT(size() > 0, "TStaticVector::popBack() an attempted to call on an empty vector!");
             destroy_at(_ptr[--_size]);
         }
 
         template<class...Args>
         constexpr T& emplace(Args&&...args) {
-            NW_ASSERT(_size <= _capacity, "CStaticVector::emplace() exceeds bounds!");
+            NW_ASSERT(_size <= _capacity, "TStaticVector::emplace() exceeds bounds!");
             construct_at(_ptr[_size++], forward<Args>(args)...);
             return back();
         }
 
         constexpr void resize(TUint sz) {
-            NW_ASSERT(sz <= _capacity, "CStaticVector::resize(n) an attempted to exceed capacity!");
+            NW_ASSERT(sz <= _capacity, "TStaticVector::resize(n) an attempted to exceed capacity!");
             _size = sz;
             // TODO(krovee): Is this enough for static vector? 
-            //				 Try to refactor CStaticVector::resize()!
+            //				 Try to refactor TStaticVector::resize()!
         }
 
-        constexpr void clear(const bool set0 = false) {
+        constexpr void clear(const TBool set0 = kFalse) {
             destroy_range(_ptr, _size);
             _size = 0;
             
@@ -166,7 +166,7 @@ namespace Neowise {
 
     private: 
         template<class U, TUint64 M>
-        friend constexpr void swap(CStaticVector<U, M>& l, CStaticVector<U, M>& r);
+        friend constexpr void swap(TStaticVector<U, M>& l, TStaticVector<U, M>& r);
     private:
         T*								_ptr = {};
         TUint64							_size = {};
@@ -175,16 +175,16 @@ namespace Neowise {
     };
 
     template<class T, TUint64 N>
-    constexpr void swap(CStaticVector<T, N>& l, CStaticVector<T, N>& r) {
+    constexpr void swap(TStaticVector<T, N>& l, TStaticVector<T, N>& r) {
         swap_range(l._zbuffer, r._zbuffer, N);
         swap(l._ptr, r._ptr);
         swap(l._size, r._size);
     }
 
     template<class T, TUint N>
-    class NW_API CObjectHash<CStaticVector<T, N>> {
+    class NW_API CObjectHash<TStaticVector<T, N>> {
     public:
-        static TUint get(const CStaticVector<T, N>& vec) {
+        static TUint get(const TStaticVector<T, N>& vec) {
             TUint hs = vec.size() * 0xab0ba + 1;
             for (const auto& v : vec) {
                 hs *= hs + CObjectHash<T>::get(v);

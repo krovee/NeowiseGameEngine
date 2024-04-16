@@ -51,27 +51,27 @@ namespace Neowise {
         return *this;
     }
 
-    bool FVector4::operator==(const FVector4& r) const {
+    TBool FVector4::operator==(const FVector4& r) const {
         return _mm_cvtss_i32_safe(_mm_cmpeq_ps(_mm_load_ps(_data), _mm_load_ps(r._data)));
     }
 
-    bool FVector4::operator!=(const FVector4& r) const {
+    TBool FVector4::operator!=(const FVector4& r) const {
         return _mm_cvtss_i32_safe(_mm_cmpneq_ps(_mm_load_ps(_data), _mm_load_ps(r._data)));
     }
 
-    bool FVector4::operator<(const FVector4& r) const {
+    TBool FVector4::operator<(const FVector4& r) const {
         return _mm_cvtss_i32_safe(_mm_cmplt_ps(_mm_load_ps(_data), _mm_load_ps(r._data)));
     }
 
-    bool FVector4::operator<=(const FVector4& r) const {
+    TBool FVector4::operator<=(const FVector4& r) const {
         return _mm_cvtss_i32_safe(_mm_cmple_ps(_mm_load_ps(_data), _mm_load_ps(r._data)));
     }
 
-    bool FVector4::operator>(const FVector4& r) const {
+    TBool FVector4::operator>(const FVector4& r) const {
         return _mm_cvtss_i32_safe(_mm_cmpgt_ps(_mm_load_ps(_data), _mm_load_ps(r._data)));
     }
 
-    bool FVector4::operator>=(const FVector4& r) const {
+    TBool FVector4::operator>=(const FVector4& r) const {
         return _mm_cvtss_i32_safe(_mm_cmpge_ps(_mm_load_ps(_data), _mm_load_ps(r._data)));
     }
 

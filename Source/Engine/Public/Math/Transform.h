@@ -33,7 +33,7 @@ namespace Neowise {
 
         void recalculate();
     private:
-        bool isDirty(const TUint8 flag) const;
+        TBool isDirty(const TUint8 flag) const;
         void setDirty(const TUint8 flag);
 
     private:

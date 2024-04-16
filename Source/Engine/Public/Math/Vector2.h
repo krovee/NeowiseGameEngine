@@ -19,12 +19,12 @@ namespace Neowise {
         FVector2& operator=(const FVector2&);
         FVector2& operator=(FVector2&&);
 
-        bool operator==(const FVector2&) const;
-        bool operator!=(const FVector2&) const;
-        bool operator<(const FVector2&) const;
-        bool operator<=(const FVector2&) const;
-        bool operator>(const FVector2&) const;
-        bool operator>=(const FVector2&) const;
+        TBool operator==(const FVector2&) const;
+        TBool operator!=(const FVector2&) const;
+        TBool operator<(const FVector2&) const;
+        TBool operator<=(const FVector2&) const;
+        TBool operator>(const FVector2&) const;
+        TBool operator>=(const FVector2&) const;
 
         FVector2& operator+=(const FVector2&);
         FVector2& operator+=(TReal);

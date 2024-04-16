@@ -13,7 +13,7 @@ namespace Neowise::Platform::Windows {
     class NW_API CFileDescriptor {
     public:
         ~CFileDescriptor();
-        CFileDescriptor(CFS& fs, const CUUID& uuid, TInt64& refCount, TUint size, bool autoRelease);
+        CFileDescriptor(CFS& fs, const CUUID& uuid, TInt64& refCount, TUint size, TBool autoRelease);
 
         CFileDescriptor(const CFileDescriptor&);
         CFileDescriptor(CFileDescriptor&&);
@@ -32,7 +32,7 @@ namespace Neowise::Platform::Windows {
         CUUID	_uuid = {};
         TUint	_size = {};
         TInt64*	_refCount;
-        bool	_autoRelease = true;
+        TBool	_autoRelease = kTrue;
     };
 
     /** 

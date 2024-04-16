@@ -38,27 +38,27 @@ namespace Neowise {
         return *this;
     }
     
-    bool FVector2::operator==(const FVector2& r) const {
+    TBool FVector2::operator==(const FVector2& r) const {
         return x == r.x && y == r.y;
     }
     
-    bool FVector2::operator!=(const FVector2& r) const {
+    TBool FVector2::operator!=(const FVector2& r) const {
         return !(*this == r);
     }
     
-    bool FVector2::operator<(const FVector2& r) const {
+    TBool FVector2::operator<(const FVector2& r) const {
         return x < r.x && y < r.y;
     }
     
-    bool FVector2::operator<=(const FVector2& r) const {
+    TBool FVector2::operator<=(const FVector2& r) const {
         return x <= r.x && y <= r.y;
     }
     
-    bool FVector2::operator>(const FVector2& r) const {
+    TBool FVector2::operator>(const FVector2& r) const {
         return x > r.x && y > r.y;
     }
     
-    bool FVector2::operator>=(const FVector2& r) const {
+    TBool FVector2::operator>=(const FVector2& r) const {
         return x >= r.x && y >= r.y;
     }
     

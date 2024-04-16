@@ -10,19 +10,19 @@ namespace Neowise::Platform::Null {
 
     }
 
-    bool CBaseWindow::isOpen() const {
-        return false;
+    TBool CBaseWindow::isOpen() const {
+        return kFalse;
     }
 
-    void CBaseWindow::setFullscreen(bool) {
-
-    }
-
-    void CBaseWindow::setMaximized(bool) {
+    void CBaseWindow::setFullscreen(TBool) {
 
     }
 
-    void CBaseWindow::suspend(bool) {
+    void CBaseWindow::setMaximized(TBool) {
+
+    }
+
+    void CBaseWindow::suspend(TBool) {
 
     }
 

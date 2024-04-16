@@ -3,7 +3,7 @@
 #include <Engine/EngineLoop.h>
 
 namespace Neowise {
-    bool GIsRestarting = true;
+    TBool GIsRestarting = kTrue;
     extern CEngineLoop* GEngineLoop;
 
     namespace {
@@ -30,7 +30,7 @@ namespace Neowise {
         NW_PROFILE_FUNCTION();
 
         while (GIsRestarting) {
-            GIsRestarting = false;
+            GIsRestarting = kFalse;
 
             DEngineBootInfo eBootInfo = {};
             eBootInfo.baseScenePath = "";

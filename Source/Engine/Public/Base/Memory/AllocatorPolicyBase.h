@@ -28,6 +28,13 @@ namespace Neowise {
         virtual void* allocate(TUint64) { return nullptr; }
         virtual void  free(void*, TUint64) {}
 
+        template<class T, class...Args>
+        T* create(Args&&...args) {
+            T* p = reinterpret_cast<T*>(allocate(sizeof(T)));
+            construct_at<T>(p, forward<Args>(args)...);
+            return p;
+        }
+
         DAllocationInfo const& getInfo() const;
         TUint64 getTotalAllocated() const;
         TUint64 getCurrentAllocated() const;

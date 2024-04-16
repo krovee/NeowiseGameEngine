@@ -1,25 +1,48 @@
 #include <Engine/VulkanRHI/Common.h>
 
+#include <Engine/VulkanRHI/VulkanSurface.h>
+#include <Engine/VulkanRHI/VulkanAdapter.h>
+#include <Engine/VulkanRHI/DynamicProvider.h>
+
+#include <Platform/Windows/WindowsBase.h>
+
 namespace Neowise {
 
-    const CVector<const char*>& RHIVKUtil::getRequiredInstanceExtensions() {
-        static CVector<const char*> sInstanceExtensions = {
-            "VK_KHR_surface",
+    const TVector<const char*>& RHIVKUtil::getRequiredInstanceExtensions() {
+        static TVector<const char*> sInstanceExtensions = {
             "VK_KHR_win32_surface",
-            "VK_KHR_get_physical_device_properties2"
+
+            VK_KHR_GET_PHYSICAL_DEVICE_PROPERTIES_2_EXTENSION_NAME,
+            VK_EXT_VALIDATION_FEATURES_EXTENSION_NAME,
+            VK_KHR_SURFACE_EXTENSION_NAME,
+#if NW_BUILD_TYPE_DEBUG
+            VK_EXT_DEBUG_UTILS_EXTENSION_NAME,
+#endif//NW_BUILD_TYPE_DEBUG
         };
 
         return sInstanceExtensions;
     }
 
-    const CVector<const char*>& RHIVKUtil::getRequiredInstanceLayers() {
-        static CVector<const char*> sInstanceLayers = {
+    const TVector<const char*>& RHIVKUtil::getRequiredInstanceLayers() {
+        static TVector<const char*> sInstanceLayers = {
 #if NW_BUILD_TYPE_DEBUG
             "VK_LAYER_LUNARG_standard_validation"
-#endif
+#endif//NW_BUILD_TYPE_DEBUG
         };
         
         return sInstanceLayers;
+    }
+
+    TBool RHIVKUtil::createSurfaceFromWindow(const CBaseWindow *window, const CRHIDynamicProviderInterface* prov, IRHISurface& surface) {
+
+        auto vkprov = reinterpret_cast<const CRHIVulkanDynamicProvider*>(prov);
+
+        surface = IRHISurface::make<CRHIVulkanSurface>(
+            vkprov->getInstance(),
+            VkSurfaceKHR(Platform::Windows::createVulkanSurface(vkprov->getInstance(), Platform::Windows::HWND(window->getNativeHandle())))
+        );
+
+        return kTrue;
     }
 
 }

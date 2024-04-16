@@ -2,8 +2,8 @@
 
 namespace Neowise {
 
-    const CVector<const char*>& RHIVKUtil::getRequiredInstanceExtensions() {
-        static CVector<const char*> sInstanceExtensions = {
+    const TVector<const char*>& RHIVKUtil::getRequiredInstanceExtensions() {
+        static TVector<const char*> sInstanceExtensions = {
             "VK_KHR_surface",
             "VK_KHR_xcb_surface",
             "VK_KHR_xlib_surface",
@@ -15,8 +15,8 @@ namespace Neowise {
         return sInstanceExtensions;
     }
 
-    const CVector<const char*>& RHIVKUtil::getRequiredInstanceLayers() {
-        static CVector<const char*> sInstanceLayers = {
+    const TVector<const char*>& RHIVKUtil::getRequiredInstanceLayers() {
+        static TVector<const char*> sInstanceLayers = {
 #if NW_BUILD_TYPE_DEBUG
             "VK_LAYER_LUNARG_standard_validation"
 #endif

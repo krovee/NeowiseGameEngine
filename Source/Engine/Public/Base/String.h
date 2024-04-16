@@ -31,7 +31,7 @@ namespace Neowise {
 
         TUint size() const;
         TUint capacity() const;
-        bool empty() const;
+        TBool empty() const;
         char* data() const;
         const char* cstr() const;
         TUint getCRC() const;
@@ -42,8 +42,8 @@ namespace Neowise {
         char* begin();
         char* end();
 
-        bool operator==(const CString& r) const;
-        bool operator!=(const CString& r) const;
+        TBool operator==(const CString& r) const;
+        TBool operator!=(const CString& r) const;
 
         operator CStringView() const;
 
@@ -51,8 +51,8 @@ namespace Neowise {
         char* findReverse(const CStringView& sv) const;
         char* findFirst(const CStringView& set) const;
         char* findLast(const CStringView& set) const;
-        bool  startsWith(const CStringView& str) const;
-        bool  endsWith(const CStringView& str) const;
+        TBool  startsWith(const CStringView& str) const;
+        TBool  endsWith(const CStringView& str) const;
 
         CString& append(const CStringView& sv);
         CString& append(const char c, TUint count = 1);
@@ -62,8 +62,8 @@ namespace Neowise {
 
         CStringRef toRef() const;
     private:
-        bool isSmall() const;
-        bool fitSmall(TUint size) const;
+        TBool isSmall() const;
+        TBool fitSmall(TUint size) const;
         char* construct(const char* str, TUint size);
 
     private:

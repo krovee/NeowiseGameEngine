@@ -1,6 +1,9 @@
 #pragma once
 
 #include <Base/Common.h>
+#include <Engine/RHI/RHI.h>
+#include <Engine/RHI/RHIAdapter.h>
+#include <Engine/RHI/RHISurface.h>
 
 // Include actual renderer???
 
@@ -19,19 +22,23 @@ namespace Neowise {
         void initializeBasic(const CBaseWindow& window);
         void waitResourcesIdle();
 
-        bool startFrameRecord();
+        TBool startFrameRecord();
         void endFrameRecord();
 
     private:
-        bool beginFrame();
-        bool endFrame();
+        TBool beginFrame();
+        TBool endFrame();
 
     private:
         static void loop(void* params);
 
-        CBaseWindow*			window = nullptr;
-    };
+        CBaseWindow*            window = nullptr;
 
-    NW_API bool RT_Initialize();
-    NW_API bool RT_Shutdown();
+        IRHIDynamicProvider     rhi = nullptr;
+        IRHISurface             surface = nullptr;
+        IRHIAdapter             adapter = nullptr;
+	};
+
+    NW_API TBool RT_Initialize();
+    NW_API TBool RT_Shutdown();
 }

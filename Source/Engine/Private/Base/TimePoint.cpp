@@ -14,27 +14,27 @@ namespace Neowise {
         return _seconds;
     }
 
-    bool CTimePoint::operator==(const CTimePoint& r) const {
+    TBool CTimePoint::operator==(const CTimePoint& r) const {
         return _seconds == r._seconds;
     }
 
-    bool CTimePoint::operator!=(const CTimePoint& r) const {
+    TBool CTimePoint::operator!=(const CTimePoint& r) const {
         return _seconds != r._seconds;
     }
 
-    bool CTimePoint::operator<(const CTimePoint& r) const {
+    TBool CTimePoint::operator<(const CTimePoint& r) const {
         return _seconds < r._seconds;
     }
 
-    bool CTimePoint::operator>(const CTimePoint& r) const {
+    TBool CTimePoint::operator>(const CTimePoint& r) const {
         return _seconds > r._seconds;
     }
 
-    bool CTimePoint::operator<=(const CTimePoint& r) const {
+    TBool CTimePoint::operator<=(const CTimePoint& r) const {
         return _seconds <= r._seconds;
     }
 
-    bool CTimePoint::operator>=(const CTimePoint& r) const {
+    TBool CTimePoint::operator>=(const CTimePoint& r) const {
         return _seconds >= r._seconds;
     }
 

@@ -13,7 +13,7 @@ namespace Neowise {
     inline CGameRuntimeApplication(const CStringView& name) : CApplication(E_APPLICATION_TYPE_GAME_RUNTIME, name) 
         {}
 
-        bool initialize() override;
+        TBool initialize() override;
         void postInitialize() override;
         
         void onRenderFrame() override;

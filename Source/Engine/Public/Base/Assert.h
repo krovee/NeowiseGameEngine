@@ -64,9 +64,9 @@ namespace Neowise {
 
 #ifndef NW_OPT_ASSERT
 #   define NW_OPT_ASSERT(cond, msg) \
-    Neowise::ignoreAssert(true);    \
+    Neowise::ignoreAssert(kTrue);    \
     NW_ASSERT(cond, msg);           \
-    Neowise::ignoreAssert(false) 
+    Neowise::ignoreAssert(kFalse) 
 #endif
 
 #ifdef  NW_SHIP_BUILD

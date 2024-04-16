@@ -48,7 +48,7 @@ namespace Neowise {
     {
     }
 
-    bool FMatrix4::operator==(const FMatrix4& r) const {
+    TBool FMatrix4::operator==(const FMatrix4& r) const {
         const auto m = (const TReal* const)(&const_cast<FMatrix4&>(*this)[0][0]);
         const auto m2= (const TReal* const)(&const_cast<FMatrix4&>(r)[0][0]);
         
@@ -81,7 +81,7 @@ namespace Neowise {
         ));
     }
 
-    bool FMatrix4::operator!=(const FMatrix4& r) const {
+    TBool FMatrix4::operator!=(const FMatrix4& r) const {
         return !(*this == r);
     }
 

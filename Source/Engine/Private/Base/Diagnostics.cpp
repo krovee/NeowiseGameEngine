@@ -35,7 +35,7 @@ namespace Neowise {
         Platform::GConsole.writeFmt("%.4f", v);
     }
 
-    CDiagnostics::operator bool() const {
+    CDiagnostics::operator TBool() const {
         return Platform::GConsole.getHandle();
     }
 
