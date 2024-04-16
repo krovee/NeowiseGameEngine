@@ -2,7 +2,6 @@
 #include <Engine/EngineLoop.h>
 
 #include <Engine/RenderThread.h>
-#include <Engine/RHI/RHI.h>
 
 namespace Neowise {
 	TBool CGameRuntimeApplication::initialize() {

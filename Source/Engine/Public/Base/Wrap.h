@@ -10,13 +10,13 @@ namespace Neowise {
     * checks around it. Wrap doesn't do *anything* with data at pointers. 
     */
     template<class T>
-    class NW_API CWrap {
+    class NW_API TWrap {
     public:
-        constexpr CWrap() = default;
-        ~CWrap() = default;
+        constexpr TWrap() = default;
+        ~TWrap() = default;
 
-        explicit CWrap(T* p) : _ptr(p) {}
-        CWrap(nullptr_t) : _ptr() {}
+        explicit TWrap(T* p) : _ptr(p) {}
+        TWrap(nullptr_t) : _ptr() {}
 
         constexpr TBool isValid() const {
             return _ptr != nullptr;

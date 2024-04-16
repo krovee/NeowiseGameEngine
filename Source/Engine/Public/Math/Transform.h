@@ -15,11 +15,11 @@ namespace Neowise {
         CTransform createChild(const FVector3& translation = FVector3::zero, const FVector3& rotation = FVector3::zero, const FVector3& scale = FVector3::one);
         CTransform createChild(const FVector3& translation, const FQuaternion& rotation, const FVector3& scale = FVector3::one);
 
-        CWrap<const CTransform> getParent() const {
+        TWrap<const CTransform> getParent() const {
             return _parent;
         }
 
-        void resetParent(CWrap<const CTransform> parent = nullptr);
+        void resetParent(TWrap<const CTransform> parent = nullptr);
 
         FMatrix4 getMatrix() const;
         const FVector3& getLocalPosition() const;
@@ -43,7 +43,7 @@ namespace Neowise {
         FQuaternion             _localRotation = {};
         FVector3                _localScale = FVector3::one;
     
-        CWrap<const CTransform> _parent = nullptr;
+        TWrap<const CTransform> _parent = nullptr;
 
         TUint8                   _dirtyFlags = 14;
     };
