@@ -151,8 +151,7 @@ namespace Neowise {
         constexpr void resize(TUint sz) {
             NW_ASSERT(sz <= _capacity, "TStaticVector::resize(n) an attempted to exceed capacity!");
             _size = sz;
-            // TODO(krovee): Is this enough for static vector? 
-            //				 Try to refactor TStaticVector::resize()!
+            construct_range(_ptr, _size);
         }
 
         constexpr void clear(const TBool set0 = kFalse) {
