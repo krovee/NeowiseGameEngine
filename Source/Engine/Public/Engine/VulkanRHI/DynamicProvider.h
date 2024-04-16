@@ -25,8 +25,6 @@ namespace Neowise {
     private:
         VkInstance                  instance = VK_NULL_HANDLE;
         VkDebugUtilsMessengerEXT    _debugMessenger = VK_NULL_HANDLE;
-
-        IRHISurface                 _cachedSurface = nullptr;
     };
 
 }

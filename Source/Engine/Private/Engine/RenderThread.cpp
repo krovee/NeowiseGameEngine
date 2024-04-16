@@ -21,18 +21,19 @@ namespace Neowise {
     TBool RT_Shutdown() {
 
         if (GRenderThread) {
-            destroy_at(GRenderThread);
+            destroy_at<CRenderThread>(GRenderThread);
         }
 
         return kTrue;
     }
-    
+
     
     CRenderThread::CRenderThread() {
         
     }
 
-    void CRenderThread::spawn() {
+    void CRenderThread::spawn()
+    {
         (void)CThread::create(&CRenderThread::loop, GRenderThread, kTrue, kTrue);
     }
 
@@ -40,7 +41,9 @@ namespace Neowise {
         NW_PROFILE_FUNCTION();
 
 		this->window = &const_cast<CBaseWindow&>(window);
+
         rhi = RHIMakeVulkanProvider();
+        
         surface = rhi->createSurface(this->window);
 
         SRHIAdapterSpecification adapterSpecs   = {};
@@ -50,6 +53,12 @@ namespace Neowise {
         adapterSpecs.required.dynamicRendering  = kTrue;
         adapterSpecs.required.advancedSync      = kTrue;
         adapter = rhi->createAdapter(adapterSpecs, surface);
+
+        SRHISwapchainSpecification swapchainSpecs = {
+            window.getSize(),
+            E_VERTICAL_SYNCHRONIZATION_FULL
+        };
+        swapchain = adapter->createSwapchain(swapchainSpecs, surface);
 
         // Call setup on every renderer module
     }

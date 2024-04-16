@@ -6,31 +6,6 @@
 namespace Neowise {
     class CRHIVulkanSurface;
 
-    struct QueueFamilyInfo {
-        TOptional<TUint32> graphicsIdx = nullopt;
-        TOptional<TUint32> transferIdx = nullopt;
-        TOptional<TUint32> presentIdx = nullopt;
-        TOptional<TUint32> computeIdx = nullopt;
-
-        inline TBool complete() const {
-            return graphicsIdx && computeIdx && transferIdx && presentIdx;
-        }
-    };
-
-    struct PhysicalDeviceSet {
-        TDouble score = {};
-        VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
-        CString name = { "<unknownGPU>" };
-        QueueFamilyInfo queueFamilyInfo = {};
-        VkPhysicalDeviceProperties2 properties2 = { VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2, &meshShaderProps };
-        VkPhysicalDeviceFeatures2 features2 = { VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2, &features12 };
-        VkPhysicalDeviceMeshShaderFeaturesEXT meshShaderExt = { VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_FEATURES_EXT };
-        VkPhysicalDeviceMeshShaderPropertiesEXT meshShaderProps = { VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_PROPERTIES_EXT };
-        VkPhysicalDeviceVulkan13Features features13 = { VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_3_FEATURES, &meshShaderExt };
-        VkPhysicalDeviceVulkan12Features features12 = { VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_2_FEATURES, &features13 };
-        VkPhysicalDeviceMemoryProperties memory = {};
-    };
-
     class NW_API CRHIVulkanAdapter : public CRHIAdapterInterface {
     public:
         ~CRHIVulkanAdapter() override;
@@ -38,6 +13,10 @@ namespace Neowise {
         CRHIVulkanAdapter(const SRHIAdapterSpecification& specs, VkInstance instance, const CRHIVulkanSurface* pSurface);
 
         CStringView getName() const override;
+        IRHISwapchain createSwapchain(const SRHISwapchainSpecification& specs, const IRHISurface& surface, const IRHISwapchain& oldSwapchain) override;
+
+        VkDevice getDevice() const;
+        VkPhysicalDevice getGPU() const;
     private:
         PFN_vkEnumeratePhysicalDevices              enumeratePhysicalDevices = nullptr;
         PFN_vkGetPhysicalDeviceProperties2          getPhysicalDeviceProperties2 = nullptr;
@@ -48,16 +27,23 @@ namespace Neowise {
         PFN_vkGetPhysicalDeviceMemoryProperties     getPhysicalDeviceMemoryProperties = nullptr;
         PFN_vkCreateDevice                          createDevice = nullptr;
         PFN_vkDestroyDevice                         destroyDevice = nullptr;
+        PFN_vkCreateSwapchainKHR                    createSwapchainKHR = nullptr;
+        PFN_vkDestroySwapchainKHR                   destroySwapchainKHR = nullptr;
+        PFN_vkGetSwapchainImagesKHR                 getSwapchainImagesKHR = nullptr;
+        PFN_vkCreateImageView                       createImageView = nullptr;
+        PFN_vkDestroyImageView                      destroyImageView = nullptr;
 
         TBool pickPhysicalDevice(const SRHIAdapterSpecification& specs, VkInstance instance);
         TBool pickPhysicalDeviceWithSurfaceSupport(const SRHIAdapterSpecification& specs, VkInstance instance, const CRHIVulkanSurface* pSurface);
 
         PhysicalDeviceSet getPhysicalDeviceSet(VkPhysicalDevice pd, const CRHIVulkanSurface* pSurface = nullptr) const;
         QueueFamilyInfo getPhysicalDeviceQueueFamilyInfo(VkPhysicalDevice pd, const CRHIVulkanSurface* pSurface = nullptr) const;
+        SwapchainSupportInfo getPhysicalDeviceSwapchainSupportInfo(VkPhysicalDevice pd, const CRHIVulkanSurface* pSurface) const;
     private:
         CString gpuName = { "<unknownGPU>" };
         VkDevice device = VK_NULL_HANDLE;
         QueueFamilyInfo queueFamilyInfo = {};
+        SwapchainSupportInfo swapchainSupportInfo = {};
         VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
         VkPhysicalDeviceFeatures2 physicalDeviceFeatures = {};
         VkPhysicalDeviceProperties2 physicalDeviceProperties = {};

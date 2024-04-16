@@ -1,6 +1,7 @@
 #include "Engine/VulkanRHI/API/vulkan_core.h"
 #include <Engine/VulkanRHI/VulkanAdapter.h>
 #include <Engine/VulkanRHI/VulkanSurface.h>
+#include <Engine/VulkanRHI/VulkanSwapchain.h>
 #include <Base/DynamicLibrary.h>
 
 
@@ -47,6 +48,26 @@ namespace Neowise {
             destroyDevice = 
                 reinterpret_cast<PFN_vkDestroyDevice>(
                     getInstanceProcAddr(instance, "vkDestroyDevice")
+                );
+            createSwapchainKHR = 
+                reinterpret_cast<PFN_vkCreateSwapchainKHR>(
+                    getInstanceProcAddr(instance, "vkCreateSwapchainKHR")
+                );
+            destroySwapchainKHR = 
+                reinterpret_cast<PFN_vkDestroySwapchainKHR>(
+                    getInstanceProcAddr(instance, "vkDestroySwapchainKHR")
+                );
+            getSwapchainImagesKHR = 
+                reinterpret_cast<PFN_vkGetSwapchainImagesKHR>(
+                    getInstanceProcAddr(instance, "vkGetSwapchainImagesKHR")
+                );
+            createImageView = 
+                reinterpret_cast<PFN_vkCreateImageView>(
+                    getInstanceProcAddr(instance, "vkCreateImageView")
+                );
+            destroyImageView = 
+                reinterpret_cast<PFN_vkDestroyImageView>(
+                    getInstanceProcAddr(instance, "vkDestroyImageView")
                 );
         }
         
@@ -98,6 +119,26 @@ namespace Neowise {
                 reinterpret_cast<PFN_vkDestroyDevice>(
                     getInstanceProcAddr(instance, "vkDestroyDevice")
                 );
+            createSwapchainKHR = 
+                reinterpret_cast<PFN_vkCreateSwapchainKHR>(
+                    getInstanceProcAddr(instance, "vkCreateSwapchainKHR")
+                );
+            destroySwapchainKHR = 
+                reinterpret_cast<PFN_vkDestroySwapchainKHR>(
+                    getInstanceProcAddr(instance, "vkDestroySwapchainKHR")
+                );
+            getSwapchainImagesKHR = 
+                reinterpret_cast<PFN_vkGetSwapchainImagesKHR>(
+                    getInstanceProcAddr(instance, "vkGetSwapchainImagesKHR")
+                );
+            createImageView = 
+                reinterpret_cast<PFN_vkCreateImageView>(
+                    getInstanceProcAddr(instance, "vkCreateImageView")
+                );
+            destroyImageView = 
+                reinterpret_cast<PFN_vkDestroyImageView>(
+                    getInstanceProcAddr(instance, "vkDestroyImageView")
+                );
         }
 
         if (!pickPhysicalDeviceWithSurfaceSupport(specs, instance, pSurface)) {
@@ -105,12 +146,36 @@ namespace Neowise {
         }
     }
 
-    CStringView Neowise::CRHIVulkanAdapter::getName() const {
+    CStringView CRHIVulkanAdapter::getName() const {
         return gpuName;
     }
 
-    CRHIVulkanAdapter::~CRHIVulkanAdapter() {
+    IRHISwapchain Neowise::CRHIVulkanAdapter::createSwapchain(const SRHISwapchainSpecification& specs, const IRHISurface& surface, const IRHISwapchain &oldSwapchain) {
+        return IRHISwapchain::make<CRHIVulkanSwapchain>(specs, 
+                                                        this, 
+                                                        surface, 
+                                                        queueFamilyInfo, 
+                                                        swapchainSupportInfo, 
+                                                        createSwapchainKHR, 
+                                                        destroySwapchainKHR, 
+                                                        getSwapchainImagesKHR, 
+                                                        createImageView,
+                                                        destroyImageView,
+                                                        oldSwapchain);
+    }
 
+    VkDevice CRHIVulkanAdapter::getDevice() const {
+        return device;
+    }
+
+    VkPhysicalDevice CRHIVulkanAdapter::getGPU() const {
+        return physicalDevice;
+    }
+
+    CRHIVulkanAdapter::~CRHIVulkanAdapter() {
+        if (destroyDevice && device) {
+            destroyDevice(device, nullptr);
+        }
     }
 
     TBool CRHIVulkanAdapter::pickPhysicalDevice(const SRHIAdapterSpecification& specs, VkInstance instance) {
@@ -182,11 +247,34 @@ namespace Neowise {
         meshShaderProperties = bestSet.meshShaderProps;
         physicalDeviceMemoryProperties = bestSet.memory;
         physicalDeviceProperties = bestSet.properties2;
+        queueFamilyInfo = bestSet.queueFamilyInfo;
+        swapchainSupportInfo = bestSet.swapchainSupportInfo;
         gpuName = bestSet.name;
 
-        VkDeviceCreateInfo deviceCI = { VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO };
-        
+        // Create queue create infos for our device...        
+        TStaticVector<VkDeviceQueueCreateInfo, 4> queuesCI;
+        HS<TUint32> uniqueFamilyIndxs = { 
+            queueFamilyInfo.graphicsIdx.unwrap(), 
+            queueFamilyInfo.transferIdx.unwrap(),
+            queueFamilyInfo.computeIdx.unwrap(),
+            queueFamilyInfo.presentIdx.unwrap()
+        };
 
+        TSingle queuePrior = 1.f;
+        for (const auto queueFamilyIdx : uniqueFamilyIndxs) {
+            VkDeviceQueueCreateInfo queueCI = { VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO };
+            queueCI.pQueuePriorities = &queuePrior;
+            queueCI.queueFamilyIndex = queueFamilyIdx;
+            queueCI.queueCount = 1;
+
+            queuesCI.emplace(queueCI);
+        }
+
+        VkDeviceCreateInfo deviceCI = { VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO };
+        deviceCI.queueCreateInfoCount = queuesCI.size();
+        deviceCI.pQueueCreateInfos = queuesCI.data();
+
+        RHIVKFN(createDevice(physicalDevice, &deviceCI, nullptr, &device), "Failed to create logical vulkan device!");
         return kTrue;
     }
 
@@ -204,7 +292,7 @@ namespace Neowise {
         TStaticVector<VkPhysicalDevice, 8> physicalDevices(physicalDevicesCount);
         enumeratePhysicalDevices(instance, &physicalDevicesCount, physicalDevices.data());
 
-        TStaticVector<PhysicalDeviceSet, 8> sets = {};
+        TVector<PhysicalDeviceSet> sets = {};
 
         for (const auto pd : physicalDevices) {
             sets.emplace(getPhysicalDeviceSet(pd, pSurface));
@@ -268,13 +356,37 @@ namespace Neowise {
         physicalDeviceMemoryProperties = bestSet.memory;
         physicalDeviceProperties = bestSet.properties2;
         queueFamilyInfo = bestSet.queueFamilyInfo;
+        swapchainSupportInfo = bestSet.swapchainSupportInfo;
         gpuName = bestSet.name;
 
-        VkDeviceCreateInfo deviceCI = { VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO };
-        
-        TStaticVector<VkDeviceQueueCreateInfo, 4> queuesCI = {4, VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO};
-        
+        // Create queue create infos for our device...        
+        TStaticVector<VkDeviceQueueCreateInfo, 4> queuesCI;
+        HS<TUint32> uniqueFamilyIndxs = { 
+            queueFamilyInfo.graphicsIdx.unwrap(), 
+            queueFamilyInfo.transferIdx.unwrap(),
+            queueFamilyInfo.computeIdx.unwrap(),
+            queueFamilyInfo.presentIdx.unwrap()
+        };
 
+        TSingle queuePrior = 1.f;
+        for (const auto queueFamilyIdx : uniqueFamilyIndxs) {
+            VkDeviceQueueCreateInfo queueCI = { VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO };
+            queueCI.pQueuePriorities = &queuePrior;
+            queueCI.queueFamilyIndex = queueFamilyIdx;
+            queueCI.queueCount = 1;
+
+            queuesCI.emplace(queueCI);
+        }
+
+        VkDeviceCreateInfo deviceCI = { VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO };
+        deviceCI.queueCreateInfoCount = queuesCI.size();
+        deviceCI.pQueueCreateInfos = queuesCI.data();
+
+        const auto requiredExts = RHIVKUtil::getRequiredDeviceExtensions();
+        deviceCI.enabledExtensionCount = requiredExts.size();
+        deviceCI.ppEnabledExtensionNames = requiredExts.data();
+
+        RHIVKFN(createDevice(physicalDevice, &deviceCI, nullptr, &device), "Failed to create logical vulkan device!");
         return kTrue;
     }
 
@@ -335,10 +447,14 @@ namespace Neowise {
 
         set.queueFamilyInfo = getPhysicalDeviceQueueFamilyInfo(pd, pSurface);
 
+        if (pSurface) {
+            set.swapchainSupportInfo = getPhysicalDeviceSwapchainSupportInfo(pd, pSurface);
+        }
+
         return set;
     }
 
-    QueueFamilyInfo Neowise::CRHIVulkanAdapter::getPhysicalDeviceQueueFamilyInfo(VkPhysicalDevice pd, const CRHIVulkanSurface* pSurface) const {
+    QueueFamilyInfo CRHIVulkanAdapter::getPhysicalDeviceQueueFamilyInfo(VkPhysicalDevice pd, const CRHIVulkanSurface* pSurface) const {
         QueueFamilyInfo info = {};
 
         TUint32 queueFamilyCount = 0;
@@ -372,6 +488,28 @@ namespace Neowise {
             }
 
             ++queueIdx;
+        }
+
+        return info;
+    }
+
+    SwapchainSupportInfo CRHIVulkanAdapter::getPhysicalDeviceSwapchainSupportInfo(VkPhysicalDevice pd, const CRHIVulkanSurface* pSurface) const {
+        SwapchainSupportInfo info = {};
+
+        pSurface->getPhysicalDeviceCapabilities(pd, &info.capabilities);
+
+        TUint32 formats = {};
+        pSurface->getPhysicalDeviceFormats(pd, &formats, nullptr);
+        if (formats) {
+            construct_at(info.formats, formats);
+            pSurface->getPhysicalDeviceFormats(pd, &formats, info.formats.data());
+        }
+
+        TUint32 presentModes = {};
+        pSurface->getPhysicalDevicePresentModes(pd, &presentModes, nullptr);
+        if (presentModes) {
+            construct_at(info.presentModes, presentModes);
+            pSurface->getPhysicalDevicePresentModes(pd, &presentModes, info.presentModes.data());
         }
 
         return info;
