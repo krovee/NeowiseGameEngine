@@ -22,8 +22,8 @@ namespace Neowise {
         FQuaternion& operator=(const FQuaternion&) = default;
         FQuaternion& operator=(FQuaternion&&) = default;
 
-        bool operator==(const FQuaternion&) const;
-        bool operator!=(const FQuaternion&) const;
+        TBool operator==(const FQuaternion&) const;
+        TBool operator!=(const FQuaternion&) const;
 
         FQuaternion& operator+=(const FQuaternion&);
         FQuaternion& operator-=(const FQuaternion&);

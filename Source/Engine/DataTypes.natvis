@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?> 
 <AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">
 	
-	<Type Name="Neowise::CStaticVector&lt;*,*&gt;">
+	<Type Name="Neowise::TStaticVector&lt;*,*&gt;">
 		<DisplayString>{{ size = { _size } }}</DisplayString>
 		<Expand>
 			<Item Name="[size]" ExcludeView="simple">_size</Item>
@@ -13,7 +13,7 @@
 		</Expand>
 	</Type>
 
-	<Type Name="Neowise::CVector&lt;*&gt;">
+	<Type Name="Neowise::TVector&lt;*&gt;">
 		<DisplayString>{{ size = { _size } }}</DisplayString>
 		<Expand>
 			<Item Name="[size]" ExcludeView="simple">_size</Item>
@@ -25,7 +25,7 @@
 		</Expand>
 	</Type>
 
-	<Type Name="Neowise::CArrayView&lt;*&gt;">
+	<Type Name="Neowise::TArrayView&lt;*&gt;">
 		<DisplayString>{{ size = { length } }}</DisplayString>
 		<Expand>
 			<Item Name="[size]" ExcludeView="simple">length</Item>

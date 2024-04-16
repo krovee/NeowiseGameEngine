@@ -32,7 +32,7 @@ namespace Neowise::Platform::Linux {
     void* _MemorySet(void *dst, TInt32 value, TUint size);
     TUint  _MemoryCount(const char *s);
     TUint  _MemoryCount(const wchar_t *ws);
-    bool  _MemoryCompare(const void *p1, const void *p2, TUint size);
+    TBool  _MemoryCompare(const void *p1, const void *p2, TUint size);
     void  _ConsoleWrite(const char *text);
     TReal  _GetAbsoluteTime();
     TUint  _ThreadCreate(TUint& threadID, void *(*startFn)(void *), void *params);
@@ -42,7 +42,7 @@ namespace Neowise::Platform::Linux {
     void  _BreakProcess();
     TUint  _WindowCreate(_WindowID& id, const CStringView& name, const Point2i& pos, const FVec2& size);
     TUint  _WindowDestroy(_WindowID& id);
-    bool  _WindowPumpMessages(const _WindowID& id, void* params);
+    TBool  _WindowPumpMessages(const _WindowID& id, void* params);
     void  _WindowSetTitle(const _WindowID& id, const CStringView& name);
     void  _WindowSetPlacement(const _WindowID& id, const Point2i& pos, const FVec2& size);
     void  _TranslateKey(const TUint in, EKey& key, EKeyMod& mod);   

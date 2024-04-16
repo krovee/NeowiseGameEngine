@@ -44,7 +44,7 @@ namespace Neowise::Platform {
     } // 8
 
     Windows::CBaseWindow::CBaseWindow(defaultCreateTag) 
-    : Neowise::CBaseWindow({0, 0}, sGetScreenSize() / 2, false, true, false, true)
+    : Neowise::CBaseWindow({0, 0}, sGetScreenSize() / 2, kFalse, kTrue, kFalse, kTrue)
     {
         CStringBuilder s(_title);
         s << "Neowise Engine (build." << TUint(buildVersion) << ")";
@@ -143,11 +143,11 @@ namespace Neowise::Platform {
         peekWindowMessagesA(_hWnd);
     }
 
-    bool Windows::CBaseWindow::isOpen() const {
+    TBool Windows::CBaseWindow::isOpen() const {
         return _hWnd != nullptr;
     }
 
-    void Windows::CBaseWindow::setFullscreen(bool enable) {
+    void Windows::CBaseWindow::setFullscreen(TBool enable) {
         if (enable) {
             setWindowLongPtrA(_hWnd, E_WINDOW_LONG_PTR_NAME_STYLE, E_WINDOW_FLAGS_BORDERLESS);
             showWindow(_hWnd, E_WINDOW_SHOW_FLAGS_MAXIMIZED);
@@ -162,11 +162,11 @@ namespace Neowise::Platform {
         setWindowTextA(_hWnd, title.cstr());
     }
 
-    void Windows::CBaseWindow::setMaximized(bool enable) {
+    void Windows::CBaseWindow::setMaximized(TBool enable) {
         showWindow(_hWnd, enable ? E_WINDOW_SHOW_FLAGS_MAXIMIZED : E_WINDOW_SHOW_FLAGS_NORMAL);
     }
 
-    void Windows::CBaseWindow::suspend(bool enable) {
+    void Windows::CBaseWindow::suspend(TBool enable) {
         showWindow(_hWnd, enable ? E_WINDOW_SHOW_FLAGS_HIDDEN : E_WINDOW_SHOW_FLAGS_NORMAL);
     }
 

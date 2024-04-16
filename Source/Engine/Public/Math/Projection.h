@@ -70,6 +70,6 @@ namespace Neowise {
         TReal			_top	= 0;
         TReal			_aspect	= 0;
         EProjectionKind	_kind = E_PROJETION_KIND_PERSPECTIVE;
-        bool			_dirty	= true;
+        TBool			_dirty	= kTrue;
     };
 }

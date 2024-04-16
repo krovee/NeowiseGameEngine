@@ -21,10 +21,10 @@ namespace Neowise {
 
         virtual EventID getEventID() const = 0;
         
-        bool isHandled() const;
+        TBool isHandled() const;
         void markHandled();
     private:
-        bool handled = false;
+        TBool handled = kFalse;
     };
 
     template<class T>

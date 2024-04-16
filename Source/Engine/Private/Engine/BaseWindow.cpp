@@ -28,31 +28,31 @@ namespace Neowise {
         return _size.y;
     }
     
-    bool CBaseWindow::isFullscreen() const {
+    TBool CBaseWindow::isFullscreen() const {
         return _flags.isFullscreen;
     }
     
-    bool CBaseWindow::isMaximized() const {
+    TBool CBaseWindow::isMaximized() const {
         return _flags.isMaximized;
     }
     
-    bool CBaseWindow::isSuspended() const {
+    TBool CBaseWindow::isSuspended() const {
         return _flags.isSuspended;
     }
     
-    bool CBaseWindow::isFocused() const {
+    TBool CBaseWindow::isFocused() const {
         return _flags.isFocused;
     }
 
 
-    Scope<CBaseWindow> CBaseWindow::createDefault(bool maximized, bool fullscreen) {
+    Scope<CBaseWindow> CBaseWindow::createDefault(TBool maximized, TBool fullscreen) {
         auto w = makeScope<Platform::CBaseWindow>(Platform::CBaseWindow::defaultCreateTag{});
         w->setFullscreen(fullscreen);
         w->setMaximized(maximized);
         return move(w.cast<CBaseWindow>());
     }
 
-    CBaseWindow::CBaseWindow(const Point2i& pos, const FVec2& size, bool isfull, bool ismax, bool issusp, bool isfoc)
+    CBaseWindow::CBaseWindow(const Point2i& pos, const FVec2& size, TBool isfull, TBool ismax, TBool issusp, TBool isfoc)
         : _pos(pos), _size(size), _flags{ isfull, ismax, issusp, isfoc }
     {
     }

@@ -18,11 +18,11 @@ namespace Neowise {
         explicit CWrap(T* p) : _ptr(p) {}
         CWrap(nullptr_t) : _ptr() {}
 
-        constexpr bool isValid() const {
+        constexpr TBool isValid() const {
             return _ptr != nullptr;
         }
 
-        constexpr operator bool() const {
+        constexpr operator TBool() const {
             return _ptr != nullptr;
         }
 

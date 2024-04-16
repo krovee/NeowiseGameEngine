@@ -38,11 +38,11 @@ namespace Neowise {
     {
     }
 
-    bool FMatrix3::operator==(const FMatrix3& r) const {
+    TBool FMatrix3::operator==(const FMatrix3& r) const {
         return columns[0] == r[0] && columns[1] == r[1] && columns[2] == r[2];
     }
 
-    bool FMatrix3::operator!=(const FMatrix3& r) const {
+    TBool FMatrix3::operator!=(const FMatrix3& r) const {
         return !(*this == r);
     }
 

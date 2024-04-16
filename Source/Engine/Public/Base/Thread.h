@@ -14,12 +14,12 @@ namespace Neowise {
 
         virtual ~CThread() = default;
 
-        virtual bool isActive() const { return false; }
+        virtual TBool isActive() const { return kFalse; }
         virtual void detach()		{}
         virtual void terminate()	{}
         virtual void destroy()		{}
         virtual void start()		{}
 
-        static Scope<CThread> create(PFN_StartFunc func, void* params, bool immediateStart = false, bool immediateDetach = false);
+        static Scope<CThread> create(PFN_StartFunc func, void* params, TBool immediateStart = kFalse, TBool immediateDetach = kFalse);
     };
 }

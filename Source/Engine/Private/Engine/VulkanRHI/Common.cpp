@@ -64,11 +64,11 @@ namespace Neowise {
         RESULT_TO_STR(ErrorIncompatibleShaderBinaryEXT)
     };
 
-    bool Neowise::RHIVKUtil::isSuccess(const VkResult result) {
+    TBool Neowise::RHIVKUtil::isSuccess(const VkResult result) {
         return result == VK_SUCCESS;
     }
 
-    bool RHIVKUtil::isValid(const VkResult result) {
+    TBool RHIVKUtil::isValid(const VkResult result) {
         switch (result) {
             case VK_SUCCESS:
             case VK_NOT_READY:
@@ -77,10 +77,10 @@ namespace Neowise {
             case VK_EVENT_RESET:
             case VK_INCOMPLETE:
             case VK_PIPELINE_COMPILE_REQUIRED:
-                return true;
+                return kTrue;
 
             default: 
-                return false;
+                return kFalse;
         }
         
     }

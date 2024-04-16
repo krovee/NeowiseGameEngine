@@ -8,7 +8,7 @@ namespace Neowise {
         E_TRANSFORM_LOCAL_SCALE_DIRTY       = 1 << 3, 
     };
 
-    bool CTransform::isDirty(const TUint8 flag) const {
+    TBool CTransform::isDirty(const TUint8 flag) const {
         return (_dirtyFlags & flag) == flag;
     }
 

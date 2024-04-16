@@ -9,14 +9,14 @@ namespace Neowise {
     * contigous data. Captures a pointer and a length of an array.
     */
     template<class T>
-    class NW_API CArrayView {
+    class NW_API TArrayView {
     public:
-        constexpr CArrayView() = default;
-        constexpr explicit CArrayView(T* p, TUint len) 
+        constexpr TArrayView() = default;
+        constexpr explicit TArrayView(T* p, TUint len) 
             : ptr(p), length(len) 
         {}
 
-        constexpr bool empty() const {
+        constexpr TBool empty() const {
             return length == 0;
         }
 

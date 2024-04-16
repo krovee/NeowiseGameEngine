@@ -79,9 +79,9 @@ namespace Neowise {
 #endif
     };
 
-    constexpr bool kIsDebug     = E_BUILD_TYPE == E_BUILD_TYPE_DEBUG;
-    constexpr bool kIsRelease   = E_BUILD_TYPE == E_BUILD_TYPE_RELEASE;
-    constexpr bool kIsShip      = E_BUILD_TYPE == E_BUILD_TYPE_SHIP;
+    constexpr TBool kIsDebug     = E_BUILD_TYPE == E_BUILD_TYPE_DEBUG;
+    constexpr TBool kIsRelease   = E_BUILD_TYPE == E_BUILD_TYPE_RELEASE;
+    constexpr TBool kIsShip      = E_BUILD_TYPE == E_BUILD_TYPE_SHIP;
 
     STATIC_ASSERT((kIsDebug != kIsRelease) || (kIsRelease != kIsShip));
 
@@ -295,7 +295,7 @@ namespace Neowise {
     /**
      * Pretty fast sorting algorithm, works well.
      */
-    template<class T, class PredFn = bool(const T&, const T&)>
+    template<class T, class PredFn = TBool(const T&, const T&)>
     void quickSort(T* array, TUint count, TUint offset = 0, PredFn pred = [](const T& a, const T& b){ return a > b; }) {
         auto low = offset;
         auto high = count - 1;

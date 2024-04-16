@@ -1,27 +1,31 @@
 #pragma once
 
 #include <Engine/RHI/Common.h>
+#include <Engine/RHI/RHIAdapter.h>
+#include <Engine/BaseWindow.h>
 
 namespace Neowise {
     
-    class CRHIAdapterInterface;
-    using IRHIAdapter = Scope<CRHIAdapterInterface>;
+    class CRHISurfaceInterface;
+    using IRHISurface = RHIInterface<CRHISurfaceInterface>;
 
-    class NW_API CRHIDynamicProviderInterface {
+    class NW_API CRHIDynamicProviderInterface : public RHIBase<CRHIDynamicProviderInterface> {
     public:
         virtual  ~CRHIDynamicProviderInterface() = default;
-        constexpr CRHIDynamicProviderInterface() = default;
+        CRHIDynamicProviderInterface() = default;
 
-        virtual IRHIAdapter createAdapter() = 0;
+        virtual IRHISurface createSurface(const CBaseWindow* window) = 0;
+        virtual IRHIAdapter createAdapter(const SRHIAdapterSpecification& specs) = 0;
+        virtual IRHIAdapter createAdapter(const SRHIAdapterSpecification& specs, const IRHISurface& requredSurface) = 0;
 
         NW_RHI_CLASS_DECLARATION(CRHIDynamicProviderInterface)
     };
 
-    using IRHIDynamicProvider = Scope<CRHIDynamicProviderInterface>;
+    using IRHIDynamicProvider = RHIInterface<CRHIDynamicProviderInterface>;
 
     template<class T, class...Args>
     inline auto RHIMakeProvider(Args&&...args) {
-        return makeScope<T>(forward<Args>(args)...).template cast<CRHIDynamicProviderInterface>();
+        return IRHIDynamicProvider::make<T>(forward<Args>(args)...);
     }
 
     NW_API IRHIDynamicProvider RHIMakeVulkanProvider();

@@ -4,8 +4,8 @@
 #include <Engine/GameRuntimeApplication.h>
 
 namespace Neowise {
-    bool GIsExitRequested = false;
-    bool GEditorFrameworkProvided = false;
+    TBool GIsExitRequested = kFalse;
+    TBool GEditorFrameworkProvided = kFalse;
     TInt32 GExitRequestCode = 0;
     CApplication* GApp = nullptr;
     STimeData GTime = {};
@@ -103,7 +103,7 @@ namespace Neowise {
 
     void CEngineLoop::requestExit(TInt32 code) {
         GExitRequestCode = code;
-        GIsExitRequested = true;
+        GIsExitRequested = kTrue;
     }
 
 }

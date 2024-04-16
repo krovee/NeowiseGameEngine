@@ -40,7 +40,7 @@ namespace Neowise::Platform::Linux {
         return _MemoryCount(ws);
     }
 
-    bool CMemory::compare(const void* p1, const void* p2, uint64 len) {
+    TBool CMemory::compare(const void* p1, const void* p2, uint64 len) {
         return _MemoryCompare(p1, p2, len);
     }
     

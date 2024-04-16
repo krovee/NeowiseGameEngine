@@ -30,8 +30,8 @@ namespace Neowise {
     using TBool     = bool;
 
     enum EBoolean : TBool {
-        kFalse, // false
-        kTrue,  // true
+        kFalse, // kFalse
+        kTrue,  // kTrue
     };
 
     using TVaList   = void*;

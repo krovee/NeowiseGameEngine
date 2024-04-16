@@ -18,12 +18,12 @@ namespace Neowise {
         TReal getMilliseconds() const;
         TReal getSeconds() const;
 
-        bool operator==(const CTimePoint& r) const;
-        bool operator!=(const CTimePoint& r) const;
-        bool operator<(const CTimePoint& r) const;
-        bool operator>(const CTimePoint& r) const;
-        bool operator<=(const CTimePoint& r) const;
-        bool operator>=(const CTimePoint& r) const;
+        TBool operator==(const CTimePoint& r) const;
+        TBool operator!=(const CTimePoint& r) const;
+        TBool operator<(const CTimePoint& r) const;
+        TBool operator>(const CTimePoint& r) const;
+        TBool operator<=(const CTimePoint& r) const;
+        TBool operator>=(const CTimePoint& r) const;
 
         CTimePoint operator-(const CTimePoint& r) const;
 

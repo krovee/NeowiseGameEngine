@@ -36,7 +36,7 @@ namespace Neowise {
         return keyMod;
     }
 
-    bool CEventWindowInputKeyboard::isPressed() const {
+    TBool CEventWindowInputKeyboard::isPressed() const {
         return pressed;
     }
 
@@ -90,7 +90,7 @@ namespace Neowise {
         return _buttonKey;
     }
 
-    bool CEventWindowInputMouseButton::isPressed() const {
+    TBool CEventWindowInputMouseButton::isPressed() const {
         return _pressed;
     }
 }

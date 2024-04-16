@@ -22,7 +22,7 @@ namespace Neowise {
         void writeUnsigned(const TUint64 v);
         void writeFloat(const TReal v);
 
-        operator bool() const;
+        operator TBool() const;
         
     private:
         // TODO: store history of engine's diagnostics
@@ -48,7 +48,7 @@ namespace Neowise {
         return d;
     }
 
-    inline CDiagnostics& operator<<(CDiagnostics& d, bool b) {
+    inline CDiagnostics& operator<<(CDiagnostics& d, TBool b) {
         d.writeSigned(b);
         return d;
     }

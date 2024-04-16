@@ -6,7 +6,7 @@
 namespace Neowise {
     CRenderThread* GRenderThread = nullptr;
 
-    bool RT_Initialize() {
+    TBool RT_Initialize() {
         NW_PROFILE_FUNCTION();
         NW_OPT_ASSERT(!GRenderThread, "Failed to initialize already created GRenderThread object!");
 
@@ -15,16 +15,16 @@ namespace Neowise {
         
         construct_at<CRenderThread>(GRenderThread);
 
-        return true;
+        return kTrue;
     }
     
-    bool RT_Shutdown() {
+    TBool RT_Shutdown() {
 
         if (GRenderThread) {
             destroy_at(GRenderThread);
         }
 
-        return true;
+        return kTrue;
     }
     
     
@@ -33,13 +33,23 @@ namespace Neowise {
     }
 
     void CRenderThread::spawn() {
-        (void)CThread::create(&CRenderThread::loop, GRenderThread, true, true);
+        (void)CThread::create(&CRenderThread::loop, GRenderThread, kTrue, kTrue);
     }
 
     void CRenderThread::initializeBasic(const CBaseWindow& window) {
         NW_PROFILE_FUNCTION();
 
-        this->window = &const_cast<CBaseWindow&>(window);
+		this->window = &const_cast<CBaseWindow&>(window);
+        rhi = RHIMakeVulkanProvider();
+        surface = rhi->createSurface(this->window);
+
+        SRHIAdapterSpecification adapterSpecs   = {};
+        adapterSpecs.required.meshShading       = kTrue;
+        adapterSpecs.required.advancedIndexing  = kTrue;
+        adapterSpecs.required.openAddressing    = kTrue;
+        adapterSpecs.required.dynamicRendering  = kTrue;
+        adapterSpecs.required.advancedSync      = kTrue;
+        adapter = rhi->createAdapter(adapterSpecs, surface);
 
         // Call setup on every renderer module
     }
@@ -48,23 +58,23 @@ namespace Neowise {
 
     }
 
-    bool CRenderThread::startFrameRecord() {
+    TBool CRenderThread::startFrameRecord() {
 
-        return true;
+        return kTrue;
     }
 
     void CRenderThread::endFrameRecord() {
 
     }
 
-    bool CRenderThread::beginFrame() {
+    TBool CRenderThread::beginFrame() {
 
-        return true;
+        return kTrue;
     }
 
-    bool CRenderThread::endFrame() {
+    TBool CRenderThread::endFrame() {
 
-        return true;
+        return kTrue;
     }
 
     void CRenderThread::loop(void* params) {

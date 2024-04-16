@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Engine/RHI/RHI.h>
+#include <Engine/BaseWindow.h>
 
 #define VK_NO_PROTOTYPES
 #include <Engine/VulkanRHI/API/vk_platform.h>
@@ -12,14 +13,14 @@ namespace Neowise {
     */
     struct RHIVKUtil {
         /** 
-        * Returns true ONLY when result is equals vk::Result::eSuccess.
+        * Returns kTrue ONLY when result is equals vk::Result::eSuccess.
         */
-        static bool isSuccess(const VkResult result);
+        static TBool isSuccess(const VkResult result);
 
         /** 
-        * Returns true if result is semi-successful (e.g. VK_SUBOPTIMAL).
+        * Returns kTrue if result is semi-successful (e.g. VK_SUBOPTIMAL).
         */
-        static bool isValid(const VkResult result);
+        static TBool isValid(const VkResult result);
 
         /** 
         * 
@@ -34,12 +35,17 @@ namespace Neowise {
         /**
          * Gets an access to list of required instance extensions.
          */
-        static const CVector<const char*>& getRequiredInstanceExtensions();
+        static const TVector<const char*>& getRequiredInstanceExtensions();
         
         /**
          * 
          */
-        static const CVector<const char*>& getRequiredInstanceLayers();
+        static const TVector<const char*>& getRequiredInstanceLayers();
+
+        /**
+         * 
+         */
+        static TBool createSurfaceFromWindow(const CBaseWindow* window, const CRHIDynamicProviderInterface* prov, IRHISurface& surface);
     };
 
 #ifndef RHIVKFN
