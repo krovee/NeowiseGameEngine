@@ -33,8 +33,10 @@ namespace Neowise {
     private:
         static void loop(void* params);
 
+        // Main output device
         const CBaseWindow*      window = nullptr;
 
+        // RHI core components
         IRHIDynamicProvider     rhi = nullptr;
         IRHISurface             surface = nullptr;
         IRHIAdapter             adapter = nullptr;

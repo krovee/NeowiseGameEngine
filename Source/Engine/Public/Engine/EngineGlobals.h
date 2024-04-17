@@ -96,11 +96,11 @@ namespace Neowise {
         TReal frameRate = {};
     };
 
-    extern STimeData					GTime;
-    extern CFixedHeapAllocatorPolicy*	GAlloc;
-    extern CEventBus*					GEventBus;
-    extern CEngineLoop*					GEngineLoop;
-    extern CRenderThread*				GRenderThread;
-    extern CApplication*				GApp;
+    extern STimeData*                   GTime;
+    extern CFixedHeapAllocatorPolicy*   GAlloc;
+    extern CEventBus*                   GEventBus;
+    extern CEngineLoop*                 GEngineLoop;
+    extern CRenderThread*               GRenderThread;
+    extern CApplication*                GApp;
     
 }

@@ -32,9 +32,7 @@ namespace Neowise {
 
     void CGameRuntimeApplication::onRenderFrame() {
         if (GRenderThread->startFrameRecord()) {
-
-            
-
+            // Record GPU commands (make drawcalls)
             GRenderThread->endFrameRecord();
         }
     }
@@ -45,11 +43,11 @@ namespace Neowise {
             GEngineLoop->requestExit();
         }
         
-        if (GTime.updateCount % 1000 == 0) {
+        if (GTime->updateCount % 1000 == 0) {
             static CString title = {};
             CStringBuilder sb(title);
 
-            sb << "time: " << GTime.time << "s dt: " << GTime.deltaTime << " frmr: " << GTime.frameRate << "s upr: " << GTime.updateRate ;
+            sb << "time: " << GTime->time << "s dt: " << GTime->deltaTime << " frmr: " << GTime->frameRate << "s upr: " << GTime->updateRate ;
             _window->setTitle(title);
             title.clear();
         }
