@@ -19,15 +19,21 @@ namespace Neowise {
     void CGameRuntimeApplication::postInitialize() {
         NW_PROFILE_FUNCTION();
 
-        GRenderThread->initializeBasic(*_window);
+        // Initializes core of render thread (not the loading!)
+        GRenderThread->initializeBasic(_window.get());
 
+        // Spawn and run separate render thread, means all loading and
+        // stuff should be delivered to render thread, or...>?
+        // Maybe we should have another special loader-thread that will
+        // do all loading stuff and notifying both render and main threads
+        // about done work?
         CRenderThread::spawn();
     }
 
     void CGameRuntimeApplication::onRenderFrame() {
         if (GRenderThread->startFrameRecord()) {
 
-
+            
 
             GRenderThread->endFrameRecord();
         }

@@ -20,7 +20,7 @@ namespace Neowise {
 
         static void spawn();
 
-        void initializeBasic(const CBaseWindow& window);
+        void initializeBasic(const CBaseWindow* pWindow);
         void waitResourcesIdle();
 
         TBool startFrameRecord();
@@ -33,7 +33,7 @@ namespace Neowise {
     private:
         static void loop(void* params);
 
-        CBaseWindow*            window = nullptr;
+        const CBaseWindow*      window = nullptr;
 
         IRHIDynamicProvider     rhi = nullptr;
         IRHISurface             surface = nullptr;

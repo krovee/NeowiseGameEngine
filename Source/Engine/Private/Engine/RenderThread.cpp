@@ -37,10 +37,10 @@ namespace Neowise {
         (void)CThread::create(&CRenderThread::loop, GRenderThread, kTrue, kTrue);
     }
 
-    void CRenderThread::initializeBasic(const CBaseWindow& window) {
+    void CRenderThread::initializeBasic(const CBaseWindow* pWindow) {
         NW_PROFILE_FUNCTION();
 
-		this->window = &const_cast<CBaseWindow&>(window);
+		this->window = pWindow;
 
         rhi = RHIMakeVulkanProvider();
         
@@ -55,7 +55,7 @@ namespace Neowise {
         adapter = rhi->createAdapter(adapterSpecs, surface);
 
         SRHISwapchainSpecification swapchainSpecs = {
-            window.getSize(),
+            window->getSize(),
             E_VERTICAL_SYNCHRONIZATION_FULL
         };
         swapchain = adapter->createSwapchain(swapchainSpecs, surface);
@@ -86,6 +86,9 @@ namespace Neowise {
         return kTrue;
     }
 
+    /**
+     * This loop() function works in a <separate> from main thread.
+     */
     void CRenderThread::loop(void* params) {
         auto RT = reinterpret_cast<CRenderThread*>(params);
 
