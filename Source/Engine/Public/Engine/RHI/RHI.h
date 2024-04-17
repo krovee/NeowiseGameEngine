@@ -6,7 +6,7 @@
 
 namespace Neowise {
     
-    class NW_API CRHIDynamicProviderInterface : public RHIBase<CRHIDynamicProviderInterface> {
+    class NW_API CRHIDynamicProviderInterface : public RHIBase {
     public:
         virtual  ~CRHIDynamicProviderInterface() = default;
         CRHIDynamicProviderInterface() = default;

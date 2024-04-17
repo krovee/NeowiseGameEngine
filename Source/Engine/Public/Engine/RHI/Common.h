@@ -66,7 +66,6 @@ namespace Neowise {
         E_RHI_BACKEND_VULKAN
     };
 
-    template<class Interface>
     class NW_API RHIBase {
     public:
 
@@ -231,12 +230,15 @@ namespace Neowise {
     class CRHISwapchainInterface;
     using IRHISwapchain = RHIInterface<CRHISwapchainInterface>;
 
+    class CRHICmdRecorderInterface;
+    using IRHICmdRecorder = RHIInterface<CRHICmdRecorderInterface>;
+
 }
 
 #ifndef NW_RHI_CLASS_DECLARATION
 #   define NW_RHI_CLASS_DECLARATION(classname)                                      	\
     public:                                                                         	\
-        inline classname(const ERHIBackend _backend) : backend(_backend) {}       	\
+        inline classname(const ERHIBackend _backend) : backend(_backend) {}       	    \
         constexpr ERHIBackend getBackend() const { return backend; }               		\
     private:                                                                      		\
         const ERHIBackend backend = E_RHI_BACKEND_UNDEFINED;

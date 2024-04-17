@@ -8,7 +8,7 @@ namespace Neowise {
     TBool GEditorFrameworkProvided = kFalse;
     TInt32 GExitRequestCode = 0;
     CApplication* GApp = nullptr;
-    STimeData GTime = {};
+    STimeData* GTime = {};
 
     CEngineLoop* CEngineLoop::instantiate() {
         NW_PROFILE_FUNCTION();
@@ -35,13 +35,13 @@ namespace Neowise {
         else {
             NW_PROFILE_SCOPE("Game runtime instantiation");
 
-            // Startup game runtime.
-            auto p = GAlloc->allocate(sizeof(CGameRuntimeApplication));
-            GApp = reinterpret_cast<CGameRuntimeApplication*>(p);
-            construct_at<CGameRuntimeApplication>(GApp, "Last Night");
+            // Create game runtime.
+            GApp = GAlloc->create<CGameRuntimeApplication>("Last Night");
         }
 
         NW_ASSERT(GApp, "Failed to create GApp!");
+
+        GTime = GAlloc->create<STimeData>();
 
         if (!GApp->initialize()) {
             return E_ENGINE_LOOP_APP_INIT_FAIL;
@@ -63,27 +63,27 @@ namespace Neowise {
 
         while (!isExitRequested()) {
             const TReal newTime = CClock::now().getSeconds();
-            GTime.deltaTime = newTime - currentTime;
-            GTime.time += GTime.deltaTime;
+            GTime->deltaTime = newTime - currentTime;
+            GTime->time += GTime->deltaTime;
             currentTime = newTime;
 
-            if (GTime.updateCount == 0) {
-                
+            if (GTime->updateCount == 0) {
+                // ->>! This is first loop of the engine !<<-
             }
 
             const TReal frameBeginTime = CClock::now().getMilliseconds();
             GApp->onRenderFrame();
             const TReal frameEndTime = CClock::now().getMilliseconds();
-            GTime.frameTime = frameEndTime - frameBeginTime;
-            GTime.frameRate = TReal(1000) / GTime.frameTime;
-            ++GTime.frameCount;
+            GTime->frameTime = frameEndTime - frameBeginTime;
+            GTime->frameRate = TReal(1000) / GTime->frameTime;
+            ++GTime->frameCount;
 
             const TReal updateBeginTime = CClock::now().getMilliseconds();
             GApp->onUpdate();
             const TReal updateEndTime = CClock::now().getMilliseconds();
-            GTime.updateTime = updateEndTime - updateBeginTime;
-            GTime.updateRate = TReal(1000) / GTime.updateTime;
-            ++GTime.updateCount;
+            GTime->updateTime = updateEndTime - updateBeginTime;
+            GTime->updateRate = TReal(1000) / GTime->updateTime;
+            ++GTime->updateCount;
         }
 
     }

@@ -9,7 +9,7 @@ namespace Neowise {
         EVerticalSynchronization vsync = E_VERTICAL_SYNCHRONIZATION_FULL; // NOTE: by default cap framerate to monitor freq (Hz).
     };
 
-    class CRHISwapchainInterface : public RHIBase<CRHISwapchainInterface> {
+    class CRHISwapchainInterface : public RHIBase {
     public:
         virtual ~CRHISwapchainInterface() = default;
 

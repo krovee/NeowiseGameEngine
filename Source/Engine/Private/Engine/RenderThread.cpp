@@ -60,7 +60,6 @@ namespace Neowise {
         };
         swapchain = adapter->createSwapchain(swapchainSpecs, surface);
 
-        // Call setup on every renderer module
     }
 
     void CRenderThread::waitResourcesIdle() {
@@ -91,7 +90,6 @@ namespace Neowise {
      */
     void CRenderThread::loop(void* params) {
         auto RT = reinterpret_cast<CRenderThread*>(params);
-
 
         while (!isExitRequested()) {
             if (!RT->beginFrame()) continue;

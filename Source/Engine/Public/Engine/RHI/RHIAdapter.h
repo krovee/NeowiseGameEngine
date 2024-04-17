@@ -39,7 +39,7 @@ namespace Neowise {
         } required = {};
     };
 
-    class NW_API CRHIAdapterInterface : public RHIBase<CRHIAdapterInterface> {
+    class NW_API CRHIAdapterInterface : public RHIBase {
     public:
         virtual ~CRHIAdapterInterface() = default;
 

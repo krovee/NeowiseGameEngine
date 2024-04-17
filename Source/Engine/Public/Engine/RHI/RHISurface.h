@@ -4,7 +4,7 @@
 
 namespace Neowise {
 
-    class NW_API CRHISurfaceInterface : public RHIBase<CRHISurfaceInterface> {
+    class NW_API CRHISurfaceInterface : public RHIBase {
     public:
         virtual ~CRHISurfaceInterface() = default;
         CRHISurfaceInterface() = default;
